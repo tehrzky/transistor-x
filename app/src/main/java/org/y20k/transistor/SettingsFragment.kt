@@ -198,7 +198,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             // open web browser
             val intent = Intent().apply {
                 action = Intent.ACTION_VIEW
-                data = "https://github.com/y20k/transistor/issues".toUri()
+                data = "https://codeberg.org/y20k/transistor/issues".toUri()
             }
             startActivity(intent)
             return@setOnPreferenceClickListener true
