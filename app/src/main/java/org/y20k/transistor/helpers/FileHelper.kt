@@ -254,9 +254,9 @@ object FileHelper {
         // get JSON from text file
         val json: String = readTextFile(context, Keys.FOLDER_COLLECTION, Keys.COLLECTION_FILE)
         var collection: Collection = Collection()
-        when (json.isNotBlank()) {
+        if (json.isNotBlank()) {
             // convert JSON and return as collection
-            true -> try {
+            try {
                 collection = getCustomGson().fromJson(json, collection::class.java)
             } catch (e: Exception) {
                 LogHelper.e(TAG, "Error Reading collection.\nContent: $json")
