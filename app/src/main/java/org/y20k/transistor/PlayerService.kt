@@ -25,10 +25,10 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.media3.common.*
+import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
+import androidx.media3.exoplayer.LoadControl
 import androidx.media3.exoplayer.analytics.AnalyticsListener
-import androidx.media3.extractor.metadata.icy.IcyHeaders
-import androidx.media3.extractor.metadata.icy.IcyInfo
 import androidx.media3.session.*
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
@@ -38,7 +38,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.helpers.*
 import java.util.*
-import kotlin.math.min
 
 
 /*
@@ -69,6 +68,7 @@ class PlayerService: MediaSessionService() {
 //    private lateinit var notificationHelper: NotificationHelper
     private lateinit var modificationDate: Date
     private var playbackRestartCounter: Int = 0
+    private var playbackActive = false // todo remove
 
 
     /* Overrides onCreate from Service */
@@ -108,6 +108,7 @@ class PlayerService: MediaSessionService() {
         val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
             setAudioAttributes(AudioAttributes.DEFAULT, /* handleAudioFocus= */ true)
             setHandleAudioBecomingNoisy(true)
+//            setLoadControl(CustomLoadControl())
         }.build()
         // exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
@@ -118,6 +119,29 @@ class PlayerService: MediaSessionService() {
                 return super.getAvailableCommands().buildUpon().add(Player.COMMAND_SEEK_TO_NEXT).add(Player.COMMAND_SEEK_TO_PREVIOUS).build()
             }
         }
+    }
+
+
+    /* todo remove */
+    inner class CustomLoadControl: DefaultLoadControl() {
+        override fun shouldContinueLoading(playbackPositionUs: Long, bufferedDurationUs: Long, playbackSpeed: Float): Boolean {
+            LogHelper.e(TAG, "playbackActive = $playbackActive // playbackPositionUs = $playbackPositionUs") // todo remove
+//            if (playbackActive) {
+//                return super.shouldContinueLoading(playbackPositionUs, bufferedDurationUs, playbackSpeed)
+//            } else {
+//                return false
+//            }
+            return super.shouldContinueLoading(playbackPositionUs, bufferedDurationUs, playbackSpeed)
+        }
+    }
+
+
+    /* todo remove */
+    private fun createLoadControl(): LoadControl {
+        return DefaultLoadControl.Builder()
+//            .setBackBuffer(0, false)
+            .setBufferDurationsMs(0, 0, 0, 0)
+            .build()
     }
 
 
@@ -170,29 +194,29 @@ class PlayerService: MediaSessionService() {
         PreferencesHelper.saveSleepTimerRunning(isRunning = false)
     }
 
+
     /* Updates metadata */
-    private fun updateMetadata(metadata: String?) {
+    private fun updateMetadata(metadata: String = String()) {
         // get metadata string
         val metadataString: String
-        if (metadata != null && metadata.isNotEmpty()) {
-            metadataString = metadata.substring(0, min(metadata.length, Keys.DEFAULT_MAX_LENGTH_OF_METADATA_ENTRY))
+        if (metadata.isNotEmpty()) {
+            metadataString = metadata
         } else {
             metadataString = player.currentMediaItem?.mediaMetadata?.title.toString()
         }
-        // append metadata to metadata history
+        // remove duplicates
         if (metadataHistory.contains(metadataString)) {
             metadataHistory.removeIf { it == metadataString }
         }
+        // append metadata to metadata history
         metadataHistory.add(metadataString)
         // trim metadata list
         if (metadataHistory.size > Keys.DEFAULT_SIZE_OF_METADATA_HISTORY) {
             metadataHistory.removeAt(0)
         }
         // update notification
-        // todo implement
-//        mediaSessionConnector.invalidateMediaSessionQueue()
-//        mediaSessionConnector.invalidateMediaSessionMetadata()
-//        notificationHelper.updateNotification()
+        // TODO implement
+        // this will hide the NotificationUtil.setNotification(applicationContext, Keys.NOW_PLAYING_NOTIFICATION_ID, null)
         // save history
         PreferencesHelper.saveMetadataHistory(metadataHistory)
     }
@@ -248,6 +272,7 @@ class PlayerService: MediaSessionService() {
             builder.add(SessionCommand(Keys.CMD_START_SLEEP_TIMER, Bundle.EMPTY))
             builder.add(SessionCommand(Keys.CMD_CANCEL_SLEEP_TIMER, Bundle.EMPTY))
             builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
+            builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
             return MediaSession.ConnectionResult.accept(builder.build(), connectionResult.availablePlayerCommands);
         }
 
@@ -262,6 +287,11 @@ class PlayerService: MediaSessionService() {
                 Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING -> {
                     val resultBundle = Bundle()
                     resultBundle.putLong(Keys.EXTRA_SLEEP_TIMER_REMAINING, sleepTimerTimeRemaining)
+                    return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS, resultBundle))
+                }
+                Keys.CMD_REQUEST_METADATA_HISTORY -> {
+                    val resultBundle = Bundle()
+                    resultBundle.putStringArrayList(Keys.EXTRA_METADATA_HISTORY, ArrayList(metadataHistory))
                     return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS, resultBundle))
                 }
             }
@@ -289,7 +319,8 @@ class PlayerService: MediaSessionService() {
                     // override pause with stop, to prevent unnecessary buffering
                     LogHelper.e(TAG, "COMMAND_PLAY_PAUSE") // todo remove
                     if (player.isPlaying) {
-                        player.stop()
+                        player.playWhenReady = false
+//                        player.stop()
                         return SessionResult.RESULT_INFO_SKIPPED
                     } else {
                        return super.onPlayerCommandRequest(session, controller, playerCommand)
@@ -318,6 +349,7 @@ class PlayerService: MediaSessionService() {
         override fun handleCustomCommand(session: MediaSession, action: String, extras: Bundle): Boolean {
             TODO("Not yet implemented")
         }
+
     }
     /*
      * End of inner class
@@ -332,6 +364,7 @@ class PlayerService: MediaSessionService() {
             super.onIsPlayingChanged(isPlaying)
             // store state of playback
             val currentMediaId: String = player.currentMediaItem?.mediaId ?: String()
+            playbackActive = isPlaying
             PreferencesHelper.saveIsPlaying(isPlaying)
             PreferencesHelper.saveCurrentStationId(currentMediaId)
             // reset restart counter
@@ -346,6 +379,8 @@ class PlayerService: MediaSessionService() {
             } else {
                 // cancel sleep timer
                 cancelSleepTimer()
+                // reset metadata
+                updateMetadata()
 
                 // playback is not active
                 // Not playing because playback is paused, ended, suppressed, or the player
@@ -355,6 +390,7 @@ class PlayerService: MediaSessionService() {
                 when (player.playbackState) {
                     // player is able to immediately play from its current position
                     Player.STATE_READY -> {
+                        LogHelper.e(TAG, "PAUSED") // todo remove
                         // todo
                     }
                     // buffering - data needs to be loaded
@@ -375,25 +411,7 @@ class PlayerService: MediaSessionService() {
 
         override fun onMetadata(metadata: Metadata) {
             super.onMetadata(metadata)
-            for (i in 0 until metadata.length()) {
-                val entry = metadata[i]
-                // extract IceCast metadata
-                if (entry is IcyInfo) {
-                    val icyInfo: IcyInfo = entry as IcyInfo
-                    updateMetadata(icyInfo.title)
-                } else if (entry is IcyHeaders) {
-                    val icyHeaders = entry as IcyHeaders
-                    LogHelper.i(TAG, "icyHeaders:" + icyHeaders.name + " - " + icyHeaders.genre)
-                } else {
-                    LogHelper.w(
-                        TAG,
-                        "Unsupported metadata received (type = ${entry.javaClass.simpleName})"
-                    )
-                    updateMetadata(null)
-                }
-                // TODO implement HLS metadata extraction (Id3Frame / PrivFrame)
-                // https://exoplayer.dev/doc/reference/com/google/android/exoplayer2/metadata/Metadata.Entry.html
-            }
+            updateMetadata(AudioHelper.getMetadataString(metadata))
         }
 
     }

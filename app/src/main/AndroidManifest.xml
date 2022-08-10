@@ -118,6 +118,7 @@
         <!-- Player Service -->
         <service
             android:name=".PlayerService"
+            android:foregroundServiceType="mediaPlayback"
             android:enabled="true"
             android:exported="true"
             tools:ignore="ExportedService">

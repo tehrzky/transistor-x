@@ -54,6 +54,7 @@ object Keys {
     const val EXTRA_STREAM_URI: String = "STREAM_URI"
     const val EXTRA_START_LAST_PLAYED_STATION: String = "START_LAST_PLAYED_STATION"
     const val EXTRA_SLEEP_TIMER_REMAINING: String = "SLEEP_TIMER_REMAINING"
+    const val EXTRA_METADATA_HISTORY: String = "METADATA_HISTORY"
 
     // arguments
     const val ARG_UPDATE_COLLECTION: String = "ArgUpdateCollection"
@@ -71,6 +72,7 @@ object Keys {
     const val CMD_START_SLEEP_TIMER: String = "START_SLEEP_TIMER"
     const val CMD_CANCEL_SLEEP_TIMER: String = "CANCEL_SLEEP_TIMER"
     const val CMD_REQUEST_SLEEP_TIMER_REMAINING: String = "REQUEST_SLEEP_TIMER_REMAINING"
+    const val CMD_REQUEST_METADATA_HISTORY: String = "REQUEST_METADATA_HISTORY"
     const val CMD_PLAY_STREAM: String = "PLAY_STREAM"
 
     // preferences
