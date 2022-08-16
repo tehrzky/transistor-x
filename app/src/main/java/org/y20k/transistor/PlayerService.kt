@@ -27,8 +27,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.media3.common.*
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.LoadControl
 import androidx.media3.exoplayer.analytics.AnalyticsListener
+import androidx.media3.exoplayer.upstream.DefaultAllocator
 import androidx.media3.session.*
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
@@ -56,18 +56,7 @@ class PlayerService: MediaSessionService() {
     private lateinit var sleepTimer: CountDownTimer
     var sleepTimerTimeRemaining: Long = 0L
     private var collection: Collection = Collection()
-//    private var collectionProvider: CollectionProvider = CollectionProvider()
-//    private var station: Station = Station()
-//    private var isForegroundService: Boolean = false
-//    private lateinit var forwardingPlayer: ForwardingPlayer
-//    private lateinit var playerState: PlayerState
     private lateinit var metadataHistory: MutableList<String>
-    private lateinit var packageValidator: PackageValidator
-//    protected lateinit var mediaSession: MediaSessionCompat
-//    protected lateinit var mediaSessionConnector: MediaSessionConnector
-//    private lateinit var notificationHelper: NotificationHelper
-    private lateinit var modificationDate: Date
-    private var playbackRestartCounter: Int = 0
     private var playbackActive = false // todo remove
 
 
@@ -105,13 +94,16 @@ class PlayerService: MediaSessionService() {
 
     /* Initializes the ExoPlayer */
     private fun initializePlayer() {
+        // val loadControl = CustomLoadControl()
         val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
             setAudioAttributes(AudioAttributes.DEFAULT, /* handleAudioFocus= */ true)
             setHandleAudioBecomingNoisy(true)
-//            setLoadControl(CustomLoadControl())
+            // setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setDataSourceFactory(OkHttpDataSource.Factory(OkHttpClient.Builder().build())))  // todo remove
+            // setLoadControl(loadControl) // todo remove
         }.build()
         // exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
+        // exoPlayer.addListener(loadControl)  // todo remove
 
         // manually add seek to next and seek to previous since headphones issue them and they are translated to skip 30 sec forward / 10 sec back
         player = object : ForwardingPlayer(exoPlayer) {
@@ -119,29 +111,6 @@ class PlayerService: MediaSessionService() {
                 return super.getAvailableCommands().buildUpon().add(Player.COMMAND_SEEK_TO_NEXT).add(Player.COMMAND_SEEK_TO_PREVIOUS).build()
             }
         }
-    }
-
-
-    /* todo remove */
-    inner class CustomLoadControl: DefaultLoadControl() {
-        override fun shouldContinueLoading(playbackPositionUs: Long, bufferedDurationUs: Long, playbackSpeed: Float): Boolean {
-            LogHelper.e(TAG, "playbackActive = $playbackActive // playbackPositionUs = $playbackPositionUs") // todo remove
-//            if (playbackActive) {
-//                return super.shouldContinueLoading(playbackPositionUs, bufferedDurationUs, playbackSpeed)
-//            } else {
-//                return false
-//            }
-            return super.shouldContinueLoading(playbackPositionUs, bufferedDurationUs, playbackSpeed)
-        }
-    }
-
-
-    /* todo remove */
-    private fun createLoadControl(): LoadControl {
-        return DefaultLoadControl.Builder()
-//            .setBackBuffer(0, false)
-            .setBufferDurationsMs(0, 0, 0, 0)
-            .build()
     }
 
 
@@ -315,17 +284,17 @@ class PlayerService: MediaSessionService() {
                     LogHelper.e(TAG, "COMMAND_SEEK_TO_PREVIOUS") // todo remove
                     return SessionResult.RESULT_INFO_SKIPPED
                 }
-                Player.COMMAND_PLAY_PAUSE -> {
-                    // override pause with stop, to prevent unnecessary buffering
-                    LogHelper.e(TAG, "COMMAND_PLAY_PAUSE") // todo remove
-                    if (player.isPlaying) {
-                        player.playWhenReady = false
-//                        player.stop()
-                        return SessionResult.RESULT_INFO_SKIPPED
-                    } else {
-                       return super.onPlayerCommandRequest(session, controller, playerCommand)
-                    }
-                }
+//                Player.COMMAND_PLAY_PAUSE -> {
+//                    // override pause with stop, to prevent unnecessary buffering
+//                    LogHelper.e(TAG, "COMMAND_PLAY_PAUSE") // todo remove
+//                    if (player.isPlaying) {
+//                        player.playWhenReady = false
+////                        player.stop()
+//                        return SessionResult.RESULT_INFO_SKIPPED
+//                    } else {
+//                       return super.onPlayerCommandRequest(session, controller, playerCommand)
+//                    }
+//                }
                 else -> {
                     return super.onPlayerCommandRequest(session, controller, playerCommand)
                 }
@@ -456,6 +425,50 @@ class PlayerService: MediaSessionService() {
     /*
      * End of declaration
      */
+
+
+    // todo remove
+    /*
+     * Custom LoadControl that tried to stop buffering after player has been paused
+     * See: https://github.com/androidx/media/issues/146
+     */
+    //    inner class CustomLoadControl: DefaultLoadControl(), Player.Listener {
+    private inner class CustomLoadControl: DefaultLoadControl(
+        DefaultAllocator(true, C.DEFAULT_BUFFER_SEGMENT_SIZE),
+        5000,
+        5000,
+        DEFAULT_BUFFER_FOR_PLAYBACK_MS,
+        DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS,
+        DEFAULT_TARGET_BUFFER_BYTES,
+        DEFAULT_PRIORITIZE_TIME_OVER_SIZE_THRESHOLDS,
+        DEFAULT_BACK_BUFFER_DURATION_MS,
+        DEFAULT_RETAIN_BACK_BUFFER_FROM_KEYFRAME), Player.Listener {
+        private var paused: Boolean = true
+        override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
+            paused = !playWhenReady
+            LogHelper.v("Issue #146", "onPlayWhenReadyChanged - paused = $paused") // todo remove
+        }
+
+//        override fun onIsPlayingChanged(isPlaying: Boolean) {
+//            paused = !isPlaying
+//            LogHelper.v("Issue #146", "onIsPlayingChanged - paused = $paused") // todo remove
+//        }
+
+        override fun shouldContinueLoading(playbackPositionUs: Long, bufferedDurationUs: Long, playbackSpeed: Float): Boolean {
+            if (paused) {
+                LogHelper.v("Issue #146", "shouldContinueLoading - paused = $paused - RETURN false") // todo remove
+                return false
+            } else {
+                LogHelper.v("Issue #146", "shouldContinueLoading - paused = $paused - RETURN super.shouldContinueLoading") // todo remove
+                return super.shouldContinueLoading(playbackPositionUs, bufferedDurationUs, playbackSpeed)
+            }
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
 
 //    /*
 //     * EventListener: Listener for ExoPlayer Events

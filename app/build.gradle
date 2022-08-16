@@ -70,7 +70,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
 
     implementation "androidx.activity:activity-ktx:1.5.1"
-    implementation "androidx.appcompat:appcompat:1.4.2"
+    implementation "androidx.appcompat:appcompat:1.5.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation "androidx.core:core-ktx:1.8.0"
     implementation "androidx.palette:palette-ktx:1.0.0"
@@ -80,7 +80,8 @@ dependencies {
 
     def mediaVersion = "1.0.0-beta02"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
-    implementation "androidx.media3:media3-session:mediaVersion"
+    implementation "androidx.media3:media3-session:$mediaVersion"
+    implementation "androidx.media3:media3-datasource-okhttp:$mediaVersion"
 
     def navigationVersion = "2.5.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
