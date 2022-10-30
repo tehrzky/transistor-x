@@ -33,7 +33,7 @@ import java.io.InputStream
 object ImageHelper {
 
     /* Define log tag */
-    private val TAG: String = LogHelper.makeLogTag(ImageHelper::class.java)
+    private val TAG: String = ImageHelper::class.java.simpleName
 
     /* Get scaling factor from display density */
     fun getDensityScalingFactor(context: Context): Float {

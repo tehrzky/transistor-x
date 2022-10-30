@@ -54,7 +54,7 @@ import java.util.*
 class CollectionAdapter(private val context: Context, private val collectionAdapterListener: CollectionAdapterListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), UpdateHelper.UpdateHelperListener {
 
     /* Define log tag */
-    private val TAG: String = LogHelper.makeLogTag(CollectionAdapter::class.java)
+    private val TAG: String = CollectionAdapter::class.java.simpleName
 
 
     /* Main class variables */
@@ -449,7 +449,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
 //            // download playlist // todo check content type detection is necessary here
 //            DownloadHelper.downloadPlaylists(context, arrayOf(station.remoteStationLocation))
 //        } else {
-//            LogHelper.w(TAG, "Unable to update station: ${station.name}.")
+//            Log.w(TAG, "Unable to update station: ${station.name}.")
 //        }
 //    }
 

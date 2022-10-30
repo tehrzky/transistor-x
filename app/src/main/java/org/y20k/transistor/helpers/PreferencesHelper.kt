@@ -16,6 +16,7 @@ package org.y20k.transistor.helpers
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import androidx.core.content.edit
 import androidx.preference.PreferenceManager
 import com.google.gson.Gson
@@ -38,7 +39,7 @@ object PreferencesHelper {
     }
 
     /* Define log tag */
-    private val TAG: String = LogHelper.makeLogTag(PreferencesHelper::class.java)
+    private val TAG: String = PreferencesHelper::class.java.simpleName
 
 
     /* Loads address of radio-browser.info API from shared preferences */
@@ -145,7 +146,7 @@ object PreferencesHelper {
     /* Loads active downloads from shared preferences */
     fun loadActiveDownloads(): String {
         val activeDownloadsString: String = sharedPreferences.getString(Keys.PREF_ACTIVE_DOWNLOADS, Keys.ACTIVE_DOWNLOADS_EMPTY) ?: Keys.ACTIVE_DOWNLOADS_EMPTY
-        LogHelper.v(TAG, "IDs of active downloads: $activeDownloadsString")
+        Log.v(TAG, "IDs of active downloads: $activeDownloadsString")
         return activeDownloadsString
     }
 

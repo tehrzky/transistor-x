@@ -32,7 +32,10 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 import org.y20k.transistor.core.Station
-import org.y20k.transistor.helpers.*
+import org.y20k.transistor.helpers.DateTimeHelper
+import org.y20k.transistor.helpers.ImageHelper
+import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.UiHelper
 
 
 /*
@@ -41,7 +44,7 @@ import org.y20k.transistor.helpers.*
 data class LayoutHolder(var rootView: View) {
 
     /* Define log tag */
-    private val TAG: String = LogHelper.makeLogTag(LayoutHolder::class.java)
+    private val TAG: String = LayoutHolder::class.java.simpleName
 
 
     /* Main class variables */
@@ -228,10 +231,10 @@ data class LayoutHolder(var rootView: View) {
     fun togglePlayButton(isPlaying: Boolean) {
         if (isPlaying) {
             playButtonView.setImageResource(R.drawable.ic_player_stop_symbol_36dp)
-            bufferingIndicator.isVisible = false
+            // bufferingIndicator.isVisible = false
         } else {
             playButtonView.setImageResource(R.drawable.ic_player_play_symbol_36dp)
-            bufferingIndicator.isVisible = isBuffering
+            // bufferingIndicator.isVisible = isBuffering
         }
     }
 

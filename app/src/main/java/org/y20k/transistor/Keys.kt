@@ -43,7 +43,6 @@ object Keys {
 
     // intent actions
     const val ACTION_SHOW_PLAYER: String = "org.y20k.transistor.action.SHOW_PLAYER"
-    const val ACTION_START_PLAYER_SERVICE: String = "org.y20k.transistor.action.START_PLAYER_SERVICE"
     const val ACTION_COLLECTION_CHANGED: String = "org.y20k.transistor.action.COLLECTION_CHANGED"
     const val ACTION_START: String = "org.y20k.transistor.action.START"
     const val ACTION_STOP: String = "org.y20k.transistor.action.STOP"

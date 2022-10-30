@@ -21,6 +21,7 @@ import android.content.Context
 import androidx.core.app.NotificationCompat
 import androidx.core.graphics.drawable.IconCompat
 import androidx.media3.common.Player
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.common.util.Util
 import androidx.media3.session.MediaNotification
 import androidx.media3.session.MediaSession
@@ -29,13 +30,13 @@ import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 
 
-/*
+@UnstableApi /*
  * NotificationHelper class
  */
 class NotificationHelper(private val context: Context) {
 
     /* Define log tag */
-    private val TAG: String = LogHelper.makeLogTag(NotificationHelper::class.java)
+    private val TAG: String = NotificationHelper::class.java.simpleName
 
 
     /* Main class variables */
