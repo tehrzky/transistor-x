@@ -13,7 +13,7 @@ android {
         targetSdkVersion 33
         versionCode 92
         versionName '4.1.2'
-        resConfigs "en", "ar", "ca", "cs", "de", "el", "eo", "es", "eu", "fr", "fy", "gl", "he", "hr", "id", "it", "ja", "kab", "nb-rNO", "nl", "pa", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "sr", "th", "tr", "uk", "zh-rCN"
+        resConfigs "en", "ar", "ca", "cs", "de", "el", "eo", "es", "eu", "fr", "fy", "gl", "hr", "id", "it", "iw", "ja", "kab", "nb-rNO", "nl", "pa", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "sr", "th", "tr", "uk", "zh-rCN"
     }
 
     kotlinOptions {

@@ -155,7 +155,7 @@
     <string name="dialog_yes_no_positive_button_add_up_next">התחל עכשיו</string>
     <string name="dialog_yes_no_negative_button_default">לא</string>
     <string name="dialog_yes_no_negative_button_cancel">בטל</string>
-    <string name="dialog_yes_no_negative_button_add_up_next">הוסף ל \'הבא \'</string>
+    <string name="dialog_yes_no_negative_button_add_up_next">הוסף ל \'הבא\'</string>
     <string name="dialog_yes_no_message_update_station_images">להוריד את הגרסה האחרונה של כל תמונות התחנה\?</string>
     <string name="dialog_yes_no_message_update_collection">לחפש שינויים\?</string>
     <string name="dialog_yes_no_message_remove_station">להסיר תחנה הזו\?</string>
