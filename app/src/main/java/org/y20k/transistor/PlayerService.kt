@@ -91,6 +91,14 @@ class PlayerService: MediaLibraryService() {
     }
 
 
+    /* Overrides onTaskRemoved from Service */
+    override fun onTaskRemoved(rootIntent: Intent) {
+        if (!player.playWhenReady) {
+            stopSelf()
+        }
+    }
+
+
     /* Overrides onGetSession from MediaSessionService */
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession {
         return mediaLibrarySession
@@ -333,6 +341,16 @@ class PlayerService: MediaLibraryService() {
                         return super.onPlayerCommandRequest(session, controller, playerCommand)
                     }
                 }
+                Player.COMMAND_PLAY_PAUSE -> {
+                    Log.e(TAG, "COMMAND_PLAY_PAUSE") // todo remove
+                    if (player.isPlaying) {
+                        return super.onPlayerCommandRequest(session, controller, playerCommand)
+                    } else {
+                        // seek to the start of the "live window"
+                        player.seekTo(0)
+                        return SessionResult.RESULT_SUCCESS
+                    }
+                }
 //                Player.COMMAND_PLAY_PAUSE -> {
 //                    // override pause with stop, to prevent unnecessary buffering
 //                    if (player.isPlaying) {
@@ -365,7 +383,6 @@ class PlayerService: MediaLibraryService() {
         override fun handleCustomCommand(session: MediaSession, action: String, extras: Bundle): Boolean {
             TODO("Not yet implemented")
         }
-
     }
     /*
      * End of inner class
