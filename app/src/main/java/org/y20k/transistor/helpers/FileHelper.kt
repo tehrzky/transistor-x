@@ -470,6 +470,14 @@ object FileHelper {
     }
 
 
+    /* Todo replace with something more nice */
+    fun getShareableImageUri(context: Context, imageUriString: String): Uri {
+        val imageFileString = imageUriString.substring(imageUriString.indexOf("/files/images/") + 13)
+        val imageFile: File = File(context.getExternalFilesDir(Keys.FOLDER_IMAGES), imageFileString)
+        return FileProvider.getUriForFile(context, "${context.applicationContext.packageName}.provider", imageFile)
+    }
+
+
 
     /* Writes given bitmap as image file to storage */
     private fun writeImageFile(bitmap: Bitmap, file: File, format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG, quality: Int = 75) {

@@ -24,10 +24,7 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.os.Parcelable
+import android.os.*
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -490,7 +487,7 @@ class PlayerFragment: Fragment(),
 
     /* Check permissions and start image picker */
     private fun pickImage() {
-        if (ContextCompat.checkSelfPermission(activity as Context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(activity as Context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // permission READ_EXTERNAL_STORAGE not granted - request permission
             requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         } else {

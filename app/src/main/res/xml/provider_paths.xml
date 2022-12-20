@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <paths>
-    <external-files-path name="my_images" path="Android/data/org.y20k.transistor/files/Pictures" />
-    <external-path name="external_files" path="."/>
+    <!-- Represents files in the root of external storage. Same as Context#getExternalFilesDir(String) Context.getExternalFilesDir(null) -->
+    <external-files-path name="files" path="." />
 </paths>

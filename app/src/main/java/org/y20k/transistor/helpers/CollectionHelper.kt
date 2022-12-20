@@ -196,7 +196,7 @@ object CollectionHelper {
     /* Sets station image - determines station by remote image file location */
     fun setStationImageWithStationUuid(context: Context, collection: Collection, tempImageFileUri: String, stationUuid: String, imageManuallySet: Boolean = false): Collection {
         collection.stations.forEach { station ->
-            // find stattion by uuid
+            // find station by uuid
             if (station.uuid == stationUuid) {
                 station.smallImage = FileHelper.saveStationImage(context, station.uuid, tempImageFileUri, Keys.SIZE_STATION_IMAGE_CARD, Keys.STATION_SMALL_IMAGE_FILE).toString()
                 station.image = FileHelper.saveStationImage(context, station.uuid, tempImageFileUri, Keys.SIZE_STATION_IMAGE_MAXIMUM, Keys.STATION_IMAGE_FILE).toString()
@@ -496,6 +496,7 @@ object CollectionHelper {
             setArtist(station.name)
             //setTitle(station.name)
             setArtworkUri(station.image.toUri())
+//            setArtworkData()
             setFolderType(MediaMetadata.FOLDER_TYPE_NONE)
             setIsPlayable(true)
         }.build()
