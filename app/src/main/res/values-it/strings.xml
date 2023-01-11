@@ -177,7 +177,7 @@
     <string name="pref_update_collection_title">Aggiorna stazioni</string>
     <string name="pref_update_collection_summary">Cerca flussi audio aggiornati e nuove immagini di stazioni.</string>
     <string name="pref_report_issue_title">Segnala problema</string>
-    <string name="pref_report_issue_summary">Segnala errori e suggerisci miglioramenti su GitHub.</string>
+    <string name="pref_report_issue_summary">Segnala errori e suggerisci miglioramenti su Codeberg.</string>
     <string name="pref_app_version_title">Versione dell\'applicazione</string>
     <string name="pref_app_version_summary">Versione</string>
     <string name="pref_about_title">Informazioni</string>

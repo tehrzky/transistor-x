@@ -174,7 +174,7 @@
     <string name="pref_theme_selection_mode_device_default">Selde as apparaat</string>
     <string name="pref_theme_selection_mode_dark">Tsjustere modus</string>
     <string name="pref_report_issue_title">Flater Oanjaan</string>
-    <string name="pref_report_issue_summary">Flaters oanjaan en ferbetteringen foarstelle op GitHub.</string>
+    <string name="pref_report_issue_summary">Flaters oanjaan en ferbetteringen foarstelle op Codeberg.</string>
     <string name="pref_m3u_export_summary">Slach jo radio stasjon op as M3U ôfspyl list bestân die troch oare ôfspyl applikaasjes iepene wurde kin.</string>
     <string name="notification_now_playing_channel_description">Ôfspyl betsjinning, namme en ôfbylding fan stasjon.</string>
     <string name="notification_now_playing_channel_name">Ôfspyl Betsjinning</string>

@@ -108,7 +108,7 @@
     <string name="toastmessage_updating_collection">Ĝisdatigante kolekton de stacioj.</string>
     <string name="toastmessage_updating_station">Ĝisdatigante stacion.</string>
     <string name="menu_update">Ĝisdatigi stacion</string>
-    <string name="pref_report_issue_summary">Raporti cimojn kaj sugesti plibonigojn ĉe GitHub.</string>
+    <string name="pref_report_issue_summary">Raporti cimojn kaj sugesti plibonigojn ĉe Codeberg.</string>
     <string name="notification_skip_to_next">Sekva</string>
     <string name="notification_skip_to_previous">Antaŭa</string>
     <string name="pref_report_issue_title">Raporti problemon</string>

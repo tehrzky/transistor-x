@@ -115,7 +115,7 @@
     <string name="pref_theme_selection_mode_device_default">זהה למכשיר</string>
     <string name="pref_theme_selection_mode_dark">מצב כהה</string>
     <string name="pref_report_issue_title">דווח על בעייה</string>
-    <string name="pref_report_issue_summary">דווח על באגים והצעות שיפור ב- GitHub.</string>
+    <string name="pref_report_issue_summary">דווח על באגים והצעות שיפור ב- Codeberg.</string>
     <string name="pref_maintenance_title">תחזוקה</string>
     <string name="pref_general_title">כללי</string>
     <string name="pref_delete_all_title">מחק הורדות</string>
