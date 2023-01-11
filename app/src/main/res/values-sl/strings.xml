@@ -125,7 +125,6 @@
     <string name="descr_dialog_edit_station_image">Podoba postaje</string>
     <string name="onboarding_app_get_started">Začnimo</string>
     <string name="onboarding_app_import_running">Uvažam vaše postaje …</string>
-    <string name="player_sheet_p_no_data" translatable="false"/>
     <string name="descr_station_metadata_example">Ustvarjalec – Skladba</string>
     <string name="descr_station_stream_loading">Nalagam pretok …</string>
     <string name="descr_playback_button_play">Predvajaj</string>
@@ -168,7 +167,6 @@
     <string name="player_sheet_h2_station_bitrate">Bitna hitrost</string>
     <string name="toastalert_unable_to_connect">Ne morem vzpostaviti povezave. Naprava nima dostopa do interneta ali pa je naslov do pretoka zastarel.</string>
     <string name="toastmessage_timer_duration_increased"/>
-    <string name="sample_text_steam_url" translatable="false"/>
     <string name="descr_card_starred_station">Priljubljena postaja</string>
     <string name="descr_card_station_image">Podoba postaje</string>
     <string name="descr_app_icon">Star radio kot ikona aplikacije</string>
@@ -192,8 +190,6 @@
     <string name="descr_card_small_play_button">Predvajaj/ustavi</string>
     <string name="dialog_yes_no_positive_button_default">Da</string>
     <string name="descr_card_playback_indicator">Potek predvajanja</string>
-    <string name="app_version_name" translatable="false"/>
-    <string name="onboarding_app_rodriguez_quote_1" translatable="false"/>
     <string name="notification_playing">Predvajam</string>
     <string name="pref_edit_station_stream_summary_disabled">Urejanje povezav pretokov je onemogočeno.</string>
     <string name="toastmessage_error_missing_storage_permission"/>
@@ -207,14 +203,12 @@
     <string name="notification_now_playing_channel_description">Krmilnik predvajanja, ime postaje in njena podoba.</string>
     <string name="pref_maintenance_title">Vzdrževanje</string>
     <string name="pref_edit_station_stream_summary_enabled">Urejanje povezav pretokov je omogočeno. Prepričajte se, da ste vnesli pravilni naslov pretoka.</string>
-    <string name="sample_text_station_metadata" translatable="false"/>
     <string name="notification_now_playing_channel_name">Krmilnik predvajanja</string>
     <string name="toastmessage_updating_collection">Posodabljam zbirko postaj.</string>
     <string name="notification_skip_to_previous"/>
     <string name="descr_list_add_select_stream_dropdown">Izberite pretok</string>
     <string name="pref_theme_selection_mode_dark">Temni način</string>
     <string name="pref_edit_station_stream_title"/>
-    <string name="sample_text_station_name" translatable="false"/>
     <string name="dialog_yes_no_title_default">Odločite</string>
     <string name="toastmessage_save_m3u">Shranjujem postaje kot M3U …</string>
     <string name="onboarding_app_description">Radio aplikacija</string>
@@ -230,14 +224,12 @@
     <string name="player_sheet_h1_details">Podrobnosti</string>
     <string name="dialog_opml_import_details_default">Brez podrobnosti</string>
     <string name="pref_theme_selection_title">Izgled aplikacije</string>
-    <string name="onboarding_app_rodriguez_quote_2" translatable="false"/>
     <string name="toastmessage_station_copied">Postaja je prekopirana na odložišče.</string>
     <string name="descr_player_sheet_content_copy_icon">Kopiraj</string>
     <string name="notification_channel_playback_description">Krmilnik predvajanja, podoba postaje in trenutno predvajano.</string>
     <string name="toastalert_station_not_found">Ne najdem postaje.</string>
     <string name="dialog_yes_no_message_update_collection">Naj preverim za spremembe\?</string>
     <string name="dialog_error_message_no_network">Vzpostavite povezavo z internetom.</string>
-    <string name="sample_text_sleep_timer_remaining_time" translatable="false"/>
     <string name="pref_update_collection_summary"/>
     <string name="descr_player_station_image">Podoba postaje</string>
     <string name="fragment_settings_title">Nastavitve</string>
