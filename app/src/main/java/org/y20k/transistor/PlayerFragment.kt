@@ -272,7 +272,9 @@ class PlayerFragment: Fragment(),
                 }
                 // CASE: invalid address
                 else {
-                    Toast.makeText(activity as Context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
+                    CoroutineScope(IO).launch {
+                        Toast.makeText(activity as Context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }
