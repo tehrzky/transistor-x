@@ -64,10 +64,11 @@ data class LayoutHolder(var rootView: View) {
     private var sheetStreamingLinkView: TextView
     private var sheetMetadataHistoryHeadline: TextView
     private var sheetMetadataHistoryView: TextView
-    var sheetNextMetadataView: ImageView
-    var sheetPreviousMetadataView: ImageView
-    var sheetSleepTimerStartButtonView: ImageView
-    var sheetSleepTimerCancelButtonView: ImageView
+    var sheetNextMetadataView: ImageButton
+    var sheetPreviousMetadataView: ImageButton
+    var sheetCopyMetadataButtonView: ImageButton
+    var sheetSleepTimerStartButtonView: ImageButton
+    var sheetSleepTimerCancelButtonView: ImageButton
     private var sheetSleepTimerRemainingTimeView: TextView
     private var onboardingLayout: ConstraintLayout
     private var onboardingQuoteViews: Group
@@ -97,6 +98,7 @@ data class LayoutHolder(var rootView: View) {
         sheetMetadataHistoryView = rootView.findViewById(R.id.sheet_metadata_history)
         sheetNextMetadataView = rootView.findViewById(R.id.sheet_next_metadata_button)
         sheetPreviousMetadataView = rootView.findViewById(R.id.sheet_previous_metadata_button)
+        sheetCopyMetadataButtonView = rootView.findViewById(R.id.copy_station_metadata_button)
         sheetSleepTimerStartButtonView = rootView.findViewById(R.id.sleep_timer_start_button)
         sheetSleepTimerCancelButtonView = rootView.findViewById(R.id.sleep_timer_cancel_button)
         sheetSleepTimerRemainingTimeView = rootView.findViewById(R.id.sleep_timer_remaining_time)
@@ -176,6 +178,7 @@ data class LayoutHolder(var rootView: View) {
         sheetStreamingLinkView.setOnClickListener{ copyToClipboard(context, sheetStreamingLinkView.text) }
         sheetMetadataHistoryHeadline.setOnClickListener { copyToClipboard(context, sheetMetadataHistoryView.text) }
         sheetMetadataHistoryView.setOnClickListener { copyToClipboard(context, sheetMetadataHistoryView.text) }
+        sheetCopyMetadataButtonView.setOnClickListener { copyToClipboard(context, sheetMetadataHistoryView.text) }
 
     }
 
