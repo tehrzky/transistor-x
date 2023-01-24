@@ -79,6 +79,8 @@
     <string name="pref_advanced_title">Advanced</string>
     <string name="pref_app_version_summary">Version</string>
     <string name="pref_app_version_title">App Version</string>
+    <string name="pref_backup_title">Backup Stations</string>
+    <string name="pref_backup_summary">Save collection of radio stations including images to device storage.</string>
     <string name="pref_delete_all_title">Delete Downloads</string>
     <string name="pref_edit_station_summary_disabled">Editing of station information disabled.</string>
     <string name="pref_edit_station_summary_enabled">Editing of station information enabled. Use long press to enter edit mode.</string>
@@ -90,8 +92,13 @@
     <string name="pref_maintenance_title">Maintenance</string>
     <string name="pref_m3u_export_summary">Save your radio stations to an M3U playlist file that can be imported into other players.</string>
     <string name="pref_m3u_export_title">Export M3U</string>
+    <string name="pref_restore_title">Restore Stations</string>
+    <string name="pref_restore_summary">Restore collection of radio stations from backup. Existing stations will be replaced.</string>
     <string name="pref_report_issue_summary">Report bugs and suggest improvements on Codeberg.</string>
     <string name="pref_report_issue_title">Report Issue</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Tap on the play button to start listening to a radio station.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Tap anywhere on a radio station card to start listening to it.</string>
+    <string name="pref_tap_anywhere_playback_title">Tap Radio Station</string>
     <string name="pref_theme_selection_mode_dark">Dark mode</string>
     <string name="pref_theme_selection_mode_device_default">Same as device</string>
     <string name="pref_theme_selection_mode_light">Light mode</string>
@@ -231,9 +238,5 @@
     <string name="notification_channel_playback_name">Playback Controls</string>
     <string name="notification_channel_playback_description">Playback controls, station logo and now playing info.</string>
     <string name="toastmessage_restoring_collection">Restoring radio stations from backup.</string>
-    <string name="pref_backup_title">Backup Stations</string>
-    <string name="pref_backup_summary">Save collection of radio stations including images to device storage.</string>
-    <string name="pref_restore_title">Restore Stations</string>
-    <string name="pref_restore_summary">Restore collection of radio stations from backup. Existing stations will be replaced.</string>
     <string name="toastmessage_collection_backup">Backing up radio stations to:</string>
 </resources>

@@ -21,6 +21,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -61,6 +62,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
     private lateinit var collectionViewModel: CollectionViewModel
     private var collection: Collection = Collection()
     private var editStationsEnabled: Boolean = PreferencesHelper.loadEditStationsEnabled()
+    private var tapAnywherePlaybackEnabled: Boolean = PreferencesHelper.loadTapAnyWherePlayback()
     private var editStationStreamsEnabled: Boolean = PreferencesHelper.loadEditStreamUrisEnabled()
     private var expandedStationUuid: String = PreferencesHelper.loadStationListStreamUuid()
     private var expandedStationPosition: Int = -1
@@ -280,7 +282,12 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
             false -> stationViewHolder.playButtonView.setImageResource(R.drawable.ic_play_circle_outline_36dp)
         }
         stationViewHolder.playButtonView.setOnClickListener {
-            collectionAdapterListener.onPlayButtonTapped(station.uuid)
+                collectionAdapterListener.onPlayButtonTapped(station.uuid)
+        }
+        stationViewHolder.stationCardView.setOnClickListener {
+            if (tapAnywherePlaybackEnabled) {
+                stationViewHolder.playButtonView.performClick()
+            }
         }
         stationViewHolder.stationCardView.setOnLongClickListener {
             if (editStationsEnabled) {
@@ -498,6 +505,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
         when (key) {
             Keys.PREF_EDIT_STATIONS -> editStationsEnabled = PreferencesHelper.loadEditStationsEnabled()
             Keys.PREF_EDIT_STREAMS_URIS -> editStationStreamsEnabled = PreferencesHelper.loadEditStreamUrisEnabled()
+            Keys.PREF_TAP_ANYWHERE_PLAYBACK -> tapAnywherePlaybackEnabled = PreferencesHelper.loadTapAnyWherePlayback()
         }
     }
     /*
@@ -526,7 +534,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
         val stationNameView: TextView = stationCardLayout.findViewById(R.id.station_name)
         val stationStarredView: ImageView = stationCardLayout.findViewById(R.id.starred_icon)
 //        val menuButtonView: ImageView = stationCardLayout.findViewById(R.id.menu_button)
-        val playButtonView: ImageView = stationCardLayout.findViewById(R.id.playback_button)
+        val playButtonView: ImageButton = stationCardLayout.findViewById(R.id.playback_button)
         val editViews: Group = stationCardLayout.findViewById(R.id.default_edit_views)
         val stationImageChangeView: ImageView = stationCardLayout.findViewById(R.id.change_image_view)
         val stationNameEditView: TextInputEditText = stationCardLayout.findViewById(R.id.edit_station_name)

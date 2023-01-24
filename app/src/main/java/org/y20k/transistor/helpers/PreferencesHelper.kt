@@ -266,6 +266,11 @@ object PreferencesHelper {
     }
 
 
+    /* Loads value of the option: Tap Anywhere */
+    fun loadTapAnyWherePlayback(): Boolean {
+        return sharedPreferences.getBoolean(Keys.PREF_TAP_ANYWHERE_PLAYBACK, false)
+    }
+
 
     /* Return whether to download over mobile */
     fun downloadOverMobile(): Boolean {
