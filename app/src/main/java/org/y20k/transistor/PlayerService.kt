@@ -16,10 +16,7 @@ package org.y20k.transistor
 
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
 import android.media.audiofx.AudioEffect
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -64,6 +61,7 @@ class PlayerService: MediaLibraryService() {
     private var collection: Collection = Collection()
     private lateinit var metadataHistory: MutableList<String>
     private lateinit var modificationDate: Date
+    private var bufferSizeMultiplier: Int = PreferencesHelper.loadBufferSizeMultiplier()
     private var playbackRestartCounter: Int = 0
     private var playLastStation: Boolean = false
 
@@ -113,8 +111,9 @@ class PlayerService: MediaLibraryService() {
         val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
             setAudioAttributes(AudioAttributes.DEFAULT, true)
             setHandleAudioBecomingNoisy(true)
-            setLoadControl(createDefaultLoadControl(10))
+            setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
         }.build()
+        Toast.makeText(this, "Buffer size = $bufferSizeMultiplier" , Toast.LENGTH_LONG).show() // todo remove
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
 
@@ -144,7 +143,8 @@ class PlayerService: MediaLibraryService() {
     /* Creates a LoadControl - increase buffer size by given factor */
     private fun createDefaultLoadControl(factor: Int): DefaultLoadControl {
         val builder = DefaultLoadControl.Builder()
-        builder.setAllocator(DefaultAllocator(true, C.DEFAULT_BUFFER_SEGMENT_SIZE * factor))
+        builder.setAllocator(DefaultAllocator(true, C.DEFAULT_BUFFER_SEGMENT_SIZE))
+        builder.setBufferDurationsMs(DefaultLoadControl.DEFAULT_MIN_BUFFER_MS * factor, DefaultLoadControl.DEFAULT_MAX_BUFFER_MS * factor, DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_MS * factor, DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS * factor)
         return builder.build()
     }
 
@@ -501,6 +501,24 @@ class PlayerService: MediaLibraryService() {
                 if (date.after(collection.modificationDate)) {
                     Log.v(TAG, "PlayerService - reload collection after broadcast received.")
                     loadCollection(context)
+                }
+            }
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
+    /*
+     * Defines the listener for changes in shared preferences
+     */
+    private val sharedPreferenceChangeListener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+        when (key) {
+            Keys.PREF_LARGE_BUFFER_SIZE -> {
+                bufferSizeMultiplier = PreferencesHelper.loadBufferSizeMultiplier()
+                if (!player.isPlaying && !player.isLoading) {
+                    initializePlayer()
                 }
             }
         }

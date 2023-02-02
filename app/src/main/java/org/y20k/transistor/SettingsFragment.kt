@@ -155,6 +155,16 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         }
 
 
+        // set up "Buffer Size" preference
+        val preferenceBufferSize: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
+        preferenceBufferSize.title = getString(R.string.pref_buffer_size_title)
+        preferenceBufferSize.setIcon(R.drawable.ic_network_check_24dp)
+        preferenceBufferSize.key = Keys.PREF_LARGE_BUFFER_SIZE
+        preferenceBufferSize.summaryOn = getString(R.string.pref_buffer_size_summary_enabled)
+        preferenceBufferSize.summaryOff = getString(R.string.pref_buffer_size_summary_disabled)
+        preferenceBufferSize.setDefaultValue(PreferencesHelper.loadLargeBufferSize())
+
+
         // set up "Edit Stream Address" preference
         val preferenceEnableEditingStreamUri: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
         preferenceEnableEditingStreamUri.title = getString(R.string.pref_edit_station_stream_title)
@@ -237,6 +247,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
         val preferenceCategoryAdvanced: PreferenceCategory = PreferenceCategory(activity as Context)
         preferenceCategoryAdvanced.title = getString(R.string.pref_advanced_title)
+        preferenceCategoryAdvanced.contains(preferenceBufferSize)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingGeneral)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingStreamUri)
 
@@ -257,6 +268,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         screen.addPreference(preferenceBackupCollection)
         screen.addPreference(preferenceRestoreCollection)
         screen.addPreference(preferenceCategoryAdvanced)
+        screen.addPreference(preferenceBufferSize)
         screen.addPreference(preferenceEnableEditingGeneral)
         screen.addPreference(preferenceEnableEditingStreamUri)
 
