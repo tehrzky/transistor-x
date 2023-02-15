@@ -53,6 +53,7 @@ import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import org.y20k.transistor.collection.CollectionAdapter
 import org.y20k.transistor.collection.CollectionViewModel
 import org.y20k.transistor.core.Collection
@@ -272,7 +273,7 @@ class PlayerFragment: Fragment(),
                 }
                 // CASE: invalid address
                 else {
-                    CoroutineScope(IO).launch {
+                    withContext(Main) {
                         Toast.makeText(activity as Context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
                     }
                 }
