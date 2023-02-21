@@ -496,7 +496,6 @@ object CollectionHelper {
             setArtist(station.name)
             //setTitle(station.name)
             setArtworkUri(station.image.toUri())
-//            setArtworkData()
             setFolderType(MediaMetadata.FOLDER_TYPE_NONE)
             setIsPlayable(true)
         }.build()
@@ -505,6 +504,7 @@ object CollectionHelper {
             setMediaId(station.uuid)
             setRequestMetadata(requestMetadata)
             setMediaMetadata(mediaMetadata)
+            //setMimeType(station.getMediaType())
             setUri(station.getStreamUri().toUri())
         }.build()
     }
