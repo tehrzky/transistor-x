@@ -26,10 +26,14 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.media.MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT
 import androidx.media3.common.*
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.analytics.AnalyticsListener
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.upstream.DefaultAllocator
+import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
+import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
 import androidx.media3.session.*
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
@@ -37,7 +41,10 @@ import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers.Main
 import org.y20k.transistor.core.Collection
-import org.y20k.transistor.helpers.*
+import org.y20k.transistor.helpers.AudioHelper
+import org.y20k.transistor.helpers.CollectionHelper
+import org.y20k.transistor.helpers.FileHelper
+import org.y20k.transistor.helpers.PreferencesHelper
 import java.util.*
 
 
@@ -76,7 +83,9 @@ class PlayerService: MediaLibraryService() {
         // initialize player and session
         initializePlayer()
         initializeSession()
-        setMediaNotificationProvider(CustomNotificationProvider())
+        val notificationProvider: DefaultMediaNotificationProvider = CustomNotificationProvider()
+        notificationProvider.setSmallIcon(R.drawable.ic_notification_app_icon_white_24dp)
+        setMediaNotificationProvider(notificationProvider)
         // fetch the metadata history
         metadataHistory = PreferencesHelper.loadMetadataHistory()
     }
@@ -112,8 +121,9 @@ class PlayerService: MediaLibraryService() {
             setAudioAttributes(AudioAttributes.DEFAULT, true)
             setHandleAudioBecomingNoisy(true)
             setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
+            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
         }.build()
-        Toast.makeText(this, "Buffer size = $bufferSizeMultiplier" , Toast.LENGTH_LONG).show() // todo remove
+        Toast.makeText(this, "Buffer size multiplier = $bufferSizeMultiplier" , Toast.LENGTH_LONG).show() // todo remove
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
 
@@ -121,6 +131,9 @@ class PlayerService: MediaLibraryService() {
         player = object : ForwardingPlayer(exoPlayer) {
             override fun getAvailableCommands(): Player.Commands {
                 return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
+            }
+            override fun getDuration(): Long {
+                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
             }
         }
     }
@@ -384,22 +397,39 @@ class PlayerService: MediaLibraryService() {
      */
 
 
+
     /*
-     * Custom NotificationProvider that sets tailored Notification
-     */
-    private inner class CustomNotificationProvider: MediaNotification.Provider {
-
-        override fun createNotification(session: MediaSession, customLayout: ImmutableList<CommandButton>, actionFactory: MediaNotification.ActionFactory,  onNotificationChangedCallback: MediaNotification.Provider.Callback): MediaNotification {
-            return MediaNotification(Keys.NOW_PLAYING_NOTIFICATION_ID, NotificationHelper(this@PlayerService).getNotification(session, actionFactory))
-        }
-
-        override fun handleCustomCommand(session: MediaSession, action: String, extras: Bundle): Boolean {
-            TODO("Not yet implemented")
+ * NotificationProvider to customize Notification actions
+ */
+    private inner class CustomNotificationProvider: DefaultMediaNotificationProvider(this@PlayerService) {
+        override fun getMediaButtons(session: MediaSession, playerCommands: Player.Commands, customLayout: ImmutableList<CommandButton>, showPauseButton: Boolean): ImmutableList<CommandButton> {
+            val seekToPreviousCommandButton = CommandButton.Builder()
+                .setPlayerCommand(Player.COMMAND_SEEK_TO_PREVIOUS)
+                .setIconResId(R.drawable.ic_notification_skip_to_previous_36dp)
+                .setEnabled(true)
+                .build()
+            val playCommandButton = CommandButton.Builder()
+                .setPlayerCommand(Player.COMMAND_PLAY_PAUSE)
+                .setIconResId(if (player.isPlaying) R.drawable.ic_notification_stop_36dp else R.drawable.ic_notification_play_36dp)
+                .setEnabled(true)
+                .build()
+            val seekToNextCommandButton = CommandButton.Builder()
+                .setPlayerCommand(Player.COMMAND_SEEK_TO_NEXT)
+                .setIconResId(R.drawable.ic_notification_skip_to_next_36dp)
+                .setEnabled(true)
+                .build()
+            val commandButtons: MutableList<CommandButton> = mutableListOf(
+                seekToPreviousCommandButton,
+                playCommandButton,
+                seekToNextCommandButton
+            )
+            return ImmutableList.copyOf(commandButtons)
         }
     }
     /*
      * End of inner class
      */
+
 
     /*
      * Player.Listener: Called when one or more player states changed.
@@ -475,6 +505,7 @@ class PlayerService: MediaLibraryService() {
         override fun onPlayerError(error: PlaybackException) {
             super.onPlayerError(error)
             if (error.errorCode == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED)  {
+                Log.e(TAG, "Network Error Handling / onPlayerError / ERROR_CODE_IO_NETWORK_CONNECTION_FAILED") // todo remove
                 tryToRestartPlayback()
             }
         }
@@ -491,7 +522,32 @@ class PlayerService: MediaLibraryService() {
 
 
     /*
-     * Custom that handles Keys.ACTION_COLLECTION_CHANGED
+     * Custom LoadErrorHandlingPolicy that network drop outs
+     */
+    private val loadErrorHandlingPolicy: DefaultLoadErrorHandlingPolicy = object: DefaultLoadErrorHandlingPolicy()  {
+        override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
+            Log.e(TAG, "Network Error Handling / DefaultLoadErrorHandlingPolicy => ${loadErrorInfo.errorCount} ${loadErrorInfo.exception}") // todo remove
+            // try to reconnect every 5 seconds - up to 19 times
+            return if (loadErrorInfo.errorCount < 20 && loadErrorInfo.exception is HttpDataSource.HttpDataSourceException) {
+                5000 // 5 seconds
+            } else {
+                C.TIME_UNSET
+                // todo check if playback needs to be stopped
+            }
+        }
+
+        override fun getMinimumLoadableRetryCount(dataType: Int): Int {
+            return Int.MAX_VALUE
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
+
+    /*
+     * Custom receiver that handles Keys.ACTION_COLLECTION_CHANGED
      */
     private val collectionChangedReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
@@ -538,7 +594,9 @@ class PlayerService: MediaLibraryService() {
             val intent: Intent = Intent(AudioEffect.ACTION_OPEN_AUDIO_EFFECT_CONTROL_SESSION)
             intent.putExtra(AudioEffect.EXTRA_AUDIO_SESSION, audioSessionId)
             intent.putExtra(AudioEffect.EXTRA_PACKAGE_NAME, packageName)
+            intent.putExtra(AudioEffect.EXTRA_CONTENT_TYPE, AudioEffect.CONTENT_TYPE_MUSIC)
             sendBroadcast(intent)
+            // note: remember to broadcast AudioEffect.ACTION_CLOSE_AUDIO_EFFECT_CONTROL_SESSION, when not needed anymore
         }
     }
     /*
