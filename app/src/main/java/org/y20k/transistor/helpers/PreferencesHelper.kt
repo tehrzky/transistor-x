@@ -281,7 +281,7 @@ object PreferencesHelper {
     /* Loads a multiplier value for constructing the load control */
     fun loadBufferSizeMultiplier(): Int {
         if (sharedPreferences.getBoolean(Keys.PREF_LARGE_BUFFER_SIZE, false)) {
-            return 2
+            return Keys.LARGE_BUFFER_SIZE_MULTIPLIER
         } else {
             return 1
         }
