@@ -5,4 +5,3 @@
 - M3U8 / HLS playback fixed
 - monochrome app icon variant added
 - network loss is handled better
-- new large buffer option added
