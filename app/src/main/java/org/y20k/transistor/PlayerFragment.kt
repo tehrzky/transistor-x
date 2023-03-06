@@ -127,11 +127,6 @@ class PlayerFragment: Fragment(),
         val rootView: View = inflater.inflate(R.layout.fragment_player, container, false);
         layout = LayoutHolder(rootView)
         initializeViews()
-        // convert old stations (one-time import)
-        if (PreferencesHelper.isHouseKeepingNecessary()) {
-            if (ImportHelper.convertOldStations(activity as Context)) layout.toggleImportingStationViews()
-            PreferencesHelper.saveHouseKeepingNecessaryState()
-        }
         // hide action bar
         (activity as AppCompatActivity).supportActionBar?.hide()
         return rootView

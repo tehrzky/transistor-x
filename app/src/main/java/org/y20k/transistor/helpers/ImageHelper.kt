@@ -21,8 +21,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.net.toUri
 import androidx.palette.graphics.Palette
-import org.y20k.transistor.Keys
 import org.y20k.transistor.R
+import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.io.InputStream
 
@@ -52,7 +52,7 @@ object ImageHelper {
     fun getStationImage(context: Context, imageUriString: String): Bitmap {
         var bitmap: Bitmap? = null
 
-        if (imageUriString != Keys.LOCATION_DEFAULT_STATION_IMAGE) {
+        if (imageUriString.isNotEmpty()) {
             try {
                 // just decode the file
                 bitmap = BitmapFactory.decodeFile(imageUriString.toUri().path)
@@ -67,6 +67,25 @@ object ImageHelper {
         }
 
         return bitmap
+    }
+
+
+    /* Returns a byte array for given image uri */
+    fun getStationImageByteArray(context: Context, imageUri: Uri): ByteArray {
+        var byteArray: ByteArray = byteArrayOf()
+        val stream: InputStream? = context.contentResolver.openInputStream(imageUri)
+        val byteBuffer = ByteArrayOutputStream()
+        val bufferSize = 1024
+        val buffer = ByteArray(bufferSize)
+        var len = 0
+        if (stream != null) {
+            while (stream.read(buffer).also { len = it } != -1) {
+                byteBuffer.write(buffer, 0, len)
+            }
+            stream.close()
+        }
+        byteArray = byteBuffer.toByteArray()
+        return byteArray
     }
 
 
@@ -140,7 +159,7 @@ object ImageHelper {
     /* Return sampled down image for given Uri */
     private fun decodeSampledBitmapFromUri(context: Context, imageUriString: String, reqWidth: Int, reqHeight: Int): Bitmap {
         var bitmap: Bitmap? = null
-        if (imageUriString != Keys.LOCATION_DEFAULT_STATION_IMAGE) {
+        if (imageUriString.isNotEmpty()) {
             try {
                 val imageUri: Uri = imageUriString.toUri()
 

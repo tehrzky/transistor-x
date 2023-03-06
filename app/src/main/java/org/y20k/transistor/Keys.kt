@@ -77,7 +77,7 @@ object Keys {
 
     // preferences
     const val PREF_RADIO_BROWSER_API: String = "RADIO_BROWSER_API"
-    const val PREF_ONE_TIME_HOUSEKEEPING_NECESSARY: String = "ONE_TIME_HOUSEKEEPING_NECESSARY_VERSIONCODE_72" // increment to current app version code to trigger housekeeping that runs only once
+    const val PREF_ONE_TIME_HOUSEKEEPING_NECESSARY: String = "ONE_TIME_HOUSEKEEPING_NECESSARY_VERSIONCODE_95" // increment to current app version code to trigger housekeeping that runs only once
     const val PREF_THEME_SELECTION: String= "THEME_SELECTION"
     const val PREF_LAST_UPDATE_COLLECTION: String = "LAST_UPDATE_COLLECTION"
     const val PREF_COLLECTION_SIZE: String = "COLLECTION_SIZE"
@@ -193,6 +193,7 @@ object Keys {
 
     // locations
     const val LOCATION_DEFAULT_STATION_IMAGE: String = "android.resource://org.y20k.transistor/drawable/ic_default_station_image_24dp"
+    const val LOCATION_RESOURCES: String = "android.resource://org.y20k.transistor/"
 
     // sizes (in dp)
     const val SIZE_COVER_NOTIFICATION_LARGE_ICON: Int = 256

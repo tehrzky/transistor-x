@@ -33,6 +33,21 @@ object ImportHelper {
     /* Define log tag */
     private val TAG: String = ImportHelper::class.java.simpleName
 
+    /* */
+    fun removeDefaultStationImageUris(context: Context) {
+        val collection: Collection = FileHelper.readCollection(context)
+        collection.stations.forEach { station ->
+            if (station.image == Keys.LOCATION_DEFAULT_STATION_IMAGE) {
+                station.image = String()
+            }
+            if (station.smallImage == Keys.LOCATION_DEFAULT_STATION_IMAGE) {
+                station.smallImage = String()
+            }
+        }
+        CollectionHelper.saveCollection(context, collection, async = false)
+    }
+
+
 
     /* Converts older station of type .m3u  */
     fun convertOldStations(context: Context): Boolean {
@@ -52,7 +67,7 @@ object ImportHelper {
                         station.streamContent = NetworkHelper.detectContentType(station.getStreamUri()).type
                         // try to also import station image
                         val sourceImageUri: String = getLegacyStationImageFileUri(context, station)
-                        if (sourceImageUri != Keys.LOCATION_DEFAULT_STATION_IMAGE) {
+                        if (sourceImageUri.isNotEmpty()) {
                             // create and add image and small image + get main color
                             station.image = FileHelper.saveStationImage(context, station.uuid, sourceImageUri, Keys.SIZE_STATION_IMAGE_CARD, Keys.STATION_SMALL_IMAGE_FILE).toString()
                             station.smallImage = FileHelper.saveStationImage(context, station.uuid, sourceImageUri, Keys.SIZE_STATION_IMAGE_MAXIMUM, Keys.STATION_IMAGE_FILE).toString()
@@ -107,10 +122,10 @@ object ImportHelper {
             if (legacyStationImage.exists()) {
                 return legacyStationImage.toString()
             } else {
-                return Keys.LOCATION_DEFAULT_STATION_IMAGE
+                return String()
             }
         } else {
-            return Keys.LOCATION_DEFAULT_STATION_IMAGE
+            return String()
         }
     }
 
