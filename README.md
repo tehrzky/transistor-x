@@ -29,6 +29,9 @@ Transistor can play back streams encoded in MP3, AAC and Ogg/Opus. It also has e
 ### How can I curate the radio station list?
 Use the swipe gesture to delete a radio station from the list. Further editing options can be enabled in Settings. If enabled, tap and hold a radio station to edit its name, image or streaming link.
 
+### How can a suggest a new feature?
+Transistor is a pretty bare bones app. To keep it simple and maintainable new features are rarely added. Before suggesting a new feature please have a look at [Contribute.md](https://codeberg.org/y20k/transistor/src/branch/master/CONTRIBUTE.md) and ["Previous discussions and feature requests"](https://codeberg.org/y20k/transistor/issues/48).
+
 ## Screenshots (v4.1)
 [<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/phoneScreenshots/01-transistor-v4.1.0-playback.png" width="360">](https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/phoneScreenshots/01-transistor-v4.1.0-playback.png)
 [<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/phoneScreenshots/02-transistor-v4.1.0-playback-details.png" width="360">](https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/phoneScreenshots/02-transistor-v4.1.0-playback-details.png)
