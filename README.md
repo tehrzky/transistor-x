@@ -17,7 +17,7 @@ You can install Transistor via F-Froid.
 
 ## Frequent Questions
 
-### How can I add a radio station
+### How can I add a radio station?
 There are three ways to add a radio station to Transistor: Use Search, add playlist file address (M3U, PLS), enter a raw stream address.
 
 ### Where do the radio station search results come from?
