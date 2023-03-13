@@ -315,6 +315,11 @@ object FileHelper {
     }
 
 
+    /* Returns content:// Uri for given file:// path */
+    fun getContentUriForFile(context: Context, file: File): Uri {
+        return FileProvider.getUriForFile(context, "${context.applicationContext.packageName}.provider", file)
+    }
+
 
     /* Suspend function: Wrapper for saveCollection */
     suspend fun saveCollectionSuspended(context: Context, collection: Collection, lastUpdate: Date) {
@@ -489,7 +494,6 @@ object FileHelper {
     }
 
 
-
     /* Writes given bitmap as image file to storage */
     private fun writeImageFile(bitmap: Bitmap, file: File, format: Bitmap.CompressFormat = Bitmap.CompressFormat.JPEG, quality: Int = 75) {
         if (file.exists()) file.delete ()
@@ -502,6 +506,7 @@ object FileHelper {
             e.printStackTrace()
         }
     }
+
 
     /* Checks the size of the collection folder */
     fun getCollectionFolderSize(context: Context): Int {
