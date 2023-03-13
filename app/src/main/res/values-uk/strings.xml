@@ -223,4 +223,13 @@
     <string name="pref_restore_title">Відновити станції</string>
     <string name="pref_restore_summary">Відновити колекцію радіостанцій з резервної копії. Наявні станції будуть замінені.</string>
     <string name="toastmessage_collection_backup">Резервування радіостанцій на:</string>
+    <string name="pref_buffer_size_summary_disabled">Використання стандартного розміру буфера для відтворення потокового радіо.</string>
+    <string name="pref_buffer_size_title">Використовувати більший буфер</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Торкніться будь-де на картці радіостанції, щоб почати її слухати.</string>
+    <string name="pref_tap_anywhere_playback_title">Торкніться радіостанції</string>
+    <string name="descr_expanded_player_metadata_copy_button">Скопіювати інформацію про відтворювану зараз музику</string>
+    <string name="descr_expanded_player_metadata_next_button">Метадані про наступну доріжку</string>
+    <string name="descr_expanded_player_metadata_previous_button">Метадані попереднього треку</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Торкніться кнопки відтворення, щоб почати слухати радіостанцію.</string>
+    <string name="pref_buffer_size_summary_enabled">Увімкнено більший буфер для відтворення потокового радіо. Початок відтворення може тривати довше.</string>
 </resources>
