@@ -103,7 +103,7 @@
     <string name="notification_play">Oynat</string>
     <string name="notification_stop">Stop</string>
     <string name="notification_channel_playback_name">Oynatma Denetimleri</string>
-    <string name="notification_channel_playback_description">Oynatma denetimleri, istasyon logosu ve şimdi yürütülüyor bilgisi.</string>
+    <string name="notification_channel_playback_description">Oynatma denetimleri, istasyon logosu ve şimdi oynatılıyor bilgisi.</string>
     <!-- onboarding -->
     <string name="onboarding_app_description">Radyo uygulaması</string>
     <string name="onboarding_app_get_started">Başlayın</string>
@@ -217,4 +217,13 @@
     <string name="toastmessage_restoring_collection">Radyo istasyonları yedekten geri yükleniyor.</string>
     <string name="pref_backup_summary">Görseller de dahil olmak üzere radyo istasyonlarını aygıt depolama alanına kaydedin.</string>
     <string name="toastmessage_collection_backup">Radyo istasyonları şuraya yedekleniyor:</string>
+    <string name="pref_buffer_size_title">Daha Büyük Ara Bellek Kullan</string>
+    <string name="pref_tap_anywhere_playback_title">Radyo İstasyonuna Dokun</string>
+    <string name="descr_expanded_player_metadata_next_button">Sonraki şimdi oynatılıyor üst veri girdisi</string>
+    <string name="descr_expanded_player_metadata_previous_button">Önceki şimdi oynatılıyor üst veri girdisi</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Bir radyo istasyonunu dinlemeye başlamak için oynat düğmesine dokunun.</string>
+    <string name="pref_buffer_size_summary_disabled">Bir radyo yayınını oynatmak için öntanımlı ara bellek boyutunu kullan.</string>
+    <string name="pref_buffer_size_summary_enabled">Bir radyo yayınını oynatmak için daha büyük ara bellek etkinleştirildi. Oynatmanın başlaması daha uzun sürebilir.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Dinlemeye başlamak için radyo istasyonu kartı üzerinde herhangi bir yere dokunun.</string>
+    <string name="descr_expanded_player_metadata_copy_button">Şimdi oynatılıyor bilgilerini kopyala</string>
 </resources>
