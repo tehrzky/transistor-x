@@ -224,4 +224,6 @@
     <string name="pref_tap_anywhere_playback_summary_enabled">Toque en cualquier lugar de una ficha de emisora de radio para empezar a escucharla.</string>
     <string name="pref_tap_anywhere_playback_title">Toque Emisora de Radio</string>
     <string name="descr_expanded_player_metadata_copy_button">Copiar la información de reproducción actual</string>
+    <string name="descr_expanded_player_metadata_next_button">Siguiente ahora reproduciendo entrada de metadatos</string>
+    <string name="descr_expanded_player_metadata_previous_button">Entrada anterior de metadatos de reproducción</string>
 </resources>
