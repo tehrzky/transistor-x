@@ -70,22 +70,14 @@ object ImageHelper {
     }
 
 
-    /* Returns a byte array for given image uri */
-    fun getStationImageByteArray(context: Context, imageUri: Uri): ByteArray {
-        var byteArray: ByteArray = byteArrayOf()
-        val stream: InputStream? = context.contentResolver.openInputStream(imageUri)
-        val byteBuffer = ByteArrayOutputStream()
-        val bufferSize = 1024
-        val buffer = ByteArray(bufferSize)
-        var len = 0
-        if (stream != null) {
-            while (stream.read(buffer).also { len = it } != -1) {
-                byteBuffer.write(buffer, 0, len)
-            }
-            stream.close()
-        }
-        byteArray = byteBuffer.toByteArray()
-        return byteArray
+    /* Get an unscaled version of the station image as a ByteArray */
+    fun getStationImageAsByteArray(context: Context, imageUriString: String = String()): ByteArray {
+        val coverBitmap: Bitmap = getStationImage(context, imageUriString)
+        val stream = ByteArrayOutputStream()
+        coverBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val coverByteArray: ByteArray = stream.toByteArray()
+        coverBitmap.recycle()
+        return coverByteArray
     }
 
 
