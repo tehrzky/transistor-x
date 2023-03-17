@@ -247,7 +247,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
         val preferenceCategoryAdvanced: PreferenceCategory = PreferenceCategory(activity as Context)
         preferenceCategoryAdvanced.title = getString(R.string.pref_advanced_title)
-        preferenceCategoryAdvanced.contains(preferenceBufferSize)
+//        preferenceCategoryAdvanced.contains(preferenceBufferSize)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingGeneral)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingStreamUri)
 
@@ -268,7 +268,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         screen.addPreference(preferenceBackupCollection)
         screen.addPreference(preferenceRestoreCollection)
         screen.addPreference(preferenceCategoryAdvanced)
-        screen.addPreference(preferenceBufferSize)
+//        screen.addPreference(preferenceBufferSize)
         screen.addPreference(preferenceEnableEditingGeneral)
         screen.addPreference(preferenceEnableEditingStreamUri)
 
