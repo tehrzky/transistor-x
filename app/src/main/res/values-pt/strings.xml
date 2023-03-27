@@ -120,7 +120,7 @@
     <string name="toastmessage_updating_station_images">A atualizar as imagens de estações.</string>
     <string name="toastmessage_error_restart_playback_failed">Não foi possível reestabelecer a reprodução.</string>
     <string name="toastmessage_collection_update_not_necessary">A coleção de estações está atualizada.</string>
-    <string name="toastmessage_error_download_error">Erro no descrarregamento</string>
+    <string name="toastmessage_error_download_error">Erro no descarregamento</string>
     <string name="onboarding_app_import_running">A importando as suas estações…</string>
     <string name="dialog_button_save">Gravar alterações</string>
     <string name="descr_dialog_edit_update_icon">Atualizar</string>
