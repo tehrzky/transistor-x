@@ -78,7 +78,7 @@
     <string name="toastmessage_long_press_change_icon">Aldatu irratiaren ikonoa (Sakatze luzea antzeman da)</string>
     <string name="toastmessage_long_press_change_name">Aldatu irratiaren izena (Sakatze luzea antzeman da)</string>
     <string name="toastmessage_theme_night">Gau modura aldatzen (luze sakatzea antzeman da)</string>
-    <string name="toastmessage_theme_day">Egun modura aldatzen (luze sakatzea antzeman da)</string>
+    <string name="toastmessage_theme_day">\'Egun modu\'-ra aldatzen (luze sakatzea antzeman da)</string>
     <string name="toastmessage_theme_follow_system">Sistemaren ezarpenetan aukeratutako modura aldatzen (luze sakatzea antzeman da)</string>
     <string name="toastmessage_shortcut_created">Lasterbidea sortu da.</string>
     <string name="toastmessage_shortcut_not_created">Ez da lasterbidea sortu. Gailu honek ez du lasterbideak sortzea ahalbidetzen.</string>
@@ -110,5 +110,50 @@
     <!-- Version 3 of Transistor removes the screens infosheet_howto and infosheet_about.
     The last version containing those strings is v2.3.7
     https://github.com/y20k/transistor/tree/v2.3.7/app/src/main/res -->
-
+    <string name="dialog_opml_import_button_okay">Inportatu</string>
+    <string name="dialog_find_station_no_results">Emaitzarik ez.</string>
+    <string name="dialog_generic_details_button">Erakutsi xehetasunak</string>
+    <string name="dialog_yes_no_message_update_station_images">Deskargatu irratiaren irudien azken bertsioa\?</string>
+    <string name="dialog_generic_details_default">Xehetasunik ez</string>
+    <string name="dialog_yes_no_message_default">Ziur hau egin nahi duzula\?</string>
+    <string name="dialog_yes_no_message_update_collection">Bilatu aldaketik badagoen\?</string>
+    <string name="dialog_yes_no_positive_button_add_up_next">Hasi Orain</string>
+    <string name="toastmessage_error_download_error">Deskargaren errorea</string>
+    <string name="menu_update">Eguneratu irratia</string>
+    <string name="toastmessage_collection_update_not_necessary">Irratien bilduma eguneratuta dago.</string>
+    <string name="dialog_yes_no_positive_button_default">Bai</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Ezabatu</string>
+    <string name="dialog_yes_no_title_default">Erabaki</string>
+    <string name="toastmessage_error_no_station_found">Ezin da erreprodukzioa hasi. Mesedez, gehi ezazu irrati bat lehenik.</string>
+    <string name="toastmessage_error_restart_playback_failed">Ezin da erreprodukzioa berrabiarazi.</string>
+    <string name="toastmessage_install_file_helper">Mesedez, instala ezazu fitxategi-kudeatzaile bat.</string>
+    <string name="toastmessage_station_not_valid">Irratiak ez du balio.</string>
+    <string name="dialog_yes_no_positive_button_non_wifi_download">Deskargatu hala ere</string>
+    <string name="dialog_yes_no_negative_button_add_up_next">Gehitu \'Hurrengoa\'-ra</string>
+    <string name="dialog_find_station_button_add">Gehitu</string>
+    <string name="dialog_yes_no_negative_button_default">Ez</string>
+    <string name="dialog_yes_no_negative_button_cancel">Utzi</string>
+    <string name="dialog_find_station_title">Bilatu irratia</string>
+    <string name="dialog_edit_update_station">Eguneratu irratia</string>
+    <string name="dialog_yes_no_positive_button_update_collection">Eguneratu</string>
+    <string name="dialog_yes_no_positive_button_update_covers">Eguneratu</string>
+    <string name="fragment_settings_title">Ezarpenak</string>
+    <string name="dialog_error_title_no_network">Konexiorik gabe</string>
+    <string name="dialog_opml_import_details_button">Erakutsi xehetasunak</string>
+    <string name="toastmessage_error_missing_storage_permission">Eman \"Irakurri Biltegiratzea\" baimena fitxategi hau irekitzeko.</string>
+    <string name="toastmessage_error_no_station_matches_search">Ezin da zure bilaketarekin bat datorren irrati bat aurkitu.</string>
+    <string name="dialog_opml_import_details_default">Xehetasunik ez</string>
+    <string name="dialog_edit_station_name">Irratiaren izena</string>
+    <string name="toastmessage_save_m3u">Irratiak M3U gisa gordetzen…</string>
+    <string name="dialog_yes_no_positive_button_delete_downloads">Ezabatu Guztiak</string>
+    <string name="dialog_yes_no_positive_button_vpn_download">Deskargatu hala ere</string>
+    <string name="dialog_edit_choose_station_image">Aukeratu</string>
+    <string name="dialog_edit_save_changes">Gorde Aldaketak</string>
+    <string name="dialog_edit_stream_uri">Jarioaren helbidea</string>
+    <string name="dialog_error_message_no_network">Konektatu Internetera.</string>
+    <string name="dialog_yes_no_message_remove_station">Ezabatu irrati hau\?</string>
+    <string name="toastmessage_station_duplicate">Bikoiztutako irratia.</string>
+    <string name="dialog_edit_place_on_home_screen">Kokatu Hasierako pantailan</string>
+    <string name="dialog_edit_title">Editatu irratia</string>
+    <string name="dialog_find_station_hint">Izena edo jarioaren helbidea</string>
 </resources>
