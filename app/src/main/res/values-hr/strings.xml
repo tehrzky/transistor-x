@@ -82,7 +82,7 @@
     <string name="snackbar_message_timer_set">Odbrojavanje postavljeno na</string>
     <string name="toastmessage_updating_station">Aktualiziranje stanice …</string>
     <string name="dialog_error_message_fetch_general_hint_m3u">Savjet: Transistor obrađuje samo MP3, AAC i Ogg/Opus kodirane emisije ili poveznice s nastavkom .m3u ili .pls.</string>
-    <string name="descr_player_sheet_p_stream_url">Poveznica emisije odabrane radio stanice</string>
+    <string name="descr_player_sheet_p_stream_url">Poveznica emitiranja odabrane radio stanice</string>
     <string name="dialog_yes_no_positive_button_update_covers">Aktualiziraj</string>
     <string name="dialog_opml_import_details_default">Nema detalja</string>
     <string name="dialog_yes_no_positive_button_remove_station">Ukloni</string>
@@ -104,7 +104,7 @@
     <string name="dialog_yes_no_positive_button_delete_downloads">Izbriši sve</string>
     <string name="toastmessage_timer_duration_increased">Trajanje poduljeno.</string>
     <string name="menu_rename">Preimenuj</string>
-    <string name="notification_now_playing_channel_description">Kontrole za reprodukciju, ime i slika stanice.</string>
+    <string name="notification_now_playing_channel_description">Kontrole za reprodukciju, ime stanice i slika.</string>
     <string name="descr_card_playback_indicator">Napredak reprodukcije</string>
     <string name="notification_stop">Prekini</string>
     <string name="notification_now_playing_channel_name">Kontrole za reprodukciju</string>
@@ -144,7 +144,7 @@
     <string name="pref_about_title">Informacije</string>
     <string name="menu_delete">Izbriši</string>
     <string name="toastalert_station_not_found">Nemoguće pronaći stanicu.</string>
-    <string name="notification_channel_playback_description">Kontrole za reprodukciju, logotip stanice i podaci trenutačne emisije.</string>
+    <string name="notification_channel_playback_description">Kontrole za reprodukciju, logotip stanice i podaci emisije.</string>
     <string name="descr_station_metadata_example">Izvođač – Naslov</string>
     <string name="descr_station_options_button">Opcije</string>
     <string name="descr_station_name_example">UKV primjer</string>
@@ -200,7 +200,16 @@
     <string name="pref_backup_title">Spremi stanice</string>
     <string name="pref_restore_title">Obnovi stanice</string>
     <string name="pref_restore_summary">Obnovi zbirku radio stanica iz sigurnosne kopije. Postojeće stanice će se zamijeniti.</string>
-    <string name="pref_backup_summary">Spremi zbirku radijskih stanica uključujući slike u spremište uređaja.</string>
+    <string name="pref_backup_summary">Spremi zbirku radio stanica uključujući slike u spremište uređaja.</string>
     <string name="toastmessage_restoring_collection">Obnavljanje radio stanica iz sigurnosne kopije.</string>
-    <string name="toastmessage_collection_backup">Spremanje sigurnosnih kopija radijskih stanica na:</string>
+    <string name="toastmessage_collection_backup">Spremanje sigurnosne kopije radio stanica na:</string>
+    <string name="pref_buffer_size_summary_enabled">Aktiviran je veći međuspremnik za reprodukciju radio prijenosa. Pokretanje reprodukcije će možda trebati više vremena.</string>
+    <string name="pref_buffer_size_title">Koristi veću međumemoriju</string>
+    <string name="pref_buffer_size_summary_disabled">Korištenje zadane veličine međuspremnika za reprodukciju radio prijenosa.</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Za slušanje radio stanice dodirni gumb za pokretanje.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Za slušanje radio stanice dodirni karticu radio stanice bilo gdje.</string>
+    <string name="pref_tap_anywhere_playback_title">Dodirni radio stanicu</string>
+    <string name="descr_expanded_player_metadata_copy_button">Kopiraj informacije emisije</string>
+    <string name="descr_expanded_player_metadata_previous_button">Unos metapodataka prethodne emisije</string>
+    <string name="descr_expanded_player_metadata_next_button">Unos metapodataka sljedeće emisije</string>
 </resources>
