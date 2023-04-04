@@ -110,4 +110,10 @@
     <!-- Version 3 of Transistor removes the screens infosheet_howto and infosheet_about.
     The last version containing those strings is v2.3.7
     https://github.com/y20k/transistor/tree/v2.3.7/app/src/main/res -->
+    <string name="dialog_edit_station_name">Meno stanice</string>
+    <string name="dialog_edit_place_on_home_screen">Umiestniť na domovskú obrazovke</string>
+    <string name="dialog_edit_save_changes">Uložiť zmeny</string>
+    <string name="fragment_settings_title">Nastavenia</string>
+    <string name="dialog_edit_stream_uri">Adresa streamovania</string>
+    <string name="dialog_edit_choose_station_image">Vybrať</string>
 </resources>

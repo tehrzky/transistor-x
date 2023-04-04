@@ -538,7 +538,6 @@ class PlayerService: MediaLibraryService() {
      */
 
 
-
     /*
      * Custom receiver that handles Keys.ACTION_COLLECTION_CHANGED
      */
