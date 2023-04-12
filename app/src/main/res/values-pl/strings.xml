@@ -217,4 +217,11 @@
     <string name="pref_restore_summary">Przywraca zestaw stacji z kopii zapasowej. Istniejące stacje będą nadpisane.</string>
     <string name="dialog_edit_stream_uri">Adres strumienia</string>
     <string name="pref_backup_summary">Zapisuje zestaw stacji radiowych, wraz z ich obrazami do pamięci urządzenia.</string>
+    <string name="pref_buffer_size_summary_disabled">Używanie domyślnego rozmiaru bufora do odtwarzania strumienia radiowego.</string>
+    <string name="pref_buffer_size_summary_enabled">Włączono większy bufor do odtwarzania strumienia radiowego. Rozpoczęcie odtwarzania może potrwać dłużej.</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Naciśnij przycisk odtwarzania, aby rozpocząć słuchanie stacji radiowej.</string>
+    <string name="pref_buffer_size_title">Użyj większego bufora</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Naciśnij dowolne miejsce na karcie stacji radiowej, aby rozpocząć jej słuchanie.</string>
+    <string name="pref_tap_anywhere_playback_title">Naciśnij na stację radiową</string>
+    <string name="descr_expanded_player_metadata_copy_button">Skopiuj aktualnie odtwarzane informacje</string>
 </resources>
