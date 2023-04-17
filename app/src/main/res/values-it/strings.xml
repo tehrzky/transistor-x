@@ -203,4 +203,11 @@
     <string name="pref_restore_title">Ripristina stazioni</string>
     <string name="pref_restore_summary">Ripristina la raccolta di stazioni radio da un precedente backup. Le stazioni esistenti saranno sostituite.</string>
     <string name="toastmessage_collection_backup">Salvataggio delle stazioni radio in:</string>
+    <string name="pref_buffer_size_title">Usa buffer più grande</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Toccare il pulsante di riproduzione per iniziare ad ascoltare una stazione radio.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Toccare la scheda di una stazione radio per iniziare ad ascoltarla.</string>
+    <string name="pref_tap_anywhere_playback_title">Tocca stazione radio</string>
+    <string name="descr_expanded_player_metadata_copy_button">Copia le informazioni sulla riproduzione in corso</string>
+    <string name="pref_buffer_size_summary_disabled">Usa la dimensione predefinita del buffer per riprodurre uno stream radiofonico.</string>
+    <string name="pref_buffer_size_summary_enabled">Per la riproduzione di uno stream radiofonico è stato attivato un buffer più grande. L\'avvio della riproduzione potrebbe richiedere più tempo.</string>
 </resources>
