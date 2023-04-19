@@ -203,4 +203,13 @@
     <string name="pref_restore_title">Pulihkan Stasiun</string>
     <string name="pref_restore_summary">Pulihkan koleksi stasiun radio dari cadangan. Stasiun yang ada akan diganti.</string>
     <string name="toastmessage_collection_backup">Menyimpan stasiun radio ke:</string>
+    <string name="pref_buffer_size_summary_disabled">Menggunakan ukuran buffer bawaan untuk memutar stream radio.</string>
+    <string name="pref_buffer_size_summary_enabled">Buffer yang lebih besar untuk memutar stream radio diaktifkan. Mungkin membutuhkan waktu lebih lama untuk memulai pemutaran.</string>
+    <string name="pref_buffer_size_title">Gunakan Buffer yang Lebih Besar</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Ketuk tombol putar untuk mulai mendengarkan stasiun radio.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Ketuk dimanapun pada kartu stasiun radio untuk mulai mendengarkannya.</string>
+    <string name="pref_tap_anywhere_playback_title">Ketuk Stasiun Radio</string>
+    <string name="descr_expanded_player_metadata_copy_button">Salin informasi pemutaran saat ini</string>
+    <string name="descr_expanded_player_metadata_next_button">Entri metadata pemutaran saat ini berikutnya</string>
+    <string name="descr_expanded_player_metadata_previous_button">Entri metadata pemutaran saat ini sebelumnya</string>
 </resources>
