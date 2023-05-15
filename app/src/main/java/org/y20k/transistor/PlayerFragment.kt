@@ -24,7 +24,11 @@ import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.AudioManager
 import android.net.Uri
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Parcelable
 import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
@@ -51,20 +55,34 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.Runnable
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.y20k.transistor.collection.CollectionAdapter
 import org.y20k.transistor.collection.CollectionViewModel
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.core.Station
 import org.y20k.transistor.dialogs.FindStationDialog
 import org.y20k.transistor.dialogs.YesNoDialog
-import org.y20k.transistor.extensions.*
-import org.y20k.transistor.helpers.*
+import org.y20k.transistor.extensions.cancelSleepTimer
+import org.y20k.transistor.extensions.play
+import org.y20k.transistor.extensions.playStreamDirectly
+import org.y20k.transistor.extensions.requestMetadataHistory
+import org.y20k.transistor.extensions.requestSleepTimerRemaining
+import org.y20k.transistor.extensions.startSleepTimer
+import org.y20k.transistor.helpers.BackupHelper
+import org.y20k.transistor.helpers.CollectionHelper
+import org.y20k.transistor.helpers.DownloadHelper
+import org.y20k.transistor.helpers.NetworkHelper
+import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.UiHelper
+import org.y20k.transistor.helpers.UpdateHelper
 import org.y20k.transistor.ui.LayoutHolder
 import org.y20k.transistor.ui.PlayerState
-import java.util.*
 
 
 /*
@@ -243,39 +261,11 @@ class PlayerFragment: Fragment(),
 
 
     /* Overrides onFindStationDialog from FindStationDialog */
-    override fun onFindStationDialog(remoteStationLocation: String, station: Station) {
-        super.onFindStationDialog(remoteStationLocation, station)
-        if (remoteStationLocation.isNotEmpty()) {
-            // detect content type on background thread
-            CoroutineScope(IO).launch {
-                val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(remoteStationLocation) }
-                // wait for result
-                val contentType: String = deferred.await().type.lowercase(Locale.getDefault())
-                // CASE: playlist detected
-                if (Keys.MIME_TYPES_M3U.contains(contentType) or
-                    Keys.MIME_TYPES_PLS.contains(contentType)) {
-                    // download playlist
-                    DownloadHelper.downloadPlaylists(activity as Context, arrayOf(remoteStationLocation))
-                }
-                // CASE: stream address detected
-                else if (Keys.MIME_TYPES_MPEG.contains(contentType) or
-                         Keys.MIME_TYPES_OGG.contains(contentType) or
-                         Keys.MIME_TYPES_AAC.contains(contentType) or
-                         Keys.MIME_TYPES_HLS.contains(contentType)) {
-                    // create station and add to collection
-                    val newStation: Station = Station(name = remoteStationLocation, streamUris = mutableListOf(remoteStationLocation), streamContent = contentType, modificationDate = GregorianCalendar.getInstance().time)
-                    collection = CollectionHelper.addStation(activity as Context, collection, newStation)
-                }
-                // CASE: invalid address
-                else {
-                    withContext(Main) {
-                        Toast.makeText(activity as Context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
-                    }
-                }
-            }
-        }
-
-        if (station.radioBrowserStationUuid.isNotEmpty()) {
+    override fun onFindStationDialog(station: Station) {
+        if (station.streamContent.isNotEmpty() && station.streamContent != Keys.MIME_TYPE_UNSUPPORTED) {
+            // add station and save collection
+            collection = CollectionHelper.addStation(activity as Context, collection, station)
+        } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
                 val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(station.getStreamUri()) }

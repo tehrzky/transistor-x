@@ -32,19 +32,20 @@ import com.google.android.material.textview.MaterialTextView
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 import org.y20k.transistor.core.Station
+import org.y20k.transistor.search.DirectInputCheck
 import org.y20k.transistor.search.RadioBrowserResult
-import org.y20k.transistor.search.RadioBrowserResultAdapter
 import org.y20k.transistor.search.RadioBrowserSearch
+import org.y20k.transistor.search.SearchResultAdapter
 
 
 /*
  * FindStationDialog class
  */
-class FindStationDialog (private var context: Context, private var listener: FindFindStationDialogListener): RadioBrowserResultAdapter.RadioBrowserResultAdapterListener, RadioBrowserSearch.RadioBrowserSearchListener {
+class FindStationDialog (private var context: Context, private var listener: FindFindStationDialogListener): SearchResultAdapter.SearchResultAdapterListener, RadioBrowserSearch.RadioBrowserSearchListener, DirectInputCheck.DirectInputCheckListener {
 
     /* Interface used to communicate back to activity */
     interface FindFindStationDialogListener {
-        fun onFindStationDialog(remoteStationLocation: String, station: Station) {
+        fun onFindStationDialog(station: Station) {
         }
     }
 
@@ -58,8 +59,9 @@ class FindStationDialog (private var context: Context, private var listener: Fin
     private lateinit var searchRequestProgressIndicator: ProgressBar
     private lateinit var noSearchResultsTextView: MaterialTextView
     private lateinit var stationSearchResultList: RecyclerView
-    private lateinit var searchResultAdapter: RadioBrowserResultAdapter
+    private lateinit var searchResultAdapter: SearchResultAdapter
     private lateinit var radioBrowserSearch: RadioBrowserSearch
+    private lateinit var directInputCheck: DirectInputCheck
     private var currentSearchString: String = String()
     private val handler: Handler = Handler()
     private var remoteStationLocation: String = String()
@@ -67,8 +69,8 @@ class FindStationDialog (private var context: Context, private var listener: Fin
 
 
     /* Overrides onSearchResultTapped from RadioBrowserResultAdapterListener */
-    override fun onSearchResultTapped(radioBrowserResult: RadioBrowserResult) {
-        station = radioBrowserResult.toStation()
+    override fun onSearchResultTapped(result: Station) {
+        station = result
         // hide keyboard
         val imm: InputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(stationSearchBoxView.windowToken, 0)
@@ -80,7 +82,8 @@ class FindStationDialog (private var context: Context, private var listener: Fin
     /* Overrides onRadioBrowserSearchResults from RadioBrowserSearchListener */
     override fun onRadioBrowserSearchResults(results: Array<RadioBrowserResult>) {
         if (results.isNotEmpty()) {
-            searchResultAdapter.searchResults = results
+            val stationList: List<Station> = results.map {it.toStation()}
+            searchResultAdapter.searchResults = stationList
             searchResultAdapter.notifyDataSetChanged()
             resetLayout(clearAdapter = false)
         } else {
@@ -89,10 +92,22 @@ class FindStationDialog (private var context: Context, private var listener: Fin
     }
 
 
+    /* Overrides onDirectInputCheck from DirectInputCheck */
+    override fun onDirectInputCheck(stationList: MutableList<Station>) {
+        if (stationList.isNotEmpty()) {
+            searchResultAdapter.searchResults = stationList
+            searchResultAdapter.notifyDataSetChanged()
+            resetLayout(clearAdapter = false)
+        } else {
+            showNoResultsError()
+        }
+    }
+
     /* Construct and show dialog */
     fun show() {
-        // initialize a radio browser search
+        // initialize a radio browser search and direct url input check
         radioBrowserSearch = RadioBrowserSearch(this)
+        directInputCheck = DirectInputCheck(this)
 
         // prepare dialog builder
         val builder: MaterialAlertDialogBuilder = MaterialAlertDialogBuilder(context, R.style.AlertDialogTheme)
@@ -112,10 +127,10 @@ class FindStationDialog (private var context: Context, private var listener: Fin
         // set up list of search results
         setupRecyclerView(context)
 
-        // add okay ("import") button
+        // add okay ("Add") button
         builder.setPositiveButton(R.string.dialog_find_station_button_add) { _, _ ->
             // listen for click on add button
-            (listener).onFindStationDialog(remoteStationLocation, station)
+            listener.onFindStationDialog(station)
         }
         // add cancel button
         builder.setNegativeButton(R.string.dialog_generic_button_cancel) { _, _ ->
@@ -154,7 +169,7 @@ class FindStationDialog (private var context: Context, private var listener: Fin
 
     /* Sets up list of results (RecyclerView) */
     private fun setupRecyclerView(context: Context) {
-        searchResultAdapter = RadioBrowserResultAdapter(this, arrayOf())
+        searchResultAdapter = SearchResultAdapter(this, listOf())
         stationSearchResultList.adapter = searchResultAdapter
         val layoutManager: LinearLayoutManager = object: LinearLayoutManager(context) {
             override fun supportsPredictiveItemAnimations(): Boolean {
@@ -175,8 +190,7 @@ class FindStationDialog (private var context: Context, private var listener: Fin
             }
             // handle direct URL input
             query.startsWith("http") -> {
-                remoteStationLocation = query
-                activateAddButton()
+                directInputCheck.checkStationAddress(context, query)
             }
             // handle search string input
             else -> {
@@ -192,8 +206,7 @@ class FindStationDialog (private var context: Context, private var listener: Fin
         currentSearchString = query
         if (query.startsWith("htt")) {
             // handle direct URL input
-            remoteStationLocation = query
-            activateAddButton()
+            directInputCheck.checkStationAddress(context, query)
         } else if (query.contains(" ") || query.length > 2 ) {
             // show progress indicator
             showProgressIndicator()

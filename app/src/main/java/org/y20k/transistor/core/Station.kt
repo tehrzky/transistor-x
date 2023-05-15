@@ -21,7 +21,8 @@ import com.google.gson.annotations.Expose
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import org.y20k.transistor.Keys
-import java.util.*
+import java.util.Date
+import java.util.UUID
 
 
 /*

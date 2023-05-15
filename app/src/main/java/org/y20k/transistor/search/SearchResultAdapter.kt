@@ -1,7 +1,7 @@
 /*
- * RadioBrowserResult.kt
- * Implements the RadioBrowserResultAdapter class
- * A RadioBrowserResultAdapter is a custom adapter providing search result views for a RecyclerView
+ * SearchResultAdapter.kt
+ * Implements the SearchResultAdapter class
+ * A SearchResultAdapter is a custom adapter providing search result views for a RecyclerView
  *
  * This file is part of
  * TRANSISTOR - Radio App for Android
@@ -20,15 +20,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textview.MaterialTextView
 import org.y20k.transistor.R
+import org.y20k.transistor.core.Station
 
 
 /*
- * RadioBrowserResult class
+ * SearchResultAdapter class
  */
-class RadioBrowserResultAdapter(private val listener: RadioBrowserResultAdapterListener, var searchResults: Array<RadioBrowserResult>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchResultAdapter(private val listener: SearchResultAdapterListener, var searchResults: List<Station>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     /* Define log tag */
-    private val TAG: String = RadioBrowserResultAdapter::class.java.simpleName
+    private val TAG: String = SearchResultAdapter::class.java.simpleName
 
 
     /* Main class variables */
@@ -36,8 +37,8 @@ class RadioBrowserResultAdapter(private val listener: RadioBrowserResultAdapterL
 
 
     /* Listener Interface */
-    interface RadioBrowserResultAdapterListener {
-        fun onSearchResultTapped(radioBrowserResult: RadioBrowserResult)
+    interface SearchResultAdapterListener {
+        fun onSearchResultTapped(result: Station)
     }
 
 
@@ -67,10 +68,10 @@ class RadioBrowserResultAdapter(private val listener: RadioBrowserResultAdapterL
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         // get reference to ViewHolder
         val searchResultViewHolder: SearchResultViewHolder = holder as SearchResultViewHolder
-        val searchResult: RadioBrowserResult = searchResults[position]
+        val searchResult: Station = searchResults[position]
         // update text
         searchResultViewHolder.nameView.text = searchResult.name
-        searchResultViewHolder.streamView.text = searchResult.url
+        searchResultViewHolder.streamView.text = searchResult.getStreamUri()
         // mark selected if necessary
         searchResultViewHolder.searchResultLayout.isSelected = selectedPosition == position
         // toggle text scrolling (marquee) if necessary
@@ -93,7 +94,7 @@ class RadioBrowserResultAdapter(private val listener: RadioBrowserResultAdapterL
         val currentlySelected: Int = selectedPosition
         selectedPosition = RecyclerView.NO_POSITION
         if (clearAdapter) {
-            searchResults = arrayOf()
+            searchResults = listOf()
             notifyDataSetChanged()
         } else {
             notifyItemChanged(currentlySelected)
