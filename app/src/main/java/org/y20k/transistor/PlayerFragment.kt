@@ -47,6 +47,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.media3.common.MediaItem
+import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionResult
@@ -663,6 +664,13 @@ class PlayerFragment: Fragment(),
             if (playWhenReady && controller?.isPlaying == false) {
                 layout.showBufferingIndicator(buffering = true)
             }
+        }
+
+        override fun onPlayerError(error: PlaybackException) {
+            super.onPlayerError(error)
+            layout.togglePlayButton(false)
+            layout.showBufferingIndicator(false)
+            // TODO: display Toast error message
         }
     }
     /*
