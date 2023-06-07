@@ -217,4 +217,13 @@
     <string name="pref_restore_summary">Herstel de verzameling radiozenders vanaf de back-up. Bestaande zenders worden vervangen.</string>
     <string name="toastmessage_collection_backup">Back-up maken van radiozenders naar:</string>
     <string name="pref_backup_title">Back-up van zenders maken</string>
+    <string name="pref_buffer_size_title">Grotere buffer gebruiken</string>
+    <string name="pref_buffer_size_summary_disabled">De standaard buffergrootte gebruiken voor het afspelen van een radiostream.</string>
+    <string name="pref_buffer_size_summary_enabled">Grotere buffer voor het afspelen van een radiostream ingeschakeld. Het kan langer duren voordat het afspelen begint.</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Tik op de afspeelknop om een zender te beluisteren.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Tik ergens op een radiokaart om te beluisteren.</string>
+    <string name="pref_tap_anywhere_playback_title">Tik op radiostation</string>
+    <string name="descr_expanded_player_metadata_copy_button">Kopieer de informatie van de huidige weergave</string>
+    <string name="descr_expanded_player_metadata_next_button">Geef informatie over de hierop volgende weergave</string>
+    <string name="descr_expanded_player_metadata_previous_button">Geef informatie over de hieraan voorgaande weergave</string>
 </resources>
