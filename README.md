@@ -11,9 +11,11 @@ Transistor is an app with a minimalistic approach for listening to radio program
 Transistor is free software. It is published under the [MIT open source license](https://opensource.org/licenses/MIT). Want to help? Please check out the notes in [CONTRIBUTE.md](https://codeberg.org/y20k/transistor/src/branch/master/CONTRIBUTE.md) first.
 
 ## Install Transistor
-You can install Transistor via F-Froid.
+You can install Transistor via F-Droid or IzzyOnDroid.
 
-[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=org.y20k.transistor)
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=org.y20k.transistor) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/packages/org.y20k.transistor/)
+
+
 
 ## Frequent Questions
 
