@@ -31,13 +31,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.net.toUri
 import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
-import androidx.preference.*
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
+import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreferenceCompat
+import androidx.preference.contains
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.y20k.transistor.dialogs.ErrorDialog
 import org.y20k.transistor.dialogs.YesNoDialog
-import org.y20k.transistor.helpers.*
+import org.y20k.transistor.helpers.AppThemeHelper
+import org.y20k.transistor.helpers.BackupHelper
+import org.y20k.transistor.helpers.FileHelper
+import org.y20k.transistor.helpers.NetworkHelper
+import org.y20k.transistor.helpers.PreferencesHelper
 
 
 /*
@@ -247,7 +256,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
         val preferenceCategoryAdvanced: PreferenceCategory = PreferenceCategory(activity as Context)
         preferenceCategoryAdvanced.title = getString(R.string.pref_advanced_title)
-//        preferenceCategoryAdvanced.contains(preferenceBufferSize)
+        preferenceCategoryAdvanced.contains(preferenceBufferSize)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingGeneral)
         preferenceCategoryAdvanced.contains(preferenceEnableEditingStreamUri)
 
@@ -268,7 +277,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         screen.addPreference(preferenceBackupCollection)
         screen.addPreference(preferenceRestoreCollection)
         screen.addPreference(preferenceCategoryAdvanced)
-//        screen.addPreference(preferenceBufferSize)
+        screen.addPreference(preferenceBufferSize)
         screen.addPreference(preferenceEnableEditingGeneral)
         screen.addPreference(preferenceEnableEditingStreamUri)
 
