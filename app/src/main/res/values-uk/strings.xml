@@ -14,7 +14,7 @@
     <string name="menu_shortcut">Розмістити на домашньому екрані</string>
     <!-- descriptions -->
     <string name="descr_app_icon">Піктограма застосунку з зображенням старого радіо</string>
-    <string name="descr_station_options_button">Налаштування</string>
+    <string name="descr_station_options_button">Опції</string>
     <string name="descr_station_name_example">Приклад FM</string>
     <string name="descr_station_metadata_example">Артист - Заголовок</string>
     <string name="descr_station_stream_loading">Завантаження потоку …</string>
@@ -173,7 +173,7 @@
     <string name="dialog_yes_no_positive_button_vpn_download">Однаково завантажити</string>
     <string name="dialog_yes_no_positive_button_update_covers">Оновити</string>
     <string name="dialog_yes_no_positive_button_update_collection">Оновити</string>
-    <string name="dialog_yes_no_positive_button_remove_station">Видалити</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Вилучити</string>
     <string name="dialog_yes_no_positive_button_non_wifi_download">Однаково завантажити</string>
     <string name="dialog_yes_no_positive_button_delete_downloads">Видалити все</string>
     <string name="dialog_yes_no_positive_button_default">Так</string>
