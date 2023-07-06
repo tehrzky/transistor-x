@@ -53,7 +53,7 @@ object AudioHelper {
     fun getMetadataString(metadata: Metadata): String {
         var metadataString: String = String()
         for (i in 0 until metadata.length()) {
-            val entry = metadata[i]
+            val entry = metadata.get(i)
             // extract IceCast metadata
             if (entry is IcyInfo) {
                 metadataString = entry.title.toString()

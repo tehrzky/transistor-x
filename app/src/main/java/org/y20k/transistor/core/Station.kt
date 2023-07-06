@@ -60,6 +60,7 @@ data class Station (@Expose val uuid: String = UUID.randomUUID().toString(),
         stringBuilder.append("Name: ${name}\n")
         if (streamUris.isNotEmpty()) stringBuilder.append("Stream: ${streamUris[stream]}\n")
         stringBuilder.append("Last Update: ${modificationDate}\n")
+        stringBuilder.append("Content-Type: ${streamContent}\n")
         return stringBuilder.toString()
     }
 

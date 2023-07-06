@@ -70,21 +70,21 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.9.0'
 
-    implementation "androidx.activity:activity-ktx:1.7.1"
+    implementation "androidx.activity:activity-ktx:1.7.2"
     implementation "androidx.appcompat:appcompat:1.6.1"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
-    implementation "androidx.core:core-ktx:1.10.0"
+    implementation "androidx.core:core-ktx:1.10.1"
     implementation "androidx.palette:palette-ktx:1.0.0"
     implementation "androidx.preference:preference-ktx:1.2.0"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation "androidx.media:media:1.6.0"
 
-    def mediaVersion = "1.0.1"
+    def mediaVersion = "1.1.0"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
     implementation "androidx.media3:media3-exoplayer-hls:$mediaVersion"
     implementation "androidx.media3:media3-session:$mediaVersion"
 
-    def navigationVersion = "2.5.3"
+    def navigationVersion = "2.6.0"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
