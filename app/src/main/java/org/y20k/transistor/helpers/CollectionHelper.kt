@@ -504,7 +504,7 @@ object CollectionHelper {
                 //setArtworkUri(Uri.parse(Keys.LOCATION_RESOURCES + R.raw.ic_default_station_image))
                 setArtworkData(ImageHelper.getStationImageAsByteArray(context), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
             }
-            setFolderType(MediaMetadata.FOLDER_TYPE_NONE)
+            setIsBrowsable(false)
             setIsPlayable(true)
         }.build()
         // build MediaItem and return it
