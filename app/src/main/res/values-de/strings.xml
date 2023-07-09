@@ -224,4 +224,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Informationen zur aktuellen Wiedergabe kopieren</string>
     <string name="pref_buffer_size_summary_disabled">Verwendung der Standardpuffergröße für die Wiedergabe eines Radiostreams.</string>
     <string name="pref_buffer_size_summary_enabled">Größerer Puffer für die Wiedergabe eines Radiostreams aktiviert. Es kann länger dauern, bis die Wiedergabe beginnt.</string>
+    <string name="descr_expanded_player_metadata_next_button">Nächster jetzt spielender Metadateneintrag</string>
+    <string name="descr_expanded_player_metadata_previous_button">Vorheriger jetzt spielender Metadateneintrag</string>
 </resources>
