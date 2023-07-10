@@ -57,12 +57,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.Runnable
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.y20k.transistor.collection.CollectionAdapter
 import org.y20k.transistor.collection.CollectionViewModel
 import org.y20k.transistor.core.Collection
@@ -269,13 +268,13 @@ class PlayerFragment: Fragment(),
         } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
-                val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(station.getStreamUri()) }
-                // wait for result
-                val contentType: NetworkHelper.ContentType = deferred.await()
+                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.getStreamUri())
                 // set content type
                 station.streamContent = contentType.type
                 // add station and save collection
-                collection = CollectionHelper.addStation(activity as Context, collection, station)
+                withContext(Main) {
+                    collection = CollectionHelper.addStation(activity as Context, collection, station)
+                }
             }
         }
     }

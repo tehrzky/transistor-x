@@ -51,16 +51,6 @@ class DirectInputCheck(private var directInputCheckListener: DirectInputCheckLis
     private var lastCheckedAddress: String = String()
 
 
-/*
-TEST CASES - TODO REMOVE WHEN FINISHED
-https://www.radioeins.de/live.m3u
-https://www.radioeins.de/live.pls
-http://server-10.stream-server.nl:8300/listen.pls
-multiple streams in one file
-http://wfmu.org/wfmu.pls
-http://radio.xaq.nl/m3u/speech.m3u
- */
-
     /* Searches station(s) on radio-browser.info */
     fun checkStationAddress(context: Context, query: String) {
         // check if valid URL
