@@ -9,7 +9,7 @@
     <string name="shortcut_last_station_disabled_message">Atajo para la reproducción de la última emisora desactivada.</string>
     <!-- menu entries -->
     <string name="menu_icon">Cambiar icono</string>
-    <string name="menu_delete">Eliminar</string>
+    <string name="menu_delete">Borrar</string>
     <string name="menu_rename">Cambiar nombre</string>
     <string name="menu_shortcut">Colocar en la pantalla de inicio</string>
     <!-- descriptions -->
@@ -44,20 +44,20 @@
     <string name="dialog_add_station_message">Añadir nueva emisora</string>
     <string name="dialog_add_station_howto">Puedes añadir una retransmisión de audio codificado en MP3, AAC y Ogg/Opus además de retransmisiones encapsuladas en archivos PLS o M3U. Alternativamente puedes añadir nuevas emisoras pulsando en los enlaces de retransmisión (.pls o .m3u) en tu navegador web.</string>
     <string name="dialog_delete_station_message">Eliminar emisora</string>
-    <string name="dialog_button_delete">Eliminar</string>
+    <string name="dialog_button_delete">Borrar</string>
     <string name="dialog_rename_station_input_hint">Introducir un nuevo nombre</string>
     <string name="dialog_rename_station_message">Cambiar nombre de emisora</string>
     <string name="dialog_button_rename">Cambiar nombre</string>
     <string name="dialog_add_station_choose_stream_heading">Se encontraron varias retransmisiones</string>
     <string name="dialog_add_station_choose_stream_message">Seleccione una retransmisión</string>
-    <string name="dialog_add_station_choose_stream_button">Seleccionar</string>
+    <string name="dialog_add_station_choose_stream_button">Escoger</string>
     <!-- error dialogs -->
     <string name="dialog_error_title_default">Error</string>
     <string name="dialog_error_message_default">Un error ha ocurrido</string>
     <string name="dialog_error_details_button_default">Mostrar detalles</string>
     <string name="dialog_error_details_default">No hay detalles disponibles</string>
     <string name="dialog_error_details_write">Esta emisora está probablemente duplicada, si no, comprueba su almacenamiento externo.</string>
-    <string name="dialog_error_title_fetch_download">Error de descarga</string>
+    <string name="dialog_error_title_fetch_download">Problema en la descarga</string>
     <string name="dialog_error_title_fetch_read">Error de lectura</string>
     <string name="dialog_error_title_fetch_write">Error de escritura</string>
     <string name="dialog_error_message_fetch_general_external_storage">Almacenamiento externo:</string>
@@ -111,7 +111,7 @@
     The last version containing those strings is v2.3.7
     https://github.com/y20k/transistor/tree/v2.3.7/app/src/main/res -->
     <string name="toastmessage_sleep_timer_unable_to_start">Inicie primero la reproducción.</string>
-    <string name="dialog_button_save">Guardar cambios</string>
+    <string name="dialog_button_save">Guardar los cambios</string>
     <string name="onboarding_app_import_running">Importando emisoras…</string>
     <string name="descr_player_playback_button">Iniciar/pausar</string>
     <string name="descr_player_station_image">Imagen de emisora</string>
@@ -162,13 +162,13 @@
     <string name="dialog_edit_place_on_home_screen">Colocar en la pantalla de inicio</string>
     <string name="toastmessage_error_missing_storage_permission">Concede permiso de \"Lectura de almacenamiento\" para abrir este archivo.</string>
     <string name="toastmessage_collection_update_not_necessary">La colección de emisoras está actualizada.</string>
-    <string name="toastmessage_error_download_error">Error de descarga</string>
+    <string name="toastmessage_error_download_error">Error en la descarga</string>
     <string name="menu_update">Actualizar emisora</string>
     <string name="dialog_yes_no_title_default">Decidir</string>
     <string name="dialog_yes_no_positive_button_vpn_download">Descargar de todas maneras</string>
     <string name="dialog_yes_no_positive_button_update_covers">Actualizar</string>
     <string name="dialog_yes_no_positive_button_update_collection">Actualizar</string>
-    <string name="dialog_yes_no_positive_button_remove_station">Eliminar</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Quitar</string>
     <string name="dialog_yes_no_positive_button_non_wifi_download">Descargar de todas maneras</string>
     <string name="dialog_yes_no_positive_button_delete_downloads">Eliminar Todo</string>
     <string name="dialog_yes_no_positive_button_default">Sí</string>
@@ -193,7 +193,7 @@
     <string name="dialog_error_message_no_network">Conectar a Internet.</string>
     <string name="dialog_edit_update_station">Actualizar emisora</string>
     <string name="dialog_edit_title">Editar Emisora</string>
-    <string name="dialog_edit_choose_station_image">Seleccionar</string>
+    <string name="dialog_edit_choose_station_image">Elegir</string>
     <string name="fragment_settings_title">Configuración</string>
     <string name="pref_m3u_export_summary">Guarde sus emisoras de radio en un archivo de lista de reproducción M3U para que se pueda importar a otros reproductores.</string>
     <string name="pref_m3u_export_title">Exportar M3U</string>
@@ -206,7 +206,7 @@
     <string name="pref_edit_station_title">Editar estaciones</string>
     <string name="pref_edit_station_summary_enabled">Edición de la información de la estación habilitada. Utilice una pulsación larga para entrar en modo edición.</string>
     <string name="pref_edit_station_stream_summary_disabled">Edición de enlaces de retransmisión deshabilitado.</string>
-    <string name="dialog_edit_save_changes">Guardar cambios</string>
+    <string name="dialog_edit_save_changes">Guardar los cambios</string>
     <string name="station_list_button_settings">Ajustes</string>
     <string name="pref_edit_station_stream_summary_enabled">Edición de enlaces de retransmisión habilitada. Asegúrese de ingresar una dirección de transmisión correcta.</string>
     <string name="pref_edit_station_stream_title">Editar enlaces de retransmisión</string>
