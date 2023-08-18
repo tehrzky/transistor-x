@@ -51,7 +51,7 @@
     <string name="toastmessage_station_not_valid">Emisora non válida.</string>
     <string name="toastmessage_updating_station_images">Actualizando imaxes da emisora.</string>
     <string name="pref_general_title">Xeral</string>
-    <string name="dialog_yes_no_positive_button_remove_station">Desbotar</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Retirar</string>
     <string name="dialog_yes_no_positive_button_update_covers">Actualizar</string>
     <string name="toastmessage_error_no_station_matches_search">Non se atopan emisoras que cumpran co criterio.</string>
     <string name="toastmessage_theme_follow_system">Cambiando a \'modo Seguir Axustes do Sistema\' (detectouse pulsación longa)</string>
@@ -137,14 +137,14 @@
     <string name="player_sheet_h2_current_session">Sesión actual</string>
     <string name="descr_player_sheet_content_copy_icon">Copiar</string>
     <string name="player_sheet_h2_station_metadata">Reproducindo agora</string>
-    <string name="descr_list_add_new">Engadir emisora</string>
+    <string name="descr_list_add_new">Engadir unha nova emisora</string>
     <string name="descr_list_add_select_stream_dropdown">Elixe un fluxo</string>
     <string name="player_sheet_h1_details">Detalles</string>
     <string name="dialog_add_station_input_hint">Pegar ligazón ao fluxo</string>
-    <string name="dialog_add_station_message">Engadir emisora</string>
+    <string name="dialog_add_station_message">Engadir nova emisora</string>
     <string name="dialog_add_station_howto">Podes engadir fluxos de audio puros codificados en MP3, AAC e Ogg/Opus así como fluxos encapsulados en ficheiros PLS ou M3U. De xeito alternativo tamén podes engadir emisoras premendo en ligazóns a fluxos (.pls ou .m3u) no teu navegador.</string>
     <string name="dialog_delete_station_message">Eliminar emisora</string>
-    <string name="dialog_button_delete">Desbotar</string>
+    <string name="dialog_button_delete">Eliminar</string>
     <string name="dialog_rename_station_input_hint">Escribe o novo nome</string>
     <string name="dialog_rename_station_message">Cambiar nome emisora</string>
     <string name="dialog_add_station_choose_stream_button">Elexir</string>
