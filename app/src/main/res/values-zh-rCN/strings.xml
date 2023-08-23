@@ -7,7 +7,7 @@
     <string name="fragment_settings_title">设置</string>
     <!-- Dialogs -->
     <string name="dialog_edit_choose_station_image">选择</string>
-    <string name="dialog_edit_place_on_home_screen">添加到主屏幕</string>
+    <string name="dialog_edit_place_on_home_screen">添加到主屏</string>
     <string name="dialog_edit_title">编辑电台</string>
     <string name="dialog_edit_update_station">更新电台</string>
     <string name="dialog_error_message_default">发生错误</string>
