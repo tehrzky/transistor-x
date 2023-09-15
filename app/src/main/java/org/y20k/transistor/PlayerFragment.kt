@@ -514,12 +514,29 @@ class PlayerFragment: Fragment(),
 
     /* Handles ACTION_VIEW request to add Station */
     private fun handleViewIntent() {
-        val contentUri: Uri? = (activity as Activity).intent.data
-        if (contentUri != null) {
-            val scheme: String = contentUri.scheme ?: String()
-            if (scheme.startsWith("http")) DownloadHelper.downloadPlaylists(activity as Context, arrayOf(contentUri.toString()))
+        val intentUri: Uri? = (activity as Activity).intent.data
+        if (intentUri != null) {
+            CoroutineScope(IO).launch {
+                val stationList: MutableList<Station> = mutableListOf()
+                val scheme: String = intentUri.scheme ?: String()
+                if (scheme.startsWith("http")) {
+                    Log.i(TAG, "Transistor was started to handle a web link.")
+                    stationList.addAll(CollectionHelper.createStationsFromUrl(intentUri.toString()))
+                } else if (scheme.startsWith("content")) {
+                    Log.i(TAG, "Transistor was started to handle a local audio playlist.")
+                    stationList.addAll(CollectionHelper.createStationListFromContentUri(activity as Context, intentUri))
+                }
+                if (stationList.isNotEmpty()) {
+                    // todo hand over station list to a new AddStationDialog
+                    Log.e(TAG, stationList.toString()) // todo remove
+                } else {
+                    // invalid address
+                    Toast.makeText(context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
+                }
+            }
         }
     }
+
 
     /* Handles START_PLAYER_SERVICE request from App Shortcut */
     private fun handleStartPlayer() {

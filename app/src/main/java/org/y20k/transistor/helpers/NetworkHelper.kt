@@ -18,14 +18,16 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import android.net.NetworkCapabilities.*
+import android.net.NetworkCapabilities.TRANSPORT_CELLULAR
+import android.net.NetworkCapabilities.TRANSPORT_VPN
+import android.net.NetworkCapabilities.TRANSPORT_WIFI
 import android.util.Log
 import org.y20k.transistor.Keys
 import java.net.HttpURLConnection
 import java.net.InetAddress
 import java.net.URL
 import java.net.UnknownHostException
-import java.util.*
+import java.util.Random
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -132,6 +134,21 @@ object NetworkHelper {
         }
         Log.i(TAG, "content type: ${contentType.type} | character set: ${contentType.charset}")
         return contentType
+    }
+
+
+    /* Download playlist - up to 100 lines, with max. 200 characters */
+    fun downloadPlaylist(playlistUrlString: String): List<String> {
+        val lines = mutableListOf<String>()
+        val connection = URL(playlistUrlString).openConnection()
+        val reader = connection.getInputStream().bufferedReader()
+        reader.useLines { sequence ->
+            sequence.take(100).forEach { line ->
+                val trimmedLine = line.take(2000)
+                lines.add(trimmedLine)
+            }
+        }
+        return lines
     }
 
 

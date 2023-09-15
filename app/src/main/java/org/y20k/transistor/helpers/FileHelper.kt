@@ -268,7 +268,7 @@ object FileHelper {
     fun readCollection(context: Context): Collection {
         Log.v(TAG, "Reading collection - Thread: ${Thread.currentThread().name}")
         // get JSON from text file
-        val json: String = readTextFile(context, Keys.FOLDER_COLLECTION, Keys.COLLECTION_FILE)
+        val json: String = readTextFileFromFile(context, Keys.FOLDER_COLLECTION, Keys.COLLECTION_FILE)
         var collection: Collection = Collection()
         if (json.isNotBlank()) {
             // convert JSON and return as collection
@@ -285,7 +285,7 @@ object FileHelper {
 
     /* Appends a message to an existing log - and saves it */
     fun saveLog(context: Context, logMessage: String) {
-        var log: String = readTextFile(context, Keys.FOLDER_COLLECTION, Keys.DEBUG_LOG_FILE)
+        var log: String = readTextFileFromFile(context, Keys.FOLDER_COLLECTION, Keys.DEBUG_LOG_FILE)
         log = "${log} {$logMessage}"
         writeTextFile(context, log, Keys.FOLDER_COLLECTION, Keys.DEBUG_LOG_FILE)
     }
@@ -447,7 +447,7 @@ object FileHelper {
 
 
     /* Reads InputStream from file uri and returns it as String */
-    private fun readTextFile(context: Context, folder: String, fileName: String): String {
+    private fun readTextFileFromFile(context: Context, folder: String, fileName: String): String {
         // todo read https://commonsware.com/blog/2016/03/15/how-consume-content-uri.html
         // https://developer.android.com/training/secure-file-sharing/retrieve-info
 
@@ -456,7 +456,7 @@ object FileHelper {
         if (!file.exists() || !file.canRead()) {
             return String()
         }
-        // readSuspended until last line reached
+        // read until last line reached
         val stream: InputStream = file.inputStream()
         val reader: BufferedReader = BufferedReader(InputStreamReader(stream))
         val builder: StringBuilder = StringBuilder()
@@ -466,6 +466,30 @@ object FileHelper {
         stream.close()
         return builder.toString()
     }
+
+
+    /* Reads InputStream from content uri and returns it as List of String */
+    fun readTextFileFromContentUri(context: Context, contentUri: Uri): List<String> {
+        val lines: MutableList<String> = mutableListOf()
+        try {
+            // open input stream from content URI
+            val inputStream: InputStream? = context.contentResolver.openInputStream(contentUri)
+            if (inputStream != null) {
+                val reader: InputStreamReader = inputStream.reader()
+                var index: Int = 0
+                reader.forEachLine {
+                    index += 1
+                    if (index < 256)
+                    lines.add(it)
+                }
+                inputStream.close()
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return lines
+    }
+
 
 
     /* Writes given text to file on storage */
