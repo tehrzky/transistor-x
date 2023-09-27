@@ -27,7 +27,6 @@ import androidx.core.net.toUri
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -335,7 +334,7 @@ object FileHelper {
 
     /* Suspend function: Wrapper for readCollection */
     suspend fun readCollectionSuspended(context: Context): Collection =
-        withContext(Dispatchers.IO) {
+        withContext(IO) {
             readCollection(context)
         }
 

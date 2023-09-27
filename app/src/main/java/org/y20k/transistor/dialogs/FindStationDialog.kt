@@ -41,10 +41,10 @@ import org.y20k.transistor.search.SearchResultAdapter
 /*
  * FindStationDialog class
  */
-class FindStationDialog (private var context: Context, private var listener: FindFindStationDialogListener): SearchResultAdapter.SearchResultAdapterListener, RadioBrowserSearch.RadioBrowserSearchListener, DirectInputCheck.DirectInputCheckListener {
+class FindStationDialog (private val context: Context, private val listener: FindStationDialogListener): SearchResultAdapter.SearchResultAdapterListener, RadioBrowserSearch.RadioBrowserSearchListener, DirectInputCheck.DirectInputCheckListener {
 
     /* Interface used to communicate back to activity */
-    interface FindFindStationDialogListener {
+    interface FindStationDialogListener {
         fun onFindStationDialog(station: Station) {
         }
     }
@@ -68,7 +68,7 @@ class FindStationDialog (private var context: Context, private var listener: Fin
     private var station: Station = Station()
 
 
-    /* Overrides onSearchResultTapped from RadioBrowserResultAdapterListener */
+    /* Overrides onSearchResultTapped from SearchResultAdapterListener */
     override fun onSearchResultTapped(result: Station) {
         station = result
         // hide keyboard

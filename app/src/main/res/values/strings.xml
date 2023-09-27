@@ -7,6 +7,7 @@
     <!-- Fragment -->
     <string name="fragment_settings_title">Settings</string>
     <!-- Dialogs -->
+    <string name="dialog_add_station_title">Add Station</string>
     <string name="dialog_edit_choose_station_image">Choose</string>
     <string name="dialog_edit_place_on_home_screen">Place on Home screen</string>
     <string name="dialog_edit_save_changes">Save Changes</string>
