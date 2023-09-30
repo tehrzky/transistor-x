@@ -159,7 +159,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceRestoreCollection.setIcon(R.drawable.ic_restore_24dp)
         preferenceRestoreCollection.summary = getString(R.string.pref_restore_summary)
         preferenceRestoreCollection.setOnPreferenceClickListener {
-            openRestoreCollecionDialog()
+            openRestoreCollectionDialog()
             return@setOnPreferenceClickListener true
         }
 
@@ -319,7 +319,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
 
     /* Register the ActivityResultLauncher for the backup dialog */
-    private val requestBackupCollectionLauncher = registerForActivityResult(StartActivityForResult(), this::requestBackupCollecionResult)
+    private val requestBackupCollectionLauncher = registerForActivityResult(StartActivityForResult(), this::requestBackupCollectionResult)
 
 
     /* Register the ActivityResultLauncher for the restore dialog */
@@ -345,8 +345,8 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     }
 
 
-    /* Pass the activity result for the backup collecion dialog */
-    private fun requestBackupCollecionResult(result: ActivityResult) {
+    /* Pass the activity result for the backup collection dialog */
+    private fun requestBackupCollectionResult(result: ActivityResult) {
         // save station backup file to result file location
         if (result.resultCode == Activity.RESULT_OK && result.data != null) {
             val targetUri: Uri? = result.data?.data
@@ -442,7 +442,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
 
     /* Opens up a file picker to select the file containing the collection to be restored */
-    private fun openRestoreCollecionDialog() {
+    private fun openRestoreCollectionDialog() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
             addCategory(Intent.CATEGORY_OPENABLE)
             type = "*/*"

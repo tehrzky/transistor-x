@@ -141,7 +141,7 @@
     <string name="dialog_button_save">変更を保存</string>
     <string name="pref_app_version_summary">バージョン</string>
     <string name="menu_update">放送局を更新</string>
-    <string name="toastmessage_restoring_collection">バックアップから放送局を復元しています。</string>
+    <string name="toastmessage_collection_restore">バックアップから放送局を復元しています。</string>
     <string name="pref_backup_summary">放送局のコレクションを画像を含めて端末のストレージに保存します。</string>
     <string name="toastmessage_collection_backup">次に放送局を保存中:</string>
     <string name="pref_report_issue_summary">GitHubでバグを報告し、改善を提案する。</string>

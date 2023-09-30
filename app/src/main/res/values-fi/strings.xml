@@ -122,7 +122,7 @@
     <string name="toastmessage_station_duplicate">Kanava on tuplana.</string>
     <string name="toastmessage_updating_collection">Kanavakokoelmaa päivitetään.</string>
     <string name="toastmessage_updating_station">Kanavaa päivitetään…</string>
-    <string name="toastmessage_restoring_collection">Palautetaan radiokanavat varmuuskopiosta.</string>
+    <string name="toastmessage_collection_restore">Palautetaan radiokanavat varmuuskopiosta.</string>
     <string name="pref_edit_station_summary_enabled">Kanavatiedon muokkaaminen on otettu käyttöön. Paina pitkään muokataksesi.</string>
     <string name="dialog_rename_station_message">Nimeä kanava uudelleen</string>
     <string name="toastmessage_collection_update_not_necessary">Asemien kokoelma on ajan tasalla.</string>

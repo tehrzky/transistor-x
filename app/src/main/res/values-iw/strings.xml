@@ -200,7 +200,7 @@
     <string name="pref_backup_title">תחנות גיבוי</string>
     <string name="pref_restore_title">שחזור מחרוזות</string>
     <string name="pref_restore_summary">שחזור אוסף תחנות הרדיו מגיבוי. התחנות הקיימות תוחלפנה.</string>
-    <string name="toastmessage_restoring_collection">תחנות רדיו משוחזרות מגיבוי.</string>
+    <string name="toastmessage_collection_restore">תחנות רדיו משוחזרות מגיבוי.</string>
     <string name="pref_backup_summary">שמירת אוסף של תחנות רדיו לרבות התמונות לאחסון המכשיר.</string>
     <string name="toastmessage_collection_backup">תחנות הרדיו מגובות אל:</string>
 </resources>

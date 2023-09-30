@@ -17,7 +17,7 @@
     <string name="toastmessage_error_restart_playback_failed">재생을 다시 시작할 수 없습니다.</string>
     <string name="dialog_yes_no_positive_button_default">네</string>
     <string name="notification_now_playing_channel_name">재생 컨트롤</string>
-    <string name="toastmessage_restoring_collection">백업에서 라디오 방송국을 복구하는 중입니다.</string>
+    <string name="toastmessage_collection_restore">백업에서 라디오 방송국을 복구하는 중입니다.</string>
     <string name="player_sheet_h2_station_mime_type">매체종류</string>
     <string name="dialog_find_station_button_add">추가하기</string>
     <string name="dialog_find_station_title">방송국 검색</string>

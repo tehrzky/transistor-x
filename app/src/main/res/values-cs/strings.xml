@@ -210,6 +210,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Kopírovat informace o probíhajícím přehrávání</string>
     <string name="descr_expanded_player_metadata_next_button">Následující metadata o přehrávání</string>
     <string name="descr_expanded_player_metadata_previous_button">Předchozí metadata o přehrávání</string>
-    <string name="toastmessage_restoring_collection">Obnova stanic ze zálohy.</string>
+    <string name="toastmessage_collection_restore">Obnova stanic ze zálohy.</string>
     <string name="toastmessage_collection_backup">Záloha stanic na:</string>
 </resources>

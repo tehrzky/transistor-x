@@ -57,14 +57,11 @@ object BackupHelper {
             val data = ByteArray(2048)
             // get all File objects in folder
             for (file in source.listFiles()!!) {
-                val path = parentDirPath + File.separator + file.name
+                // make sure that path does not start with a separator (/)
+                val path: String = if (parentDirPath.isEmpty()) file.name else parentDirPath + File.separator + file.name
                 when (file.isDirectory) {
                     // CASE: Folder
                     true -> {
-//                        val entry = ZipEntry(path + File.separator) // add separator to make entry a folder
-//                        entry.time = file.lastModified()
-//                        entry.size = file.length()
-//                        zipOutputStream.putNextEntry(entry)
                         // call zipFolder recursively to add files within this folder
                         zipFolder(zipOutputStream, file, path)
                     }
@@ -95,7 +92,7 @@ object BackupHelper {
 
     /* Extracts zip backup  file and restores files and folders - Credit: https://www.baeldung.com/java-compress-and-uncompress*/
     fun restore(context: Context, sourceUri: Uri) {
-        Toast.makeText(context, context.getString(R.string.toastmessage_restoring_collection), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.toastmessage_collection_restore), Toast.LENGTH_LONG).show()
 
         val resolver: ContentResolver = context.contentResolver
         val sourceInputStream: InputStream? = resolver.openInputStream(sourceUri)
@@ -111,12 +108,12 @@ object BackupHelper {
                 when (zipEntry.isDirectory) {
                     // CASE: Folder
                     true -> {
-                        // create folder if new file is just a file
+                        // create folder if zip entry is a folder
                         if (!newFile.isDirectory && !newFile.mkdirs()) {
                             Log.w(TAG,"Failed to create directory $newFile")
                         }
                     }
-                    // CASE: Files
+                    // CASE: File
                     false -> {
                         // create parent directory, if necessary
                         val parent: File? = newFile.parentFile
@@ -133,7 +130,7 @@ object BackupHelper {
                     }
                 }
             } catch (e: Exception) {
-                Log.e(TAG, "Unable to safely create get file. $e")
+                Log.e(TAG, "Unable to safely create file. $e")
             }
             // get next entry - zipEntry will be null, when zipInputStream has no more entries left
             zipEntry = zipInputStream.nextEntry

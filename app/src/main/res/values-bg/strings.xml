@@ -205,7 +205,7 @@
     <string name="dialog_error_message_fetch_read_file_location">Местоположение на файла:</string>
     <string name="dialog_error_message_fetch_write">Транзистор не може да запази станцията.</string>
     <string name="toastalert_rename_unsuccessful">Грешка при преименуване. Изберете друго наименование.</string>
-    <string name="toastmessage_restoring_collection">Възстановяване на станции от резервно копие.</string>
+    <string name="toastmessage_collection_restore">Възстановяване на станции от резервно копие.</string>
     <string name="toastmessage_collection_backup">Резервно копие на станциите в:</string>
     <string name="toastalert_permission_denied">Достъпът е забранен:</string>
     <string name="notification_stop">Спиране</string>

@@ -245,7 +245,7 @@
     <string name="pref_update_collection_title">Posodobi postaje</string>
     <string name="pref_update_station_images_summary">Prenesi najnovejše podobe vseh postaj.</string>
     <string name="menu_update">Posodobi postajo</string>
-    <string name="toastmessage_restoring_collection">Obnavljam radio postaje iz varnostne kopije.</string>
+    <string name="toastmessage_collection_restore">Obnavljam radio postaje iz varnostne kopije.</string>
     <string name="toastmessage_copied_to_clipboard">Prekopirano na odložišče.</string>
     <string name="dialog_find_station_hint">Ime postaje ali naslov pretoka</string>
     <string name="dialog_edit_update_station">Posodobi postajo</string>

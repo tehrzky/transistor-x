@@ -193,6 +193,7 @@
     <string name="dialog_add_station_choose_stream_heading">Multiple streams found</string>
     <string name="dialog_add_station_choose_stream_message">Please select a stream</string>
     <string name="dialog_add_station_choose_stream_button">Select</string>
+    <string name="dialog_restore_collection_replace_existing">Replace current collection of radio stations with the radio station from backup?</string>
     <!-- error dialogs -->
     <string name="dialog_error_details_button_default">Show details</string>
     <string name="dialog_error_details_default">No details available</string>
@@ -213,6 +214,8 @@
     <!-- messages -->
     <string name="toastmessage_add_download_started">Download started.</string>
     <string name="toastmessage_add_open_file_started">Opening file.</string>
+    <string name="toastmessage_collection_restore">Restoring radio stations from backup.</string>
+    <string name="toastmessage_collection_backup">Backing up radio stations to:</string>
     <string name="toastmessage_long_press_playback_stopped">Playback stopped (long press detected)</string>
     <string name="toastmessage_long_press_playback_started">Playback started (long press detected)</string>
     <string name="toastmessage_long_press_change_icon">Change station icon (long press detected)</string>
@@ -241,6 +244,5 @@
     <string name="notification_stop">Stop</string>
     <string name="notification_channel_playback_name">Playback Controls</string>
     <string name="notification_channel_playback_description">Playback controls, station logo and now playing info.</string>
-    <string name="toastmessage_restoring_collection">Restoring radio stations from backup.</string>
-    <string name="toastmessage_collection_backup">Backing up radio stations to:</string>
+
 </resources>

@@ -202,7 +202,7 @@
     <string name="pref_advanced_title">Zaawansowane</string>
     <string name="pref_edit_station_title">Edycja stacji</string>
     <string name="descr_card_station_image_change">Zmień obrazek stacji</string>
-    <string name="toastmessage_restoring_collection">Przywracanie stacji radiowych z kopii zapasowej.</string>
+    <string name="toastmessage_collection_restore">Przywracanie stacji radiowych z kopii zapasowej.</string>
     <string name="pref_backup_title">Kopie Zapasowe Stacji</string>
     <string name="pref_restore_title">Przywracanie Stacji</string>
     <string name="toastmessage_collection_backup">Tworzenie kopii zapasowej stacji radiowych na:</string>

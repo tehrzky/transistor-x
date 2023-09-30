@@ -201,7 +201,7 @@
     <string name="pref_restore_title">Obnovi stanice</string>
     <string name="pref_restore_summary">Obnovi zbirku radio stanica iz sigurnosne kopije. Postojeće stanice će se zamijeniti.</string>
     <string name="pref_backup_summary">Spremi zbirku radio stanica uključujući slike u spremište uređaja.</string>
-    <string name="toastmessage_restoring_collection">Obnavljanje radio stanica iz sigurnosne kopije.</string>
+    <string name="toastmessage_collection_restore">Obnavljanje radio stanica iz sigurnosne kopije.</string>
     <string name="toastmessage_collection_backup">Spremanje sigurnosne kopije radio stanica na:</string>
     <string name="pref_buffer_size_summary_enabled">Aktiviran je veći međuspremnik za reprodukciju radio prijenosa. Pokretanje reprodukcije će možda trebati više vremena.</string>
     <string name="pref_buffer_size_title">Koristi veću međumemoriju</string>

@@ -201,7 +201,7 @@
     <string name="pref_restore_title">Restablecer emisoras</string>
     <string name="pref_restore_summary">Restablecer a lista de emisoras desde a copia. As emisoras existentes serán substituídas.</string>
     <string name="toastmessage_collection_backup">Facer copia das emisoras en:</string>
-    <string name="toastmessage_restoring_collection">Restablecer emisoras de radio desde a copia.</string>
+    <string name="toastmessage_collection_restore">Restablecer emisoras de radio desde a copia.</string>
     <string name="pref_backup_summary">Garda as emisoras de radio na almacenaxe do dispositivo incluíndo as imaxes.</string>
     <string name="pref_buffer_size_title">Usar un Buffer máis grande</string>
     <string name="pref_tap_anywhere_playback_summary_enabled">Toca en calquera parte da tarxeta da emisora para comezar a escoitala.</string>
