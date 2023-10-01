@@ -35,6 +35,7 @@
     <string name="dialog_yes_no_positive_button_remove_station">Forigi</string>
     <string name="dialog_yes_no_positive_button_default">Jes</string>
     <string name="dialog_yes_no_negative_button_cancel">Nuligi</string>
+    <string name="dialog_rename_station_input_hint">Eniru novan nomon</string>
     <string name="dialog_yes_no_message_remove_station">Forigi ĉi tiun stacion\?</string>
     <string name="dialog_opml_import_details_default">Neniu detalo disponebla</string>
     <string name="dialog_generic_details_button">Montri detalojn</string>

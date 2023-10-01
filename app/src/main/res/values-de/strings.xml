@@ -57,6 +57,7 @@
     <string name="toast_message_station_not_valid">Sender ist ungültig.</string>
     <string name="toast_message_station_duplicate">Sender duplizieren.</string>
     <string name="dialog_yes_no_message_update_station_images">Neueste Version aller Senderbilder herunterladen\?</string>
+    <string name="dialog_rename_station_input_hint">Zadejte nový název</string>
     <string name="dialog_yes_no_message_remove_station">Diesen Sender entfernen\?</string>
     <string name="dialog_find_station_title">Sender finden</string>
     <string name="dialog_find_station_hint">Name oder Stream-Adresse</string>

@@ -21,7 +21,11 @@ import android.os.Build
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isGone
@@ -190,7 +194,7 @@ data class LayoutHolder(var rootView: View) {
         cm.setPrimaryClip(clip)
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU){
             // since API 33 (TIRAMISU) the OS displays its own notification when content is copied to the clipboard
-            Toast.makeText(context, R.string.toastmessage_copied_to_clipboard, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.toast_message_copied_to_clipboard, Toast.LENGTH_LONG).show()
         }
     }
 

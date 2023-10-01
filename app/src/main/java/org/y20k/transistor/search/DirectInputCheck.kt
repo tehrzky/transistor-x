@@ -61,7 +61,7 @@ class DirectInputCheck(private var directInputCheckListener: DirectInputCheckLis
                         directInputCheckListener.onDirectInputCheck(stationList)
                     } else {
                         // invalid address
-                        Toast.makeText(context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.toast_message_station_not_valid, Toast.LENGTH_LONG).show()
                     }
                 }
             }

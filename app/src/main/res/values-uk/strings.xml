@@ -60,6 +60,7 @@
     <string name="dialog_yes_no_positive_button_default">Так</string>
     <string name="dialog_yes_no_negative_button_cancel">Скасувати</string>
     <string name="dialog_yes_no_message_update_station_images">Завантажити найновіші версії всіх зображень станцій\?</string>
+    <string name="dialog_rename_station_input_hint">Ввести нову назву</string>
     <string name="dialog_yes_no_message_remove_station">Видалити цю станцію\?</string>
     <string name="dialog_opml_import_details_default">Подробиці недоступні</string>
     <string name="dialog_generic_details_button">Показати подробиці</string>

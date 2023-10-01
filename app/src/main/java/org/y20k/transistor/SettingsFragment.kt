@@ -218,7 +218,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             cm.setPrimaryClip(clip)
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
                 // since API 33 (TIRAMISU) the OS displays its own notification when content is copied to the clipboard
-                Toast.makeText(activity as Context, R.string.toastmessage_copied_to_clipboard, Toast.LENGTH_LONG).show()
+                Toast.makeText(activity as Context, R.string.toast_message_copied_to_clipboard, Toast.LENGTH_LONG).show()
             }
             return@setOnPreferenceClickListener true
         }
@@ -337,7 +337,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
                 CoroutineScope(IO).launch {
                     FileHelper.saveCopyOfFileSuspended(activity as Context, sourceUri, targetUri)
                 }
-                Toast.makeText(activity as Context, R.string.toastmessage_save_m3u, Toast.LENGTH_LONG).show()
+                Toast.makeText(activity as Context, R.string.toast_message_save_m3u, Toast.LENGTH_LONG).show()
             } else {
                 Log.w(TAG, "M3U export failed.")
             }
@@ -378,7 +378,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     /* Updates collection */
     private fun updateCollection() {
         if (NetworkHelper.isConnectedToNetwork(activity as Context)) {
-            Toast.makeText(activity as Context, R.string.toastmessage_updating_collection, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity as Context, R.string.toast_message_updating_collection, Toast.LENGTH_LONG).show()
             // update collection in player screen
             val bundle: Bundle = bundleOf(Keys.ARG_UPDATE_COLLECTION to true)
             this.findNavController().navigate(R.id.player_destination, bundle)
@@ -391,7 +391,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     /* Updates station images */
     private fun updateStationImages() {
         if (NetworkHelper.isConnectedToNetwork(activity as Context)) {
-            Toast.makeText(activity as Context, R.string.toastmessage_updating_station_images, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity as Context, R.string.toast_message_updating_station_images, Toast.LENGTH_LONG).show()
             // update collection in player screen
             val bundle: Bundle = bundleOf(
                 Keys.ARG_UPDATE_IMAGES to true
@@ -415,7 +415,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             requestSaveM3uLauncher.launch(intent)
         } catch (exception: Exception) {
             Log.e(TAG, "Unable to save M3U.\n$exception")
-            Toast.makeText(activity as Context, R.string.toastmessage_install_file_helper, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity as Context, R.string.toast_message_install_file_helper, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -434,7 +434,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             requestBackupCollectionLauncher.launch(intent)
         } catch (exception: Exception) {
             Log.e(TAG, "Unable to save M3U.\n$exception")
-            Toast.makeText(activity as Context, R.string.toastmessage_install_file_helper, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity as Context, R.string.toast_message_install_file_helper, Toast.LENGTH_LONG).show()
         }
     }
 

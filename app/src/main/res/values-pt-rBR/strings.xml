@@ -49,6 +49,7 @@
     <string name="dialog_yes_no_positive_button_default">Sim</string>
     <string name="dialog_yes_no_negative_button_cancel">Cancelar</string>
     <string name="dialog_yes_no_message_update_station_images">Baixe a versão mais recente de todas as imagens da estação\?</string>
+    <string name="dialog_rename_station_input_hint">Insira um novo nome</string>
     <string name="dialog_yes_no_message_remove_station">Remover essa estação\?</string>
     <string name="dialog_opml_import_details_default">Sem detalhes disponíveis</string>
     <string name="dialog_find_station_hint">Nome ou endereço do stream</string>

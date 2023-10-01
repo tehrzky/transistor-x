@@ -15,6 +15,7 @@
     <string name="dialog_edit_save_changes">Gardar cambios</string>
     <string name="dialog_opml_import_details_default">Non hai detalles</string>
     <string name="dialog_error_message_no_network">Conectar con internet.</string>
+    <string name="dialog_rename_station_input_hint">Escribe o novo nome</string>
     <string name="dialog_yes_no_message_remove_station">Eliminar esta emisora\?</string>
     <string name="dialog_error_title_no_network">Sen conexión</string>
     <string name="dialog_find_station_button_add">Engadir</string>

@@ -37,6 +37,7 @@
     <string name="descr_player_playback_button">再生/一時停止</string>
     <string name="toast_message_sleep_timer_unable_to_start">先に再生を開始してください。</string>
     <string name="toast_message_error_download_error">ダウンロードエラー</string>
+    <string name="dialog_rename_station_input_hint">新しい名前を入力してください</string>
     <string name="dialog_yes_no_message_remove_station">この放送局を削除しますか？</string>
     <string name="dialog_error_message_no_network">インターネットに接続してください。</string>
     <string name="pref_app_version_summary">バージョン</string>

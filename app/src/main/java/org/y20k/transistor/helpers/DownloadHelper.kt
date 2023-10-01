@@ -21,15 +21,21 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.core.net.toUri
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.core.Station
 import org.y20k.transistor.extensions.copy
-import java.util.*
+import java.util.Date
+import java.util.StringTokenizer
 
 
 /*
@@ -99,7 +105,7 @@ object DownloadHelper {
         if (downloadResult == null) {
             val downloadErrorCode: Int = getDownloadError(downloadId)
             val downloadErrorFileName: String = getDownloadFileName(downloadManager, downloadId)
-            Toast.makeText(context, "${context.getString(R.string.toastmessage_error_download_error)}: $downloadErrorFileName ($downloadErrorCode)", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "${context.getString(R.string.toast_message_error_download_error)}: $downloadErrorFileName ($downloadErrorCode)", Toast.LENGTH_LONG).show()
             Log.w(TAG, "Download not successful: File name = $downloadErrorFileName Error code = $downloadErrorCode")
             removeFromActiveDownloads(arrayOf(downloadId), deleteDownload = true)
             return

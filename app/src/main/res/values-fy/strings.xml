@@ -22,6 +22,7 @@
     <string name="dialog_yes_no_positive_button_remove_station">Weismite</string>
     <string name="dialog_yes_no_positive_button_default">Ja</string>
     <string name="dialog_yes_no_negative_button_cancel">Annulearje</string>
+    <string name="dialog_rename_station_input_hint">In nije namme ynfiere</string>
     <string name="dialog_yes_no_message_remove_station">Dit sjasjon weismite\?</string>
     <string name="dialog_opml_import_details_default">Gjin details beskikber</string>
     <string name="dialog_generic_details_button">Details besjen</string>

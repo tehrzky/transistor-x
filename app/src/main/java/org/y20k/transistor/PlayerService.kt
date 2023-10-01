@@ -252,7 +252,7 @@ class PlayerService: MediaLibraryService() {
             player.play()
         } else {
             player.stop()
-            Toast.makeText(this, this.getString(R.string.toastmessage_error_restart_playback_failed), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, this.getString(R.string.toast_message_error_restart_playback_failed), Toast.LENGTH_LONG).show()
         }
     }
 

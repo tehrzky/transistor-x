@@ -72,6 +72,7 @@
     <string name="dialog_error_message_no_network">Connecta a Internet.</string>
     <string name="dialog_find_station_no_results">Sense resultats.</string>
     <string name="dialog_generic_details_button">Mostra dades</string>
+    <string name="dialog_rename_station_input_hint">Introdueix un nou nom</string>
     <string name="dialog_yes_no_message_remove_station">Voleu eliminar aquesta emissora\?</string>
     <string name="dialog_yes_no_negative_button_cancel">Cancel·la</string>
     <string name="dialog_yes_no_message_update_station_images">Baixar la darrera versió de totes les imatges d\'emissores\?</string>

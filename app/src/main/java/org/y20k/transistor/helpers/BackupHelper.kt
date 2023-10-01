@@ -36,7 +36,7 @@ object BackupHelper {
     fun backup(context: Context, destinationUri: Uri) {
         val sourceFolder: File? = context.getExternalFilesDir("")
         if (sourceFolder != null && sourceFolder.isDirectory) {
-            Toast.makeText(context, "${context.getString(R.string.toastmessage_collection_backup)} ${FileHelper.getFileName(context, destinationUri)}", Toast.LENGTH_LONG).show()
+            Toast.makeText(context, "${context.getString(R.string.toast_message_collection_backup)} ${FileHelper.getFileName(context, destinationUri)}", Toast.LENGTH_LONG).show()
             val resolver: ContentResolver = context.contentResolver
             val outputStream: OutputStream? = resolver.openOutputStream(destinationUri)
             ZipOutputStream(BufferedOutputStream(outputStream)).use { zipOutputStream ->
@@ -92,7 +92,7 @@ object BackupHelper {
 
     /* Extracts zip backup  file and restores files and folders - Credit: https://www.baeldung.com/java-compress-and-uncompress*/
     fun restore(context: Context, sourceUri: Uri) {
-        Toast.makeText(context, context.getString(R.string.toastmessage_collection_restore), Toast.LENGTH_LONG).show()
+        Toast.makeText(context, context.getString(R.string.toast_message_collection_restore), Toast.LENGTH_LONG).show()
 
         val resolver: ContentResolver = context.contentResolver
         val sourceInputStream: InputStream? = resolver.openInputStream(sourceUri)

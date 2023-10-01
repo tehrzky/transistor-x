@@ -80,6 +80,7 @@
     <string name="toast_message_error_restart_playback_failed">Ne morem ponovno začeti predvajanja.</string>
     <string name="pref_about_title">O aplikaciji</string>
     <string name="pref_m3u_export_summary">Shranite svoje postaje v M3U datoteki, ki jo lahko uvozite v druge predvajalnike.</string>
+    <string name="dialog_rename_station_input_hint">Vnesite novo ime</string>
     <string name="dialog_yes_no_message_remove_station">Odstrani postajo\?</string>
     <string name="pref_edit_station_summary_disabled">Urejanje informacij o postajah je onemogočeno.</string>
     <string name="pref_update_station_images_summary">Prenesi najnovejše podobe vseh postaj.</string>

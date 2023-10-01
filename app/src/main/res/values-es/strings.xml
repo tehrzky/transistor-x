@@ -60,6 +60,7 @@
     <string name="dialog_yes_no_positive_button_default">Sí</string>
     <string name="dialog_yes_no_negative_button_cancel">Cancelar</string>
     <string name="dialog_yes_no_message_update_station_images">¿Descargar la última versión de todas las imágenes de la estación\?</string>
+    <string name="dialog_rename_station_input_hint">Introducir un nuevo nombre</string>
     <string name="dialog_yes_no_message_remove_station">¿Eliminar emisora\?</string>
     <string name="dialog_opml_import_details_default">Detalles no disponibles</string>
     <string name="dialog_generic_details_button">Mostrar detalles</string>

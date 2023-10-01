@@ -53,6 +53,7 @@
     <string name="dialog_yes_no_positive_button_default">Evet</string>
     <string name="dialog_yes_no_negative_button_cancel">İptal</string>
     <string name="dialog_yes_no_message_update_station_images">Tüm istasyon görsellerinin son sürümü indirilsin mi\?</string>
+    <string name="dialog_rename_station_input_hint">Yeni isim girin</string>
     <string name="dialog_yes_no_message_remove_station">Bu istasyon kaldırılsın mı\?</string>
     <string name="dialog_opml_import_details_default">Kullanılabilir ayrıntı yok</string>
     <string name="dialog_generic_details_button">Ayrıntıları göster</string>

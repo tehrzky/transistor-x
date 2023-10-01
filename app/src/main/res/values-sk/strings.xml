@@ -31,6 +31,7 @@
     <string name="dialog_opml_import_details_default">Nie sú dostupné žiadne detaily</string>
     <string name="pref_advanced_title">Pokročilý</string>
     <string name="dialog_find_station_title">Nájdi stanicu</string>
+    <string name="dialog_rename_station_input_hint">Zadajte nový názov</string>
     <string name="dialog_yes_no_message_remove_station">Odstrániť túto stanicu\?</string>
     <string name="dialog_yes_no_negative_button_cancel">Zrušiť</string>
     <string name="notification_skip_to_previous">Predošlé</string>

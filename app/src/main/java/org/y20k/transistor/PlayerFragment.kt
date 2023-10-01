@@ -246,7 +246,7 @@ class PlayerFragment: Fragment(),
             pickImage()
         } else {
             // permission denied
-            Toast.makeText(activity as Context, R.string.toastmessage_error_missing_storage_permission, Toast.LENGTH_LONG).show()
+            Toast.makeText(activity as Context, R.string.toast_message_error_missing_storage_permission, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -404,7 +404,7 @@ class PlayerFragment: Fragment(),
                     controller?.startSleepTimer()
                     togglePeriodicSleepTimerUpdateRequest()
                 }
-                else -> Toast.makeText(activity as Context, R.string.toastmessage_sleep_timer_unable_to_start, Toast.LENGTH_LONG).show()
+                else -> Toast.makeText(activity as Context, R.string.toast_message_sleep_timer_unable_to_start, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -546,7 +546,7 @@ class PlayerFragment: Fragment(),
                         AddStationDialog(activity as Activity, stationList, this@PlayerFragment as AddStationDialog.AddStationDialogListener).show()
                     } else {
                         // invalid address
-                        Toast.makeText(context, R.string.toastmessage_station_not_valid, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, R.string.toast_message_station_not_valid, Toast.LENGTH_LONG).show()
                     }
                 }
             }

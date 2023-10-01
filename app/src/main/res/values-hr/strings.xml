@@ -68,6 +68,7 @@
     <string name="pref_app_version_title">Verzija programa</string>
     <string name="dialog_yes_no_message_update_station_images">Preuzeti najnovije verzije svih slika stanica\?</string>
     <string name="dialog_find_station_title">Pronađi stanicu</string>
+    <string name="dialog_rename_station_input_hint">Upiši novo ime</string>
     <string name="dialog_yes_no_message_remove_station">Ukloniti ovu stanicu\?</string>
     <string name="pref_m3u_export_title">Izvezi M3U</string>
     <string name="pref_m3u_export_summary">Spremi radio stanice u M3U-datoteku popisa za reprodukciju, koja se može uvesti u druge uređaje za reprodukciju.</string>

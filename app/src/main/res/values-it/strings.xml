@@ -49,6 +49,7 @@
     <string name="dialog_yes_no_positive_button_default">Sì</string>
     <string name="dialog_yes_no_negative_button_cancel">Annulla</string>
     <string name="dialog_yes_no_message_update_station_images">Aggiornare le immagini di tutte stazioni\?</string>
+    <string name="dialog_rename_station_input_hint">Inserisci un nuovo nome</string>
     <string name="dialog_yes_no_message_remove_station">Eliminare questa stazione\?</string>
     <string name="dialog_opml_import_details_default">Nessun dettaglio</string>
     <string name="dialog_generic_details_button">Mostra dettagli</string>

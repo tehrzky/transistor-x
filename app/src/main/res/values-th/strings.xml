@@ -17,5 +17,6 @@
     <string name="app_name">วิทยุทรานซิสเตอร์</string>
     <string name="dialog_error_message_default">เกิดข้อผิดพลาด</string>
     <string name="shortcut_last_station_disabled_message">ทางลัดสำหรับการเล่นสถานีสุดท้ายถูกปิดใช้งาน</string>
+    <string name="dialog_rename_station_input_hint">ป้อนชื่อสถานีใหม่</string>
     <string name="toast_message_shortcut_created">สร้างทางลัดแล้ว</string>
 </resources>

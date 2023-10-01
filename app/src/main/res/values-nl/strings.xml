@@ -33,6 +33,7 @@
     <string name="toast_message_error_download_error">Downloadfoutmelding</string>
     <string name="dialog_yes_no_negative_button_cancel">Annuleer</string>
     <string name="dialog_yes_no_message_update_station_images">Alle zenderlogo\'s bijwerken naar meest recente\?</string>
+    <string name="dialog_rename_station_input_hint">Nieuwe naam geven</string>
     <string name="dialog_yes_no_message_remove_station">Deze zender verwijderen\?</string>
     <string name="dialog_find_station_button_add">Voeg toe</string>
     <string name="dialog_error_message_no_network">Met internet verbinden.</string>

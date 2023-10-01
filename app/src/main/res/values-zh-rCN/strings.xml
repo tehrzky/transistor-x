@@ -15,6 +15,7 @@
     <string name="dialog_generic_button_okay">确定</string>
     <string name="dialog_generic_details_button">显示详情</string>
     <string name="dialog_opml_import_details_default">无可用详情</string>
+    <string name="dialog_rename_station_input_hint">请输入一个新名称</string>
     <string name="dialog_yes_no_message_remove_station">移除此电台吗？</string>
     <string name="dialog_yes_no_message_update_station_images">下载所有电台图标的最新版本吗？</string>
     <string name="dialog_yes_no_negative_button_cancel">取消</string>

@@ -14,6 +14,7 @@
     <string name="station_list_button_add_new_station">Lisää uusi kanava</string>
     <string name="dialog_find_station_title">Löydä kanava</string>
     <string name="dialog_generic_details_button">Näytä tiedot</string>
+    <string name="dialog_rename_station_input_hint">Syötä uusi nimi</string>
     <string name="dialog_yes_no_message_remove_station">Poista tämä kanava\?</string>
     <string name="dialog_yes_no_positive_button_remove_station">Poista</string>
     <string name="notification_play">Toista</string>
