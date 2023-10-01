@@ -10,14 +10,14 @@
     <string name="notification_skip_to_previous">Foarige</string>
     <string name="notification_play">Ôfspylje</string>
     <string name="station_list_button_add_new_station">Nij stasjon tafoege</string>
-    <string name="toastmessage_updating_collection">Samling fan stasjons fernije.</string>
-    <string name="toastmessage_station_not_valid">Stasjon is net jildich.</string>
-    <string name="toastmessage_station_duplicate">Stasjon ferdûbelje.</string>
-    <string name="toastmessage_save_m3u">Radiostasjons as M3U opslaan.</string>
-    <string name="toastmessage_install_file_helper">Graach in triemsbehearder ynstallearje.</string>
-    <string name="toastmessage_error_restart_playback_failed">Kin it ôfspyljen net opnij starte.</string>
-    <string name="toastmessage_error_missing_storage_permission">Tastimming foar \"Opslach lézen\" jaan om disse triem te iepenjen.</string>
-    <string name="toastmessage_error_download_error">Flater by it binnenheljen</string>
+    <string name="toast_message_updating_collection">Samling fan stasjons fernije.</string>
+    <string name="toast_message_station_not_valid">Stasjon is net jildich.</string>
+    <string name="toast_message_station_duplicate">Stasjon ferdûbelje.</string>
+    <string name="toast_message_save_m3u">Radiostasjons as M3U opslaan.</string>
+    <string name="toast_message_install_file_helper">Graach in triemsbehearder ynstallearje.</string>
+    <string name="toast_message_error_restart_playback_failed">Kin it ôfspyljen net opnij starte.</string>
+    <string name="toast_message_error_missing_storage_permission">Tastimming foar \"Opslach lézen\" jaan om disse triem te iepenjen.</string>
+    <string name="toast_message_error_download_error">Flater by it binnenheljen</string>
     <string name="dialog_yes_no_positive_button_update_covers">Fernije</string>
     <string name="dialog_yes_no_positive_button_remove_station">Weismite</string>
     <string name="dialog_yes_no_positive_button_default">Ja</string>
@@ -39,8 +39,8 @@
     <string name="dialog_error_message_default">In flater die harren foar</string>
     <string name="notification_stop">Stopje</string>
     <string name="toast_message_no_image_picker">Gjin ôfbyldings seleksje programma beskikber. Probearje der ris ien te ynstallearjen.</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">Graach earst begjinne mei ôfspyljen.</string>
-    <string name="toastmessage_copied_to_clipboard">Nei klemboerd kopiearre.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Graach earst begjinne mei ôfspyljen.</string>
+    <string name="toast_message_copied_to_clipboard">Nei klemboerd kopiearre.</string>
     <string name="player_sheet_h2_stream_url">Stream keppeling</string>
     <string name="player_sheet_h2_station_metadata">No oan it ôfspyljen</string>
     <string name="shortcut_last_station_long_label">Lêste stasjon ôfspylje</string>
@@ -69,5 +69,5 @@
     <string name="pref_report_issue_summary">Flaters oanjaan en ferbetteringen foarstelle op Codeberg.</string>
     <string name="pref_m3u_export_summary">Slach jo radio stasjon op as M3U ôfspyl list bestân die troch oare ôfspyl applikaasjes iepene wurde kin.</string>
     <string name="notification_now_playing_channel_name">Ôfspyl Betsjinning</string>
-    <string name="toastmessage_updating_station_images">Stasjon ôfbyldingen fernije.</string>
+    <string name="toast_message_updating_station_images">Stasjon ôfbyldingen fernije.</string>
 </resources>

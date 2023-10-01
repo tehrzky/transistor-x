@@ -31,21 +31,21 @@
     <string name="dialog_yes_no_positive_button_update_covers">Update</string>
     <!-- Station Menu -->
     <!-- Toasts -->
-    <string name="toastmessage_error_download_error">Download error</string>
-    <string name="toastmessage_error_missing_storage_permission">Grant \"Read Storage\" permission to open this file.</string>
-    <string name="toastmessage_error_restart_playback_failed">Unable to restart playback.</string>
-    <string name="toastmessage_install_file_helper">Please install a file manager.</string>
-    <string name="toastmessage_save_m3u">Saving radio stations as M3U…</string>
-    <string name="toastmessage_station_duplicate">Duplicate station.</string>
-    <string name="toastmessage_station_not_valid">Station is not valid.</string>
-    <string name="toastmessage_updating_collection">Updating collection of stations.</string>
-    <string name="toastmessage_updating_station_images">Updating station images.</string>
-    <string name="toastmessage_collection_restore">Restoring radio stations from backup.</string>
-    <string name="toastmessage_collection_backup">Backing up radio stations to:</string>
-    <string name="toastmessage_shortcut_created">Shortcut created.</string>
-    <string name="toastmessage_shortcut_not_created">Shortcut not created. This device does not allow the creation of shortcuts.</string>
-    <string name="toastmessage_copied_to_clipboard">Copied to clipboard.</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">Please start playback first.</string>
+    <string name="toast_message_error_download_error">Download error</string>
+    <string name="toast_message_error_missing_storage_permission">Grant \"Read Storage\" permission to open this file.</string>
+    <string name="toast_message_error_restart_playback_failed">Unable to restart playback.</string>
+    <string name="toast_message_install_file_helper">Please install a file manager.</string>
+    <string name="toast_message_save_m3u">Saving radio stations as M3U…</string>
+    <string name="toast_message_station_duplicate">Duplicate station.</string>
+    <string name="toast_message_station_not_valid">Station is not valid.</string>
+    <string name="toast_message_updating_collection">Updating collection of stations.</string>
+    <string name="toast_message_updating_station_images">Updating station images.</string>
+    <string name="toast_message_collection_restore">Restoring radio stations from backup.</string>
+    <string name="toast_message_collection_backup">Backing up radio stations to:</string>
+    <string name="toast_message_shortcut_created">Shortcut created.</string>
+    <string name="toast_message_shortcut_not_created">Shortcut not created. This device does not allow the creation of shortcuts.</string>
+    <string name="toast_message_copied_to_clipboard">Copied to clipboard.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Please start playback first.</string>
     <string name="toast_message_no_image_picker">No image picker available. Consider installing a Gallery application.</string>
     <!-- player -->
     <string name="player_sheet_h2_station_metadata">Currently playing</string>

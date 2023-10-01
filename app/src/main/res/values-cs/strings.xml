@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="onboarding_app_get_started">Začínáme</string>
-    <string name="toastmessage_shortcut_not_created">Odkaz není vytvořený. Toto zařízení neumožňuje přidávat odkazy na domovskou obrazovku.</string>
+    <string name="toast_message_shortcut_not_created">Odkaz není vytvořený. Toto zařízení neumožňuje přidávat odkazy na domovskou obrazovku.</string>
     <string name="notification_stop">Zastavit</string>
     <string name="player_sheet_h2_stream_url">Odkaz na stream</string>
     <string name="dialog_generic_button_okay">OK</string>
@@ -10,14 +10,14 @@
     <string name="dialog_generic_button_cancel">Zrušit</string>
     <string name="toast_message_no_image_picker">Není k dispozici žádná aplikace na výběr obrázků. Měli byste si nainstalovat aplikaci Galerie.</string>
     <string name="player_sheet_h2_station_metadata">Právě hraje</string>
-    <string name="toastmessage_copied_to_clipboard">Odkaz na stream zkopírovaný do schránky.</string>
+    <string name="toast_message_copied_to_clipboard">Odkaz na stream zkopírovaný do schránky.</string>
     <string name="shortcut_last_station_short_label">Poslední přehrávaná stanice</string>
     <string name="shortcut_last_station_long_label">Znovu spustí naposledy přehrávanou stanici</string>
     <string name="descr_app_icon">Ikona aplikace znázorňuje staré rádio</string>
     <string name="app_name">Transistor</string>
     <string name="dialog_error_message_default">Vyskytla se chyba</string>
     <string name="shortcut_last_station_disabled_message">Zkratka na poslední přehrávanou stanici je zakázaná.</string>
-    <string name="toastmessage_shortcut_created">Odkaz vytvořený.</string>
+    <string name="toast_message_shortcut_created">Odkaz vytvořený.</string>
     <string name="dialog_yes_no_positive_button_remove_station">Odstranit</string>
     <string name="dialog_yes_no_positive_button_default">Ano</string>
     <string name="dialog_yes_no_negative_button_cancel">Zrušit</string>
@@ -32,7 +32,7 @@
     <string name="dialog_error_title_no_network">Offline</string>
     <string name="dialog_error_message_no_network">Připojte se k Internetu.</string>
     <string name="fragment_settings_title">Nastavení</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">Nejprve spusťte přehrávání.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Nejprve spusťte přehrávání.</string>
     <string name="onboarding_app_import_running">Importují se vaše stanice…</string>
     <string name="descr_player_playback_button">Přehrát/pozastavit</string>
     <string name="descr_player_station_image">Obrázek stanice</string>
@@ -63,15 +63,15 @@
     <string name="notification_skip_to_previous">Předchozí</string>
     <string name="notification_now_playing_channel_name">Ovládací prvky přehrávání</string>
     <string name="station_list_button_add_new_station">Přidat novou stanici</string>
-    <string name="toastmessage_updating_station_images">Aktualizace obrázků stanic.</string>
-    <string name="toastmessage_updating_collection">Aktualizace kolekce stanic.</string>
-    <string name="toastmessage_station_not_valid">Stanice není platná.</string>
-    <string name="toastmessage_station_duplicate">Duplicitní stanice.</string>
-    <string name="toastmessage_save_m3u">Ukládání rozhlasových stanic jako M3U…</string>
-    <string name="toastmessage_install_file_helper">Nainstalujte správce souborů.</string>
-    <string name="toastmessage_error_restart_playback_failed">Přehrávání nelze restartovat.</string>
-    <string name="toastmessage_error_missing_storage_permission">Udělte oprávnění \"Čtení Úložiště\" k otevření tohoto souboru.</string>
-    <string name="toastmessage_error_download_error">Chyba stahování</string>
+    <string name="toast_message_updating_station_images">Aktualizace obrázků stanic.</string>
+    <string name="toast_message_updating_collection">Aktualizace kolekce stanic.</string>
+    <string name="toast_message_station_not_valid">Stanice není platná.</string>
+    <string name="toast_message_station_duplicate">Duplicitní stanice.</string>
+    <string name="toast_message_save_m3u">Ukládání rozhlasových stanic jako M3U…</string>
+    <string name="toast_message_install_file_helper">Nainstalujte správce souborů.</string>
+    <string name="toast_message_error_restart_playback_failed">Přehrávání nelze restartovat.</string>
+    <string name="toast_message_error_missing_storage_permission">Udělte oprávnění \"Čtení Úložiště\" k otevření tohoto souboru.</string>
+    <string name="toast_message_error_download_error">Chyba stahování</string>
     <string name="dialog_yes_no_positive_button_update_covers">Aktualizovat</string>
     <string name="pref_advanced_title">Rozšířené</string>
     <string name="dialog_edit_stream_uri">Adresa streamu</string>
@@ -98,6 +98,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Kopírovat informace o probíhajícím přehrávání</string>
     <string name="descr_expanded_player_metadata_next_button">Následující metadata o přehrávání</string>
     <string name="descr_expanded_player_metadata_previous_button">Předchozí metadata o přehrávání</string>
-    <string name="toastmessage_collection_restore">Obnova stanic ze zálohy.</string>
-    <string name="toastmessage_collection_backup">Záloha stanic na:</string>
+    <string name="toast_message_collection_restore">Obnova stanic ze zálohy.</string>
+    <string name="toast_message_collection_backup">Záloha stanic na:</string>
 </resources>

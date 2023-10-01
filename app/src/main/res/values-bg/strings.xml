@@ -21,7 +21,7 @@
     <string name="dialog_yes_no_negative_button_cancel">Отменяне</string>
     <string name="dialog_yes_no_positive_button_default">Да</string>
     <string name="dialog_yes_no_positive_button_remove_station">Премахване</string>
-    <string name="toastmessage_error_download_error">Грешка при изтегляне.</string>
+    <string name="toast_message_error_download_error">Грешка при изтегляне.</string>
     <string name="station_list_button_add_new_station">Добавяне на станция</string>
     <string name="station_list_button_settings">Настройки</string>
     <string name="notification_now_playing_channel_name">Управление на възпроизвеждането</string>
@@ -36,7 +36,7 @@
     <string name="pref_backup_summary">Запазва избраните радиостанции и изображения им в хранилището на устройството.</string>
     <string name="pref_buffer_size_summary_disabled">Използва се стандартното количество междинна памет за възпроизвеждане на потоци.</string>
     <string name="pref_buffer_size_summary_enabled">Използва се голямо количество междинна памет за възпроизвеждане на потоци. Възпроизвеждането може да започне с голямо забавяне.</string>
-    <string name="toastmessage_install_file_helper">Инсталирайте приложение за управление на файлове.</string>
+    <string name="toast_message_install_file_helper">Инсталирайте приложение за управление на файлове.</string>
     <string name="pref_edit_station_summary_disabled">Информацията за станциите не може да бъде променяна.</string>
     <string name="pref_edit_station_title">Променяне на станции</string>
     <string name="pref_theme_selection_title">Тема на приложението</string>
@@ -64,16 +64,16 @@
     <string name="pref_theme_selection_mode_dark">Тъмна</string>
     <string name="pref_theme_selection_mode_device_default">Като системната</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Добавяне към началния екран</string>
-    <string name="toastmessage_shortcut_not_created">Прекият път не е създаден. Устройството не позволява създаването на преки пътища.</string>
-    <string name="toastmessage_copied_to_clipboard">Копирано в междинната памет.</string>
+    <string name="toast_message_shortcut_not_created">Прекият път не е създаден. Устройството не позволява създаването на преки пътища.</string>
+    <string name="toast_message_copied_to_clipboard">Копирано в междинната памет.</string>
     <string name="toast_message_no_image_picker">Няма приложение за избор на изображениея. Инсталирайте приложение за галерия.</string>
-    <string name="toastmessage_error_missing_storage_permission">За да достъпите този файл е необходим достъп до хранилището.</string>
-    <string name="toastmessage_updating_station_images">Изображенията на станциите са обновени.</string>
-    <string name="toastmessage_error_restart_playback_failed">Грешка при възпроизвеждане.</string>
-    <string name="toastmessage_save_m3u">Запазване на станциите като M3U…</string>
-    <string name="toastmessage_station_duplicate">Дублираща се станция.</string>
-    <string name="toastmessage_station_not_valid">Неприемлива станция.</string>
-    <string name="toastmessage_updating_collection">Списъкът със станции е обновен.</string>
+    <string name="toast_message_error_missing_storage_permission">За да достъпите този файл е необходим достъп до хранилището.</string>
+    <string name="toast_message_updating_station_images">Изображенията на станциите са обновени.</string>
+    <string name="toast_message_error_restart_playback_failed">Грешка при възпроизвеждане.</string>
+    <string name="toast_message_save_m3u">Запазване на станциите като M3U…</string>
+    <string name="toast_message_station_duplicate">Дублираща се станция.</string>
+    <string name="toast_message_station_not_valid">Неприемлива станция.</string>
+    <string name="toast_message_updating_collection">Списъкът със станции е обновен.</string>
     <string name="pref_update_station_images_summary">Обновява изображенията на станциите.</string>
     <string name="pref_update_station_images_title">Обновяване на изображенията на станциите</string>
     <string name="descr_expanded_player_sleep_timer_cancel_button">Отказ от отброяване за сън</string>
@@ -95,9 +95,9 @@
     <string name="shortcut_last_station_disabled_message">Прекият път за възпроизвеждане на последната станция е изключен.</string>
     <string name="player_sheet_h2_station_metadata">В момента звучи</string>
     <string name="player_sheet_h2_stream_url">Адрес на потока</string>
-    <string name="toastmessage_shortcut_created">Прекият път е създаден.</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">Първо пуснете станция.</string>
-    <string name="toastmessage_collection_restore">Възстановяване на станции от резервно копие.</string>
-    <string name="toastmessage_collection_backup">Резервно копие на станциите в:</string>
+    <string name="toast_message_shortcut_created">Прекият път е създаден.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Първо пуснете станция.</string>
+    <string name="toast_message_collection_restore">Възстановяване на станции от резервно копие.</string>
+    <string name="toast_message_collection_backup">Резервно копие на станциите в:</string>
     <string name="notification_stop">Спиране</string>
 </resources>

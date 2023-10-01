@@ -11,9 +11,9 @@
     <string name="dialog_generic_button_okay">OK</string>
     <string name="dialog_generic_button_cancel">Zrušiť</string>
     <string name="dialog_error_message_default">Vyskytla sa chyba</string>
-    <string name="toastmessage_shortcut_created">Odkaz vytvorený.</string>
-    <string name="toastmessage_shortcut_not_created">Odkaz nie je vytvorený. Toto zariadenie neumožňuje pridávať odkazy na domovskú obrazovku.</string>
-    <string name="toastmessage_copied_to_clipboard">Odkaz na stream skopírovaný do schránky.</string>
+    <string name="toast_message_shortcut_created">Odkaz vytvorený.</string>
+    <string name="toast_message_shortcut_not_created">Odkaz nie je vytvorený. Toto zariadenie neumožňuje pridávať odkazy na domovskú obrazovku.</string>
+    <string name="toast_message_copied_to_clipboard">Odkaz na stream skopírovaný do schránky.</string>
     <string name="toast_message_no_image_picker">Nie je k dispozícii žiadna aplikácia na výber obrázkov. Mali by ste si nainštalovať aplikáciu Galéria.</string>
     <string name="notification_play">Prehrať</string>
     <string name="notification_stop">Zastaviť</string>

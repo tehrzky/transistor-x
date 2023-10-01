@@ -496,7 +496,7 @@ class PlayerFragment: Fragment(),
                 requestLoadImageLauncher.launch(pickImageIntent)
             } catch (e: Exception) {
                 Log.e(TAG, "Unable to select image. Probably no image picker available.")
-                Toast.makeText(context, R.string.toastalert_no_image_picker, Toast.LENGTH_LONG).show()
+                Toast.makeText(context, R.string.toast_message_no_image_picker, Toast.LENGTH_LONG).show()
             }
         }
     }

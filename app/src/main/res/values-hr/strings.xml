@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="toastmessage_sleep_timer_unable_to_start">Najprije pokreni reprodukciju.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Najprije pokreni reprodukciju.</string>
     <string name="pref_report_issue_title">Prijavi problem</string>
     <string name="station_list_button_add_new_station">Dodaj novu stanicu</string>
     <string name="dialog_generic_button_cancel">Odustani</string>
@@ -8,7 +8,7 @@
     <string name="dialog_find_station_hint">Ime ili adresa emisije</string>
     <string name="notification_skip_to_previous">Prethodna</string>
     <string name="fragment_settings_title">Postavke</string>
-    <string name="toastmessage_shortcut_created">Prečac stvoren.</string>
+    <string name="toast_message_shortcut_created">Prečac stvoren.</string>
     <string name="pref_theme_selection_title">Tema programa</string>
     <string name="pref_update_station_images_title">Aktualiziraj slike stanica</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Smjesti na početni ekran</string>
@@ -16,16 +16,16 @@
     <string name="dialog_yes_no_positive_button_default">Da</string>
     <string name="pref_general_title">Opće</string>
     <string name="onboarding_app_description">Program za radio</string>
-    <string name="toastmessage_station_duplicate">Duplikat stanice.</string>
-    <string name="toastmessage_shortcut_not_created">Prečac nije stvoren. Ovaj uređaj ne dozvoljava izradu prečaca.</string>
+    <string name="toast_message_station_duplicate">Duplikat stanice.</string>
+    <string name="toast_message_shortcut_not_created">Prečac nije stvoren. Ovaj uređaj ne dozvoljava izradu prečaca.</string>
     <string name="descr_player_playback_button">Sviraj/zaustavi</string>
     <string name="descr_card_station_image">Slika stanice</string>
     <string name="player_sheet_h2_stream_url">Poveznica emisije</string>
     <string name="shortcut_last_station_disabled_message">Prečac za reprodukciju zadnje stanice deaktiviran.</string>
     <string name="descr_expanded_player_sleep_timer_cancel_button">Prekini odbrojavanje</string>
-    <string name="toastmessage_station_not_valid">Stanica nije ispravna.</string>
+    <string name="toast_message_station_not_valid">Stanica nije ispravna.</string>
     <string name="player_sheet_h2_station_metadata">Trenutačno svira</string>
-    <string name="toastmessage_error_missing_storage_permission">Dozvoli „Čitaj spremište” za otvaranje ove datoteke.</string>
+    <string name="toast_message_error_missing_storage_permission">Dozvoli „Čitaj spremište” za otvaranje ove datoteke.</string>
     <string name="pref_update_station_images_summary">Preuzmi najnovije verzije svih slika stanica.</string>
     <string name="pref_theme_selection_mode_dark">Tamni modus</string>
     <string name="dialog_error_message_default">Došlo je do greške</string>
@@ -38,22 +38,22 @@
     <string name="dialog_error_title_no_network">Odspojen</string>
     <string name="dialog_yes_no_negative_button_cancel">Odustani</string>
     <string name="pref_theme_selection_summary">Trenutačna tema:</string>
-    <string name="toastmessage_error_restart_playback_failed">Nemoguće ponovo pokrenuti reprodukciju.</string>
+    <string name="toast_message_error_restart_playback_failed">Nemoguće ponovo pokrenuti reprodukciju.</string>
     <string name="notification_stop">Prekini</string>
     <string name="notification_now_playing_channel_name">Kontrole za reprodukciju</string>
     <string name="shortcut_last_station_long_label">Sviraj zadnju stanicu</string>
     <string name="dialog_generic_details_button">Prikaži detalje</string>
     <string name="dialog_generic_button_okay">U redu</string>
-    <string name="toastmessage_updating_collection">Aktualiziraj zbirku stanica.</string>
-    <string name="toastmessage_updating_station_images">Aktualiziranje slika stanica.</string>
+    <string name="toast_message_updating_collection">Aktualiziraj zbirku stanica.</string>
+    <string name="toast_message_updating_station_images">Aktualiziranje slika stanica.</string>
     <string name="pref_app_version_summary">Verzija</string>
     <string name="pref_report_issue_summary">Prijavi greške i predloži poboljšanja na Codebergu.</string>
-    <string name="toastmessage_copied_to_clipboard">Kopirano u međuspremnik.</string>
+    <string name="toast_message_copied_to_clipboard">Kopirano u međuspremnik.</string>
     <string name="descr_card_starred_station">Favoritna stanica</string>
     <string name="descr_app_icon">Ikona programa prikazuje stari radio</string>
     <string name="dialog_find_station_no_results">Nema rezultata.</string>
     <string name="onboarding_app_get_started">Početak</string>
-    <string name="toastmessage_error_download_error">Greška pri preuzimanju</string>
+    <string name="toast_message_error_download_error">Greška pri preuzimanju</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Preostalo vrijeme odbrojavanja</string>
     <string name="pref_about_title">Informacije</string>
     <string name="pref_theme_selection_mode_light">Svijetli modus</string>
@@ -71,8 +71,8 @@
     <string name="dialog_yes_no_message_remove_station">Ukloniti ovu stanicu\?</string>
     <string name="pref_m3u_export_title">Izvezi M3U</string>
     <string name="pref_m3u_export_summary">Spremi radio stanice u M3U-datoteku popisa za reprodukciju, koja se može uvesti u druge uređaje za reprodukciju.</string>
-    <string name="toastmessage_save_m3u">Spremanje radio stanica kao M3U …</string>
-    <string name="toastmessage_install_file_helper">Instaliraj upravljač datoteka.</string>
+    <string name="toast_message_save_m3u">Spremanje radio stanica kao M3U …</string>
+    <string name="toast_message_install_file_helper">Instaliraj upravljač datoteka.</string>
     <string name="dialog_edit_stream_uri">Adresa emisije</string>
     <string name="pref_edit_station_summary_disabled">Uređivanje podataka stanice je deaktivirano.</string>
     <string name="pref_edit_station_summary_enabled">Uređivanje podataka stanice je deaktivirano. Za uređivanje podataka pritisni stanicu dugo.</string>
@@ -89,8 +89,8 @@
     <string name="pref_restore_title">Obnovi stanice</string>
     <string name="pref_restore_summary">Obnovi zbirku radio stanica iz sigurnosne kopije. Postojeće stanice će se zamijeniti.</string>
     <string name="pref_backup_summary">Spremi zbirku radio stanica uključujući slike u spremište uređaja.</string>
-    <string name="toastmessage_collection_restore">Obnavljanje radio stanica iz sigurnosne kopije.</string>
-    <string name="toastmessage_collection_backup">Spremanje sigurnosne kopije radio stanica na:</string>
+    <string name="toast_message_collection_restore">Obnavljanje radio stanica iz sigurnosne kopije.</string>
+    <string name="toast_message_collection_backup">Spremanje sigurnosne kopije radio stanica na:</string>
     <string name="pref_buffer_size_summary_enabled">Aktiviran je veći međuspremnik za reprodukciju radio prijenosa. Pokretanje reprodukcije će možda trebati više vremena.</string>
     <string name="pref_buffer_size_title">Koristi veću međumemoriju</string>
     <string name="pref_buffer_size_summary_disabled">Korištenje zadane veličine međuspremnika za reprodukciju radio prijenosa.</string>

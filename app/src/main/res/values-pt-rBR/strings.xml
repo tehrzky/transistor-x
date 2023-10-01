@@ -10,15 +10,15 @@
     <string name="dialog_generic_button_okay">Ok</string>
     <string name="dialog_generic_button_cancel">Cancelar</string>
     <string name="dialog_error_message_default">Um erro ocorreu</string>
-    <string name="toastmessage_shortcut_created">Atalho criado.</string>
-    <string name="toastmessage_shortcut_not_created">Atalho não criado. Este dispositivo não permite a criação de atalhos.</string>
-    <string name="toastmessage_copied_to_clipboard">Link de transmissão copiado para área de transferência.</string>
+    <string name="toast_message_shortcut_created">Atalho criado.</string>
+    <string name="toast_message_shortcut_not_created">Atalho não criado. Este dispositivo não permite a criação de atalhos.</string>
+    <string name="toast_message_copied_to_clipboard">Link de transmissão copiado para área de transferência.</string>
     <string name="toast_message_no_image_picker">Seletor de imagem indisponível. Considere instalar um aplicativo de Galeria.</string>
     <string name="notification_play">Tocar</string>
     <string name="notification_stop">Parar</string>
     <string name="onboarding_app_description">Aplicativo de rádio</string>
     <string name="onboarding_app_get_started">Começar</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">por favor iniciar reprodução primeiro.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">por favor iniciar reprodução primeiro.</string>
     <string name="descr_player_playback_button">Tocar/ Parar</string>
     <string name="pref_update_station_images_title">Atualizar imagens da estação</string>
     <string name="pref_update_station_images_summary">Baixar todas as mais recentes imagens de rádios.</string>
@@ -40,10 +40,10 @@
     <string name="notification_skip_to_previous">Prévia</string>
     <string name="notification_now_playing_channel_name">Controles de reprodução</string>
     <string name="station_list_button_add_new_station">Adicionar uma nova estação</string>
-    <string name="toastmessage_updating_collection">Atualização de coleção das estações.</string>
-    <string name="toastmessage_error_missing_storage_permission">Conceda a permissão \"Ler armazenamento\" para poder abrir este arquivo.</string>
-    <string name="toastmessage_station_duplicate">Estação duplicada.</string>
-    <string name="toastmessage_station_not_valid">A estação não é válida.</string>
+    <string name="toast_message_updating_collection">Atualização de coleção das estações.</string>
+    <string name="toast_message_error_missing_storage_permission">Conceda a permissão \"Ler armazenamento\" para poder abrir este arquivo.</string>
+    <string name="toast_message_station_duplicate">Estação duplicada.</string>
+    <string name="toast_message_station_not_valid">A estação não é válida.</string>
     <string name="dialog_yes_no_positive_button_update_covers">Atualizar</string>
     <string name="dialog_yes_no_positive_button_remove_station">Remover</string>
     <string name="dialog_yes_no_positive_button_default">Sim</string>
@@ -66,7 +66,7 @@
     <string name="pref_app_version_title">Versão de App</string>
     <string name="pref_app_version_summary">Versão</string>
     <string name="pref_about_title">Sobre</string>
-    <string name="toastmessage_updating_station_images">Atualizando imagens de rádios.</string>
-    <string name="toastmessage_error_restart_playback_failed">Não foi possível reestabelecer a reprodução.</string>
-    <string name="toastmessage_error_download_error">Erro no download</string>
+    <string name="toast_message_updating_station_images">Atualizando imagens de rádios.</string>
+    <string name="toast_message_error_restart_playback_failed">Não foi possível reestabelecer a reprodução.</string>
+    <string name="toast_message_error_download_error">Erro no download</string>
 </resources>

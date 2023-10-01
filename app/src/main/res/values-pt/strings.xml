@@ -11,9 +11,9 @@
     <string name="dialog_generic_button_okay">OK</string>
     <string name="dialog_generic_button_cancel">Cancelar</string>
     <string name="dialog_error_message_default">Ocorreu um erro</string>
-    <string name="toastmessage_shortcut_created">Atalho criado.</string>
-    <string name="toastmessage_shortcut_not_created">Atalho não criado. Este dispositivo não permite a criação de atalhos.</string>
-    <string name="toastmessage_copied_to_clipboard">Copiado para a área de transferência.</string>
+    <string name="toast_message_shortcut_created">Atalho criado.</string>
+    <string name="toast_message_shortcut_not_created">Atalho não criado. Este dispositivo não permite a criação de atalhos.</string>
+    <string name="toast_message_copied_to_clipboard">Copiado para a área de transferência.</string>
     <string name="toast_message_no_image_picker">Não está disponível qualquer seletor de imagens. Deve instalar uma aplicação de galeria.</string>
     <string name="notification_play">Reproduzir</string>
     <string name="notification_stop">Parar</string>
@@ -24,13 +24,13 @@
     <string name="pref_app_version_title">Versão da aplicação</string>
     <string name="pref_app_version_summary">Versão</string>
     <string name="pref_about_title">Acerca</string>
-    <string name="toastmessage_updating_station_images">A atualizar imagens das estações.</string>
-    <string name="toastmessage_error_restart_playback_failed">Não foi possível reiniciar a reprodução.</string>
-    <string name="toastmessage_error_download_error">Erro ao descarregar</string>
+    <string name="toast_message_updating_station_images">A atualizar imagens das estações.</string>
+    <string name="toast_message_error_restart_playback_failed">Não foi possível reiniciar a reprodução.</string>
+    <string name="toast_message_error_download_error">Erro ao descarregar</string>
     <string name="onboarding_app_import_running">A importar estações…</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Colocar no ecrã inicial</string>
     <string name="descr_card_starred_station">Estação com estrela</string>
-    <string name="toastmessage_sleep_timer_unable_to_start">Primeiro, tem que iniciar a reprodução.</string>
+    <string name="toast_message_sleep_timer_unable_to_start">Primeiro, tem que iniciar a reprodução.</string>
     <string name="descr_player_playback_button">Reproduzir/parar</string>
     <string name="descr_player_station_image">Imagem da estação</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Iniciar temporizador</string>
@@ -51,10 +51,10 @@
     <string name="notification_skip_to_previous">Anterior</string>
     <string name="notification_now_playing_channel_name">Controlos de reprodução</string>
     <string name="station_list_button_add_new_station">Adicionar uma estação</string>
-    <string name="toastmessage_updating_collection">A atualizar coleção de estações.</string>
-    <string name="toastmessage_station_not_valid">A estação não é válida.</string>
-    <string name="toastmessage_station_duplicate">Estação duplicada.</string>
-    <string name="toastmessage_error_missing_storage_permission">Conceda a permissão \"Ler armazenamento\" para poder abrir este ficheiro.</string>
+    <string name="toast_message_updating_collection">A atualizar coleção de estações.</string>
+    <string name="toast_message_station_not_valid">A estação não é válida.</string>
+    <string name="toast_message_station_duplicate">Estação duplicada.</string>
+    <string name="toast_message_error_missing_storage_permission">Conceda a permissão \"Ler armazenamento\" para poder abrir este ficheiro.</string>
     <string name="dialog_yes_no_positive_button_update_covers">Atualizar</string>
     <string name="dialog_yes_no_positive_button_remove_station">Remover</string>
     <string name="dialog_yes_no_positive_button_default">Sim</string>
@@ -72,8 +72,8 @@
     <string name="fragment_settings_title">Definições</string>
     <string name="pref_m3u_export_title">Exportar M3U</string>
     <string name="pref_m3u_export_summary">Grave as suas estações de rádio para um ficheiro de lista de reprodução M3U, que pode ser importado em outros reprodutores.</string>
-    <string name="toastmessage_save_m3u">A gravar estações de rádio como M3U…</string>
-    <string name="toastmessage_install_file_helper">Instale um gestor de ficheiros.</string>
+    <string name="toast_message_save_m3u">A gravar estações de rádio como M3U…</string>
+    <string name="toast_message_install_file_helper">Instale um gestor de ficheiros.</string>
     <string name="descr_card_station_image_change">Alterar imagem</string>
     <string name="station_list_button_settings">Definições</string>
     <string name="pref_backup_summary">Criar backup das estações de rádio no armazenamento dispositivo.</string>
@@ -82,6 +82,6 @@
     <string name="dialog_edit_stream_uri">Endereço da emissão</string>
     <string name="pref_backup_title">Criar backup das estações</string>
     <string name="dialog_edit_station_name">Nome da estação</string>
-    <string name="toastmessage_collection_restore">A restaurar estações a partir do backup.</string>
-    <string name="toastmessage_collection_backup">A criar backup em:</string>
+    <string name="toast_message_collection_restore">A restaurar estações a partir do backup.</string>
+    <string name="toast_message_collection_backup">A criar backup em:</string>
 </resources>

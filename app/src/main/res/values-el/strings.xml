@@ -11,9 +11,9 @@
     <string name="dialog_generic_button_okay">Εντάξει</string>
     <string name="dialog_generic_button_cancel">Άκυρο</string>
     <string name="dialog_error_message_default">Συνέβη ένα σφάλμα</string>
-    <string name="toastmessage_shortcut_created">Δημιουργήθηκε συντόμευση.</string>
-    <string name="toastmessage_shortcut_not_created">Δεν δημιουργήθηκε συντόμευση. Αυτή η συσκευή δεν επιτρέπει τη δημιουργία συντομεύσεων.</string>
-    <string name="toastmessage_copied_to_clipboard">Ο δεσμός της ροής αντιγράφηκε στο πρόχειρο.</string>
+    <string name="toast_message_shortcut_created">Δημιουργήθηκε συντόμευση.</string>
+    <string name="toast_message_shortcut_not_created">Δεν δημιουργήθηκε συντόμευση. Αυτή η συσκευή δεν επιτρέπει τη δημιουργία συντομεύσεων.</string>
+    <string name="toast_message_copied_to_clipboard">Ο δεσμός της ροής αντιγράφηκε στο πρόχειρο.</string>
     <string name="toast_message_no_image_picker">Δεν υπάρχει διαθέσιμη εφαρμογή επιλογής εικόνας. Παρακαλώ εγκαταστήστε μια εφαρμογή Γκαλερί.</string>
     <string name="notification_play">Παίξε</string>
     <string name="notification_stop">Σταμάτημα</string>

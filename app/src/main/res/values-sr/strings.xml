@@ -11,9 +11,9 @@
     <string name="dialog_generic_button_okay">У реду</string>
     <string name="dialog_generic_button_cancel">Одустани</string>
     <string name="dialog_error_message_default">Десила се грешка</string>
-    <string name="toastmessage_shortcut_created">Пречица направљена.</string>
-    <string name="toastmessage_shortcut_not_created">Пречица није направљена. Овај уређај не допушта прављење пречица.</string>
-    <string name="toastmessage_copied_to_clipboard">Веза тока копирана на клипборд.</string>
+    <string name="toast_message_shortcut_created">Пречица направљена.</string>
+    <string name="toast_message_shortcut_not_created">Пречица није направљена. Овај уређај не допушта прављење пречица.</string>
+    <string name="toast_message_copied_to_clipboard">Веза тока копирана на клипборд.</string>
     <string name="toast_message_no_image_picker">No image picker available. Consider installing a Gallery application.</string>
     <string name="notification_play">Пусти</string>
     <string name="notification_stop">Заустави</string>
