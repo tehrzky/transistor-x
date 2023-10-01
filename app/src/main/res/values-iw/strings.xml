@@ -101,4 +101,5 @@
     <string name="pref_tap_anywhere_playback_summary_enabled">נגיעה בכל מקום בכרטיס תחנת רדיו תפתח אותה להאזנה.</string>
     <string name="descr_expanded_player_metadata_next_button">רשומת נתוני־על של מה שמתנגן הבא</string>
     <string name="descr_expanded_player_metadata_copy_button">העתקת פרטי מה שמתנגן עכשיו</string>
+    <string name="descr_expanded_player_metadata_previous_button">רשומת נתוני־על של מה שמתנגן הקודם</string>
 </resources>
