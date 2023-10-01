@@ -97,4 +97,6 @@
     <string name="pref_buffer_size_summary_enabled">זיכרון מוגדל לנגינת תזרים רדיו פעיל. יכול להיות שתחילת הנגינה תתעכב קצת.</string>
     <string name="pref_tap_anywhere_playback_summary_disabled">יש לגעת בכפתור הנגינה כדי להתחיל להאזין לתחנת רדיו.</string>
     <string name="pref_buffer_size_title">להשתמש בזיכרון גדול יותר</string>
+    <string name="pref_tap_anywhere_playback_title">נגיעה בתחנת רדיו</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">נגיעה בכל מקום בכרטיס תחנת רדיו תפתח אותה להאזנה.</string>
 </resources>
