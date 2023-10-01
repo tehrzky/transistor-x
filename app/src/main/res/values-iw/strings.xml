@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="notification_stop">עצור</string>
+    <string name="notification_stop">עצירה</string>
     <string name="toast_message_no_image_picker">אין בורר תמונות זמין. שקול להתקין יישום גלריה.</string>
     <string name="toastmessage_sleep_timer_unable_to_start">התחל השמעה תחילה.</string>
     <string name="toastmessage_copied_to_clipboard">הועתק ללוח.</string>
@@ -40,9 +40,9 @@
     <string name="pref_about_title">על אודות</string>
     <string name="notification_skip_to_next">הבא</string>
     <string name="notification_skip_to_previous">קודם</string>
-    <string name="notification_play">נגן</string>
+    <string name="notification_play">נגינה</string>
     <string name="notification_now_playing_channel_name">פקדי השמעה</string>
-    <string name="station_list_button_add_new_station">הוסף תחנה חדשה</string>
+    <string name="station_list_button_add_new_station">הוספת תחנה חדשה</string>
     <string name="toastmessage_updating_station_images">מעדכן תמונות תחנה.</string>
     <string name="toastmessage_updating_collection">מעדכן אוסף התחנות.</string>
     <string name="toastmessage_station_not_valid">התחנה אינה תקפה.</string>
@@ -95,4 +95,6 @@
     <string name="dialog_restore_collection_replace_existing">להחליף את אוסף תחנות הרדיו הנוכחי בתחנות רדיו מגיבוי\?</string>
     <string name="pref_buffer_size_summary_disabled">נעשה שימוש בגודל זיכרון ברירת המחדל לנגינת תזרים רדיו.</string>
     <string name="pref_buffer_size_summary_enabled">זיכרון מוגדל לנגינת תזרים רדיו פעיל. יכול להיות שתחילת הנגינה תתעכב קצת.</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">יש לגעת בכפתור הנגינה כדי להתחיל להאזין לתחנת רדיו.</string>
+    <string name="pref_buffer_size_title">להשתמש בזיכרון גדול יותר</string>
 </resources>
