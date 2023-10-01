@@ -13,6 +13,8 @@ Arabic version: [ButterflyOfFire](https://github.com/BoFFire) | [weblate version
 
 Basque version: [osoitz](https://github.com/osoitz) | [weblate version history](https://hosted.weblate.org/changes/?lang=eu&project=transistor)
 
+Bulgarian versiom: [109247019824](https://hosted.weblate.org/user/109247019824) | [weblate version history](https://hosted.weblate.org/changes/?lang=bg&project=transistor)
+
 Catalan version: [Zagur](https://github.com/Zagur) | [weblate version history](https://hosted.weblate.org/changes/?lang=ca&project=transistor)
 
 Chinese version: [YFdyh000](https://github.com/yfdyh000), [Zo Shin](https://github.com/zo-shin) | [weblate version history](https://hosted.weblate.org/changes/?lang=zh_Hans&project=transistor)
@@ -27,6 +29,8 @@ Esperanto version: [Jakub Fabijan](https://hosted.weblate.org/user/JakubFabijan/
 
 French version: [M2ck](https://github.com/M2ck), [ButterflyOfFire](https://github.com/BoFFire) | [weblate version history](https://hosted.weblate.org/changes/?lang=fr&project=transistor)
 
+Finnish version: [tomechio](https://hosted.weblate.org/user/tomechio/) | [weblate version history](https://hosted.weblate.org/changes/?lang=fi&project=transistor)
+
 German version: [nautilusx](https://hosted.weblate.org/user/nautilusx/), [y20k](https://codeberg.org/y20k) | [weblate version history](https://hosted.weblate.org/changes/?lang=de&project=transistor)
 
 Greek version: [nikoss](https://github.com/nikoss) | [weblate version history](https://hosted.weblate.org/changes/?lang=el&project=transistor)
@@ -38,6 +42,8 @@ Italian version: [pjammo](https://github.com/pjammo) | [weblate version history]
 Japanese version: [naofum](https://github.com/naofum) | [weblate version history](https://hosted.weblate.org/changes/?lang=ja&project=transistor)
 
 Kabyle version: [SlimaneAmiri](https://github.com/SlimaneAmiri) | [weblate version history](https://hosted.weblate.org/changes/?lang=kab&project=transistor)
+
+Korean version: [tomechio](https://hosted.weblate.org/user/sarami/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ko&project=transistor)
 
 Norwegian version: [comradekingu](https://github.com/comradekingu) | [weblate version history](https://hosted.weblate.org/changes/?lang=nb_NO&project=transistor)
 
@@ -64,6 +70,8 @@ Thai version [Athicom](https://github.com/athicom) | [weblate version history](h
 Turkish version [turkceapps](https://hosted.weblate.org/user/turkceapps/), [Oğuz Ersen](https://hosted.weblate.org/user/ersen/) | [weblate version history](https://hosted.weblate.org/changes/?lang=tr&project=transistor)
 
 Ukrainian version: [burunduk](https://github.com/burunduk) | [weblate version history](https://hosted.weblate.org/changes/?lang=uk&project=transistor)
+
+_Your name is missing here? I probably forgot to add you. Please open a ticket or pull request to get in touch. I will add your name to the list._
 
 ### Want to help?
 Please check out the notes in [CONTRIBUTE.md](https://codeberg.org/y20k/transistor/src/branch/master/CONTRIBUTE.md) first.
