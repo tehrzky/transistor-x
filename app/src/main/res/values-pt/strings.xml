@@ -1,117 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- activities -->
     <string name="app_name">Transistor</string>
     <!-- please do not translate app_name - transcription into different alphabet types is fine though -->
-    <!-- app shortcuts -->
     <string name="shortcut_last_station_short_label">Última estação</string>
     <string name="shortcut_last_station_long_label">Reproduzir última estação</string>
     <string name="shortcut_last_station_disabled_message">Atalho para reproduzir a última estação desativado.</string>
-    <!-- menu entries -->
-    <string name="menu_icon">Alterar ícone</string>
-    <string name="menu_delete">Eliminar</string>
-    <string name="menu_rename">Mudar nome</string>
-    <string name="menu_shortcut">Colocar no ecrã inicial</string>
-    <!-- descriptions -->
     <string name="descr_app_icon">Ícone representativo de um rádio antigo</string>
-    <string name="descr_station_options_button">Opções</string>
-    <string name="descr_station_name_example">Exemplo FM</string>
-    <string name="descr_station_metadata_example">Artista - Título</string>
-    <string name="descr_station_stream_loading">A carregar emissão…</string>
-    <string name="descr_playback_button_play">Reproduzir</string>
-    <string name="descr_playback_button_stop">Parar</string>
-    <string name="descr_playback_indicator">Reproduzir estação</string>
-    <string name="descr_timer_icon">Temporizador</string>
-    <string name="descr_player_sheet_button_minimize">Ocultar detalhes da estação</string>
-    <string name="descr_player_sheet_content_copy_icon">Copiar</string>
-    <string name="descr_player_sheet_p_stream_url">Ligação da estação selecionada</string>
-    <string name="descr_list_add_new">Adicionar estação</string>
-    <string name="descr_list_add_select_stream_dropdown">Selecione uma emissão</string>
-    <!-- player -->
-    <string name="player_sheet_h1_details">Detalhes</string>
-    <string name="player_sheet_h2_current_session">Sessão atual</string>
     <string name="player_sheet_h2_station_metadata">Reprodução atual</string>
     <string name="player_sheet_h2_stream_url">Ligação da emissão</string>
-    <string name="player_sheet_h2_station_mime_type">Tipo multimédia</string>
-    <string name="player_sheet_h2_station_channel_count">Número de canais</string>
-    <string name="player_sheet_h2_station_sample_rate">Frequência</string>
-    <string name="player_sheet_h2_station_bitrate">Taxa de dados</string>
-    <!-- dialogs -->
     <string name="dialog_generic_button_okay">OK</string>
     <string name="dialog_generic_button_cancel">Cancelar</string>
-    <string name="dialog_add_station_button">Adicionar</string>
-    <string name="dialog_add_station_input_hint">Colar ligação da emissão</string>
-    <string name="dialog_add_station_message">Adicionar nova estação</string>
-    <string name="dialog_add_station_howto"></string>
-    <string name="dialog_delete_station_message">Remover estação</string>
-    <string name="dialog_button_delete">Remover</string>
-    <string name="dialog_rename_station_input_hint">Indique um nome</string>
-    <string name="dialog_rename_station_message">Mudar nome da estação</string>
-    <string name="dialog_button_rename">Mudar nome</string>
-    <string name="dialog_add_station_choose_stream_heading">Encontradas várias emissões</string>
-    <string name="dialog_add_station_choose_stream_message">Selecione uma emissão</string>
-    <string name="dialog_add_station_choose_stream_button">Selecionar</string>
-    <!-- error dialogs -->
-    <string name="dialog_error_title_default">Erro</string>
     <string name="dialog_error_message_default">Ocorreu um erro</string>
-    <string name="dialog_error_details_button_default">Mostrar detalhes</string>
-    <string name="dialog_error_details_default">Não existem detalhes</string>
-    <string name="dialog_error_details_write">Esta estação, provavelmente, está duplicada. Se achar que não, analise o seu armazenamento.</string>
-    <string name="dialog_error_title_fetch_download">Erro ao descarregar</string>
-    <string name="dialog_error_title_fetch_read">Ver problema</string>
-    <string name="dialog_error_title_fetch_write">Escrever problema</string>
-    <string name="dialog_error_message_fetch_general_external_storage">Armazenamento externo:</string>
-    <string name="dialog_error_message_fetch_general_hint_m3u">Dica: Transistor apenas reconhece ligações nos formatos MP3, AAC e Ogg/Opus ou ficheiros .m3u e/ou .pls.</string>
-    <string name="dialog_error_message_fetch_general_playlist_type">Tipo multimédia do ficheiro:</string>
-    <string name="dialog_error_message_fetch_general_stream_type">Tipo MIME da emissão:</string>
-    <string name="dialog_error_message_fetch_general_file_content">Conteúdo do ficheiro:</string>
-    <string name="dialog_error_message_fetch_download">Transistor não conseguiu processar a ligação.</string>
-    <string name="dialog_error_message_fetch_download_station_url">Endereço da estação:</string>
-    <string name="dialog_error_message_fetch_read">Transistor não conseguiu processar o ficheiro.</string>
-    <string name="dialog_error_message_fetch_read_file_location">Localização do ficheiro:</string>
-    <string name="dialog_error_message_fetch_write">Transistor não conseguiu guardar a estação.</string>
-    <!-- messages -->
-    <string name="toastmessage_add_download_started">Descarga iniciada.</string>
-    <string name="toastmessage_add_open_file_started">A abrir o ficheiro.</string>
-    <string name="toastmessage_long_press_playback_stopped">Reprodução parada (detetado toque longo)</string>
-    <string name="toastmessage_long_press_playback_started">Reprodução iniciada (detetado toque longo)</string>
-    <string name="toastmessage_long_press_change_icon">Alterar ícone da estação (detetado toque longo)</string>
-    <string name="toastmessage_long_press_change_name">Alterar nome da estação (detetado toque longo)</string>
-    <string name="toastmessage_theme_night">A mudar para o \'Modo noturno\' (toque longo detetado)</string>
-    <string name="toastmessage_theme_day">A mudar para o \'Modo diurno\' (toque longo detetado)</string>
-    <string name="toastmessage_theme_follow_system">A mudar para o \'Modo de seguir definição do sistema\' (toque longo detetado)</string>
     <string name="toastmessage_shortcut_created">Atalho criado.</string>
     <string name="toastmessage_shortcut_not_created">Atalho não criado. Este dispositivo não permite a criação de atalhos.</string>
-    <string name="toastmessage_list_refreshed">A recarregar a lista de estações.</string>
     <string name="toastmessage_copied_to_clipboard">Copiado para a área de transferência.</string>
-    <string name="toastmessage_station_copied">Estação copiada para a área de transferência.</string>
-    <string name="toastmessage_stream_may_not_work">Detetado formato de áudio não suportado. A emissão pode não funcionar corretamente.</string>
-    <string name="toastmessage_timer_activated">Temporizador ativado.</string>
-    <string name="toastmessage_timer_cancelled">Temporizador cancelado.</string>
-    <string name="toastmessage_timer_duration_increased">Duração aumentada.</string>
-    <string name="toastalert_unable_to_connect">Não foi possível estabelecer a ligação. O dispositivo não está ligado à Internet ou a emissão pode estar desatualizada.</string>
-    <string name="toastalert_rename_unsuccessful">Não foi possível renomear a estação. Escolha um nome diferente.</string>
-    <string name="toastalert_delete_successful">A estação foi removida.</string>
-    <string name="toastalert_no_external_storage">Não foi possível aceder ao armazenamento externo.</string>
-    <string name="toastalert_no_image_picker">Não está disponível qualquer seletor de imagens. Deve instalar uma aplicação de galeria.</string>
-    <string name="toastalert_headphones_unplugged">Auscultadores removidos. A reprodução parou.</string>
-    <string name="toastalert_permission_denied">Permissão recusada:</string>
-    <string name="toastalert_station_not_found">Não foi possível encontrar a estação.</string>
-    <string name="snackbar_request_storage_access">Transistor necessita de permissão para aceder aos ficheiros no armazenamento externo.</string>
-    <string name="snackbar_message_timer_set">Temporizador definido para</string>
-    <!-- notification -->
+    <string name="toast_message_no_image_picker">Não está disponível qualquer seletor de imagens. Deve instalar uma aplicação de galeria.</string>
     <string name="notification_play">Reproduzir</string>
     <string name="notification_stop">Parar</string>
-    <string name="notification_channel_playback_name">Controlos de reprodução</string>
-    <string name="notification_channel_playback_description">Controlos de reprodução, imagem da estação e informações de reprodução.</string>
-    <!-- onboarding -->
     <string name="onboarding_app_description">Aplicação de rádio</string>
     <string name="onboarding_app_get_started">Começar</string>
-    <!-- Version 3 of Transistor removes the screens infosheet_howto and infosheet_about.
-    The last version containing those strings is v2.3.7
-    https://github.com/y20k/transistor/tree/v2.3.7/app/src/main/res -->
-    <string name="pref_update_collection_title">Atualizar estações</string>
-    <string name="pref_update_collection_summary">Procurar por novos fluxos de áudio e novas imagens das estações.</string>
     <string name="pref_report_issue_title">Reportar erro</string>
     <string name="pref_report_issue_summary">Reportar erros e sugerir melhorias no Codeberg.</string>
     <string name="pref_app_version_title">Versão da aplicação</string>
@@ -119,31 +26,18 @@
     <string name="pref_about_title">Acerca</string>
     <string name="toastmessage_updating_station_images">A atualizar imagens das estações.</string>
     <string name="toastmessage_error_restart_playback_failed">Não foi possível reiniciar a reprodução.</string>
-    <string name="toastmessage_collection_update_not_necessary">A coleção de estações está atualizada.</string>
     <string name="toastmessage_error_download_error">Erro ao descarregar</string>
     <string name="onboarding_app_import_running">A importar estações…</string>
-    <string name="dialog_button_save">Guardar alterações</string>
-    <string name="descr_dialog_edit_update_icon">Atualizar</string>
-    <string name="descr_dialog_edit_station_image">Imagem da estação</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Colocar no ecrã inicial</string>
-    <string name="dialog_edit_update_station">Atualizar estação</string>
-    <string name="dialog_edit_title">Editar estação</string>
-    <string name="dialog_edit_place_on_home_screen">Colocar no ecrã inicial</string>
-    <string name="dialog_edit_choose_station_image">Escolher</string>
     <string name="descr_card_starred_station">Estação com estrela</string>
-    <string name="toastmessage_updating_station">A atualizar estação…</string>
     <string name="toastmessage_sleep_timer_unable_to_start">Primeiro, tem que iniciar a reprodução.</string>
     <string name="descr_player_playback_button">Reproduzir/parar</string>
     <string name="descr_player_station_image">Imagem da estação</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Iniciar temporizador</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Tempo restante no temporizador</string>
     <string name="descr_expanded_player_sleep_timer_cancel_button">Desligar temporizador</string>
-    <string name="descr_card_small_edit_button">Editar</string>
     <string name="descr_card_small_play_button">Reproduzir/parar</string>
-    <string name="descr_card_small_download_button">Descarregar</string>
-    <string name="descr_card_settings_button">Definições</string>
     <string name="descr_card_station_image">Imagem da estação</string>
-    <string name="descr_card_playback_indicator">Progresso da reprodução</string>
     <string name="pref_update_station_images_title">Atualizar imagens das estações</string>
     <string name="pref_update_station_images_summary">Descarregar imagens recentes de todas as estações de rádio.</string>
     <string name="pref_theme_selection_title">Tema da aplicação</string>
@@ -153,40 +47,21 @@
     <string name="pref_theme_selection_mode_dark">Modo escuro</string>
     <string name="pref_maintenance_title">Manutenção</string>
     <string name="pref_general_title">Geral</string>
-    <string name="pref_delete_all_title">Eliminar descargas</string>
     <string name="notification_skip_to_next">Seguinte</string>
     <string name="notification_skip_to_previous">Anterior</string>
-    <string name="notification_playing">A reproduzir</string>
-    <string name="notification_now_playing_channel_description">Controlos de reprodução, nome da estação e imagem.</string>
     <string name="notification_now_playing_channel_name">Controlos de reprodução</string>
     <string name="station_list_button_add_new_station">Adicionar uma estação</string>
     <string name="toastmessage_updating_collection">A atualizar coleção de estações.</string>
     <string name="toastmessage_station_not_valid">A estação não é válida.</string>
     <string name="toastmessage_station_duplicate">Estação duplicada.</string>
-    <string name="toastmessage_error_no_station_found">Não foi possível iniciar a reprodução. Por favor, adicione uma estação de rádio.</string>
-    <string name="toastmessage_error_no_station_matches_search">Incapaz de encontrar uma estação que corresponda com a pesquisa.</string>
     <string name="toastmessage_error_missing_storage_permission">Conceda a permissão \"Ler armazenamento\" para poder abrir este ficheiro.</string>
-    <string name="menu_update">Atualizar estação</string>
-    <string name="dialog_yes_no_title_default">Decisão</string>
-    <string name="dialog_yes_no_positive_button_vpn_download">Descarregar na mesma</string>
     <string name="dialog_yes_no_positive_button_update_covers">Atualizar</string>
-    <string name="dialog_yes_no_positive_button_update_collection">Atualizar</string>
     <string name="dialog_yes_no_positive_button_remove_station">Remover</string>
-    <string name="dialog_yes_no_positive_button_non_wifi_download">Descarregar na mesma</string>
-    <string name="dialog_yes_no_positive_button_delete_downloads">Remover tudo</string>
     <string name="dialog_yes_no_positive_button_default">Sim</string>
-    <string name="dialog_yes_no_positive_button_add_up_next">Iniciar agora</string>
-    <string name="dialog_yes_no_negative_button_default">Não</string>
     <string name="dialog_yes_no_negative_button_cancel">Cancelar</string>
-    <string name="dialog_yes_no_negative_button_add_up_next">Adicionar como \'Seguinte\'</string>
     <string name="dialog_yes_no_message_update_station_images">Descarregar a versão mais recente de todas as imagens da estação\?</string>
-    <string name="dialog_yes_no_message_update_collection">Procurar alterações\?</string>
     <string name="dialog_yes_no_message_remove_station">Remover esta estação\?</string>
-    <string name="dialog_yes_no_message_default">Tem a certeza de que o deseja fazer\?</string>
     <string name="dialog_opml_import_details_default">Não existem detalhes</string>
-    <string name="dialog_opml_import_details_button">Mostrar detalhes</string>
-    <string name="dialog_opml_import_button_okay">Importar</string>
-    <string name="dialog_generic_details_default">Não existem detalhes</string>
     <string name="dialog_generic_details_button">Mostrar detalhes</string>
     <string name="dialog_find_station_title">Encontrar estação</string>
     <string name="dialog_find_station_no_results">Não existem resultados.</string>
