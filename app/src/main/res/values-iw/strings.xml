@@ -37,7 +37,7 @@
     <string name="pref_general_title">כללי</string>
     <string name="pref_app_version_title">גרסת היישום</string>
     <string name="pref_app_version_summary">גרסה</string>
-    <string name="pref_about_title">אודות</string>
+    <string name="pref_about_title">על אודות</string>
     <string name="notification_skip_to_next">הבא</string>
     <string name="notification_skip_to_previous">קודם</string>
     <string name="notification_play">נגן</string>
