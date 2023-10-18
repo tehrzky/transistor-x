@@ -2,7 +2,7 @@ README
 ======
 
 # Transistor - Simple Radio App
-<img src="https://codeberg.org/y20k/transistor/raw/branch/master/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png" width="192" />
+<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/icon.png" width="192" />
 
 **Version 4.1.x ("Modern Love")**
 

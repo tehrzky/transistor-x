@@ -4,7 +4,7 @@
 
 ## Adaptive Icon
 
-How to create Transitor's [Adaptive Icon](https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive) using Android Studio:
+How to create Transistor's [Adaptive Icon](https://developer.android.com/guide/practices/ui_guidelines/icon_design_adaptive) using Android Studio:
 
 1. Go to `File > New > Image Asset`
 2. Choose `Icon Type > Launcher Icons (Adaptive and Legacy)`

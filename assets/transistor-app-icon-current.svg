@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg width="108pt" height="108pt" viewBox="0 0 38.100001 38.1" version="1.1" id="svg8"
-    inkscape:version="1.2.2 (b0a8486541, 2022-12-01)" sodipodi:docname="transistor-app-icon-current.svg"
-    inkscape:export-filename="/Users/solaris/Desktop/transistor/assets/transistor-app-icon-current-background.png"
-    inkscape:export-xdpi="600" inkscape:export-ydpi="600" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+    inkscape:version="1.3 (0e150ed6c4, 2023-07-21)" sodipodi:docname="transistor-app-icon-current.svg"
+    inkscape:export-filename="transistor-app-icon-current-background.png" inkscape:export-xdpi="600"
+    inkscape:export-ydpi="600" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
     xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:cc="http://creativecommons.org/ns#"
     xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -142,16 +142,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="10.57"
-     inkscape:cx="58.703879"
-     inkscape:cy="69.252602"
+     inkscape:zoom="6.0876733"
+     inkscape:cx="57.986029"
+     inkscape:cy="54.207903"
      inkscape:document-units="pt"
-     inkscape:current-layer="g959"
+     inkscape:current-layer="layer4"
      showgrid="false"
      units="pt"
      inkscape:snap-object-midpoints="true"
-     inkscape:window-width="2289"
-     inkscape:window-height="1195"
+     inkscape:window-width="1593"
+     inkscape:window-height="1216"
      inkscape:window-x="26"
      inkscape:window-y="23"
      inkscape:window-maximized="0"
@@ -160,7 +160,13 @@
      inkscape:guide-bbox="true"
      inkscape:showpageshadow="2"
      inkscape:pagecheckerboard="0"
-     inkscape:deskcolor="#d1d1d1" />
+     inkscape:deskcolor="#d1d1d1">
+    <sodipodi:guide
+       position="-1.3907887,19.020119"
+       orientation="0,-1"
+       id="guide12"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <metadata
      id="metadata5">
     <rdf:RDF>
@@ -169,7 +175,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -179,90 +184,60 @@
      inkscape:label="Background"
      style="display:inline">
     <rect
-       style="display:inline;opacity:1;fill:#dc3d33;fill-opacity:1;stroke:none;stroke-width:0.409244;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0784314"
+       style="display:none;opacity:1;fill:#f2003c;fill-opacity:1;stroke:none;stroke-width:0.409244;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0784314"
        id="rect879"
        width="38.100002"
        height="38.100002"
        x="-1.7888184e-06"
        y="-8.944092e-07"
-       inkscape:label="Red Square" />
+       inkscape:label="Square (Red (Munsell))" />
     <rect
-       inkscape:label="Lower Half +2"
+       inkscape:label="Lower Half  (Crimson)"
        y="19.050001"
        x="-1.7888184e-06"
        height="19.050001"
        width="38.100002"
        id="rect996"
-       style="display:inline;opacity:1;fill:#ca2d23;fill-opacity:1;stroke:none;stroke-width:0.289379;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0784314" />
-  </g>
-  <g
-     inkscape:label="Drop Shaddow"
-     id="g887"
-     inkscape:groupmode="layer"
-     style="display:none">
-    <path
-       inkscape:label="Radio Outline Shadow"
-       inkscape:connector-curvature="0"
-       id="path926-9-5"
-       d="m 24.757739,11.424909 c -0.02706,0.0026 -0.05525,0.0079 -0.08437,0.01635 l -12.76658,3.70005 -0.100723,0.02892 -0.02393,0.0072 c -0.01952,0.0051 -0.03858,0.01174 -0.05664,0.02034 -0.557318,0.210986 -0.921917,0.719477 -0.921073,1.284078 v 7.585194 c -2.98e-4,0.762949 0.657845,1.381412 1.469767,1.381412 L 17.112718,30.516351 24.642931,38.1 38.1,38.099995 V 24.808049 l -7.481938,-6.94838 -5.728885,-5.761606 C 25.32598,11.971262 25.16366,11.38611 24.757739,11.424909 Z"
-       style="display:inline;opacity:0.13;fill:#3c4043;fill-opacity:1;stroke-width:0.0992187"
-       sodipodi:nodetypes="cccccccccccccccc" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="g923"
-     inkscape:label="Stencil"
-     style="display:inline">
-    <path
-       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.0352451;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0784314"
-       d="M 0.01757025,0.01757075 V 38.08243 H 38.08243 V 0.01757075 Z M 19.050001,7.4083338 A 11.641667,11.641667 0 0 1 30.691668,19.050001 11.641667,11.641667 0 0 1 19.050001,30.691668 11.641667,11.641667 0 0 1 7.4083342,19.050001 11.641667,11.641667 0 0 1 19.050001,7.4083338 Z"
-       id="path921"
-       inkscape:connector-curvature="0"
-       inkscape:label="Cicular Stencil" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer3"
-     inkscape:label="Radio Icon by Munadi Kiehl (original)"
-     style="display:none"
-     transform="translate(0,-29.633334)">
-    <path
-       id="path3885"
-       d="m 27.050929,46.172702 h -0.486714 v -0.05761 c 2.95e-4,-0.762084 -0.656603,-1.380254 -1.467606,-1.381084 H 14.536031 l 10.353204,-3.002617 c 0.465924,-0.135253 0.250021,-0.791981 -0.215902,-0.656728 l -12.766518,3.699921 -0.100755,0.02905 -0.02399,0.007 c -0.01952,0.0051 -0.03845,0.01194 -0.05651,0.02054 -0.557318,0.210984 -0.922029,0.7193 -0.921185,1.283902 v 7.585189 c -2.95e-4,0.762947 0.657816,1.381585 1.469738,1.381585 h 12.821959 c 0.811003,-8.11e-4 1.467901,-0.619 1.467606,-1.381084 v -5.366037 h 0.486714 c 0.135433,0 0.245223,-0.103168 0.245223,-0.230431 v -1.703186 c -0.0012,-0.126286 -0.110293,-0.228158 -0.24469,-0.228428 z"
-       class="cls-1"
-       inkscape:connector-curvature="0"
-       style="display:inline;fill:#3c98db;fill-opacity:1;stroke-width:0.05167651"
-       inkscape:label="Radio outline blue"
-       sodipodi:nodetypes="cccccccccccccscccssccc" />
-    <path
-       inkscape:label="Dial white"
-       style="display:inline;fill:#ffffff;stroke-width:0.05167651"
-       inkscape:connector-curvature="0"
-       class="cls-1"
-       d="m 24.443036,51.925965 a 1.0027485,0.94226262 0 1 1 -1.002748,-0.942263 1.0043477,0.94376542 0 0 1 1.002748,0.942263 z"
-       id="path3862-3" />
-    <path
-       inkscape:label="Radio white"
-       style="display:inline;fill:#ffffff;stroke-width:0.05167651"
-       inkscape:connector-curvature="0"
-       class="cls-1"
-       d="m 27.050929,46.172702 h -0.486714 v -0.05761 A 1.469205,1.3805826 0 0 0 25.096609,44.734011 H 14.536031 l 10.353204,-3.002617 a 0.36573716,0.34367588 0 1 0 -0.215902,-0.656728 l -12.766518,3.699921 -0.100755,0.02905 -0.02399,0.007 a 0.30386316,0.28553413 0 0 0 -0.05651,0.02054 1.4708043,1.3820853 0 0 0 -0.921185,1.283902 v 7.585189 a 1.4697381,1.3810835 0 0 0 1.469738,1.381585 h 12.821959 a 1.469205,1.3805826 0 0 0 1.467606,-1.381084 v -5.366037 h 0.486714 a 0.2452229,0.23043105 0 0 0 0.245223,-0.230431 v -1.703186 a 0.2452229,0.23043105 0 0 0 -0.24469,-0.228428 z M 12.199483,46.34803 a 0.45312929,0.42579649 0 0 1 0.452063,-0.424794 h 8.017723 v 2.16555 a 0.27454303,0.25798259 0 1 0 0.549086,0 v -2.165049 h 3.499224 a 0.4520631,0.42479464 0 0 1 0.452064,0.424794 v 2.204123 a 0.4520631,0.42479464 0 0 1 -0.452064,0.424795 H 12.653146 a 0.45312929,0.42579649 0 0 1 -0.452063,-0.424795 z m 7.597113,7.298653 h -7.246337 a 0.36623508,0.34414376 0 1 1 0,-0.687786 h 7.246337 a 0.36623508,0.34414376 0 0 1 0,0.687786 z m 0,-1.375573 h -7.246337 a 0.36623508,0.34414376 0 0 1 0,-0.687786 h 7.246337 a 0.36623508,0.34414376 0 0 1 0,0.687786 z m 0,-1.375573 h -7.246337 a 0.36623508,0.34414376 0 1 1 0,-0.687787 h 7.246337 a 0.36623508,0.34414376 0 0 1 0,0.687787 z m 3.643692,2.66198 a 1.7352186,1.6305501 0 1 1 1.734686,-1.631552 1.7362848,1.631552 0 0 1 -1.735219,1.631552 z"
-       id="path3860" />
-  </g>
-  <g
-     inkscape:groupmode="layer"
-     id="layer2"
-     inkscape:label="Radio Shaddow"
-     style="display:inline">
-    <path
-       id="path1000"
-       d="m 26.564215,46.115095 c 2.95e-4,-0.762084 -0.656603,-1.380254 -1.467606,-1.381084 H 14.536031 l -2.491082,2.65e-4 -0.138134,0.04031 -0.100755,0.02905 -0.02399,0.007 c -0.01952,0.0051 -0.03845,0.01194 -0.05651,0.02054 -0.557318,0.210984 -0.922029,0.7193 -0.921185,1.283902 v 7.585189 c -2.95e-4,0.762947 0.657816,1.381585 1.469738,1.381585 h 12.821959 c 0.811003,-8.11e-4 1.467901,-0.619 1.467606,-1.381084 -1.8e-4,-2.528563 -7.5e-5,-5.057126 5.41e-4,-7.585689 z"
-       class="cls-1"
-       inkscape:connector-curvature="0"
-       style="display:inline;fill:#f1f3f4;fill-opacity:1;stroke-width:0.0516765;filter:url(#filter1516)"
-       inkscape:label="Radio (basic shape) Shaddow -- edit in filter settings"
-       sodipodi:nodetypes="ccccccccccscccc"
-       transform="translate(0,-29.633334)" />
+       style="display:none;opacity:1;fill:#df0038;fill-opacity:1;stroke:none;stroke-width:0.289379;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.0784314" />
+    <g
+       id="g12"
+       inkscape:label="Rounded Rectangle"
+       style="display:inline">
+      <path
+         id="path12"
+         style="display:inline;opacity:1;fill:#f2003c;stroke-width:0.0280001"
+         d="m 10.806289,6.3500004 h 16.487422 c 2.468784,0 4.456289,1.9875048 4.456289,4.4562886 V 27.293711 C 31.75,29.762495 29.762495,31.75 27.293711,31.75 H 10.806289 c -2.4687838,0 -4.4562886,-1.987505 -4.4562886,-4.456289 v -8.210943 -8.276479 c 0,-2.4687838 1.9875048,-4.4562886 4.4562886,-4.4562886 z"
+         sodipodi:nodetypes="ssssssscss"
+         inkscape:label="Square"
+         inkscape:export-filename="../../../path12.png"
+         inkscape:export-xdpi="600"
+         inkscape:export-ydpi="600" />
+      <path
+         id="rect12"
+         style="display:inline;opacity:1;fill:#df0038;fill-opacity:1;stroke-width:0.0280001"
+         d="m 31.75,19.05 v 8.243711 C 31.75,29.762495 29.762495,31.75 27.293711,31.75 H 10.806289 c -2.4687838,0 -4.4562886,-1.987505 -4.4562886,-4.456289 0,-2.956606 -3e-7,-8.243711 -3e-7,-8.243711 z"
+         sodipodi:nodetypes="csssscc"
+         inkscape:label="Lower Half" />
+    </g>
+    <g
+       id="g13"
+       inkscape:label="Circle"
+       style="display:none">
+      <path
+         id="path13"
+         style="display:inline;opacity:1;fill:#f2003c;fill-opacity:1;stroke-width:0.0280001"
+         d="m 31.750001,19.050001 a 12.7,12.7 0 0 1 -12.7,12.7 12.7,12.7 0 0 1 -12.6999997,-12.7 12.7,12.7 0 0 1 12.6999997,-12.6999997 12.7,12.7 0 0 1 12.7,12.6999997 z"
+         inkscape:label="Circle"
+         inkscape:export-filename="../../../path13.png"
+         inkscape:export-xdpi="600"
+         inkscape:export-ydpi="600" />
+      <path
+         id="circle13"
+         style="display:inline;opacity:1;fill:#df0038;stroke-width:0.0280001"
+         d="m 31.750001,19.050001 c 0,7.014016 -5.685984,12.7 -12.7,12.7 -7.014016,0 -12.6999997,-5.685984 -12.6999997,-12.7 z"
+         sodipodi:nodetypes="cscc"
+         inkscape:label="Lower Half" />
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"
@@ -271,7 +246,7 @@
      style="display:inline">
     <path
        id="path487"
-       style="display:inline;fill:#ca2d23;fill-opacity:1;stroke-width:0.0516765"
+       style="display:inline;fill:#f2003c;fill-opacity:1;stroke-width:0.0516765"
        class="cls-1"
        inkscape:label="Radio (background)"
        d="m 12.044743,44.734221 -0.137976,0.04031 -0.100769,0.02894 -0.02377,0.0072 c -0.01952,0.0051 -0.03878,0.01207 -0.05684,0.02067 -0.557318,0.210984 -0.921718,0.719041 -0.920874,1.283643 v 7.585066 c -2.95e-4,0.762947 0.657758,1.381828 1.469677,1.381828 h 12.821957 c 0.811,-8.11e-4 1.467906,-0.61923 1.467611,-1.381311 -1.8e-4,-2.528554 -10e-5,-5.057029 5.16e-4,-7.585583 2.95e-4,-0.762084 -0.65661,-1.379965 -1.46761,-1.380795 H 14.536064 Z"
@@ -282,8 +257,11 @@
      transform="translate(0,-29.633334)"
      inkscape:groupmode="layer"
      id="g959"
-     inkscape:label="Radio Icon  (Variant)"
-     style="display:inline">
+     inkscape:label="Radio Icon"
+     style="display:inline"
+     inkscape:export-filename="./g959.png"
+     inkscape:export-xdpi="600"
+     inkscape:export-ydpi="600">
     <path
        id="path943"
        style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.0516765"
@@ -295,26 +273,26 @@
        d="m 27.050929,46.172702 h -0.486714 l -5.41e-4,2.162045 h 0.486714 c 0.135433,0 0.245223,-0.103168 0.245223,-0.230431 V 46.40113 c -0.0012,-0.126286 -0.110293,-0.228158 -0.24469,-0.228428 z"
        class="cls-1"
        inkscape:connector-curvature="0"
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.05167651"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.0516765"
        inkscape:label="Volume dial"
        sodipodi:nodetypes="cccssccc" />
     <path
        sodipodi:nodetypes="ccccc"
        inkscape:label="Antenna"
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.05167651"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.0516765"
        inkscape:connector-curvature="0"
        class="cls-1"
        d="m 14.536031,44.734011 10.353204,-3.002617 c 0.465924,-0.135253 0.250021,-0.791981 -0.215902,-0.656728 l -12.627845,3.659308 z"
        id="path947" />
     <path
        inkscape:label="Frequency Dial"
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.05167651"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.0516765"
        inkscape:connector-curvature="0"
        class="cls-1"
        d="m 24.443036,51.925965 a 1.0027485,0.94226262 0 1 1 -1.002748,-0.942263 1.0043477,0.94376542 0 0 1 1.002748,0.942263 z"
        id="path953" />
     <path
-       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.05167652"
+       style="display:inline;fill:#ffffff;fill-opacity:1;stroke-width:0.0516765"
        d="m 21.218512,45.923621 v 2.16506 c 8.7e-5,0.344064 -0.549007,0.344064 -0.549093,0 v -2.165459 z"
        id="path957"
        inkscape:connector-curvature="0"
@@ -323,11 +301,27 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="g923"
+     inkscape:label="Stencil"
+     style="display:none">
+    <path
+       id="rect8"
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.0280001"
+       d="M 0,0 V 38.1 H 38.1 V 0 Z m 10.806059,6.3500001 h 16.487883 c 2.468781,0 4.456058,1.9872775 4.456058,4.4560589 V 27.293942 C 31.75,29.762723 29.762723,31.75 27.293942,31.75 H 10.806059 c -2.4687814,0 -4.4560589,-1.987277 -4.4560589,-4.456058 V 10.806059 c 0,-2.4687814 1.9872775,-4.4560589 4.4560589,-4.4560589 z"
+       inkscape:label="Rounded Rectangle 72 / 12.632" />
+    <path
+       id="rect9"
+       style="display:none;opacity:1;fill:#ffffff;fill-opacity:1;stroke-width:0.0280001"
+       d="M 0,0 V 38.1 H 38.1 V 0 Z M 19.05,6.3500001 A 12.7,12.7 0 0 1 31.75,19.05 12.7,12.7 0 0 1 19.05,31.75 12.7,12.7 0 0 1 6.3500001,19.05 12.7,12.7 0 0 1 19.05,6.3500001 Z"
+       inkscape:label="Circle 72" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Save Zones"
      style="display:none">
     <circle
-       style="display:inline;opacity:0.13;fill:#ff71ff;fill-opacity:1;stroke-width:0.39692"
+       style="display:none;opacity:0.13;fill:#ff71ff;fill-opacity:1;stroke-width:0.39692"
        id="path846"
        cx="19.050001"
        cy="19.050001"
@@ -341,7 +335,7 @@
        x="6.3500004"
        y="6.3500004"
        inkscape:label="Rectangle 72pt"
-       inkscape:export-filename="/home/solaris/Desktop/transistor-app-icon.png"
+       inkscape:export-filename="transistor-app-icon-current.png"
        inkscape:export-xdpi="512"
        inkscape:export-ydpi="512" />
   </g>
