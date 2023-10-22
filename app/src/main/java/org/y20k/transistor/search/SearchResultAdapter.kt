@@ -70,7 +70,7 @@ class SearchResultAdapter(private val listener: SearchResultAdapterListener, var
         val searchResultViewHolder: SearchResultViewHolder = holder as SearchResultViewHolder
         val searchResult: Station = searchResults[position]
         // update text
-        searchResultViewHolder.nameView.text = searchResult.name
+        searchResultViewHolder.nameView.text = "${searchResult.name} (${searchResult.codec} - ${searchResult.bitrate} kbps)"
         searchResultViewHolder.streamView.text = searchResult.getStreamUri()
         // mark selected if necessary
         searchResultViewHolder.searchResultLayout.isSelected = selectedPosition == position

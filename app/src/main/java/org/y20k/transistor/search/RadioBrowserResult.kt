@@ -29,7 +29,9 @@ data class RadioBrowserResult (@Expose val changeuuid: String,
                                @Expose val url: String,
                                @Expose val url_resolved: String,
                                @Expose val homepage: String,
-                               @Expose val favicon: String) {
+                               @Expose val favicon: String,
+                               @Expose val codec: String,
+                               @Expose val bitrate: Int) {
 
     /* Converts RadioBrowserResult to Station  */
     fun toStation(): Station = Station(
@@ -49,7 +51,9 @@ data class RadioBrowserResult (@Expose val changeuuid: String,
             modificationDate = GregorianCalendar.getInstance().time,
             isPlaying = false,
             radioBrowserStationUuid = stationuuid,
-            radioBrowserChangeUuid = changeuuid)
+            radioBrowserChangeUuid = changeuuid,
+            codec = codec,
+            bitrate = bitrate)
 
 }
 

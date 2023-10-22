@@ -47,6 +47,8 @@ data class Station (@Expose val uuid: String = UUID.randomUUID().toString(),
                     @Expose var modificationDate: Date = Keys.DEFAULT_DATE,
                     @Expose var isPlaying: Boolean = false,
                     @Expose var radioBrowserStationUuid: String = String(),
+                    @Expose var codec: String = String(),
+                    @Expose var bitrate: Int = 0,
                     @Expose var radioBrowserChangeUuid: String = String()): Parcelable {
 
     /* Define log tag */
@@ -114,6 +116,8 @@ data class Station (@Expose val uuid: String = UUID.randomUUID().toString(),
                        modificationDate = modificationDate,
                        isPlaying = isPlaying,
                        radioBrowserStationUuid = radioBrowserStationUuid,
-                       radioBrowserChangeUuid = radioBrowserChangeUuid)
+                       radioBrowserChangeUuid = radioBrowserChangeUuid,
+                       codec = codec,
+                       bitrate = bitrate)
     }
 }
