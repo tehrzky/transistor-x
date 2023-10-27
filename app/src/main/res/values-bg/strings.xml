@@ -21,7 +21,7 @@
     <string name="dialog_yes_no_negative_button_cancel">Отменяне</string>
     <string name="dialog_yes_no_positive_button_default">Да</string>
     <string name="dialog_yes_no_positive_button_remove_station">Премахване</string>
-    <string name="toast_message_error_download_error">Грешка при изтегляне.</string>
+    <string name="toast_message_error_download_error">Грешка при изтегляне</string>
     <string name="station_list_button_add_new_station">Добавяне на станция</string>
     <string name="station_list_button_settings">Настройки</string>
     <string name="notification_now_playing_channel_name">Управление на възпроизвеждането</string>
@@ -100,4 +100,7 @@
     <string name="toast_message_collection_restore">Възстановяване на станции от резервно копие.</string>
     <string name="toast_message_collection_backup">Резервно копие на станциите в:</string>
     <string name="notification_stop">Спиране</string>
+    <string name="dialog_rename_station_input_hint">Въведете ново име</string>
+    <string name="dialog_add_station_title">Добавяне на станция</string>
+    <string name="dialog_restore_collection_replace_existing">Да бъдат ли заместени избраните радиостанции с тези от резервното копие\?</string>
 </resources>
