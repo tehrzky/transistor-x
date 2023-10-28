@@ -99,4 +99,8 @@
     <string name="descr_expanded_player_metadata_copy_button">Copia le informazioni sulla riproduzione in corso</string>
     <string name="pref_buffer_size_summary_disabled">Usa la dimensione predefinita del buffer per riprodurre uno stream radiofonico.</string>
     <string name="pref_buffer_size_summary_enabled">Per la riproduzione di uno stream radiofonico è stato attivato un buffer più grande. L\'avvio della riproduzione potrebbe richiedere più tempo.</string>
+    <string name="descr_expanded_player_metadata_next_button">Gioco di metadati della prossima riproduzione</string>
+    <string name="dialog_add_station_title">Aggiungi stazione</string>
+    <string name="dialog_restore_collection_replace_existing">Sostituisci la raccolta corrente di stazioni radio con la stazione radio del backup\?</string>
+    <string name="descr_expanded_player_metadata_previous_button">Gioco di metadati della riproduzione precedente</string>
 </resources>
