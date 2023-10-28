@@ -55,7 +55,7 @@
     <string name="dialog_generic_details_button">Afficher les détails</string>
     <string name="dialog_find_station_title">Rechercher une station</string>
     <string name="dialog_find_station_no_results">Aucun résultat.</string>
-    <string name="dialog_find_station_hint">Nom ou adresse</string>
+    <string name="dialog_find_station_hint">Nom ou adresse du flux</string>
     <string name="dialog_find_station_button_add">Ajouter</string>
     <string name="dialog_error_title_no_network">Hors-ligne</string>
     <string name="dialog_error_message_no_network">Connectez-vous à Internet.</string>
@@ -88,11 +88,11 @@
     <string name="dialog_edit_station_name">Nom de la station</string>
     <string name="pref_edit_station_title">Modifier les stations</string>
     <string name="toast_message_collection_restore">Restauration des stations de radio depuis la sauvegarde.</string>
-    <string name="pref_backup_title">Restauration des stations</string>
+    <string name="pref_backup_title">Sauvegarde des stations</string>
     <string name="pref_backup_summary">Enregistrer une collection de stations de radio incluant les images dans le stockage interne de l\'appareil.</string>
     <string name="pref_restore_title">Restaurer des stations</string>
     <string name="pref_restore_summary">Restaure une collection de stations de radio depuis une sauvegarde. Les stations existantes seront remplacées.</string>
-    <string name="toast_message_collection_backup">Sauvegarde des stations de radio vers:</string>
+    <string name="toast_message_collection_backup">Sauvegarde des stations de radio vers :</string>
     <string name="pref_buffer_size_summary_disabled">Utilisation de la taille de la mémoire tampon par défaut pour la lecture d\'un flux radio.</string>
     <string name="pref_buffer_size_summary_enabled">Activation d\'une plus grande mémoire tampon pour la lecture d\'un flux radio. Le démarrage de la lecture peut prendre plus de temps.</string>
     <string name="pref_buffer_size_title">Utiliser une plus grande mémoire tampon</string>
@@ -102,4 +102,6 @@
     <string name="pref_tap_anywhere_playback_title">Appuyer sur la station de radio</string>
     <string name="pref_tap_anywhere_playback_summary_enabled">Appuyez n\'importe où sur la carte d\'une station de radio pour commencer à l\'écouter.</string>
     <string name="descr_expanded_player_metadata_copy_button">Copier les informations sur la lecture en cours</string>
+    <string name="dialog_add_station_title">Ajouter une station</string>
+    <string name="dialog_restore_collection_replace_existing">Remplacer les stations actuelles par les stations de la sauvegarde \?</string>
 </resources>
