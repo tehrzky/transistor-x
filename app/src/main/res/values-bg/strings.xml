@@ -9,7 +9,7 @@
     <string name="dialog_error_message_no_network">Свържете се с интернет.</string>
     <string name="dialog_error_title_no_network">Без достъп до интернет</string>
     <string name="dialog_find_station_button_add">Добавяне</string>
-    <string name="dialog_find_station_hint">Име или адрес на потока</string>
+    <string name="dialog_find_station_hint">Име или адрес на поток</string>
     <string name="dialog_find_station_no_results">Няма резултати.</string>
     <string name="dialog_find_station_title">Търсене на станция</string>
     <string name="dialog_generic_button_okay">Добре</string>
