@@ -102,4 +102,6 @@
     <string name="pref_buffer_size_summary_enabled">Größerer Puffer für die Wiedergabe eines Radiostreams aktiviert. Es kann länger dauern, bis die Wiedergabe beginnt.</string>
     <string name="descr_expanded_player_metadata_next_button">Nächster jetzt spielender Metadateneintrag</string>
     <string name="descr_expanded_player_metadata_previous_button">Vorheriger jetzt spielender Metadateneintrag</string>
+    <string name="dialog_add_station_title">Sender hinzufügen</string>
+    <string name="dialog_restore_collection_replace_existing">Aktuelle Sammlung von Radiosendern mit dem Radiosender aus der Sicherung ersetzen\?</string>
 </resources>
