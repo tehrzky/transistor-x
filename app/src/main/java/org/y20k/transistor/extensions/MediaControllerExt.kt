@@ -40,6 +40,12 @@ fun MediaController.cancelSleepTimer() {
 }
 
 
+/* Request sleep timer state */
+fun MediaController.requestSleepTimerRunning(): ListenableFuture<SessionResult> {
+    return sendCustomCommand(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING, Bundle.EMPTY), Bundle.EMPTY)
+}
+
+
 /* Request sleep timer remaining */
 fun MediaController.requestSleepTimerRemaining(): ListenableFuture<SessionResult> {
     return sendCustomCommand(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY), Bundle.EMPTY)
@@ -53,7 +59,6 @@ fun MediaController.requestMetadataHistory(): ListenableFuture<SessionResult> {
 
 /* Starts playback with a new media item */
 fun MediaController.play(context: Context, station: Station) {
-    if (isPlaying) pause()
     // set media item, prepare and play
     setMediaItem(CollectionHelper.buildMediaItem(context, station))
     prepare()

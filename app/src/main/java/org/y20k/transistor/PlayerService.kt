@@ -24,6 +24,8 @@ import android.content.SharedPreferences
 import android.media.audiofx.AudioEffect
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -84,7 +86,9 @@ class PlayerService: MediaLibraryService() {
     private lateinit var player: Player
     private lateinit var mediaLibrarySession: MediaLibrarySession
     private lateinit var sleepTimer: CountDownTimer
-    var sleepTimerTimeRemaining: Long = 0L
+    private var sleepTimerTimeRemaining: Long = 0L
+    private var sleepTimerRunning: Boolean = false
+    private val handler: Handler = Handler(Looper.getMainLooper())
     private val librarySessionCallback = CustomMediaLibrarySessionCallback()
     private var collection: Collection = Collection()
     private lateinit var metadataHistory: MutableList<String>
@@ -186,19 +190,28 @@ class PlayerService: MediaLibraryService() {
 
 
     /* Starts sleep timer / adds default duration to running sleeptimer */
-    private fun startSleepTimer() {
+    private fun startSleepTimer(continueWithPreviousTimerDuration: Boolean) {
         // stop running timer
         if (sleepTimerTimeRemaining > 0L && this::sleepTimer.isInitialized) {
+            handler.removeCallbacksAndMessages(null)
             sleepTimer.cancel()
         }
         // initialize timer
-        sleepTimer = object: CountDownTimer(Keys.SLEEP_TIMER_DURATION + sleepTimerTimeRemaining, Keys.SLEEP_TIMER_INTERVAL) {
+        val duration: Long
+        if (continueWithPreviousTimerDuration) {
+            duration = sleepTimerTimeRemaining
+        } else {
+            duration = Keys.SLEEP_TIMER_DURATION + sleepTimerTimeRemaining
+        }
+        sleepTimer = object: CountDownTimer(duration, Keys.SLEEP_TIMER_INTERVAL) {
             override fun onFinish() {
                 Log.v(TAG, "Sleep timer finished. Sweet dreams.")
                 sleepTimerTimeRemaining = 0L
+                sleepTimerRunning = false
                 player.pause() // todo may use player.stop() here
             }
             override fun onTick(millisUntilFinished: Long) {
+                sleepTimerRunning = true
                 sleepTimerTimeRemaining = millisUntilFinished
             }
         }
@@ -210,9 +223,17 @@ class PlayerService: MediaLibraryService() {
 
 
     /* Cancels sleep timer */
-    private fun cancelSleepTimer() {
+    private fun cancelSleepTimer(delayedReset: Boolean) {
         if (this::sleepTimer.isInitialized && sleepTimerTimeRemaining > 0L) {
-            sleepTimerTimeRemaining = 0L
+            if (delayedReset) {
+                handler.postDelayed({
+                    sleepTimerTimeRemaining = 0L
+                    sleepTimerRunning = false
+                }, 2500L)
+            } else {
+                sleepTimerTimeRemaining = 0L
+                sleepTimerRunning = false
+            }
             sleepTimer.cancel()
         }
         // store timer state
@@ -303,6 +324,7 @@ class PlayerService: MediaLibraryService() {
             val builder: SessionCommands.Builder = connectionResult.availableSessionCommands.buildUpon()
             builder.add(SessionCommand(Keys.CMD_START_SLEEP_TIMER, Bundle.EMPTY))
             builder.add(SessionCommand(Keys.CMD_CANCEL_SLEEP_TIMER, Bundle.EMPTY))
+            builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING, Bundle.EMPTY))
             builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
             builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
             return MediaSession.ConnectionResult.accept(builder.build(), connectionResult.availablePlayerCommands);
@@ -337,10 +359,15 @@ class PlayerService: MediaLibraryService() {
         override fun onCustomCommand(session: MediaSession, controller: MediaSession.ControllerInfo, customCommand: SessionCommand, args: Bundle): ListenableFuture<SessionResult> {
             when (customCommand.customAction) {
                 Keys.CMD_START_SLEEP_TIMER -> {
-                    startSleepTimer()
+                    startSleepTimer(continueWithPreviousTimerDuration = false)
                 }
                 Keys.CMD_CANCEL_SLEEP_TIMER -> {
-                    cancelSleepTimer()
+                    cancelSleepTimer(delayedReset = false)
+                }
+                Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING -> {
+                    val resultBundle = Bundle()
+                    resultBundle.putBoolean(Keys.EXTRA_SLEEP_TIMER_RUNNING, sleepTimerRunning)
+                    return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS, resultBundle))
                 }
                 Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING -> {
                     val resultBundle = Bundle()
@@ -467,10 +494,11 @@ class PlayerService: MediaLibraryService() {
             //updatePlayerState(station, playbackState)
 
             if (isPlaying) {
-                // playback is active
+                // restart the sleep time if there is still time on the clock
+                if (sleepTimerTimeRemaining > 0) startSleepTimer(continueWithPreviousTimerDuration = true)
             } else {
                 // cancel sleep timer
-                cancelSleepTimer()
+                cancelSleepTimer(delayedReset = true)
                 // reset metadata
                 updateMetadata()
 

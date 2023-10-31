@@ -74,6 +74,7 @@ import org.y20k.transistor.extensions.play
 import org.y20k.transistor.extensions.playStreamDirectly
 import org.y20k.transistor.extensions.requestMetadataHistory
 import org.y20k.transistor.extensions.requestSleepTimerRemaining
+import org.y20k.transistor.extensions.requestSleepTimerRunning
 import org.y20k.transistor.extensions.startSleepTimer
 import org.y20k.transistor.helpers.BackupHelper
 import org.y20k.transistor.helpers.CollectionHelper
@@ -105,8 +106,7 @@ class PlayerFragment: Fragment(),
     private lateinit var layout: LayoutHolder
     private lateinit var collectionAdapter: CollectionAdapter
     private lateinit var controllerFuture: ListenableFuture<MediaController>
-    private val controller: MediaController?
-        get() = if (controllerFuture.isDone) controllerFuture.get() else null // defines the Getter for the MediaController
+    private val controller: MediaController? get() = if (controllerFuture.isDone) controllerFuture.get() else null // defines the Getter for the MediaController
     private var collection: Collection = Collection()
     private var playerState: PlayerState = PlayerState()
     private var listLayoutState: Parcelable? = null
@@ -676,18 +676,24 @@ class PlayerFragment: Fragment(),
             playerState.isPlaying = isPlaying
             // animate state transition of play button(s)
             layout.animatePlaybackButtonStateTransition(activity as Context, isPlaying)
+            // toggle the sleep timer update subscription
+            togglePeriodicSleepTimerUpdateRequest()
 
             if (isPlaying) {
                 // playback is active
                 layout.showPlayer(activity as Context)
                 layout.showBufferingIndicator(buffering = false)
-
             } else {
                 // playback is not active
-                togglePeriodicSleepTimerUpdateRequest()
                 layout.updateSleepTimer(activity as Context)
-                playerState.sleepTimerRunning = false
             }
+
+            // update the sleep timer running state
+            val resultFuture: ListenableFuture<SessionResult>? = controller?.requestSleepTimerRunning()
+            resultFuture?.addListener(Runnable {
+                playerState.sleepTimerRunning = resultFuture.get().extras.getBoolean(Keys.EXTRA_SLEEP_TIMER_RUNNING, false)
+            } , MoreExecutors.directExecutor())
+
         }
 
         override fun onPlayWhenReadyChanged(playWhenReady: Boolean, reason: Int) {
