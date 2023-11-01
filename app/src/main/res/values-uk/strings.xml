@@ -102,4 +102,6 @@
     <string name="descr_expanded_player_metadata_previous_button">Метадані попереднього треку</string>
     <string name="pref_tap_anywhere_playback_summary_disabled">Торкніться кнопки відтворення, щоб почати слухати радіостанцію.</string>
     <string name="pref_buffer_size_summary_enabled">Увімкнено більший буфер для відтворення потокового радіо. Початок відтворення може тривати довше.</string>
+    <string name="dialog_add_station_title">Додати станцію</string>
+    <string name="dialog_restore_collection_replace_existing">Замінити поточну збірку радіостанцій на радіостанції з резервної копії\?</string>
 </resources>
