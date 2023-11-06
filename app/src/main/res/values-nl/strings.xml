@@ -7,7 +7,7 @@
     <string name="shortcut_last_station_disabled_message">Snelkoppeling om recentste zender te openen is uitgeschakeld.</string>
     <string name="descr_app_icon">Apppictogram als van een oude radio</string>
     <string name="player_sheet_h2_station_metadata">Speelt nu af</string>
-    <string name="player_sheet_h2_stream_url">Streamadres</string>
+    <string name="player_sheet_h2_stream_url">Stream-koppeling</string>
     <string name="dialog_generic_button_okay">Oké</string>
     <string name="dialog_generic_button_cancel">Annuleer</string>
     <string name="dialog_error_message_default">Er is een foutmelding</string>
@@ -68,17 +68,17 @@
     <string name="descr_dialog_edit_place_on_home_screen_icon">Plaats op thuisscherm</string>
     <string name="descr_card_station_image">Zenderlogo</string>
     <string name="descr_card_starred_station">Zender met ster</string>
-    <string name="descr_card_small_play_button">Start/Stop</string>
+    <string name="descr_card_small_play_button">Afspelen/Stoppen</string>
     <string name="descr_player_station_image">Zenderlogo</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Start wekker</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Resterende tijd van wekker</string>
     <string name="onboarding_app_import_running">Je zenders importeren…</string>
-    <string name="descr_player_playback_button">Start/Stop</string>
+    <string name="descr_player_playback_button">Afspelen/Pauzeren</string>
     <string name="toast_message_sleep_timer_unable_to_start">Start eerst het afspelen.</string>
     <string name="station_list_button_settings">Instellingen</string>
     <string name="dialog_edit_save_changes">Sla wijzigingen op</string>
     <string name="dialog_edit_station_name">Zendernaam</string>
-    <string name="dialog_edit_stream_uri">Streamadres</string>
+    <string name="dialog_edit_stream_uri">Stream-adres</string>
     <string name="pref_advanced_title">Geavanceerd</string>
     <string name="pref_edit_station_summary_disabled">Bewerken van zenderinformatie is uitgeschakeld.</string>
     <string name="pref_edit_station_title">Zenderinformatie</string>
@@ -102,4 +102,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Kopieer de informatie van de huidige weergave</string>
     <string name="descr_expanded_player_metadata_next_button">Geef informatie over de hierop volgende weergave</string>
     <string name="descr_expanded_player_metadata_previous_button">Geef informatie over de hieraan voorgaande weergave</string>
+    <string name="dialog_add_station_title">Zender toevoegen</string>
+    <string name="dialog_restore_collection_replace_existing">Huidige verzameling zenders vervangen door de zender uit de back-up\?</string>
 </resources>
