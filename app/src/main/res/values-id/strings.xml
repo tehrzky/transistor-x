@@ -101,4 +101,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Salin informasi pemutaran saat ini</string>
     <string name="descr_expanded_player_metadata_next_button">Entri metadata pemutaran saat ini berikutnya</string>
     <string name="descr_expanded_player_metadata_previous_button">Entri metadata pemutaran saat ini sebelumnya</string>
+    <string name="dialog_add_station_title">Tambah Stasiun</string>
+    <string name="dialog_restore_collection_replace_existing">Ganti koleksi stasiun radio saat ini dengan stasiun radio dari cadangan?</string>
 </resources>
