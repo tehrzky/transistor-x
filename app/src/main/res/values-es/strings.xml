@@ -102,4 +102,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Copiar la información de reproducción actual</string>
     <string name="descr_expanded_player_metadata_next_button">Siguiente ahora reproduciendo entrada de metadatos</string>
     <string name="descr_expanded_player_metadata_previous_button">Entrada anterior de metadatos de reproducción</string>
+    <string name="dialog_add_station_title">Añadir una estación</string>
+    <string name="dialog_restore_collection_replace_existing">¿Reemplazar la colección actual de estaciones de radio con la estación de radio de la copia de seguridad?</string>
 </resources>
