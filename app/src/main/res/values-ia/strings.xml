@@ -1,2 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="descr_player_playback_button">Reproducer/pausar</string>
+    <string name="pref_about_title">A proposito de</string>
+    <string name="notification_skip_to_previous">Previe</string>
+    <string name="notification_stop">Stoppar</string>
+    <string name="player_sheet_h2_stream_url">Ligamine de fluxo</string>
+    <string name="descr_card_small_play_button">Reproducer/stoppar</string>
+    <string name="onboarding_app_description">Application de radio</string>
+    <string name="notification_play">Reproducer</string>
+    <string name="pref_app_version_title">Version del application</string>
+    <string name="pref_app_version_summary">Version</string>
+    <string name="notification_skip_to_next">Sequente</string>
+    <string name="station_list_button_settings">Parametros</string>
+    <string name="pref_theme_selection_title">Thema del application</string>
+</resources>
