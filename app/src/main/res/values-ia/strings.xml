@@ -13,4 +13,24 @@
     <string name="notification_skip_to_next">Sequente</string>
     <string name="station_list_button_settings">Parametros</string>
     <string name="pref_theme_selection_title">Thema del application</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Remover</string>
+    <string name="dialog_edit_stream_uri">Adresse del station</string>
+    <string name="dialog_yes_no_positive_button_default">Si</string>
+    <string name="toast_message_error_download_error">Error del discarga</string>
+    <string name="dialog_find_station_button_add">Adder</string>
+    <string name="dialog_yes_no_positive_button_update_covers">Actualisar</string>
+    <string name="dialog_rename_station_input_hint">Insere un nove nomine</string>
+    <string name="fragment_settings_title">Parametros</string>
+    <string name="dialog_error_title_no_network">Foras de linea</string>
+    <string name="dialog_edit_station_name">Nomine de station</string>
+    <string name="dialog_find_station_hint">Nomine o adresse de fluxo</string>
+    <string name="dialog_generic_button_okay">OK</string>
+    <string name="dialog_add_station_title">Adder un station</string>
+    <string name="dialog_generic_button_cancel">Cancellar</string>
+    <string name="dialog_opml_import_details_default">Detalios non disponibile</string>
+    <string name="dialog_edit_save_changes">Salvar le cambios</string>
+    <string name="toast_message_station_not_valid">Le station non es valide.</string>
+    <string name="dialog_yes_no_negative_button_cancel">Cancellar</string>
+    <string name="dialog_yes_no_message_remove_station">Remover iste station?</string>
+    <string name="dialog_generic_details_button">Monstrar detalios</string>
 </resources>
