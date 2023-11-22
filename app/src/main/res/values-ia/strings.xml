@@ -33,4 +33,26 @@
     <string name="dialog_yes_no_negative_button_cancel">Cancellar</string>
     <string name="dialog_yes_no_message_remove_station">Remover iste station?</string>
     <string name="dialog_generic_details_button">Monstrar detalios</string>
+    <string name="descr_card_station_image">Imagine de station</string>
+    <string name="toast_message_copied_to_clipboard">Copiate al area de transferentia.</string>
+    <string name="dialog_find_station_title">Cercar un station</string>
+    <string name="pref_theme_selection_mode_dark">Modo obscur</string>
+    <string name="station_list_button_add_new_station">Adder nove station</string>
+    <string name="descr_card_station_image_change">Modificar imagine de station</string>
+    <string name="descr_player_station_image">Imagine del station</string>
+    <string name="pref_theme_selection_mode_light">Modo clar</string>
+    <string name="pref_theme_selection_summary">Thema actual:</string>
+    <string name="pref_advanced_title">Avantiate</string>
+    <string name="descr_dialog_edit_place_on_home_screen_icon">Adder al schermo de initio</string>
+    <string name="pref_edit_station_stream_title">Modificar ligamines de fluxos</string>
+    <string name="pref_backup_title">Copia de securitate del stationes</string>
+    <string name="descr_expanded_player_metadata_copy_button">Copiar le information super le reproduction in curso</string>
+    <string name="descr_expanded_player_sleep_timer_cancel_button">Cancellar temporisator</string>
+    <string name="pref_edit_station_title">Modificar stationes</string>
+    <string name="player_sheet_h2_station_metadata">Reproduction in curso</string>
+    <string name="descr_expanded_player_sleep_timer_start_button">Initiar temporisator de somno</string>
+    <string name="shortcut_last_station_short_label">Ultime station</string>
+    <string name="shortcut_last_station_long_label">Reproducer le ultime station</string>
+    <string name="dialog_find_station_no_results">Nulle resultatos.</string>
+    <string name="pref_m3u_export_title">Exportar M3U</string>
 </resources>
