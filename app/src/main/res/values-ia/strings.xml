@@ -99,4 +99,6 @@
     <string name="pref_edit_station_summary_disabled">Modification del information de station disactivate.</string>
     <string name="shortcut_last_station_disabled_message">Accesso directe pro le reproduction del ultime station disactivate.</string>
     <string name="pref_update_station_images_summary">Discarga le ultime version de tote le imagines de station.</string>
+    <string name="toast_message_error_missing_storage_permission">Conceder permission de accesso al immagazinage pro aperir iste file.</string>
+    <string name="toast_message_collection_restore">In restauration del stationes de radio ab le copia de securitate.</string>
 </resources>
