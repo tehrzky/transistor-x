@@ -1,1 +1,1 @@
-Transistor je aplikacija za slušanje radio stanica putem interneta.
+Tranzistor je aplikacija za slušanje radio stanica putem interneta.
