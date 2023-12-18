@@ -101,4 +101,6 @@
     <string name="pref_update_station_images_summary">Discarga le ultime version de tote le imagines de station.</string>
     <string name="toast_message_error_missing_storage_permission">Conceder permission de accesso al immagazinage pro aperir iste file.</string>
     <string name="toast_message_collection_restore">In restauration del stationes de radio ab le copia de securitate.</string>
+    <string name="descr_expanded_player_metadata_next_button">Entrata de metadatos de reproduction in curso sequente</string>
+    <string name="descr_expanded_player_metadata_previous_button">Entrata de metadatos de reproduction in curso previe</string>
 </resources>
