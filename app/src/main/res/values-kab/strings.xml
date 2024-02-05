@@ -13,4 +13,5 @@
     <string name="notification_play">Urar</string>
     <string name="notification_stop">Seḥbes</string>
     <string name="fragment_settings_title">Iɣewwaṛen</string>
+    <string name="station_list_button_settings">Iɣewwaṛen</string>
 </resources>
