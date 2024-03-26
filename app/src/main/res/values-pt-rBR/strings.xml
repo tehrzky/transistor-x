@@ -19,9 +19,9 @@
     <string name="onboarding_app_description">Aplicativo de rádio</string>
     <string name="onboarding_app_get_started">Começar</string>
     <string name="toast_message_sleep_timer_unable_to_start">por favor iniciar reprodução primeiro.</string>
-    <string name="descr_player_playback_button">Tocar/ Parar</string>
+    <string name="descr_player_playback_button">Tocar/parar</string>
     <string name="pref_update_station_images_title">Atualizar imagens da estação</string>
-    <string name="pref_update_station_images_summary">Baixar todas as mais recentes imagens de rádios.</string>
+    <string name="pref_update_station_images_summary">Baixar todas as mais recentes imagens das rádios.</string>
     <string name="descr_player_station_image">Imagem da estação</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Iniciar temporizador</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Tempo restante no temporizador</string>
