@@ -2,12 +2,12 @@
 <resources>
     <string name="dialog_edit_save_changes">परिवर्तन सहेजें</string>
     <string name="dialog_edit_station_name">स्टेशन नाम</string>
-    <string name="dialog_edit_stream_uri">स्ट्रीम का पता</string>
+    <string name="dialog_edit_stream_uri">स्ट्रीम पता</string>
     <string name="dialog_error_message_default">एक त्रुटि हुई</string>
     <string name="dialog_find_station_button_add">जोड़ें</string>
     <string name="dialog_find_station_hint">नाम या स्ट्रीम पता</string>
     <string name="dialog_find_station_title">स्टेशन खोजें</string>
-    <string name="dialog_generic_button_cancel">रद्द करें</string>
+    <string name="dialog_generic_button_cancel">रद्द</string>
     <string name="dialog_rename_station_input_hint">नया नाम दर्ज करें</string>
     <string name="dialog_yes_no_message_remove_station">यह स्टेशन हटाएँ?</string>
     <string name="dialog_yes_no_positive_button_remove_station">हटाएँ</string>
@@ -66,7 +66,7 @@
     <string name="dialog_generic_button_okay">ठीक है</string>
     <string name="dialog_generic_details_button">विवरण दिखाएँ</string>
     <string name="dialog_opml_import_details_default">कोई विवरण उपलब्ध नहीं है</string>
-    <string name="dialog_yes_no_negative_button_cancel">रद्द करें</string>
+    <string name="dialog_yes_no_negative_button_cancel">रद्द</string>
     <string name="dialog_yes_no_positive_button_default">हाँ</string>
     <string name="toast_message_install_file_helper">कृपया एक फ़ाइल प्रबंधक स्थापित करें।</string>
     <string name="toast_message_station_duplicate">डुप्लिकेट स्टेशन।</string>
