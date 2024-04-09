@@ -57,7 +57,7 @@
     <string name="toast_message_station_not_valid">Sender ist ungültig.</string>
     <string name="toast_message_station_duplicate">Sender duplizieren.</string>
     <string name="dialog_yes_no_message_update_station_images">Neueste Version aller Senderbilder herunterladen\?</string>
-    <string name="dialog_rename_station_input_hint">Zadejte nový název</string>
+    <string name="dialog_rename_station_input_hint">Neuen Namen eingeben</string>
     <string name="dialog_yes_no_message_remove_station">Diesen Sender entfernen\?</string>
     <string name="dialog_find_station_title">Sender finden</string>
     <string name="dialog_find_station_hint">Name oder Stream-Adresse</string>
@@ -89,7 +89,7 @@
     <string name="pref_edit_station_stream_summary_enabled">Bearbeitung von Streaming-Links ist aktiviert. Stelle sicher, dass du eine korrekte Stream-Adresse eingibst.</string>
     <string name="pref_backup_title">Sender sichern</string>
     <string name="pref_backup_summary">Speichere die Sammlung von Radiosendern einschließlich der Bilder im Gerätespeicher.</string>
-    <string name="toast_message_collection_restore">Wiederherstellen von Radiosendern aus dem Backup.</string>
+    <string name="toast_message_collection_restore">Wiederherstellen der Radiosender aus einem Backup.</string>
     <string name="pref_restore_title">Sender wiederherstellen</string>
     <string name="pref_restore_summary">Wiederherstellen der Sammlung von Radiosendern aus dem Backup. Vorhandene Sender werden ersetzt.</string>
     <string name="toast_message_collection_backup">Radiosender sichern auf:</string>
