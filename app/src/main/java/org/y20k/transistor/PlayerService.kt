@@ -488,8 +488,11 @@ class PlayerService: MediaLibraryService() {
             PreferencesHelper.saveCurrentStationId(currentMediaId)
             // reset restart counter
             playbackRestartCounter = 0
+            // To remove the currently playing station, it is necessary to pause the player controller,
+            // which will trigger the onIsPlayingChanged method.
+            // Due to the invocation of the saveCollection method, the collection of stations needs to be reloaded.
+            collection = FileHelper.readCollection(this@PlayerService)
             // save collection and player state
-
             collection = CollectionHelper.savePlaybackState(this@PlayerService, collection, currentMediaId, isPlaying)
             //updatePlayerState(station, playbackState)
 

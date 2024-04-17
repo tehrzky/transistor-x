@@ -418,7 +418,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
         // update list
         notifyItemRemoved(position)
         // save collection and broadcast changes
-        CollectionHelper.saveCollection(context, newCollection)
+        CollectionHelper.saveCollection(context, newCollection, async = false)
     }
 
 

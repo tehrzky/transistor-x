@@ -327,7 +327,15 @@ class PlayerFragment: Fragment(),
             Keys.DIALOG_REMOVE_STATION -> {
                 when (dialogResult) {
                     // user tapped remove station
-                    true -> collectionAdapter.removeStation(activity as Context, payload)
+                    true -> {
+                        collectionAdapter.removeStation(activity as Context, payload)
+                        if (controller?.isPlaying == true &&  playerState.stationUuid == collection.stations[payload].uuid){
+                            // delete the currently playing station
+                            playerState.isPlaying = false
+                            // player pause, will cause playerListener method
+                            controller?.pause()
+                        }
+                    }
                     // user tapped cancel
                     false -> collectionAdapter.notifyItemChanged(payload)
                 }
