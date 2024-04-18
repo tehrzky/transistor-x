@@ -22,9 +22,12 @@ import android.content.IntentFilter
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.helpers.FileHelper
@@ -84,15 +87,17 @@ class CollectionViewModel(application: Application) : AndroidViewModel(applicati
     /* Reads collection of radio stations from storage using GSON */
     private fun loadCollection() {
         Log.v(TAG, "Loading collection of stations from storage")
-        viewModelScope.launch {
+        CoroutineScope(IO).launch {
             // load collection on background thread
-            val collection: Collection = FileHelper.readCollectionSuspended(getApplication())
+            val collection: Collection = FileHelper.readCollection(getApplication())
             // get updated modification date
             modificationDateViewModel = collection.modificationDate
-            // update collection view model
-            collectionLiveData.value = collection
-            // update collection sie
-            collectionSizeLiveData.value = collection.stations.size
+            withContext(Main) {
+                // update collection view model
+                collectionLiveData.value = collection
+                // update collection sie
+                collectionSizeLiveData.value = collection.stations.size
+            }
         }
     }
 

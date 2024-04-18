@@ -621,11 +621,9 @@ object CollectionHelper {
             setArtist(station.name)
             //setTitle(station.name)
             /* check for "file://" prevents a crash when an old backup was restored */
-            if (station.image.isNotEmpty() && station.image.startsWith("file://")) {
-                //setArtworkUri(station.image.toUri())
+            if (station.image.isNotEmpty() && station.image.startsWith("file://") && station.image.toUri().toFile().exists()) {
                 setArtworkData(station.image.toUri().toFile().readBytes(), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
             } else {
-                //setArtworkUri(Uri.parse(Keys.LOCATION_RESOURCES + R.raw.ic_default_station_image))
                 setArtworkData(ImageHelper.getStationImageAsByteArray(context), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
             }
             setIsBrowsable(false)

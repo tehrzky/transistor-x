@@ -26,6 +26,7 @@ import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
 import android.os.Looper
+import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
@@ -58,10 +59,7 @@ import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.helpers.AudioHelper
@@ -244,12 +242,14 @@ class PlayerService: MediaLibraryService() {
     /* Updates metadata */
     private fun updateMetadata(metadata: String = String()) {
         // get metadata string
-        val metadataString: String
+        val metadataStringEncoded: String
         if (metadata.isNotEmpty()) {
-            metadataString = metadata
+            metadataStringEncoded = metadata
         } else {
-            metadataString = player.currentMediaItem?.mediaMetadata?.artist.toString()
+            metadataStringEncoded = player.currentMediaItem?.mediaMetadata?.artist.toString()
         }
+        // remove HTML encoding
+        val metadataString: String = Html.fromHtml(metadataStringEncoded, Html.FROM_HTML_MODE_LEGACY).toString()
         // remove duplicates
         if (metadataHistory.contains(metadataString)) {
             metadataHistory.removeIf { it == metadataString }
@@ -282,10 +282,8 @@ class PlayerService: MediaLibraryService() {
     private fun loadCollection(context: Context) {
         Log.v(TAG, "Loading collection of stations from storage")
         CoroutineScope(Main).launch {
-            // load collection on background thread
-            val deferred: Deferred<Collection> = async(Dispatchers.Default) { FileHelper.readCollectionSuspended(context) }
-            // wait for result and update collection
-            collection = deferred.await()
+            // load collection
+            collection = FileHelper.readCollection(context)
 //            // special case: trigger metadata view update for stations that have no metadata
 //            if (player.isPlaying && station.name == getCurrentMetadata()) {
 //                station = CollectionHelper.getStation(collection, station.uuid)

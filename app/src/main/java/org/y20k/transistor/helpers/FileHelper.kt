@@ -29,7 +29,6 @@ import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.core.Station
@@ -332,11 +331,11 @@ object FileHelper {
     }
 
 
-    /* Suspend function: Wrapper for readCollection */
-    suspend fun readCollectionSuspended(context: Context): Collection =
-        withContext(IO) {
-            readCollection(context)
-        }
+//    /* Suspend function: Wrapper for readCollection */
+//    suspend fun readCollectionSuspended(context: Context): Collection =
+//        withContext(IO) {
+//            readCollection(context)
+//        }
 
 
     /* Suspend function: Wrapper for copyFile */
