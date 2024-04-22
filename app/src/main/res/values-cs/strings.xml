@@ -101,4 +101,5 @@
     <string name="descr_expanded_player_metadata_previous_button">Předchozí metadata o přehrávání</string>
     <string name="toast_message_collection_restore">Obnova stanic ze zálohy.</string>
     <string name="toast_message_collection_backup">Záloha stanic na:</string>
+    <string name="dialog_add_station_title">Přidat stanici</string>
 </resources>
