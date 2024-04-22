@@ -37,6 +37,8 @@ Greek version: [nikoss](https://github.com/nikoss) | [weblate version history](h
 
 Indonesian version: [zmni](https://github.com/zmni) | [weblate version history](https://hosted.weblate.org/changes/?lang=id&project=transistor)
 
+Interlingua version: [softinterlingua](https://codeberg.org/softinterlingua) |  [weblate version history](https://hosted.weblate.org/changes/?lang=ia&project=transistor)
+
 Italian version: [pjammo](https://github.com/pjammo) | [weblate version history](https://hosted.weblate.org/changes/?lang=it&project=transistor)
 
 Japanese version: [naofum](https://github.com/naofum) | [weblate version history](https://hosted.weblate.org/changes/?lang=ja&project=transistor)
