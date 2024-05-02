@@ -35,6 +35,7 @@ import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
+import androidx.media3.common.MediaMetadata
 import androidx.media3.common.Metadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
@@ -556,9 +557,13 @@ class PlayerService: MediaLibraryService() {
 
         override fun onMetadata(metadata: Metadata) {
             super.onMetadata(metadata)
-            updateMetadata(AudioHelper.getMetadataString(metadata))
+//            updateMetadata(AudioHelper.getMetadataString(metadata)) // todo remove (works only with IceCast metadata
         }
 
+        override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
+            super.onMediaMetadataChanged(mediaMetadata)
+            updateMetadata(AudioHelper.getMetadataString(mediaMetadata))
+        }
     }
     /*
      * End of declaration
