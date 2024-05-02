@@ -9,6 +9,7 @@
     android:paddingStart="8dp"
     android:paddingTop="8dp"
     android:paddingEnd="8dp"
+    android:paddingBottom="0dp"
     android:background="@color/list_card_background">
 
     <View
@@ -17,18 +18,21 @@
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintTop_toBottomOf="@+id/station_icon"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/station_icon" />
+        app:layout_constraintStart_toStartOf="@+id/station_icon"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/station_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:layout_marginBottom="8dp"
         android:background="@null"
         android:contentDescription="@string/descr_card_station_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
         app:shapeAppearanceOverlay="@style/RoundedCorners"
         app:srcCompat="@drawable/ic_default_station_image_72dp" />
 
@@ -154,7 +158,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/dialog_edit_save_changes"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/place_on_home_screen_button" />
 
@@ -173,7 +179,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone"
-        app:constraint_referenced_ids="change_image_view,edit_station_name,place_on_home_screen_button,save_button,cancel_button" />
+        app:constraint_referenced_ids="change_image_view,edit_station_name,place_on_home_screen_button,save_button,cancel_button"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
