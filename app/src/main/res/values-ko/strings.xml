@@ -100,4 +100,7 @@
     <string name="pref_m3u_export_title">M3U 내보내기</string>
     <string name="toast_message_shortcut_created">바로 가기를 만들었습니다.</string>
     <string name="toast_message_install_file_helper">파일 관리자를 설치해 주세요.</string>
+    <string name="dialog_add_station_title">채널 추가</string>
+    <string name="dialog_rename_station_input_hint">새 이름 입력</string>
+    <string name="dialog_restore_collection_replace_existing">현재 라디오 방송국 모음을 백업에서 라디오 방송국으로 대체하시겠습니까?</string>
 </resources>
