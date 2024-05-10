@@ -36,7 +36,6 @@ import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
-import androidx.media3.common.Metadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -59,6 +58,7 @@ import androidx.media3.session.SessionResult
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
+import com.google.common.util.concurrent.SettableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
@@ -342,7 +342,7 @@ class PlayerService: MediaLibraryService() {
 
         override fun onGetLibraryRoot(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, params: LibraryParams?): ListenableFuture<LibraryResult<MediaItem>> {
             if (params?.extras?.containsKey(EXTRA_RECENT) == true) {
-                // special case: system requested media resumption via EXTRA_RECENT
+                // special case: system requested media resumption via EXTRA_RECENT // todo remove (this case is handled by onPlaybackResumption)
                 playLastStation = true
                 return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRecent(this@PlayerService, collection), params))
             } else {
@@ -353,6 +353,20 @@ class PlayerService: MediaLibraryService() {
         override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
             val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
             return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
+        }
+
+        override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
+            val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
+            CoroutineScope(Main).launch {
+                val recentMediaItem = CollectionHelper.getRecent(this@PlayerService, collection)
+                val result: MediaSession.MediaItemsWithStartPosition = if (recentMediaItem != null) {
+                    MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), C.INDEX_UNSET, C.TIME_UNSET)
+                } else {
+                    MediaSession.MediaItemsWithStartPosition(emptyList(), 0, 0)
+                }
+                future.set(result)
+            }
+            return future
         }
 
         override fun onCustomCommand(session: MediaSession, controller: MediaSession.ControllerInfo, customCommand: SessionCommand, args: Bundle): ListenableFuture<SessionResult> {
@@ -555,10 +569,10 @@ class PlayerService: MediaLibraryService() {
             // todo: test if playback needs to be restarted
         }
 
-        override fun onMetadata(metadata: Metadata) {
-            super.onMetadata(metadata)
-//            updateMetadata(AudioHelper.getMetadataString(metadata)) // todo remove (works only with IceCast metadata
-        }
+//        override fun onMetadata(metadata: Metadata) {
+//            super.onMetadata(metadata)
+//            updateMetadata(AudioHelper.getMetadataString(metadata)) // todo remove (works only with IceCast metadata)
+//        }
 
         override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
             super.onMediaMetadataChanged(mediaMetadata)
