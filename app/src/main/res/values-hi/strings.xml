@@ -9,8 +9,8 @@
     <string name="dialog_find_station_title">स्टेशन खोजें</string>
     <string name="dialog_generic_button_cancel">रद्द करें</string>
     <string name="dialog_rename_station_input_hint">नया नाम दर्ज करें</string>
-    <string name="dialog_yes_no_message_remove_station">यह स्टेशन हटाएँ?</string>
-    <string name="dialog_yes_no_positive_button_remove_station">हटाएँ</string>
+    <string name="dialog_yes_no_message_remove_station">यह स्टेशन हटाएं?</string>
+    <string name="dialog_yes_no_positive_button_remove_station">हटाएं</string>
     <string name="dialog_yes_no_positive_button_update_covers">अद्यतन</string>
     <string name="toast_message_error_download_error">डाउनलोड त्रुटि</string>
     <string name="toast_message_error_restart_playback_failed">प्लेबैक पुनः आरंभ करने में असमर्थ।</string>
@@ -19,22 +19,22 @@
     <string name="toast_message_shortcut_created">शॉर्टकट बनाया गया।</string>
     <string name="toast_message_updating_station_images">स्टेशन छवियों को अद्यतन किया जा रहा है।</string>
     <string name="toast_message_collection_backup">रेडियो स्टेशनों का बैकअप यहाँ लिया जा रहा है:</string>
-    <string name="toast_message_shortcut_not_created">शॉर्टकट नहीं बनाया गया। यह डिवाइस शॉर्टकट बनाने की अनुमति नहीं देता है।</string>
+    <string name="toast_message_shortcut_not_created">शॉर्टकट नहीं बनाया गया। यह उपकरण शॉर्टकट बनाने की अनुमति नहीं देता है।</string>
     <string name="toast_message_copied_to_clipboard">क्लिपबोर्ड पर कॉपी किया गया।</string>
     <string name="toast_message_sleep_timer_unable_to_start">कृपया पहले प्लेबैक प्रारंभ करें।</string>
-    <string name="toast_message_no_image_picker">कोई छवि चयनकर्ता उपलब्ध नहीं है। गैलरी एप्लिकेशन इंस्टॉल करने पर विचार करें।</string>
+    <string name="toast_message_no_image_picker">कोई छवि चयनकर्ता उपलब्ध नहीं है। गैलरी अनुप्रयोग स्थापित करने पर विचार करें।</string>
     <string name="station_list_button_add_new_station">नया स्टेशन जोड़ें</string>
     <string name="notification_now_playing_channel_name">प्लेबैक नियंत्रण</string>
     <string name="player_sheet_h2_station_metadata">अभी चल रहा हैं</string>
     <string name="notification_skip_to_next">अगला</string>
     <string name="notification_stop">रोकें</string>
-    <string name="pref_about_title">बारे में</string>
+    <string name="pref_about_title">Transistor के बारे में</string>
     <string name="pref_advanced_title">उन्नत</string>
     <string name="pref_app_version_title">ऐप संस्करण</string>
     <string name="pref_buffer_size_title">बड़े बफर का प्रयोग करें</string>
     <string name="pref_buffer_size_summary_disabled">रेडियो स्ट्रीम चलाने के लिए डिफ़ॉल्ट बफ़र आकार का उपयोग किया जायेगा।</string>
     <string name="pref_edit_station_title">स्टेशन संपादित करें</string>
-    <string name="pref_general_title">जनरल</string>
+    <string name="pref_general_title">सामान्य</string>
     <string name="pref_maintenance_title">रखरखाव</string>
     <string name="pref_m3u_export_summary">अपने रेडियो स्टेशनों को एक M3U प्लेलिस्ट फाइल में सहेजें जिसे अन्य प्लेयर्स में आयात किया जा सकता है।</string>
     <string name="pref_m3u_export_title">M3U निर्यात करें</string>
@@ -64,7 +64,7 @@
     <string name="dialog_add_station_title">स्टेशन जोड़ें</string>
     <string name="dialog_error_message_no_network">इंटरनेट से कनेक्ट करें।</string>
     <string name="dialog_generic_button_okay">ठीक है</string>
-    <string name="dialog_generic_details_button">विवरण दिखाएँ</string>
+    <string name="dialog_generic_details_button">विवरण दिखाएं</string>
     <string name="dialog_opml_import_details_default">कोई विवरण उपलब्ध नहीं है</string>
     <string name="dialog_yes_no_negative_button_cancel">रद्द करें</string>
     <string name="dialog_yes_no_positive_button_default">हाँ</string>
@@ -80,10 +80,10 @@
     <string name="pref_edit_station_summary_disabled">स्टेशन सूचना का संपादन अक्षम किया गया।</string>
     <string name="pref_edit_station_stream_title">स्ट्रीमिंग लिंक संपादित करें</string>
     <string name="pref_restore_title">स्टेशनों को पुनर्स्थापित करें</string>
-    <string name="pref_theme_selection_mode_device_default">डिवाइस के समान</string>
+    <string name="pref_theme_selection_mode_device_default">उपकरण के समान</string>
     <string name="pref_theme_selection_summary">मौजूदा थीम:</string>
     <string name="descr_card_starred_station">तारांकित स्टेशन</string>
-    <string name="pref_update_station_images_title">स्टेशन छवियाँ अपडेट करें</string>
+    <string name="pref_update_station_images_title">स्टेशन छवियां अपडेट करें</string>
     <string name="descr_card_station_image_change">स्टेशन की छवि बदलें</string>
     <string name="descr_card_station_image">स्टेशन की छवि</string>
     <string name="descr_player_station_image">स्टेशन छवि</string>
@@ -101,6 +101,6 @@
     <string name="pref_tap_anywhere_playback_summary_enabled">रेडियो स्टेशन कार्ड को सुनना शुरू करने के लिए उस पर कहीं भी टैप करें।</string>
     <string name="pref_update_station_images_summary">सभी स्टेशन छवियों का नवीनतम संस्करण डाउनलोड करें।</string>
     <string name="descr_app_icon">एक पुराने रेडियो को दर्शाने वाला ऐप आइकन</string>
-    <string name="pref_backup_summary">छवियों सहित रेडियो स्टेशनों का संग्रह डिवाइस स्टोरेज में सहेजें।</string>
+    <string name="pref_backup_summary">छवियों सहित रेडियो स्टेशनों का संग्रह उपकरण स्टोरेज में सहेजें।</string>
     <string name="pref_buffer_size_summary_enabled">रेडियो स्ट्रीम चलाने के लिए बड़ा बफ़र सक्षम किया गया। प्लेबैक प्रारंभ होने में अधिक समय लग सकता है।</string>
 </resources>
