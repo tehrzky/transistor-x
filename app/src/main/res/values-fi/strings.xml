@@ -101,4 +101,6 @@
     <string name="toast_message_shortcut_not_created">Pikakuvaketta ei luotu. Tämä laite ei salli pikakuvakkeiden luomista.</string>
     <string name="toast_message_no_image_picker">Kuvan valitsinta ei ole saatavilla. Harkitse Galleria-sovelluksen asentamista.</string>
     <string name="toast_message_collection_backup">Radiokanavat varmuuskopioidaan:</string>
+    <string name="dialog_add_station_title">Lisää kanava</string>
+    <string name="dialog_restore_collection_replace_existing">Korvaa nykyiset radiokanavat varmuuskopion radiokanavilla?</string>
 </resources>
