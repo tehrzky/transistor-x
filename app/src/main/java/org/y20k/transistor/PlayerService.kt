@@ -30,7 +30,6 @@ import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.media.MediaBrowserServiceCompat.BrowserRoot.EXTRA_RECENT
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
@@ -295,13 +294,33 @@ class PlayerService: MediaLibraryService() {
 
 
     /*
-     * Custom MediaSession Callback that handles player commands
+     * Custom MediaLibrarySession Callback that handles player commands
      */
     private inner class CustomMediaLibrarySessionCallback: MediaLibrarySession.Callback {
 
+        override fun onGetLibraryRoot(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, params: LibraryParams?): ListenableFuture<LibraryResult<MediaItem>> {
+//            if (params?.extras?.containsKey(EXTRA_RECENT) == true) {
+//                // special case: system requested media resumption via EXTRA_RECENT // todo remove (this case is handled by onPlaybackResumption)
+//                playLastStation = true
+//                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRecent(this@PlayerService, collection), params))
+//            } else {
+                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRootItem(), params))
+//            }
+        }
+
+        override fun onGetChildren(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String, page: Int, pageSize: Int, params: LibraryParams?): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
+            val children: List<MediaItem> = CollectionHelper.getChildren(this@PlayerService, collection)
+            return Futures.immediateFuture(LibraryResult.ofItemList(children, params))
+        }
+
+        override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
+            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
+            return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
+        }
+
         override fun onAddMediaItems(mediaSession: MediaSession, controller: MediaSession.ControllerInfo, mediaItems: MutableList<MediaItem>): ListenableFuture<List<MediaItem>> {
-            val updatedMediaItems: List<MediaItem> =
-                mediaItems.map { mediaItem -> CollectionHelper.getItem(this@PlayerService, collection, mediaItem.mediaId)
+            val updatedMediaItems: List<MediaItem> = mediaItems.map { mediaItem ->
+                CollectionHelper.getItem(this@PlayerService, collection, mediaItem.mediaId)
 //                    if (mediaItem.requestMetadata.searchQuery != null)
 //                        getMediaItemFromSearchQuery(mediaItem.requestMetadata.searchQuery!!)
 //                    else MediaItemTree.getItem(mediaItem.mediaId) ?: mediaItem
@@ -335,27 +354,8 @@ class PlayerService: MediaLibraryService() {
             return Futures.immediateFuture(LibraryResult.ofVoid())
         }
 
-        override fun onGetChildren(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String, page: Int, pageSize: Int, params: LibraryParams?): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
-            val children: List<MediaItem> = CollectionHelper.getChildren(this@PlayerService, collection)
-            return Futures.immediateFuture(LibraryResult.ofItemList(children, params))
-        }
-
-        override fun onGetLibraryRoot(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, params: LibraryParams?): ListenableFuture<LibraryResult<MediaItem>> {
-            if (params?.extras?.containsKey(EXTRA_RECENT) == true) {
-                // special case: system requested media resumption via EXTRA_RECENT // todo remove (this case is handled by onPlaybackResumption)
-                playLastStation = true
-                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRecent(this@PlayerService, collection), params))
-            } else {
-                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRootItem(), params))
-            }
-        }
-
-        override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
-            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
-            return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
-        }
-
         override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
+            Log.e(TAG, "Dong => onPlaybackResumption") // todo remove
             val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
             CoroutineScope(Main).launch {
                 val recentMediaItem = CollectionHelper.getRecent(this@PlayerService, collection)
@@ -449,15 +449,16 @@ class PlayerService: MediaLibraryService() {
                 }
             }
         }
+
     }
     /*
      * End of inner class
      */
 
 
-/*
- * NotificationProvider to customize Notification actions
- */
+    /*
+     * NotificationProvider to customize Notification actions
+     */
     private inner class CustomNotificationProvider: DefaultMediaNotificationProvider(this@PlayerService) {
         override fun getMediaButtons(session: MediaSession, playerCommands: Player.Commands, customLayout: ImmutableList<CommandButton>, showPauseButton: Boolean): ImmutableList<CommandButton> {
             val seekToPreviousCommandButton = CommandButton.Builder().apply {
