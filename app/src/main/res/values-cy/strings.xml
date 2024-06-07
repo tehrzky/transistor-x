@@ -1,2 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="dialog_generic_button_cancel">Diddymu</string>
+    <string name="dialog_edit_station_name">Enw gorsaf</string>
+    <string name="dialog_edit_stream_uri">Cyfeiriad llif</string>
+    <string name="dialog_error_message_default">Bu gwall</string>
+    <string name="dialog_edit_save_changes">Cadw Newidiadau</string>
+    <string name="dialog_yes_no_positive_button_default">Iawn</string>
+    <string name="dialog_yes_no_positive_button_remove_station">Tynnu</string>
+    <string name="dialog_yes_no_positive_button_update_covers">Diweddaru</string>
+    <string name="toast_message_error_download_error">Gwall lawrlwytho</string>
+    <string name="pref_theme_selection_summary">Thema gyfredol:</string>
+    <string name="onboarding_app_description">Ap Radio</string>
+    <string name="onboarding_app_get_started">Dechrau arni</string>
+    <string name="shortcut_last_station_short_label">Gorsaf diwethaf</string>
+    <string name="shortcut_last_station_long_label">Chwarae\'r orsaf diwethaf</string>
+    <string name="app_name">Transistor</string>
+    <string name="fragment_settings_title">Gosodiadau</string>
+    <string name="dialog_add_station_title">Ychwnegu Orsaf</string>
+    <string name="dialog_error_message_no_network">Cysyllta â\'r rhyngrwyd.</string>
+    <string name="dialog_find_station_title">Canfod Orsaf</string>
+    <string name="dialog_error_title_no_network">All-lein</string>
+    <string name="dialog_yes_no_negative_button_cancel">Diddymu</string>
+    <string name="dialog_opml_import_details_default">Dim manylion ar gael</string>
+    <string name="dialog_rename_station_input_hint">Rho enw newydd</string>
+    <string name="dialog_find_station_button_add">Ychwanegu</string>
+    <string name="dialog_find_station_hint">Enw neu cyfeiriad llif</string>
+    <string name="dialog_generic_button_okay">Iawn</string>
+    <string name="dialog_generic_details_button">Dangos fanylion</string>
+    <string name="dialog_find_station_no_results">Dim canlyniadau.</string>
+    <string name="dialog_yes_no_message_remove_station">Tynnu\'r orsaf hon?</string>
+    <string name="pref_theme_selection_mode_device_default">Yr un fath â\'r ddyfais</string>
+    <string name="pref_edit_station_title">Golygu Gorsafoedd</string>
+    <string name="pref_maintenance_title">Cynnal a Chadw</string>
+    <string name="pref_theme_selection_mode_dark">Modd tywyll</string>
+    <string name="pref_theme_selection_mode_light">Modd golau</string>
+    <string name="descr_card_small_play_button">Chwarae/stopio</string>
+    <string name="pref_m3u_export_title">Allforio M3U</string>
+    <string name="pref_theme_selection_title">Thema\'r Ap</string>
+</resources>
