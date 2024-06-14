@@ -299,13 +299,7 @@ class PlayerService: MediaLibraryService() {
     private inner class CustomMediaLibrarySessionCallback: MediaLibrarySession.Callback {
 
         override fun onGetLibraryRoot(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, params: LibraryParams?): ListenableFuture<LibraryResult<MediaItem>> {
-//            if (params?.extras?.containsKey(EXTRA_RECENT) == true) {
-//                // special case: system requested media resumption via EXTRA_RECENT // todo remove (this case is handled by onPlaybackResumption)
-//                playLastStation = true
-//                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRecent(this@PlayerService, collection), params))
-//            } else {
-                return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRootItem(), params))
-//            }
+            return Futures.immediateFuture(LibraryResult.ofItem(CollectionHelper.getRootItem(), params))
         }
 
         override fun onGetChildren(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String, page: Int, pageSize: Int, params: LibraryParams?): ListenableFuture<LibraryResult<ImmutableList<MediaItem>>> {
@@ -313,27 +307,16 @@ class PlayerService: MediaLibraryService() {
             return Futures.immediateFuture(LibraryResult.ofItemList(children, params))
         }
 
-        override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
-            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
-            return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
-        }
-
         override fun onAddMediaItems(mediaSession: MediaSession, controller: MediaSession.ControllerInfo, mediaItems: MutableList<MediaItem>): ListenableFuture<List<MediaItem>> {
             val updatedMediaItems: List<MediaItem> = mediaItems.map { mediaItem ->
                 CollectionHelper.getItem(this@PlayerService, collection, mediaItem.mediaId)
-//                    if (mediaItem.requestMetadata.searchQuery != null)
-//                        getMediaItemFromSearchQuery(mediaItem.requestMetadata.searchQuery!!)
-//                    else MediaItemTree.getItem(mediaItem.mediaId) ?: mediaItem
                 }
             return Futures.immediateFuture(updatedMediaItems)
+        }
 
-
-//            val updatedMediaItems = mediaItems.map { mediaItem ->
-//                mediaItem.buildUpon().apply {
-//                    setUri(mediaItem.requestMetadata.mediaUri)
-//                }.build()
-//            }
-//            return Futures.immediateFuture(updatedMediaItems)
+        override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
+            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
+            return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
         }
 
         override fun onConnect(session: MediaSession, controller: MediaSession.ControllerInfo): MediaSession.ConnectionResult {
@@ -355,14 +338,13 @@ class PlayerService: MediaLibraryService() {
         }
 
         override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
-            Log.e(TAG, "Dong => onPlaybackResumption") // todo remove
             val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
             CoroutineScope(Main).launch {
                 val recentMediaItem = CollectionHelper.getRecent(this@PlayerService, collection)
                 val result: MediaSession.MediaItemsWithStartPosition = if (recentMediaItem != null) {
-                    MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), C.INDEX_UNSET, C.TIME_UNSET)
+                    MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), 0, C.TIME_UNSET)
                 } else {
-                    MediaSession.MediaItemsWithStartPosition(emptyList(), 0, 0)
+                    MediaSession.MediaItemsWithStartPosition(emptyList(), C.INDEX_UNSET, C.TIME_UNSET)
                 }
                 future.set(result)
             }

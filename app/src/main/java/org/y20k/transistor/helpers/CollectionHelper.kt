@@ -344,7 +344,7 @@ object CollectionHelper {
         val metadata: MediaMetadata = MediaMetadata.Builder()
             .setTitle("Root Folder")
             .setIsPlayable(false)
-            .setFolderType(MediaMetadata.FOLDER_TYPE_MIXED)
+            .setIsBrowsable(true)
             .build()
         return MediaItem.Builder()
             .setMediaId("[rootID]")
