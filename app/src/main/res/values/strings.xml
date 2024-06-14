@@ -124,5 +124,7 @@
     <string name="sample_text_station_name" translatable="false">Byte FM</string>
     <string name="sample_text_steam_url" translatable="false">http://bytefm.cast.addradio.de/bytefm/main/mid/stream</string>
     <string name="sample_text_sleep_timer_remaining_time" translatable="false">00:00</string>
+    <!-- Google Cast -->
+    <string name="cast_context_error">Failed to get Cast context. Try updating Google Play Services and restart the app.</string>
 
 </resources>

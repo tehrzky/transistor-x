@@ -46,5 +46,7 @@
         <item name="cornerFamilyTopLeft">cut</item>
         <item name="cornerSizeTopLeft">16dp</item>
     </style>
-
+    <style name="CastButtonStyle" parent="Widget.MediaRouter.Light.MediaRouteButton">
+        <item name="tint">@color/player_sheet_icon</item>
+    </style>
 </resources>

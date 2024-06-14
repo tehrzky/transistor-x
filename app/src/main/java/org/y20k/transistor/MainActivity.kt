@@ -22,6 +22,9 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
+import com.google.android.gms.cast.framework.CastContext
+import com.google.android.gms.dynamite.DynamiteModule.LoadingException
+import com.google.common.util.concurrent.MoreExecutors
 import org.y20k.transistor.helpers.AppThemeHelper
 import org.y20k.transistor.helpers.FileHelper
 import org.y20k.transistor.helpers.ImportHelper
@@ -39,12 +42,29 @@ class MainActivity: AppCompatActivity() {
 
     /* Main class variables */
     private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var castContext: CastContext
 
 
     /* Overrides onCreate from AppCompatActivity */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // get the cast context
+        try {
+            castContext = CastContext.getSharedInstance(this, MoreExecutors.directExecutor()).result
+        } catch (e: RuntimeException) {
+            var cause = e.cause
+            while (cause != null) {
+                if (cause is LoadingException) {
+                    setContentView(R.layout.activity_main_cast_context_error)
+                    return
+                }
+                cause = cause.cause
+            }
+            throw e
+        }
+
+        // house keeping - if necessary
         if (PreferencesHelper.isHouseKeepingNecessary()) {
             // house-keeping 1: remove hard coded default image
             ImportHelper.removeDefaultStationImageUris(this)
@@ -82,6 +102,24 @@ class MainActivity: AppCompatActivity() {
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_host_container) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
+
+    /* Overrides onResume from AppCompatActivity */
+    override fun onResume() {
+        super.onResume()
+        if (!this@MainActivity::castContext.isInitialized) {
+            return
+        }
+    }
+
+
+    /* Overrides onPause from AppCompatActivity */
+    override fun onPause() {
+        super.onPause()
+        if (!this@MainActivity::castContext.isInitialized) {
+            return
+        }
     }
 
 
