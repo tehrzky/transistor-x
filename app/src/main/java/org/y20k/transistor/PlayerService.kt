@@ -30,6 +30,8 @@ import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.media3.cast.CastPlayer
+import androidx.media3.cast.SessionAvailabilityListener
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
 import androidx.media3.common.ForwardingPlayer
@@ -54,6 +56,7 @@ import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionCommands
 import androidx.media3.session.SessionResult
+import com.google.android.gms.cast.framework.CastContext
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
@@ -61,6 +64,7 @@ import com.google.common.util.concurrent.SettableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import org.y20k.transistor.cast.SwappablePlayer
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.helpers.AudioHelper
 import org.y20k.transistor.helpers.CollectionHelper
@@ -81,9 +85,9 @@ class PlayerService: MediaLibraryService() {
 
 
     /* Main class variables */
-    private lateinit var player: Player
     private lateinit var mediaLibrarySession: MediaLibrarySession
     private lateinit var sleepTimer: CountDownTimer
+    private val player: SwappablePlayer by lazy { SwappablePlayer(localPlayer) }
     private var sleepTimerTimeRemaining: Long = 0L
     private var sleepTimerRunning: Boolean = false
     private val handler: Handler = Handler(Looper.getMainLooper())
@@ -103,9 +107,11 @@ class PlayerService: MediaLibraryService() {
         collection = FileHelper.readCollection(this)
         // create and register collection changed receiver
         LocalBroadcastManager.getInstance(application).registerReceiver(collectionChangedReceiver, IntentFilter(Keys.ACTION_COLLECTION_CHANGED))
-        // initialize player and session
-        initializePlayer()
+        // switch to cast player if already casting
+        if (castPlayer?.isCastSessionAvailable == true) { player.setPlayer(castPlayer!!)}
+        // initialize media session
         initializeSession()
+        // set up notification provider
         val notificationProvider: DefaultMediaNotificationProvider = CustomNotificationProvider()
         notificationProvider.setSmallIcon(R.drawable.ic_notification_app_icon_white_24dp)
         setMediaNotificationProvider(notificationProvider)
@@ -129,39 +135,50 @@ class PlayerService: MediaLibraryService() {
         if (!player.playWhenReady) {
             stopSelf()
         }
+        releaseSession()
     }
 
 
     /* Overrides onGetSession from MediaSessionService */
     override fun onGetSession(controllerInfo: MediaSession.ControllerInfo): MediaLibrarySession {
+        // todo implement a package validator (see: https://github.com/android/uamp/blob/ef5076bf4279adfccafa746c92da6ec86607f284/common/src/main/java/com/example/android/uamp/media/MusicService.kt#L217)
         return mediaLibrarySession
     }
 
 
-    /* Initializes the ExoPlayer */
-    private fun initializePlayer() {
-        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
-            setAudioAttributes(AudioAttributes.DEFAULT, true)
-            setHandleAudioBecomingNoisy(true)
-            setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
-            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
-        }.build()
-        exoPlayer.addAnalyticsListener(analyticsListener)
-        exoPlayer.addListener(playerListener)
-
-        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
-        player = object : ForwardingPlayer(exoPlayer) {
-            override fun getAvailableCommands(): Player.Commands {
-                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
-            }
-            override fun isCommandAvailable(command: Int): Boolean {
-                return availableCommands.contains(command)
-            }
-            override fun getDuration(): Long {
-                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
-            }
-        }
-    }
+//    /* Initializes the ExoPlayer */
+//    private fun initializePlayer() {
+//        // step 1: create the local player
+//        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
+//            setAudioAttributes(AudioAttributes.DEFAULT, true)
+//            setHandleAudioBecomingNoisy(true)
+//            setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
+//            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
+//        }.build()
+//        exoPlayer.addAnalyticsListener(analyticsListener)
+//        exoPlayer.addListener(playerListener)
+//        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
+//        localPlayer = object : ForwardingPlayer(exoPlayer) {
+//            override fun getAvailableCommands(): Player.Commands {
+//                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
+//            }
+//            override fun isCommandAvailable(command: Int): Boolean {
+//                return availableCommands.contains(command)
+//            }
+//            override fun getDuration(): Long {
+//                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
+//            }
+//        }
+//
+//        // step 2: create the cast player
+//        castPlayer = CastPlayer(castContext).apply {
+//            setSessionAvailabilityListener(CastSessionAvailabilityListener())
+//            addListener(playerListener)
+//        }
+//
+//        // step 3: initially set the player // todo initiate based upon cast context availability
+//        player = localPlayer
+//    }
 
 
     /* Initializes the MediaSession */
@@ -175,6 +192,18 @@ class PlayerService: MediaLibraryService() {
         mediaLibrarySession = MediaLibrarySession.Builder(this, player, librarySessionCallback).apply {
             setSessionActivity(pendingIntent)
         }.build()
+    }
+
+
+    /* Releases the MediaSession */
+    private fun releaseSession() {
+        mediaLibrarySession.run {
+            release()
+            if (player.playbackState != Player.STATE_IDLE) {
+                player.removeListener(playerListener)
+                player.release()
+            }
+        }
     }
 
 
@@ -289,6 +318,86 @@ class PlayerService: MediaLibraryService() {
 //                station = CollectionHelper.getStation(collection, station.uuid)
 //                updateMetadata(null)
 //            }
+        }
+    }
+
+
+//    /* Switches between local and cast player */
+//    private fun switchPlayer(newPlayer: Player) {
+//        if (player == newPlayer) return
+//
+//        // store the previous player
+//        val previousPlayer: Player = player
+//
+//        // transfer the media item
+//        val currentMediaItem: MediaItem? = player.currentMediaItem
+//        if (currentMediaItem != null) {
+//            newPlayer.setMediaItem(currentMediaItem, 0L)
+//        }
+//        // transfer playback state
+//        newPlayer.playWhenReady = player.playWhenReady
+//        // prepare new player
+//        newPlayer.prepare()
+//        // switch player
+//        player = newPlayer
+//
+//        // reset the current player
+//        previousPlayer.stop()
+//        previousPlayer.clearMediaItems()
+//
+//        // just a test
+//        mediaLibrarySession.release()
+//        initializeSession()
+//
+//    }
+
+
+    /*
+     * Custom Player for local playback
+     */
+    private val localPlayer: Player by lazy {
+        // step 1: create the local player
+        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
+            setAudioAttributes(AudioAttributes.DEFAULT, true)
+            setHandleAudioBecomingNoisy(true)
+            setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
+            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
+        }.build()
+        exoPlayer.addAnalyticsListener(analyticsListener)
+        exoPlayer.addListener(playerListener)
+        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
+        val player = object : ForwardingPlayer(exoPlayer) {
+            override fun getAvailableCommands(): Player.Commands {
+                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
+            }
+            override fun isCommandAvailable(command: Int): Boolean {
+                return availableCommands.contains(command)
+            }
+            override fun getDuration(): Long {
+                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
+            }
+        }
+        player
+    }
+
+
+    /*
+     * Custom player for Cast playback
+     */
+    private val castPlayer: CastPlayer? by lazy {
+        // if Cast is available, create a CastPlayer to handle communication with a Cast session
+        try {
+            val castContext = CastContext.getSharedInstance(this)
+            CastPlayer(castContext).apply { // todo: probably need to add CastMediaItemConverter()
+                setSessionAvailabilityListener(CastSessionAvailabilityListener())
+                addListener(playerListener)
+            }
+        } catch (e : Exception) {
+            // We wouldn't normally catch the generic `Exception` however
+            // calling `CastContext.getSharedInstance` can throw various exceptions, all of which
+            // indicate that Cast is unavailable.
+            Log.i(TAG, "Cast is not available on this device. " + "Exception thrown when attempting to obtain CastContext. " + e.message)
+            null
         }
     }
 
@@ -620,13 +729,32 @@ class PlayerService: MediaLibraryService() {
             Keys.PREF_LARGE_BUFFER_SIZE -> {
                 bufferSizeMultiplier = PreferencesHelper.loadBufferSizeMultiplier()
                 if (!player.isPlaying && !player.isLoading) {
-                    initializePlayer()
+                    // initializePlayer() // todo re-initialize player
                 }
             }
         }
     }
     /*
      * End of declaration
+     */
+
+    /*
+     * SessionAvailabilityListener to switch between local and cast player
+     */
+    private inner class CastSessionAvailabilityListener : SessionAvailabilityListener {
+
+        override fun onCastSessionAvailable() {
+            Log.e(TAG, "DONG => onCastSessionAvailable") // todo remove
+            player.setPlayer(castPlayer!!)
+        }
+
+        override fun onCastSessionUnavailable() {
+            Log.e(TAG, "DONG => onCastSessionUnavailable") // todo remove
+            player.setPlayer(localPlayer)
+        }
+    }
+    /*
+     * End of inner class
      */
 
 

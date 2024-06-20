@@ -54,6 +54,8 @@ import androidx.media3.session.SessionResult
 import androidx.media3.session.SessionToken
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.gms.cast.framework.CastContext
+import com.google.android.gms.dynamite.DynamiteModule.LoadingException
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
 import kotlinx.coroutines.CoroutineScope
@@ -106,6 +108,7 @@ class PlayerFragment: Fragment(),
     private lateinit var layout: LayoutHolder
     private lateinit var collectionAdapter: CollectionAdapter
     private lateinit var controllerFuture: ListenableFuture<MediaController>
+    private lateinit var castContext: CastContext
     private val controller: MediaController? get() = if (controllerFuture.isDone) controllerFuture.get() else null // defines the Getter for the MediaController
     private var collection: Collection = Collection()
     private var playerState: PlayerState = PlayerState()
@@ -138,6 +141,8 @@ class PlayerFragment: Fragment(),
         // create collection adapter
         collectionAdapter = CollectionAdapter(activity as Context, this as CollectionAdapter.CollectionAdapterListener)
 
+        // initialize Cast objects
+        initializeCast()
     }
 
 
@@ -350,6 +355,30 @@ class PlayerFragment: Fragment(),
                 }
             }
         }
+    }
+
+
+    /*  Initializes the CastContext */
+    private fun initializeCast() {
+        try {
+            castContext = CastContext.getSharedInstance(activity as Context, MoreExecutors.directExecutor()).result
+        } catch (e: RuntimeException) {
+            var cause = e.cause
+            while (cause != null) {
+                if (cause is LoadingException) {
+                    // setContentView(R.layout.activity_main_cast_context_error) // todo implement
+                    return
+                }
+                cause = cause.cause
+            }
+            throw e
+        }
+//        if (this::castContext.isInitialized) {
+//            castSession = castContext.sessionManager.currentCastSession ?: return
+//        }
+//        castSession.getPlayer
+
+
     }
 
 
