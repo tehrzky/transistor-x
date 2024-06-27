@@ -17,6 +17,7 @@ package org.y20k.transistor.helpers
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.net.toFile
@@ -628,6 +629,10 @@ object CollectionHelper {
             }
             setIsBrowsable(false)
             setIsPlayable(true)
+            // keep original artwork URI for being included in Cast metadata
+            val extras = Bundle()
+            extras.putString(Keys.KEY_ORIGINAL_ARTWORK_URI, station.remoteImageLocation)
+            setExtras(extras)
         }.build()
         // build MediaItem and return it
         return MediaItem.Builder().apply {

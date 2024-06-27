@@ -64,6 +64,7 @@ import com.google.common.util.concurrent.SettableFuture
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.launch
+import org.y20k.transistor.cast.CastMediaItemConverter
 import org.y20k.transistor.cast.SwappablePlayer
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.helpers.AudioHelper
@@ -322,36 +323,6 @@ class PlayerService: MediaLibraryService() {
     }
 
 
-//    /* Switches between local and cast player */
-//    private fun switchPlayer(newPlayer: Player) {
-//        if (player == newPlayer) return
-//
-//        // store the previous player
-//        val previousPlayer: Player = player
-//
-//        // transfer the media item
-//        val currentMediaItem: MediaItem? = player.currentMediaItem
-//        if (currentMediaItem != null) {
-//            newPlayer.setMediaItem(currentMediaItem, 0L)
-//        }
-//        // transfer playback state
-//        newPlayer.playWhenReady = player.playWhenReady
-//        // prepare new player
-//        newPlayer.prepare()
-//        // switch player
-//        player = newPlayer
-//
-//        // reset the current player
-//        previousPlayer.stop()
-//        previousPlayer.clearMediaItems()
-//
-//        // just a test
-//        mediaLibrarySession.release()
-//        initializeSession()
-//
-//    }
-
-
     /*
      * Custom Player for local playback
      */
@@ -388,14 +359,13 @@ class PlayerService: MediaLibraryService() {
         // if Cast is available, create a CastPlayer to handle communication with a Cast session
         try {
             val castContext = CastContext.getSharedInstance(this)
-            CastPlayer(castContext).apply { // todo: probably need to add CastMediaItemConverter()
+            val player = CastPlayer(castContext, CastMediaItemConverter()).apply {
                 setSessionAvailabilityListener(CastSessionAvailabilityListener())
                 addListener(playerListener)
             }
+            player
         } catch (e : Exception) {
-            // We wouldn't normally catch the generic `Exception` however
-            // calling `CastContext.getSharedInstance` can throw various exceptions, all of which
-            // indicate that Cast is unavailable.
+            // calling CastContext.getSharedInstance can throw various exceptions, all of which indicate that Cast is unavailable.
             Log.i(TAG, "Cast is not available on this device. " + "Exception thrown when attempting to obtain CastContext. " + e.message)
             null
         }
@@ -744,12 +714,10 @@ class PlayerService: MediaLibraryService() {
     private inner class CastSessionAvailabilityListener : SessionAvailabilityListener {
 
         override fun onCastSessionAvailable() {
-            Log.e(TAG, "DONG => onCastSessionAvailable") // todo remove
             player.setPlayer(castPlayer!!)
         }
 
         override fun onCastSessionUnavailable() {
-            Log.e(TAG, "DONG => onCastSessionUnavailable") // todo remove
             player.setPlayer(localPlayer)
         }
     }

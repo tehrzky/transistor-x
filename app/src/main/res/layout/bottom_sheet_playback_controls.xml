@@ -17,15 +17,15 @@
     <!-- main player views -->
     <!-- ... down here, because lower views are in a layout are above the higher views -->
 
-<!--    <View-->
-<!--        android:id="@+id/player_background"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="80dp"-->
-<!--        android:background="@drawable/shape_player_background"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="1.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" />-->
+    <!--    <View-->
+    <!--        android:id="@+id/player_background"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="80dp"-->
+    <!--        android:background="@drawable/shape_player_background"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintHorizontal_bias="1.0"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/station_icon"
@@ -88,20 +88,20 @@
         app:layout_constraintTop_toTopOf="@+id/station_icon"
         app:srcCompat="@drawable/ic_player_play_symbol_48dp" />
 
-<!--    <ImageView-->
-<!--        android:id="@+id/player_play_button"-->
-<!--        android:layout_width="60dp"-->
-<!--        android:layout_height="60dp"-->
-<!--        android:layout_marginEnd="8dp"-->
-<!--        android:background="@drawable/ic_circular_button_playback_56dp"-->
-<!--        android:clickable="true"-->
-<!--        android:contentDescription="@string/descr_player_playback_button"-->
-<!--        android:focusable="true"-->
-<!--        android:scaleType="center"-->
-<!--        app:layout_constraintBottom_toBottomOf="@+id/station_icon"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="@+id/station_icon"-->
-<!--        app:srcCompat="@drawable/ic_player_play_symbol_36dp" />-->
+    <!--    <ImageView-->
+    <!--        android:id="@+id/player_play_button"-->
+    <!--        android:layout_width="60dp"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:layout_marginEnd="8dp"-->
+    <!--        android:background="@drawable/ic_circular_button_playback_56dp"-->
+    <!--        android:clickable="true"-->
+    <!--        android:contentDescription="@string/descr_player_playback_button"-->
+    <!--        android:focusable="true"-->
+    <!--        android:scaleType="center"-->
+    <!--        app:layout_constraintBottom_toBottomOf="@+id/station_icon"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="@+id/station_icon"-->
+    <!--        app:srcCompat="@drawable/ic_player_play_symbol_36dp" />-->
 
     <ProgressBar
         android:id="@+id/player_buffering_indicator"
@@ -175,7 +175,7 @@
         android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
         android:textColor="@color/player_sheet_text_main"
         app:layout_constraintBottom_toTopOf="@+id/sheet_metadata_history"
-        app:layout_constraintEnd_toStartOf="@+id/sheet_next_metadata_button"
+        app:layout_constraintEnd_toEndOf="@+id/sheet_metadata_history"
         app:layout_constraintStart_toStartOf="@+id/sheet_metadata_history" />
 
     <com.google.android.material.textview.MaterialTextView
@@ -190,7 +190,7 @@
         android:textAppearance="@style/TextAppearance.Material3.BodySmall"
         android:textColor="@color/player_sheet_text_main"
         app:layout_constraintBottom_toBottomOf="@+id/sheet_previous_metadata_button"
-        app:layout_constraintEnd_toStartOf="@+id/copy_station_metadata_button"
+        app:layout_constraintEnd_toStartOf="@+id/sheet_next_metadata_button"
         app:layout_constraintStart_toEndOf="@+id/sheet_previous_metadata_button"
         app:layout_constraintTop_toTopOf="@+id/sheet_previous_metadata_button"
         tools:text="@string/sample_text_station_metadata" />
@@ -211,26 +211,30 @@
         android:id="@+id/copy_station_metadata_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="16dp"
+        android:padding="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/descr_expanded_player_metadata_copy_button"
-        android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/sheet_metadata_history"
-        app:layout_constraintEnd_toStartOf="@+id/sheet_next_metadata_button"
-        app:layout_constraintTop_toTopOf="@+id/sheet_metadata_history"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sheet_previous_metadata_button"
         app:srcCompat="@drawable/ic_copy_content_24dp" />
 
     <androidx.mediarouter.app.MediaRouteButton
         android:id="@+id/cast_button"
+        style="@style/CustomMediaRouteButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:layout_weight="1"
         android:mediaRouteTypes="user"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/copy_station_metadata_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sheet_previous_metadata_button"
-        style="@style/CustomMediaRouteButtonStyle" />
+        app:layout_constraintTop_toTopOf="@+id/copy_station_metadata_button"
+        tools:visibility="visible" />
 
     <ImageButton
         android:id="@+id/sleep_timer_start_button"

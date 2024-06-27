@@ -112,7 +112,6 @@ data class LayoutHolder(var rootView: View) {
         onboardingLayout = rootView.findViewById(R.id.onboarding_layout)
         onboardingQuoteViews = rootView.findViewById(R.id.onboarding_quote_views)
         onboardingImportViews = rootView.findViewById(R.id.onboarding_import_views)
-        castButton = rootView.findViewById(R.id.cast_button)
 
         // set up variables
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -158,8 +157,15 @@ data class LayoutHolder(var rootView: View) {
         // set layout for player
         setupBottomSheet()
 
-        // set up cast button
+        // initialize cast
+        castButton = rootView.findViewById(R.id.cast_button)
         CastButtonFactory.setUpMediaRouteButton(rootView.context, castButton)
+    }
+
+
+    /* Toggles visibility of the cast button */
+    fun changeCastButtonVisibility(visible: Boolean) {
+        castButton.isVisible = visible
     }
 
 
