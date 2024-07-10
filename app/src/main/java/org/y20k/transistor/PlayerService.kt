@@ -309,13 +309,13 @@ class PlayerService: MediaLibraryService() {
 
         override fun onAddMediaItems(mediaSession: MediaSession, controller: MediaSession.ControllerInfo, mediaItems: MutableList<MediaItem>): ListenableFuture<List<MediaItem>> {
             val updatedMediaItems: List<MediaItem> = mediaItems.map { mediaItem ->
-                CollectionHelper.getItem(this@PlayerService, collection, mediaItem.mediaId)
+                CollectionHelper.getStationItem(this@PlayerService, collection, mediaItem.mediaId)
                 }
             return Futures.immediateFuture(updatedMediaItems)
         }
 
         override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
-            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
+            val item: MediaItem = CollectionHelper.getStationItem(this@PlayerService, collection, mediaId)
             return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
         }
 

@@ -317,6 +317,53 @@ object CollectionHelper {
     }
 
 
+    /* Creates a MediaItem with MediaMetadata for a single radio station - used to prepare player */
+    fun buildMediaItem(context: Context, station: Station): MediaItem {
+        // todo implement HLS MediaItems
+        // put uri in RequestMetadata - credit: https://stackoverflow.com/a/70103460
+        val requestMetadata = MediaItem.RequestMetadata.Builder().apply {
+            setMediaUri(station.getStreamUri().toUri())
+        }.build()
+        // build MediaMetadata
+        val mediaMetadata = MediaMetadata.Builder().apply {
+            //setTitle(station.name) // now playing metadata will be inserted as title by the androidx/media library
+            setSubtitle(station.name)
+            setAlbumTitle(station.name)
+            setMediaType(MediaMetadata.MEDIA_TYPE_RADIO_STATION)
+            setIsBrowsable(false)
+            setIsPlayable(true)
+            /* check for "file://" prevents a crash when an old backup was restored */
+            if (station.image.isNotEmpty() && station.image.startsWith("file://") && station.image.toUri().toFile().exists()) {
+                setArtworkData(station.image.toUri().toFile().readBytes(), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
+            } else {
+                setArtworkData(ImageHelper.getStationImageAsByteArray(context), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
+            }
+        }.build()
+        // build MediaItem and return it
+        return MediaItem.Builder().apply {
+            setMediaId(station.uuid)
+            setRequestMetadata(requestMetadata)
+            setMediaMetadata(mediaMetadata)
+            setMimeType(station.getMediaType())
+            setUri(station.getStreamUri().toUri())
+        }.build()
+    }
+
+
+    /* Creates the Root media item for the browser */
+    fun getRootItem(): MediaItem {
+        return MediaItem.Builder().apply {
+            setMediaId(Keys.MEDIA_BROWSER_ROOT)
+            setMediaMetadata(
+                MediaMetadata.Builder(). apply {
+                    setMediaType(MediaMetadata.MEDIA_TYPE_FOLDER_RADIO_STATIONS)
+                    setIsBrowsable(true)
+                    setIsPlayable(false)
+                }.build())
+        }.build()
+    }
+
+
     /* Returns the children stations under under root (simple media library structure: root > stations) */
     fun getChildren(context: Context, collection: Collection): List<MediaItem> {
         val mediaItems: MutableList<MediaItem> = mutableListOf()
@@ -328,7 +375,7 @@ object CollectionHelper {
 
 
     /* Returns media item for given station id */
-    fun getItem(context: Context, collection: Collection, stationUuid: String): MediaItem {
+    fun getStationItem(context: Context, collection: Collection, stationUuid: String): MediaItem {
         return buildMediaItem(context, getStation(collection, stationUuid))
     }
 
@@ -336,20 +383,6 @@ object CollectionHelper {
     /* Returns media item for last played station */
     fun getRecent(context: Context, collection: Collection): MediaItem {
         return buildMediaItem(context, getStation(collection, PreferencesHelper.loadLastPlayedStationUuid()))
-    }
-
-
-    /* Returns the library root item */
-    fun getRootItem(): MediaItem {
-        val metadata: MediaMetadata = MediaMetadata.Builder()
-            .setTitle("Root Folder")
-            .setIsPlayable(false)
-            .setIsBrowsable(true)
-            .build()
-        return MediaItem.Builder()
-            .setMediaId("[rootID]")
-            .setMediaMetadata(metadata)
-            .build()
     }
 
 
@@ -607,37 +640,6 @@ object CollectionHelper {
 //            setExtras(extras)
 //        }.build()
 //    }
-
-
-    /* Creates a MediaItem with MediaMetadata for a single radio station - used to prepare player */
-    fun buildMediaItem(context: Context, station: Station): MediaItem {
-        // todo implement HLS MediaItems
-        // put uri in RequestMetadata - credit: https://stackoverflow.com/a/70103460
-        val requestMetadata = MediaItem.RequestMetadata.Builder().apply {
-            setMediaUri(station.getStreamUri().toUri())
-        }.build()
-        // build MediaMetadata
-        val mediaMetadata = MediaMetadata.Builder().apply {
-            setArtist(station.name)
-            //setTitle(station.name)
-            /* check for "file://" prevents a crash when an old backup was restored */
-            if (station.image.isNotEmpty() && station.image.startsWith("file://") && station.image.toUri().toFile().exists()) {
-                setArtworkData(station.image.toUri().toFile().readBytes(), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
-            } else {
-                setArtworkData(ImageHelper.getStationImageAsByteArray(context), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
-            }
-            setIsBrowsable(false)
-            setIsPlayable(true)
-        }.build()
-        // build MediaItem and return it
-        return MediaItem.Builder().apply {
-            setMediaId(station.uuid)
-            setRequestMetadata(requestMetadata)
-            setMediaMetadata(mediaMetadata)
-            //setMimeType(station.getMediaType())
-            setUri(station.getStreamUri().toUri())
-        }.build()
-    }
 
 
     /* Creates a fallback station - stupid hack for Android Auto compatibility :-/ */
