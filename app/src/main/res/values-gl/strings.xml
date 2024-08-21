@@ -83,7 +83,7 @@
     <string name="toast_message_shortcut_created">Creado atallo.</string>
     <string name="toast_message_copied_to_clipboard">Copiado ao portapapeis.</string>
     <string name="toast_message_sleep_timer_unable_to_start">Primeiro incia a reprodución.</string>
-    <string name="toast_message_no_image_picker">Non hai con que elexir a imaxe. Pensa en instalar a aplicación Galería.</string>
+    <string name="toast_message_no_image_picker">Non hai con que elixir a imaxe. Pensa en instalar a aplicación Galería.</string>
     <string name="notification_stop">Deter</string>
     <string name="toast_message_shortcut_not_created">Non se creo o atallo. O dispositivo non permite a creación de atallos.</string>
     <string name="pref_backup_title">Copia de apoio</string>
