@@ -15,8 +15,6 @@ You can install Transistor via F-Droid or IzzyOnDroid.
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=org.y20k.transistor) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/packages/org.y20k.transistor/)
 
-
-
 ## Frequent Questions
 
 ### How can I add a radio station?
@@ -30,9 +28,6 @@ Transistor can play back streams encoded in MP3, AAC and Ogg/Opus. It also has e
 
 ### How can I curate the radio station list?
 Use the swipe gesture to delete a radio station from the list. Further editing options can be enabled in Settings. If enabled, tap and hold a radio station to edit its name, image or streaming link.
-
-### How can a suggest a new feature?
-Transistor is a pretty bare bones app. To keep it simple and maintainable new features are rarely added. Before suggesting a new feature please have a look at [Contribute.md](https://codeberg.org/y20k/transistor/src/branch/master/CONTRIBUTE.md) and ["Previous discussions and feature requests"](https://codeberg.org/y20k/transistor/issues/48).
 
 ## Screenshots (v4.1)
 [<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/01-transistor.png" width="360">](https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/01-transistor.png)
