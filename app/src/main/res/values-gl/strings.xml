@@ -45,7 +45,7 @@
     <string name="station_list_button_add_new_station">Engadir emisora</string>
     <string name="notification_play">Reproducir</string>
     <string name="notification_skip_to_next">Seguinte</string>
-    <string name="pref_about_title">Acerca de</string>
+    <string name="pref_about_title">Sobre</string>
     <string name="pref_advanced_title">Avanzados</string>
     <string name="pref_app_version_summary">Versión</string>
     <string name="pref_edit_station_stream_title">Editar Ligazón das emisoras</string>
