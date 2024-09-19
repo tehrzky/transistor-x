@@ -159,6 +159,7 @@ data class LayoutHolder(var rootView: View) {
 
         // initialize cast
         castButton = rootView.findViewById(R.id.cast_button)
+        castButton.setRemoteIndicatorDrawable(rootView.context.getDrawable(R.drawable.selector_cast_button))
         CastButtonFactory.setUpMediaRouteButton(rootView.context, castButton)
     }
 

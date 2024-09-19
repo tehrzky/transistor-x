@@ -40,7 +40,7 @@ internal class CastMediaItemConverter : MediaItemConverter {
 
     override fun toMediaQueueItem(mediaItem: MediaItem): MediaQueueItem {
         val castMediaMetadata = MediaMetadata(MediaMetadata.MEDIA_TYPE_MUSIC_TRACK)
-        castMediaMetadata.putString("uamp.mediaid", mediaItem.mediaId)
+        //castMediaMetadata.putString("uamp.mediaid", mediaItem.mediaId) // todo what does this do?
         mediaItem.mediaMetadata.title?.let {
             castMediaMetadata.putString(MediaMetadata.KEY_TITLE, it.toString() )
         }

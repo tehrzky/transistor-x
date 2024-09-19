@@ -104,6 +104,8 @@ class PlayerService: MediaLibraryService() {
     /* Overrides onCreate from Service */
     override fun onCreate() {
         super.onCreate()
+        // fetch the metadata history
+        metadataHistory = PreferencesHelper.loadMetadataHistory()
         // load collection
         collection = FileHelper.readCollection(this)
         // create and register collection changed receiver
@@ -112,31 +114,26 @@ class PlayerService: MediaLibraryService() {
         if (castPlayer?.isCastSessionAvailable == true) { player.setPlayer(castPlayer!!)}
         // initialize media session
         initializeSession()
+        // initialize player
+        initializePlayer()
         // set up notification provider
         val notificationProvider: DefaultMediaNotificationProvider = CustomNotificationProvider()
         notificationProvider.setSmallIcon(R.drawable.ic_notification_app_icon_white_24dp)
         setMediaNotificationProvider(notificationProvider)
-        // fetch the metadata history
-        metadataHistory = PreferencesHelper.loadMetadataHistory()
     }
 
 
     /* Overrides onDestroy from Service */
     override fun onDestroy() {
-        // player.removeAnalyticsListener(analyticsListener)
-        player.removeListener(playerListener)
-        player.release()
-        mediaLibrarySession.release()
         super.onDestroy()
+        releaseSession()
     }
 
 
     /* Overrides onTaskRemoved from Service */
     override fun onTaskRemoved(rootIntent: Intent) {
-        if (!player.playWhenReady) {
-            stopSelf()
-        }
         releaseSession()
+        stopSelf() // todo check if that makes sense
     }
 
 
@@ -147,7 +144,54 @@ class PlayerService: MediaLibraryService() {
     }
 
 
-//    /* Initializes the ExoPlayer */
+    /* Initializes the MediaSession */
+    private fun initializeSession() {
+        val intent = Intent(this, MainActivity::class.java)
+        val pendingIntent = TaskStackBuilder.create(this).run {
+            addNextIntent(intent)
+            getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+        }
+
+        mediaLibrarySession = MediaLibrarySession.Builder(this, player, librarySessionCallback).apply {
+            setSessionActivity(pendingIntent)
+        }.build()
+    }
+
+
+    /* Releases the MediaSession */
+    private fun releaseSession() {
+        mediaLibrarySession.run {
+            release()
+            if (player.playbackState != Player.STATE_IDLE) {
+                player.removeListener(playerListener)
+                player.release()
+            }
+        }
+    }
+
+
+    /* Adds stations as media items to the player */
+    private fun initializePlayer() {
+        val stations: MutableList<MediaItem> = CollectionHelper.getStationsAsMediaItems(this, collection)
+        if (player.isPlaying) {
+            // store current item and position in playlist
+            val currentItem: MediaItem? = player.currentMediaItem
+            val currentPosition: Long = player.currentPosition
+            // set the new media items
+            player.setMediaItems(stations, false)
+            // find index of current item in new playlist
+            val newIndex = stations.indexOf(currentItem)
+            if (newIndex != -1 && newIndex != player.currentWindowIndex) {
+                // seek to correct position
+                player.seekTo(newIndex, currentPosition)
+            }
+        } else {
+            player.setMediaItems(stations)
+        }
+    }
+
+
+//    /* Initializes the ExoPlayer */ // todo: remove (this function is replaced by SwappablePlayer)
 //    private fun initializePlayer() {
 //        // step 1: create the local player
 //        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
@@ -180,32 +224,6 @@ class PlayerService: MediaLibraryService() {
 //        // step 3: initially set the player // todo initiate based upon cast context availability
 //        player = localPlayer
 //    }
-
-
-    /* Initializes the MediaSession */
-    private fun initializeSession() {
-        val intent = Intent(this, MainActivity::class.java)
-        val pendingIntent = TaskStackBuilder.create(this).run {
-            addNextIntent(intent)
-            getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
-        }
-
-        mediaLibrarySession = MediaLibrarySession.Builder(this, player, librarySessionCallback).apply {
-            setSessionActivity(pendingIntent)
-        }.build()
-    }
-
-
-    /* Releases the MediaSession */
-    private fun releaseSession() {
-        mediaLibrarySession.run {
-            release()
-            if (player.playbackState != Player.STATE_IDLE) {
-                player.removeListener(playerListener)
-                player.release()
-            }
-        }
-    }
 
 
     /* Creates a LoadControl - increase buffer size by given factor */
@@ -314,6 +332,8 @@ class PlayerService: MediaLibraryService() {
         CoroutineScope(Main).launch {
             // load collection
             collection = FileHelper.readCollection(context)
+            // re-initialize player
+            initializePlayer()
 //            // special case: trigger metadata view update for stations that have no metadata
 //            if (player.isPlaying && station.name == getCurrentMetadata()) {
 //                station = CollectionHelper.getStation(collection, station.uuid)
@@ -388,13 +408,13 @@ class PlayerService: MediaLibraryService() {
 
         override fun onAddMediaItems(mediaSession: MediaSession, controller: MediaSession.ControllerInfo, mediaItems: MutableList<MediaItem>): ListenableFuture<List<MediaItem>> {
             val updatedMediaItems: List<MediaItem> = mediaItems.map { mediaItem ->
-                CollectionHelper.getItem(this@PlayerService, collection, mediaItem.mediaId)
+                CollectionHelper.getStationItem(this@PlayerService, collection, mediaItem.mediaId)
                 }
             return Futures.immediateFuture(updatedMediaItems)
         }
 
         override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
-            val item: MediaItem = CollectionHelper.getItem(this@PlayerService, collection, mediaId)
+            val item: MediaItem = CollectionHelper.getStationItem(this@PlayerService, collection, mediaId)
             return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
         }
 
@@ -464,18 +484,6 @@ class PlayerService: MediaLibraryService() {
             // next: adb shell input keyevent 87
             // prev: adb shell input keyevent 88
             when (playerCommand) {
-                Player.COMMAND_SEEK_TO_NEXT ->  {
-                    player.addMediaItem(CollectionHelper.getNextMediaItem(this@PlayerService, collection, player.currentMediaItem?.mediaId ?: String()))
-                    player.prepare()
-                    player.play()
-                    return SessionResult.RESULT_SUCCESS
-                }
-                Player.COMMAND_SEEK_TO_PREVIOUS ->  {
-                    player.addMediaItem(CollectionHelper.getPreviousMediaItem(this@PlayerService, collection, player.currentMediaItem?.mediaId ?: String()))
-                    player.prepare()
-                    player.play()
-                    return SessionResult.RESULT_SUCCESS
-                }
                 Player.COMMAND_PREPARE -> {
                     if (playLastStation) {
                         // special case: system requested media resumption (see also onGetLibraryRoot)
@@ -496,6 +504,11 @@ class PlayerService: MediaLibraryService() {
                         return SessionResult.RESULT_SUCCESS
                     }
                 }
+                Player.COMMAND_STOP -> {
+                    Log.e(TAG, "PlayerService - stop called") // todo remove
+                    return super.onPlayerCommandRequest(session, controller, playerCommand)
+                }
+
 //                Player.COMMAND_PLAY_PAUSE -> {
 //                    // override pause with stop, to prevent unnecessary buffering
 //                    if (player.isPlaying) {
@@ -563,6 +576,7 @@ class PlayerService: MediaLibraryService() {
             PreferencesHelper.saveCurrentStationId(currentMediaId)
             // reset restart counter
             playbackRestartCounter = 0
+            // todo check if this can be abstracted / is still necessary - see: CMD_UPDATE_COLLECTION (https://codeberg.org/y20k/transistor/commit/8503b79777e8ca82df3c172fd6af7ec784254c0c)
             // To remove the currently playing station, it is necessary to pause the player controller,
             // which will trigger the onIsPlayingChanged method.
             // Due to the invocation of the saveCollection method, the collection of stations needs to be reloaded.
@@ -631,11 +645,6 @@ class PlayerService: MediaLibraryService() {
             // todo: test if playback needs to be restarted
         }
 
-//        override fun onMetadata(metadata: Metadata) {
-//            super.onMetadata(metadata)
-//            updateMetadata(AudioHelper.getMetadataString(metadata)) // todo remove (works only with IceCast metadata)
-//        }
-
         override fun onMediaMetadataChanged(mediaMetadata: MediaMetadata) {
             super.onMediaMetadataChanged(mediaMetadata)
             updateMetadata(AudioHelper.getMetadataString(mediaMetadata))
@@ -699,7 +708,7 @@ class PlayerService: MediaLibraryService() {
             Keys.PREF_LARGE_BUFFER_SIZE -> {
                 bufferSizeMultiplier = PreferencesHelper.loadBufferSizeMultiplier()
                 if (!player.isPlaying && !player.isLoading) {
-                    // initializePlayer() // todo re-initialize player
+                    // todo re-initialize player
                 }
             }
         }

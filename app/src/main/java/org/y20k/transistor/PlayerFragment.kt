@@ -116,6 +116,7 @@ class PlayerFragment: Fragment(),
     private val handler: Handler = Handler(Looper.getMainLooper())
     private var tempStationUuid: String = String()
     private lateinit var castContext: CastContext
+    private var castEnabled: Boolean = false
 
 
     /* Overrides onCreate from Fragment */
@@ -155,8 +156,6 @@ class PlayerFragment: Fragment(),
         initializeViews()
         // hide action bar
         (activity as AppCompatActivity).supportActionBar?.hide()
-        // toggle Cast button
-        layout.changeCastButtonVisibility(castContext.sessionManager.currentCastSession != null)
         return rootView
     }
 
@@ -210,8 +209,10 @@ class PlayerFragment: Fragment(),
 //        handleStartIntent()
         // start watching for changes in shared preferences
         PreferencesHelper.registerPreferenceChangeListener(this as SharedPreferences.OnSharedPreferenceChangeListener)
+        // toggle Cast button
+        layout.changeCastButtonVisibility(castEnabled)
         // start listening for Cast state changes
-        castContext.addCastStateListener(CustomCastStateListener())
+        castContext.addCastStateListener(customCastStateListener)
     }
 
 
@@ -223,7 +224,7 @@ class PlayerFragment: Fragment(),
         // stop watching for changes in shared preferences
         PreferencesHelper.unregisterPreferenceChangeListener(this as SharedPreferences.OnSharedPreferenceChangeListener)
         // stop listening for Cast state changes
-        castContext.removeCastStateListener(CustomCastStateListener())
+        castContext.removeCastStateListener(customCastStateListener)
     }
 
 
@@ -312,7 +313,7 @@ class PlayerFragment: Fragment(),
         // CASE: the selected station is not playing (another station might be playing)
         else {
             // start playback
-            controller?.play(activity as Context, CollectionHelper.getStation(collection, stationUuid))
+            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, stationUuid))
         }
     }
 
@@ -577,10 +578,10 @@ class PlayerFragment: Fragment(),
     private fun handleStartPlayer() {
         val intent: Intent = (activity as Activity).intent
         if (intent.hasExtra(Keys.EXTRA_START_LAST_PLAYED_STATION)) {
-            controller?.play(activity as Context, CollectionHelper.getStation(collection, playerState.stationUuid))
+            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, playerState.stationUuid))
         } else if (intent.hasExtra(Keys.EXTRA_STATION_UUID)) {
             val uuid: String = intent.getStringExtra(Keys.EXTRA_STATION_UUID) ?: String()
-            controller?.play(activity as Context, CollectionHelper.getStation(collection, uuid))
+            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, uuid))
         } else if (intent.hasExtra(Keys.EXTRA_STREAM_URI)) {
             val streamUri: String = intent.getStringExtra(Keys.EXTRA_STREAM_URI) ?: String()
             controller?.playStreamDirectly(streamUri)
@@ -738,17 +739,16 @@ class PlayerFragment: Fragment(),
     /*
      * Inner class: listener that is called when the Cast state changes
      */
-    private inner class CustomCastStateListener : CastStateListener {
+    private val customCastStateListener = object : CastStateListener {
         override fun onCastStateChanged(state: Int) {
-            if (state == NO_DEVICES_AVAILABLE) {
-                layout.changeCastButtonVisibility(false)
-            } else {
-                layout.changeCastButtonVisibility(true)
-            }
+            castEnabled = state != NO_DEVICES_AVAILABLE
+            layout.changeCastButtonVisibility(castEnabled)
         }
+
     }
     /*
      * End of inner class
      */
+
 
 }
