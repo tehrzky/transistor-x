@@ -21,9 +21,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.y20k.transistor.BuildConfig
@@ -123,8 +121,7 @@ class RadioBrowserSearch(private var radioBrowserSearchListener: RadioBrowserSea
     /* Updates the address of the radio-browser.info api */
     private fun updateRadioBrowserApi() {
         CoroutineScope(IO).launch {
-            val deferred: Deferred<String> = async { NetworkHelper.getRadioBrowserServerSuspended() }
-            radioBrowserApi = deferred.await()
+            radioBrowserApi = NetworkHelper.getRadioBrowserServer()
         }
     }
 

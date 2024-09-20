@@ -82,6 +82,7 @@ import org.y20k.transistor.extensions.startSleepTimer
 import org.y20k.transistor.helpers.BackupHelper
 import org.y20k.transistor.helpers.CollectionHelper
 import org.y20k.transistor.helpers.DownloadHelper
+import org.y20k.transistor.helpers.FileHelper
 import org.y20k.transistor.helpers.NetworkHelper
 import org.y20k.transistor.helpers.PreferencesHelper
 import org.y20k.transistor.helpers.UiHelper
@@ -621,7 +622,10 @@ class PlayerFragment: Fragment(),
             // size of collection changed
             layout.toggleOnboarding(activity as Context, collection.stations.size)
             updatePlayerViews()
-            CollectionHelper.exportCollectionM3u(activity as Context, collection)
+            // export collection as M3U - launch = fire & forget (no return value from save collection)
+            if (collection.stations.size > 0) {
+                CoroutineScope(IO).launch { FileHelper.backupCollectionAsM3u(activity as Context, collection) }
+            }
         })
     }
 

@@ -316,7 +316,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             if (targetUri != null && sourceUri != null) {
                 // copy file async (= fire & forget - no return value needed)
                 CoroutineScope(IO).launch {
-                    FileHelper.saveCopyOfFileSuspended(activity as Context, sourceUri, targetUri)
+                    FileHelper.copyFile(activity as Context, sourceUri, targetUri, true)
                 }
                 Toast.makeText(activity as Context, R.string.toast_message_save_m3u, Toast.LENGTH_LONG).show()
             } else {

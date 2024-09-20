@@ -28,8 +28,6 @@ import java.net.InetAddress
 import java.net.URL
 import java.net.UnknownHostException
 import java.util.Random
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
 
 /*
@@ -152,29 +150,28 @@ object NetworkHelper {
     }
 
 
-    /* Suspend function: Detects content type (mime type) from given URL string - async using coroutine */
-    suspend fun detectContentTypeSuspended(urlString: String): ContentType {
-        return suspendCoroutine { cont ->
-            cont.resume(detectContentType(urlString))
-        }
-    }
+//    /* Suspend function: Detects content type (mime type) from given URL string - async using coroutine */
+//    suspend fun detectContentTypeSuspended(urlString: String): ContentType {
+//        return suspendCoroutine { cont ->
+//            cont.resume(detectContentType(urlString))
+//        }
+//    }
 
 
-    /* Suspend function: Gets a random radio-browser.info api address - async using coroutine */
-    suspend fun getRadioBrowserServerSuspended(): String {
-        return suspendCoroutine { cont ->
-            var serverAddress: String
-            try {
-                // get all available radio browser servers
-                val serverAddressList: Array<InetAddress> = InetAddress.getAllByName(Keys.RADIO_BROWSER_API_BASE)
-                // select a random address
-                serverAddress = serverAddressList[Random().nextInt(serverAddressList.size)].canonicalHostName
-            } catch (e: UnknownHostException) {
-                serverAddress = Keys.RADIO_BROWSER_API_DEFAULT
-            }
-            PreferencesHelper.saveRadioBrowserApiAddress(serverAddress)
-            cont.resume(serverAddress)
+    /* Gets a random radio-browser.info api address - async using coroutine */
+    fun getRadioBrowserServer(): String {
+        var serverAddress: String
+        try {
+            // get all available radio browser servers
+            val serverAddressList: Array<InetAddress> = InetAddress.getAllByName(Keys.RADIO_BROWSER_API_BASE)
+            // select a random address
+            serverAddress = serverAddressList[Random().nextInt(serverAddressList.size)].canonicalHostName
+        } catch (e: UnknownHostException) {
+            serverAddress = Keys.RADIO_BROWSER_API_DEFAULT
         }
+        PreferencesHelper.saveRadioBrowserApiAddress(serverAddress)
+        return serverAddress
+
     }
 
 

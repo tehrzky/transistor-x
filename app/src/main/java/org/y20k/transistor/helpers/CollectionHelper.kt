@@ -427,8 +427,8 @@ object CollectionHelper {
         when (async) {
             true -> {
                 CoroutineScope(IO).launch {
-                    // save collection on background thread
-                    FileHelper.saveCollectionSuspended(context, collection, date)
+                    // save collection in background
+                    FileHelper.saveCollection(context, collection, date)
                     // broadcast collection update
                     sendCollectionBroadcast(context, date)
                 }
@@ -566,16 +566,6 @@ object CollectionHelper {
             }
         }
         return stations
-    }
-
-
-    /* Export collection of stations as M3U */
-    fun exportCollectionM3u(context: Context, collection: Collection) {
-        Log.v(TAG, "Exporting collection of stations as M3U")
-        // export collection as M3U - launch = fire & forget (no return value from save collection)
-        if (collection.stations.size > 0) {
-            CoroutineScope(IO).launch { FileHelper.backupCollectionAsM3uSuspended(context, collection) }
-        }
     }
 
 
