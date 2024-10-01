@@ -46,7 +46,6 @@ import androidx.core.view.isGone
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
@@ -199,15 +198,13 @@ class PlayerFragment: Fragment(),
         playerState = PreferencesHelper.loadPlayerState()
         // recreate player ui
 //        setupPlaybackControls()
-        updatePlayerViews()
+//        updatePlayerViews()
         updateStationListState()
         togglePeriodicSleepTimerUpdateRequest()
         // begin looking for changes in collection
         observeCollectionViewModel()
         // handle navigation arguments
         handleNavigationArguments()
-//        // handle start intent
-//        handleStartIntent()
         // start watching for changes in shared preferences
         PreferencesHelper.registerPreferenceChangeListener(this as SharedPreferences.OnSharedPreferenceChangeListener)
         // toggle Cast button
@@ -288,7 +285,7 @@ class PlayerFragment: Fragment(),
                 station.streamContent = contentType.type
                 // add station and save collection
                 withContext(Main) {
-                    collection = CollectionHelper.addStation(activity as Context, collection, station)
+                    CollectionHelper.addStation(activity as Context, collection, station) // todo check if should be moved to adapter (like removeStation)
                 }
             }
         }
@@ -299,22 +296,22 @@ class PlayerFragment: Fragment(),
     override fun onAddStationDialog(station: Station) {
         if (station.streamContent.isNotEmpty() && station.streamContent != Keys.MIME_TYPE_UNSUPPORTED) {
             // add station and save collection
-            collection = CollectionHelper.addStation(activity as Context, collection, station)
+            CollectionHelper.addStation(activity as Context, collection, station) // todo check if should be moved to adapter (like removeStation)
         }
     }
 
 
     /* Overrides onPlayButtonTapped from CollectionAdapterListener */
-    override fun onPlayButtonTapped(stationUuid: String) {
+    override fun onPlayButtonTapped(stationPosition: Int) {
         // CASE: the selected station is playing
-        if (controller?.isPlaying == true && stationUuid == playerState.stationUuid) {
+        if (controller?.isPlaying == true && stationPosition == playerState.stationPosition) {
             // stop playback
             controller?.pause()
         }
         // CASE: the selected station is not playing (another station might be playing)
         else {
             // start playback
-            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, stationUuid))
+            controller?.play(activity as Context, stationPosition)
         }
     }
 
@@ -342,7 +339,7 @@ class PlayerFragment: Fragment(),
                     // user tapped remove station
                     true -> {
                         collectionAdapter.removeStation(activity as Context, payload)
-                        if (controller?.isPlaying == true &&  playerState.stationUuid == collection.stations[payload].uuid){
+                        if (controller?.isPlaying == true &&  playerState.stationPosition == payload) {
                             // delete the currently playing station
                             playerState.isPlaying = false
                             // player pause, will cause playerListener method
@@ -386,6 +383,8 @@ class PlayerFragment: Fragment(),
         requestMetadataUpdate()
         // handle start intent
         handleStartIntent()
+//        // todo: check if necessary
+//        playerState.stationPosition = CollectionHelper.getStationPosition(collection, controller?.currentMediaItem?.mediaId ?: String())
     }
 
 
@@ -455,7 +454,7 @@ class PlayerFragment: Fragment(),
 
 
     /* Sets up the player */
-    private fun updatePlayerViews() {
+    private fun updatePlayerViewsOld() {
         // get station
         var station: Station = Station()
         if (playerState.stationUuid.isNotEmpty()) {
@@ -472,7 +471,30 @@ class PlayerFragment: Fragment(),
 
         // main play/pause button
         layout.playButtonView.setOnClickListener {
-            onPlayButtonTapped(playerState.stationUuid)
+            onPlayButtonTapped(playerState.stationPosition)
+        }
+    }
+
+
+    /* Sets up the player */
+    private fun updatePlayerViews() {
+        // get station
+        var station: Station = Station()
+        if (playerState.stationPosition > -1 && playerState.stationPosition < collection.stations.size -1) {
+            // get station from player state
+            station = collection.stations[playerState.stationPosition]
+        } else if (collection.stations.isNotEmpty()) {
+            // fallback: get first station
+            station = collection.stations[0]
+            playerState.stationPosition = 0
+        }
+        // update views
+        layout.togglePlayButton(playerState.isPlaying)
+        layout.updatePlayerViews(activity as Context, station, playerState.isPlaying)
+
+        // main play/pause button
+        layout.playButtonView.setOnClickListener {
+            onPlayButtonTapped(playerState.stationPosition)
         }
     }
 
@@ -579,7 +601,7 @@ class PlayerFragment: Fragment(),
     private fun handleStartPlayer() {
         val intent: Intent = (activity as Activity).intent
         if (intent.hasExtra(Keys.EXTRA_START_LAST_PLAYED_STATION)) {
-            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, playerState.stationUuid))
+            controller?.play(activity as Context, playerState.stationPosition)
         } else if (intent.hasExtra(Keys.EXTRA_STATION_UUID)) {
             val uuid: String = intent.getStringExtra(Keys.EXTRA_STATION_UUID) ?: String()
             controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, uuid))
@@ -604,27 +626,20 @@ class PlayerFragment: Fragment(),
 
     /* Observe view model of collection of stations */
     private fun observeCollectionViewModel() {
-        collectionViewModel.collectionLiveData.observe(this, Observer<Collection> { it ->
+        collectionViewModel.collectionLiveData.observe(this, Observer<Collection> { updatedCollection ->
+            // val sizeChanged: Boolean = collection.stations.size != updatedCollection.stations.size
             // update collection
-            collection = it
-////            // updates current station in player views
-////            playerState = PreferencesHelper.loadPlayerState()
-//            // get station
-//            val station: Station = CollectionHelper.getStation(collection, playerState.stationUuid)
-//            // update player views
-//            layout.updatePlayerViews(activity as Context, station, playerState.isPlaying)
-////            // handle start intent
-////            handleStartIntent()
-////            // handle navigation arguments
-////            handleNavigationArguments()
-        })
-        collectionViewModel.collectionSizeLiveData.observe(this, Observer<Int> { it ->
-            // size of collection changed
-            layout.toggleOnboarding(activity as Context, collection.stations.size)
+            collection = updatedCollection
+            // update station player station position and update player views
+            playerState.stationPosition = PreferencesHelper.loadLastPlayedStationPosition()
             updatePlayerViews()
-            // export collection as M3U - launch = fire & forget (no return value from save collection)
+            // todo only execute the below lines if the collection size has changed (note: the above sizeChanged check does not work)
+            // toggle the onboarding view if necessary and export the collection
+            layout.toggleOnboarding(activity as Context, collection.stations.size)
             if (collection.stations.size > 0) {
-                CoroutineScope(IO).launch { FileHelper.backupCollectionAsM3u(activity as Context, collection) }
+                CoroutineScope(IO).launch {
+                    FileHelper.backupCollectionAsM3u(activity as Context, collection)
+                }
             }
         })
     }
@@ -686,13 +701,21 @@ class PlayerFragment: Fragment(),
      */
     private var playerListener: Player.Listener = object : Player.Listener {
 
-        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
-            super.onMediaItemTransition(mediaItem, reason)
-            // store new station
-            playerState.stationUuid = mediaItem?.mediaId ?: String()
-            // update station specific views
-            updatePlayerViews()
-        }
+//        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+//            super.onMediaItemTransition(mediaItem, reason)
+//            // store new station
+//            //playerState.stationUuid = mediaItem?.mediaId ?: String()
+////            playerState.stationPosition = CollectionHelper.getStationPosition(collection, mediaItem?.mediaId ?: String())
+//            //playerState.stationPosition = PreferencesHelper.loadLastPlayedStationPosition()
+//            // update station specific views
+//            updatePlayerViews()
+//        }
+
+//        override fun onTimelineChanged(timeline: Timeline, reason: Int) {
+//            super.onTimelineChanged(timeline, reason)
+//            // update station specific views
+//            updatePlayerViews()
+//        }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)

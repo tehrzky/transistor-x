@@ -202,13 +202,6 @@ object DownloadHelper {
     }
 
 
-    /* Saves collection of radio station to storage */
-    private fun saveCollection(context: Context, m3uExport: Boolean = false) {
-        // save collection (not async) - and store modification date
-        modificationDate = CollectionHelper.saveCollection(context, collection, async = false)
-    }
-
-
     /* Reads station playlist file and adds it to collection */
     private fun addStation(context: Context, localFileUri: Uri, remoteFileLocation: String) {
         // read station playlist

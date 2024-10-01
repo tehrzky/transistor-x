@@ -131,7 +131,7 @@ class PlayerService: MediaLibraryService() {
 
 
     /* Overrides onTaskRemoved from Service */
-    override fun onTaskRemoved(rootIntent: Intent) {
+    override fun onTaskRemoved(rootIntent: Intent?) {
         releaseSession()
         stopSelf() // todo check if that makes sense
     }
@@ -173,20 +173,22 @@ class PlayerService: MediaLibraryService() {
     /* Adds stations as media items to the player */
     private fun initializePlayer() {
         val stations: MutableList<MediaItem> = CollectionHelper.getStationsAsMediaItems(this, collection)
-        if (player.isPlaying) {
-            // store current item and position in playlist
-            val currentItem: MediaItem? = player.currentMediaItem
-            val currentPosition: Long = player.currentPosition
-            // set the new media items
-            player.setMediaItems(stations, false)
-            // find index of current item in new playlist
-            val newIndex = stations.indexOf(currentItem)
-            if (newIndex != -1 && newIndex != player.currentWindowIndex) {
-                // seek to correct position
-                player.seekTo(newIndex, currentPosition)
-            }
+        // store current item
+        val currentItem: MediaItem? = player.currentMediaItem
+        // set the new media items
+        player.setMediaItems(stations)
+        // get the correct index ( = position in station list)
+        val index: Int
+        if (currentItem != null) {
+            index = stations.indexOf(currentItem)
         } else {
-            player.setMediaItems(stations)
+            index = PreferencesHelper.loadLastPlayedStationPosition()
+        }
+        // seek to correct position
+        if (index != -1 && index < stations.size) {
+            player.seekToDefaultPosition(index)
+        } else {
+            player.seekToDefaultPosition()
         }
     }
 
@@ -294,7 +296,7 @@ class PlayerService: MediaLibraryService() {
         if (metadata.isNotEmpty()) {
             metadataStringEncoded = metadata
         } else {
-            metadataStringEncoded = player.currentMediaItem?.mediaMetadata?.artist.toString()
+            metadataStringEncoded = player.currentMediaItem?.mediaMetadata?.albumTitle.toString()
         }
         // remove HTML encoding
         val metadataString: String = Html.fromHtml(metadataStringEncoded, Html.FROM_HTML_MODE_LEGACY).toString()
@@ -573,6 +575,7 @@ class PlayerService: MediaLibraryService() {
             // store state of playback
             val currentMediaId: String = player.currentMediaItem?.mediaId ?: String()
             PreferencesHelper.saveIsPlaying(isPlaying)
+            PreferencesHelper.saveCurrentStationPosition(player.currentMediaItemIndex)
             PreferencesHelper.saveCurrentStationId(currentMediaId)
             // reset restart counter
             playbackRestartCounter = 0

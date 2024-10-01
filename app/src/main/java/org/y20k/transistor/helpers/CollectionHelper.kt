@@ -397,7 +397,7 @@ object CollectionHelper {
 
     /* Returns media item for last played station */
     fun getRecent(context: Context, collection: Collection): MediaItem {
-        return buildMediaItem(context, getStation(collection, PreferencesHelper.loadLastPlayedStationUuid()))
+        return buildMediaItem(context, collection.stations[PreferencesHelper.loadLastPlayedStationPosition()])
     }
 
 
@@ -423,6 +423,9 @@ object CollectionHelper {
         // get modification date
         val date: Date = Calendar.getInstance().time
         collection.modificationDate = date
+        // store current station position
+        val position: Int = getStationPosition(collection, PreferencesHelper.loadLastPlayedStationUuid())
+        PreferencesHelper.saveCurrentStationPosition(position)
         // save collection to storage
         when (async) {
             true -> {

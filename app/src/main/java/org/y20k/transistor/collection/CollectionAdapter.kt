@@ -80,7 +80,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
 
     /* Listener Interface */
     interface CollectionAdapterListener {
-        fun onPlayButtonTapped(stationUuid: String)
+        fun onPlayButtonTapped(stationPosition: Int)
         fun onAddNewButtonTapped()
         fun onChangeImageButtonTapped(stationUuid: String)
     }
@@ -298,7 +298,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
             false -> stationViewHolder.playButtonView.setImageResource(R.drawable.ic_play_circle_outline_36dp)
         }
         stationViewHolder.playButtonView.setOnClickListener {
-                collectionAdapterListener.onPlayButtonTapped(station.uuid)
+                collectionAdapterListener.onPlayButtonTapped(stationViewHolder.adapterPosition)
         }
         stationViewHolder.stationCardView.setOnClickListener {
             if (tapAnywherePlaybackEnabled) {
