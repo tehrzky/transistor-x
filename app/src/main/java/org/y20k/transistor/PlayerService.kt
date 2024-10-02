@@ -193,41 +193,6 @@ class PlayerService: MediaLibraryService() {
     }
 
 
-//    /* Initializes the ExoPlayer */ // todo: remove (this function is replaced by SwappablePlayer)
-//    private fun initializePlayer() {
-//        // step 1: create the local player
-//        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
-//            setAudioAttributes(AudioAttributes.DEFAULT, true)
-//            setHandleAudioBecomingNoisy(true)
-//            setLoadControl(createDefaultLoadControl(bufferSizeMultiplier))
-//            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
-//        }.build()
-//        exoPlayer.addAnalyticsListener(analyticsListener)
-//        exoPlayer.addListener(playerListener)
-//        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
-//        localPlayer = object : ForwardingPlayer(exoPlayer) {
-//            override fun getAvailableCommands(): Player.Commands {
-//                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
-//            }
-//            override fun isCommandAvailable(command: Int): Boolean {
-//                return availableCommands.contains(command)
-//            }
-//            override fun getDuration(): Long {
-//                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
-//            }
-//        }
-//
-//        // step 2: create the cast player
-//        castPlayer = CastPlayer(castContext).apply {
-//            setSessionAvailabilityListener(CastSessionAvailabilityListener())
-//            addListener(playerListener)
-//        }
-//
-//        // step 3: initially set the player // todo initiate based upon cast context availability
-//        player = localPlayer
-//    }
-
-
     /* Creates a LoadControl - increase buffer size by given factor */
     private fun createDefaultLoadControl(factor: Int): DefaultLoadControl {
         val builder = DefaultLoadControl.Builder()
@@ -358,6 +323,7 @@ class PlayerService: MediaLibraryService() {
         }.build()
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
         // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
         val player = object : ForwardingPlayer(exoPlayer) {
             override fun getAvailableCommands(): Player.Commands {
@@ -384,6 +350,7 @@ class PlayerService: MediaLibraryService() {
             val player = CastPlayer(castContext, CastMediaItemConverter()).apply {
                 setSessionAvailabilityListener(CastSessionAvailabilityListener())
                 addListener(playerListener)
+                repeatMode = Player.REPEAT_MODE_ALL
             }
             player
         } catch (e : Exception) {

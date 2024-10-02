@@ -310,9 +310,11 @@ class PlayerFragment: Fragment(),
         }
         // CASE: the selected station is not playing (another station might be playing)
         else {
+            playerState.stationPosition = stationPosition
             // start playback
             controller?.play(activity as Context, stationPosition)
         }
+        updatePlayerViews()
     }
 
 
@@ -383,8 +385,8 @@ class PlayerFragment: Fragment(),
         requestMetadataUpdate()
         // handle start intent
         handleStartIntent()
-//        // todo: check if necessary
-//        playerState.stationPosition = CollectionHelper.getStationPosition(collection, controller?.currentMediaItem?.mediaId ?: String())
+        // wire up the playback controls
+        setupPlaybackControls()
     }
 
 
@@ -438,37 +440,8 @@ class PlayerFragment: Fragment(),
     }
 
 
-//    /* Sets up the general playback controls - Note: station specific controls and views are updated in updatePlayerViews() */
-//    @SuppressLint("ClickableViewAccessibility") // it is probably okay to suppress this warning - the OnTouchListener on the time played view does only toggle the time duration / remaining display
-//    private fun setupPlaybackControls() {
-//
-//        // main play/pause button
-//        layout.playButtonView.setOnClickListener {
-//            onPlayButtonTapped(playerState.stationUuid, playerState.playbackState)
-//            //onPlayButtonTapped(playerState.stationUuid, playerController.getPlaybackState().state) // todo remove
-//        }
-//
-//        // register a callback to stay in sync
-//        playerController.registerCallback(mediaControllerCallback)
-//    }
-
-
-    /* Sets up the player */
-    private fun updatePlayerViewsOld() {
-        // get station
-        var station: Station = Station()
-        if (playerState.stationUuid.isNotEmpty()) {
-            // get station from player state
-            station = CollectionHelper.getStation(collection, playerState.stationUuid)
-        } else if (collection.stations.isNotEmpty()) {
-            // fallback: get first station
-            station = collection.stations[0]
-            playerState.stationUuid = station.uuid
-        }
-        // update views
-        layout.togglePlayButton(playerState.isPlaying)
-        layout.updatePlayerViews(activity as Context, station, playerState.isPlaying)
-
+    /* Sets up the general playback controls - Note: station specific controls and views are updated in updatePlayerViews() */
+    private fun setupPlaybackControls() {
         // main play/pause button
         layout.playButtonView.setOnClickListener {
             onPlayButtonTapped(playerState.stationPosition)
@@ -491,11 +464,6 @@ class PlayerFragment: Fragment(),
         // update views
         layout.togglePlayButton(playerState.isPlaying)
         layout.updatePlayerViews(activity as Context, station, playerState.isPlaying)
-
-        // main play/pause button
-        layout.playButtonView.setOnClickListener {
-            onPlayButtonTapped(playerState.stationPosition)
-        }
     }
 
 
