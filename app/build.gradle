@@ -12,9 +12,9 @@ android {
         applicationId "org.y20k.transistor"
         minSdkVersion 25
         targetSdkVersion 34
-        versionCode 99
-        versionName "4.1.9"
-        resConfigs "en", "ar", "bg", "ca", "cs", "de", "el", "eo", "es", "eu", "fi", "fr", "fy", "gl", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"    }
+        versionCode 100
+        versionName "4.2.0"
+        resConfigs "en", "ar", "bg", "ca", "cy", "cs", "de", "el", "eo", "es", "eu", "fi", "fr", "fy", "ga", "gl", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"    }
 
     kotlinOptions {
         jvmTarget = '1.8'
