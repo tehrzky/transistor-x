@@ -97,7 +97,7 @@ dependencies {
     implementation "androidx.media3:media3-exoplayer-hls:$mediaVersion"
     implementation "androidx.media3:media3-session:$mediaVersion"
 
-    def navigationVersion = "2.8.1"
+    def navigationVersion = "2.8.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
