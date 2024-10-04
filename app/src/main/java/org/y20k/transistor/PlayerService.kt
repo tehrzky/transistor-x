@@ -17,13 +17,8 @@ package org.y20k.transistor
 import android.util.Log
 import androidx.media3.cast.CastPlayer
 import androidx.media3.cast.SessionAvailabilityListener
-import androidx.media3.common.AudioAttributes
-import androidx.media3.common.C
-import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
-import androidx.media3.exoplayer.ExoPlayer
-import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import com.google.android.gms.cast.framework.CastContext
 import org.y20k.transistor.cast.CastMediaItemConverter
 import org.y20k.transistor.cast.SwappablePlayer
@@ -44,39 +39,10 @@ class PlayerService: BasePlayerService() {
     override val player: SwappablePlayer by lazy { SwappablePlayer(localPlayer) }
 
 
+    /* Overrides initializePlayer from BasePlayerService */
     override fun initializePlayer() {
         // switch to cast player if already casting
         if (castPlayer?.isCastSessionAvailable == true) { player.setPlayer(castPlayer!!)}
-    }
-
-
-    /*
-     * Custom Player for local playback
-     */
-    private val localPlayer: Player by lazy {
-        // step 1: create the local player
-        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
-            setAudioAttributes(AudioAttributes.DEFAULT, true)
-            setHandleAudioBecomingNoisy(true)
-            setLoadControl(loadControl)
-            setMediaSourceFactory(DefaultMediaSourceFactory(this@PlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
-        }.build()
-        exoPlayer.addAnalyticsListener(analyticsListener)
-        exoPlayer.addListener(playerListener)
-        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
-        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
-        val player = object : ForwardingPlayer(exoPlayer) {
-            override fun getAvailableCommands(): Player.Commands {
-                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(COMMAND_SEEK_TO_PREVIOUS).build()
-            }
-            override fun isCommandAvailable(command: Int): Boolean {
-                return availableCommands.contains(command)
-            }
-            override fun getDuration(): Long {
-                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
-            }
-        }
-        player
     }
 
 
@@ -99,6 +65,9 @@ class PlayerService: BasePlayerService() {
             null
         }
     }
+    /*
+     * End of declaration
+     */
 
 
     /*
@@ -117,5 +86,6 @@ class PlayerService: BasePlayerService() {
     /*
      * End of inner class
      */
+
 
 }

@@ -30,7 +30,9 @@ import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
+import androidx.media3.common.ForwardingPlayer
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
@@ -38,7 +40,9 @@ import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
+import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.analytics.AnalyticsListener
+import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
 import androidx.media3.exoplayer.upstream.DefaultAllocator
 import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
@@ -134,8 +138,8 @@ abstract class BasePlayerService: MediaLibraryService() {
         // todo implement a package validator (see: https://github.com/android/uamp/blob/ef5076bf4279adfccafa746c92da6ec86607f284/common/src/main/java/com/example/android/uamp/media/MusicService.kt#L217)
         return mediaLibrarySession
     }
-    
-    
+
+
     /* Initialize the player - override in implementation */
     abstract fun initializePlayer()
 
@@ -305,7 +309,7 @@ abstract class BasePlayerService: MediaLibraryService() {
 //            }
         }
     }
- 
+
 
     /*
      * Custom MediaLibrarySession Callback that handles player commands
@@ -461,6 +465,41 @@ abstract class BasePlayerService: MediaLibraryService() {
     }
     /*
      * End of inner class
+     */
+
+
+    /*
+     * Custom Player for local playback
+     */
+    val localPlayer: Player by lazy {
+        // step 1: create the local player
+        val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
+            setAudioAttributes(AudioAttributes.DEFAULT, true)
+            setHandleAudioBecomingNoisy(true)
+            setLoadControl(loadControl)
+            setMediaSourceFactory(DefaultMediaSourceFactory(this@BasePlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
+        }.build()
+        exoPlayer.addAnalyticsListener(analyticsListener)
+        exoPlayer.addListener(playerListener)
+        exoPlayer.repeatMode = Player.REPEAT_MODE_ALL
+        // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
+        val player = object : ForwardingPlayer(exoPlayer) {
+            override fun getAvailableCommands(): Player.Commands {
+                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(
+                    COMMAND_SEEK_TO_PREVIOUS
+                ).build()
+            }
+            override fun isCommandAvailable(command: Int): Boolean {
+                return availableCommands.contains(command)
+            }
+            override fun getDuration(): Long {
+                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
+            }
+        }
+        player
+    }
+    /*
+     * End of declaration
      */
 
 
@@ -637,7 +676,6 @@ abstract class BasePlayerService: MediaLibraryService() {
      */
 
 
-
     /*
      * Custom AnalyticsListener that enables AudioFX equalizer integration
      */
@@ -656,5 +694,6 @@ abstract class BasePlayerService: MediaLibraryService() {
     /*
      * End of declaration
      */
+
 
 }
