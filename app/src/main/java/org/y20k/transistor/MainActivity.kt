@@ -45,6 +45,7 @@ class MainActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        // house keeping - if necessary
         if (PreferencesHelper.isHouseKeepingNecessary()) {
             // house-keeping 1: remove hard coded default image
             ImportHelper.removeDefaultStationImageUris(this)
@@ -83,6 +84,24 @@ class MainActivity: AppCompatActivity() {
         val navController = navHostFragment.navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+
+//    /* Overrides onResume from AppCompatActivity */
+//    override fun onResume() {
+//        super.onResume()
+//        if (!this@MainActivity::castContext.isInitialized) {
+//            return
+//        }
+//    }
+//
+//
+//    /* Overrides onPause from AppCompatActivity */
+//    override fun onPause() {
+//        super.onPause()
+//        if (!this@MainActivity::castContext.isInitialized) {
+//            return
+//        }
+//    }
 
 
     /* Overrides onDestroy from AppCompatActivity */

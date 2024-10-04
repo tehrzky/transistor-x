@@ -163,7 +163,7 @@ object PreferencesHelper {
     /* Loads state of player user interface from shared preferences */
     fun loadPlayerState(): PlayerState {
         return PlayerState().apply {
-            stationUuid = sharedPreferences.getString(Keys.PREF_PLAYER_STATE_STATION_UUID, String()) ?: String()
+            stationPosition = sharedPreferences.getInt(Keys.PREF_PLAYER_STATE_STATION_POSITION, -1)
             isPlaying = sharedPreferences.getBoolean(Keys.PREF_PLAYER_STATE_IS_PLAYING, false)
             sleepTimerRunning = sharedPreferences.getBoolean(Keys.PREF_PLAYER_STATE_SLEEP_TIMER_RUNNING, false)
         }
@@ -173,8 +173,17 @@ object PreferencesHelper {
     /* Saves state of player user interface to shared preferences */
     fun savePlayerState(playerState: PlayerState) {
         sharedPreferences.edit {
+            putInt(Keys.PREF_PLAYER_STATE_STATION_POSITION, playerState.stationPosition)
             putString(Keys.PREF_PLAYER_STATE_STATION_UUID, playerState.stationUuid)
             putBoolean(Keys.PREF_PLAYER_STATE_IS_PLAYING, playerState.isPlaying)
+        }
+    }
+
+
+    /* Saves Uuid if currently playing station to shared preferences */
+    fun saveCurrentStationPosition(position: Int) {
+        sharedPreferences.edit {
+            putInt(Keys.PREF_PLAYER_STATE_STATION_POSITION, position)
         }
     }
 
@@ -184,6 +193,12 @@ object PreferencesHelper {
         sharedPreferences.edit {
             putString(Keys.PREF_PLAYER_STATE_STATION_UUID, stationUuid)
         }
+    }
+
+
+    /* Loads uuid of last played station from shared preferences */
+    fun loadLastPlayedStationPosition(): Int {
+        return sharedPreferences.getInt(Keys.PREF_PLAYER_STATE_STATION_POSITION, -1)
     }
 
 

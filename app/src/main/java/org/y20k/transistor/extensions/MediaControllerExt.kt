@@ -16,14 +16,14 @@ package org.y20k.transistor.extensions
 
 import android.content.Context
 import android.os.Bundle
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionResult
 import com.google.common.util.concurrent.ListenableFuture
 import org.y20k.transistor.Keys
-import org.y20k.transistor.core.Station
-import org.y20k.transistor.helpers.CollectionHelper
+import org.y20k.transistor.R
 
 
 private val TAG: String = "MediaControllerExt"
@@ -57,12 +57,16 @@ fun MediaController.requestMetadataHistory(): ListenableFuture<SessionResult> {
     return sendCustomCommand(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY), Bundle.EMPTY)
 }
 
+
 /* Starts playback with a new media item */
-fun MediaController.play(context: Context, station: Station) {
-    // set media item, prepare and play
-    setMediaItem(CollectionHelper.buildMediaItem(context, station))
-    prepare()
-    play()
+fun MediaController.play(context: Context, stationPosition: Int) {
+    // go to media item at given position in the internal play list
+    if (stationPosition > -1) {
+        seekTo(stationPosition, 0L)
+        play()
+    } else {
+        Toast.makeText(context, R.string.toast_message_error_station_not_found, Toast.LENGTH_SHORT).show()
+    }
 }
 
 

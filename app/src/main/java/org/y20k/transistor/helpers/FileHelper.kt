@@ -26,9 +26,6 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
-import kotlinx.coroutines.launch
 import org.y20k.transistor.Keys
 import org.y20k.transistor.core.Collection
 import org.y20k.transistor.core.Station
@@ -42,8 +39,6 @@ import java.net.URL
 import java.text.NumberFormat
 import java.util.Date
 import java.util.Locale
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 import kotlin.math.ln
 import kotlin.math.pow
 
@@ -169,22 +164,22 @@ object FileHelper {
     }
 
 
-    /* Creates a copy of a given uri from downloadmanager - goal is to provide stable Uris */
-    fun saveCopyOfFile(context: Context, stationUuid: String, tempFileUri: Uri, fileType: Int, fileName: String, async: Boolean = false): Uri {
-        val targetFile: File = File(context.getExternalFilesDir(determineDestinationFolderPath(fileType, stationUuid)), fileName)
-        if (targetFile.exists()) targetFile.delete()
-        when (async) {
-            true -> {
-                // copy file async (= fire & forget - no return value needed)
-                CoroutineScope(IO).launch { saveCopyOfFileSuspended(context, tempFileUri, targetFile.toUri()) }
-            }
-            false -> {
-                // copy file
-                copyFile(context, tempFileUri, targetFile.toUri(), deleteOriginal = true)
-            }
-        }
-        return targetFile.toUri()
-    }
+//    /* Creates a copy of a given uri from downloadmanager - goal is to provide stable Uris */
+//    fun saveCopyOfFile(context: Context, stationUuid: String, tempFileUri: Uri, fileType: Int, fileName: String, async: Boolean = false): Uri {
+//        val targetFile: File = File(context.getExternalFilesDir(determineDestinationFolderPath(fileType, stationUuid)), fileName)
+//        if (targetFile.exists()) targetFile.delete()
+//        when (async) {
+//            true -> {
+//                // copy file async (= fire & forget - no return value needed)
+//                CoroutineScope(IO).launch { saveCopyOfFileSuspended(context, tempFileUri, targetFile.toUri()) }
+//            }
+//            false -> {
+//                // copy file
+//                copyFile(context, tempFileUri, targetFile.toUri(), deleteOriginal = true)
+//            }
+//        }
+//        return targetFile.toUri()
+//    }
 
 
 
@@ -323,12 +318,12 @@ object FileHelper {
     }
 
 
-    /* Suspend function: Wrapper for saveCollection */
-    suspend fun saveCollectionSuspended(context: Context, collection: Collection, lastUpdate: Date) {
-        return suspendCoroutine { cont ->
-            cont.resume(saveCollection(context, collection, lastUpdate))
-        }
-    }
+//    /* Suspend function: Wrapper for saveCollection */
+//    suspend fun saveCollectionSuspended(context: Context, collection: Collection, lastUpdate: Date) {
+//        return suspendCoroutine { cont ->
+//            cont.resume(saveCollection(context, collection, lastUpdate))
+//        }
+//    }
 
 
 //    /* Suspend function: Wrapper for readCollection */
@@ -338,23 +333,21 @@ object FileHelper {
 //        }
 
 
-    /* Suspend function: Wrapper for copyFile */
-    suspend fun saveCopyOfFileSuspended(context: Context, originalFileUri: Uri, targetFileUri: Uri): Boolean {
-        return suspendCoroutine { cont ->
-            cont.resume(copyFile(context, originalFileUri, targetFileUri, deleteOriginal = true))
-        }
-    }
+//    /* Suspend function: Wrapper for copyFile */
+//    suspend fun saveCopyOfFileSuspended(context: Context, originalFileUri: Uri, targetFileUri: Uri): Boolean {
+//        return suspendCoroutine { cont ->
+//            cont.resume(copyFile(context, originalFileUri, targetFileUri, deleteOriginal = true))
+//        }
+//    }
 
 
-    /* Suspend function: Exports collection of stations as M3U file - local backup copy */
-    suspend fun backupCollectionAsM3uSuspended(context: Context, collection: Collection) {
-        return suspendCoroutine { cont ->
-            Log.v(TAG, "Backing up collection as M3U - Thread: ${Thread.currentThread().name}")
+    /* Exports collection of stations as M3U file - local backup copy */
+    fun backupCollectionAsM3u(context: Context, collection: Collection) {
+        Log.v(TAG, "Backing up collection as M3U - Thread: ${Thread.currentThread().name}")
             // create M3U string
             val m3uString: String = CollectionHelper.createM3uString(collection)
             // save M3U as text file
-            cont.resume(writeTextFile(context, m3uString, Keys.FOLDER_COLLECTION, Keys.COLLECTION_M3U_FILE))
-        }
+            writeTextFile(context, m3uString, Keys.FOLDER_COLLECTION, Keys.COLLECTION_M3U_FILE)
     }
 
 

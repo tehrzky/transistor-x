@@ -40,11 +40,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
@@ -83,7 +80,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
 
     /* Listener Interface */
     interface CollectionAdapterListener {
-        fun onPlayButtonTapped(stationUuid: String)
+        fun onPlayButtonTapped(stationPosition: Int)
         fun onAddNewButtonTapped()
         fun onChangeImageButtonTapped(stationUuid: String)
     }
@@ -301,7 +298,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
             false -> stationViewHolder.playButtonView.setImageResource(R.drawable.ic_play_circle_outline_36dp)
         }
         stationViewHolder.playButtonView.setOnClickListener {
-                collectionAdapterListener.onPlayButtonTapped(station.uuid)
+                collectionAdapterListener.onPlayButtonTapped(stationViewHolder.adapterPosition)
         }
         stationViewHolder.stationCardView.setOnClickListener {
             if (tapAnywherePlaybackEnabled) {
@@ -334,9 +331,7 @@ class CollectionAdapter(private val context: Context, private val collectionAdap
                 if (input.startsWith("http")) {
                     // detect content type on background thread
                     CoroutineScope(IO).launch {
-                        val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(input) }
-                        // wait for result
-                        val contentType: String = deferred.await().type.lowercase(Locale.getDefault())
+                        val contentType: String = NetworkHelper.detectContentType(input).type.lowercase(Locale.getDefault())
                         // CASE: stream address detected
                         if (Keys.MIME_TYPES_MPEG.contains(contentType) or
                                 Keys.MIME_TYPES_OGG.contains(contentType) or

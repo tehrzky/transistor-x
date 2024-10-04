@@ -17,11 +17,8 @@ package org.y20k.transistor.helpers
 import android.content.Context
 import android.util.Log
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
@@ -58,9 +55,7 @@ class UpdateHelper(private val context: Context, private val updateHelperListene
                 // get station from results
                 val station: Station = results[0].toStation()
                 // detect content type
-                val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(station.getStreamUri()) }
-                // wait for result
-                val contentType: NetworkHelper.ContentType = deferred.await()
+                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.getStreamUri())
                 // update content type
                 station.streamContent = contentType.type
                 // get position

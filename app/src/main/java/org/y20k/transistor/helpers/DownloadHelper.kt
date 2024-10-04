@@ -22,11 +22,8 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.net.toUri
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.y20k.transistor.Keys
@@ -205,22 +202,13 @@ object DownloadHelper {
     }
 
 
-    /* Saves collection of radio station to storage */
-    private fun saveCollection(context: Context, m3uExport: Boolean = false) {
-        // save collection (not async) - and store modification date
-        modificationDate = CollectionHelper.saveCollection(context, collection, async = false)
-    }
-
-
     /* Reads station playlist file and adds it to collection */
     private fun addStation(context: Context, localFileUri: Uri, remoteFileLocation: String) {
         // read station playlist
         val station: Station = CollectionHelper.createStationFromPlaylistFile(context, localFileUri, remoteFileLocation)
         // detect content type on background thread
         CoroutineScope(IO).launch {
-            val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(station.getStreamUri()) }
-            // wait for result
-            val contentType: NetworkHelper.ContentType = deferred.await()
+            val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.getStreamUri())
             // set content type
             station.streamContent = contentType.type
             // add station and save collection
@@ -237,9 +225,7 @@ object DownloadHelper {
         val station: Station = CollectionHelper.createStationFromPlaylistFile(context, localFileUri, remoteFileLocation)
         // detect content type on background thread
         CoroutineScope(IO).launch {
-            val deferred: Deferred<NetworkHelper.ContentType> = async(Dispatchers.Default) { NetworkHelper.detectContentTypeSuspended(station.getStreamUri()) }
-            // wait for result
-            val contentType: NetworkHelper.ContentType = deferred.await()
+            val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.getStreamUri())
             // update content type
             station.streamContent = contentType.type
             // update station and save collection

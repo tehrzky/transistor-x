@@ -17,6 +17,7 @@ package org.y20k.transistor.helpers
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.net.toFile
@@ -258,6 +259,16 @@ object CollectionHelper {
     }
 
 
+    /* Converts a collection to a list of media items */
+    fun getStationsAsMediaItems(context: Context, collection: Collection): MutableList<MediaItem> {
+        val stations: MutableList<MediaItem> = mutableListOf()
+        collection.stations.forEach {station ->
+            stations.add(buildMediaItem(context, station))
+        }
+        return stations
+    }
+
+
     /* Gets MediaIem for next station within collection */
     fun getNextMediaItem(context: Context, collection: Collection, stationUuid: String): MediaItem {
         val currentStationPosition: Int = getStationPosition(collection, stationUuid)
@@ -326,7 +337,7 @@ object CollectionHelper {
         }.build()
         // build MediaMetadata
         val mediaMetadata = MediaMetadata.Builder().apply {
-            //setTitle(station.name) // now playing metadata will be inserted as title by the androidx/media library
+            // setTitle(station.name) // now playing metadata will be inserted as title by the androidx/media library
             setSubtitle(station.name)
             setAlbumTitle(station.name)
             setMediaType(MediaMetadata.MEDIA_TYPE_RADIO_STATION)
@@ -338,6 +349,10 @@ object CollectionHelper {
             } else {
                 setArtworkData(ImageHelper.getStationImageAsByteArray(context), MediaMetadata.PICTURE_TYPE_FRONT_COVER)
             }
+            // keep original artwork URI for being included in Cast metadata
+            val extras = Bundle()
+            extras.putString(Keys.KEY_ORIGINAL_ARTWORK_URI, station.remoteImageLocation)
+            setExtras(extras)
         }.build()
         // build MediaItem and return it
         return MediaItem.Builder().apply {
@@ -382,7 +397,7 @@ object CollectionHelper {
 
     /* Returns media item for last played station */
     fun getRecent(context: Context, collection: Collection): MediaItem {
-        return buildMediaItem(context, getStation(collection, PreferencesHelper.loadLastPlayedStationUuid()))
+        return buildMediaItem(context, collection.stations[PreferencesHelper.loadLastPlayedStationPosition()])
     }
 
 
@@ -408,12 +423,15 @@ object CollectionHelper {
         // get modification date
         val date: Date = Calendar.getInstance().time
         collection.modificationDate = date
+        // store current station position
+        val position: Int = getStationPosition(collection, PreferencesHelper.loadLastPlayedStationUuid())
+        PreferencesHelper.saveCurrentStationPosition(position)
         // save collection to storage
         when (async) {
             true -> {
                 CoroutineScope(IO).launch {
-                    // save collection on background thread
-                    FileHelper.saveCollectionSuspended(context, collection, date)
+                    // save collection in background
+                    FileHelper.saveCollection(context, collection, date)
                     // broadcast collection update
                     sendCollectionBroadcast(context, date)
                 }
@@ -551,16 +569,6 @@ object CollectionHelper {
             }
         }
         return stations
-    }
-
-
-    /* Export collection of stations as M3U */
-    fun exportCollectionM3u(context: Context, collection: Collection) {
-        Log.v(TAG, "Exporting collection of stations as M3U")
-        // export collection as M3U - launch = fire & forget (no return value from save collection)
-        if (collection.stations.size > 0) {
-            CoroutineScope(IO).launch { FileHelper.backupCollectionAsM3uSuspended(context, collection) }
-        }
     }
 
 

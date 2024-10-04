@@ -35,6 +35,7 @@
     <string name="toast_message_error_download_error">Download error</string>
     <string name="toast_message_error_missing_storage_permission">Grant \"Read Storage\" permission to open this file.</string>
     <string name="toast_message_error_restart_playback_failed">Unable to restart playback.</string>
+    <string name="toast_message_error_station_not_found">Station not found.</string>
     <string name="toast_message_install_file_helper">Please install a file manager.</string>
     <string name="toast_message_save_m3u">Saving radio stations as M3U…</string>
     <string name="toast_message_station_duplicate">Duplicate station.</string>
@@ -124,5 +125,7 @@
     <string name="sample_text_station_name" translatable="false">Byte FM</string>
     <string name="sample_text_steam_url" translatable="false">http://bytefm.cast.addradio.de/bytefm/main/mid/stream</string>
     <string name="sample_text_sleep_timer_remaining_time" translatable="false">00:00</string>
+    <!-- Google Cast -->
+    <string name="cast_context_error">Failed to get Cast context. Try updating Google Play Services and restart the app.</string>
 
 </resources>

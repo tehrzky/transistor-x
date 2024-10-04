@@ -29,9 +29,6 @@ Transistor can play back streams encoded in MP3, AAC and Ogg/Opus. It also has e
 ### How can I curate the radio station list?
 Use the swipe gesture to delete a radio station from the list. Further editing options can be enabled in Settings. If enabled, tap and hold a radio station to edit its name, image or streaming link.
 
-### How is the current status of Transistor's development?
-Development of Transistor is currently happening on the [non-free](https://codeberg.org/y20k/transistor/src/branch/non-free) feature branch. A version of Transistor that supports Google Cast is in development. As soon as this feature works as expected all enhancements (except for the Cast feature) will be ported back to the main branch. The main branch will always be free / libre. ✊ Cast-enabled Transistor will be published as an APK here alongside the main app.
-
 ## Screenshots (v4.1)
 [<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/01-transistor.png" width="360">](https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/01-transistor.png)
 [<img src="https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/02-transistor.png" width="360">](https://codeberg.org/y20k/transistor/raw/branch/master/metadata/en-US/images/phoneScreenshots/02-transistor.png)

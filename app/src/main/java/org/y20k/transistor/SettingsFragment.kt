@@ -21,6 +21,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -316,7 +317,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             if (targetUri != null && sourceUri != null) {
                 // copy file async (= fire & forget - no return value needed)
                 CoroutineScope(IO).launch {
-                    FileHelper.saveCopyOfFileSuspended(activity as Context, sourceUri, targetUri)
+                    FileHelper.copyFile(activity as Context, sourceUri, targetUri, true)
                 }
                 Toast.makeText(activity as Context, R.string.toast_message_save_m3u, Toast.LENGTH_LONG).show()
             } else {
@@ -401,6 +402,8 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     }
 
 
+
+
     /* Opens up a file picker to select the backup location */
     private fun openBackupCollectionDialog() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
@@ -416,6 +419,8 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             Toast.makeText(activity as Context, R.string.toast_message_install_file_helper, Toast.LENGTH_LONG).show()
         }
     }
+
+
 
 
     /* Opens up a file picker to select the file containing the collection to be restored */
