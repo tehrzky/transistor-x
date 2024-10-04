@@ -1,4 +1,4 @@
-# v4.2.0 - Modern Love (Release #100)
+# v4.2.0 - Ashes to Ashes (Release #100)
 
 **2024-10-04**
 - fixes station switching (notification and headphone buttons)
