@@ -3,7 +3,7 @@
 **2024-10-04**
 - fixes station switching (notification and headphone buttons)
 - fixes playback resumption from the notification
-- minor bux fixes
+- minor bug fixes
 - new translation: Irish (THX Aindriú Mac Giolla Eoin)
 - new translation: Welsh (THX Aled Powell)
 - updated translations
