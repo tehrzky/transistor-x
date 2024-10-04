@@ -39,6 +39,8 @@ Indonesian version: [zmni](https://github.com/zmni) | [weblate version history](
 
 Interlingua version: [softinterlingua](https://codeberg.org/softinterlingua) |  [weblate version history](https://hosted.weblate.org/changes/?lang=ia&project=transistor)
 
+Irish version: [Aindriú Mac Giolla Eoin](https://hosted.weblate.org/user/aindriu80/) | [weblate version history](https://hosted.weblate.org/changes/browse/transistor/-/ga/)
+
 Italian version: [pjammo](https://github.com/pjammo) | [weblate version history](https://hosted.weblate.org/changes/?lang=it&project=transistor)
 
 Japanese version: [naofum](https://github.com/naofum) | [weblate version history](https://hosted.weblate.org/changes/?lang=ja&project=transistor)
@@ -73,7 +75,7 @@ Turkish version [turkceapps](https://hosted.weblate.org/user/turkceapps/), [Oğu
 
 Ukrainian version: [burunduk](https://github.com/burunduk) | [weblate version history](https://hosted.weblate.org/changes/?lang=uk&project=transistor)
 
-_Your name is missing here? I probably forgot to add you. Please open a ticket or pull request to get in touch. I will add your name to the list._
+Welsh version: [Aled Powell](https://hosted.weblate.org/user/Cymrodor/) | [weblate version history](https://hosted.weblate.org/changes/?lang=cy&project=transistor)
 
 ### Want to help?
 Please check out the notes in [CONTRIBUTE.md](https://codeberg.org/y20k/transistor/src/branch/master/CONTRIBUTE.md) first.
