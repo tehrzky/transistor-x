@@ -30,11 +30,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import androidx.mediarouter.app.MediaRouteButton
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
@@ -83,7 +81,6 @@ data class LayoutHolder(var rootView: View) {
     private var metadataHistory: MutableList<String>
     private var metadataHistoryPosition: Int
     private var isBuffering: Boolean
-    private val castButton: MediaRouteButton
 
 
     /* Init block */
@@ -156,17 +153,6 @@ data class LayoutHolder(var rootView: View) {
 
         // set layout for player
         setupBottomSheet()
-
-        // initialize cast
-        castButton = rootView.findViewById(R.id.cast_button)
-        castButton.setRemoteIndicatorDrawable(rootView.context.getDrawable(R.drawable.selector_cast_button))
-        CastButtonFactory.setUpMediaRouteButton(rootView.context, castButton)
-    }
-
-
-    /* Toggles visibility of the cast button */
-    fun changeCastButtonVisibility(visible: Boolean) {
-        castButton.isVisible = visible
     }
 
 

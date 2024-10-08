@@ -49,7 +49,7 @@
         <item name="cornerSizeTopLeft">16dp</item>
     </style>
     <!-- custom style for the Cast button -->
-    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.MediaRouteButton">
-        <item name="android:tint">@color/player_sheet_icon</item>
-    </style>
+<!--    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.MediaRouteButton">-->
+<!--        <item name="android:tint">@color/player_sheet_icon</item>-->
+<!--    </style>-->
 </resources>
