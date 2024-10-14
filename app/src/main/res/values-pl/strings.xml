@@ -20,7 +20,7 @@
     <string name="onboarding_app_description">Aplikacja radiowa</string>
     <string name="onboarding_app_get_started">Pierwsze kroki</string>
     <string name="toast_message_sleep_timer_unable_to_start">Najpierw zacznij odtwarzanie.</string>
-    <string name="descr_player_playback_button">Odtwórz/zatrzymaj</string>
+    <string name="descr_player_playback_button">Odtwarzaj/pauzuj</string>
     <string name="descr_player_station_image">Obraz stacji</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Włącz wyłącznik czasowy</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Pozostały czas do wyłącznika czasowego</string>
@@ -28,7 +28,7 @@
     <string name="descr_dialog_edit_place_on_home_screen_icon">Umieść na Ekranie głównym</string>
     <string name="descr_card_station_image">Zdjęcie stacji</string>
     <string name="descr_card_starred_station">Polubione stacje</string>
-    <string name="descr_card_small_play_button">Odtwórz/zatrzymaj</string>
+    <string name="descr_card_small_play_button">Odtwarzaj/zatrzymaj</string>
     <string name="pref_update_station_images_title">Aktualizuj zdjęcia stacji</string>
     <string name="pref_update_station_images_summary">Pobierz najnowszą wersję wszystkich obrazów stacji.</string>
     <string name="pref_theme_selection_title">Motyw aplikacji</string>
@@ -99,5 +99,9 @@
     <string name="pref_buffer_size_title">Użyj większego bufora</string>
     <string name="pref_tap_anywhere_playback_summary_enabled">Naciśnij dowolne miejsce na karcie stacji radiowej, aby rozpocząć jej słuchanie.</string>
     <string name="pref_tap_anywhere_playback_title">Naciśnij na stację radiową</string>
-    <string name="descr_expanded_player_metadata_copy_button">Skopiuj aktualnie odtwarzane informacje</string>
+    <string name="descr_expanded_player_metadata_copy_button">Skopiuj obecnie odtwarzane</string>
+    <string name="dialog_add_station_title">Dodaj stację</string>
+    <string name="descr_expanded_player_metadata_previous_button">Poprzednio odtwarzane</string>
+    <string name="descr_expanded_player_metadata_next_button">Następnie odtwarzane</string>
+    <string name="dialog_restore_collection_replace_existing">Zastąpić obecne stacje radiowe zawartością kopii zapasowej?</string>
 </resources>
