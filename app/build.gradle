@@ -14,7 +14,7 @@ android {
         targetSdkVersion 34
         versionCode 101
         versionName "4.2.1"
-        resConfigs "en", "ar", "bg", "ca", "cy", "cs", "de", "el", "eo", "es", "eu", "fi", "fr", "fy", "ga", "gl", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"    }
+        resConfigs "en", "ar", "ast", "bg", "ca", "cy", "cs", "de", "el", "eo", "es", "eu", "fi", "fr", "fy", "ga", "gl", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"    }
 
     kotlinOptions {
         jvmTarget = '1.8'
@@ -83,7 +83,7 @@ dependencies {
 
     implementation 'com.google.android.material:material:1.12.0'
 
-    implementation "androidx.activity:activity-ktx:1.9.2"
+    implementation "androidx.activity:activity-ktx:1.9.3"
     implementation "androidx.appcompat:appcompat:1.7.0"
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
     implementation "androidx.core:core-ktx:1.13.1"
@@ -97,7 +97,7 @@ dependencies {
     implementation "androidx.media3:media3-exoplayer-hls:$mediaVersion"
     implementation "androidx.media3:media3-session:$mediaVersion"
 
-    def navigationVersion = "2.8.2"
+    def navigationVersion = "2.8.3"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
