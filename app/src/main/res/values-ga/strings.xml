@@ -103,4 +103,6 @@
     <string name="onboarding_app_get_started">Cuir tús leis</string>
     <string name="onboarding_app_import_running">Ag iompórtáil do stáisiúin…</string>
     <string name="shortcut_last_station_short_label">Stáisiún deireanach</string>
+    <string name="toast_message_error_station_not_found">Stáisiún gan aimsiú.</string>
+    <string name="cast_context_error">Theip ar an gcomhthéacs Cast a fháil. Bain triail as Google Play Services a nuashonrú agus atosaigh an aip.</string>
 </resources>

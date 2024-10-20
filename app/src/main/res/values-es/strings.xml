@@ -75,7 +75,7 @@
     <string name="pref_m3u_export_title">Exportar M3U</string>
     <string name="toast_message_save_m3u">Guardar emisora de radio como M3U…</string>
     <string name="toast_message_install_file_helper">Por favor instale un administrador de archivos.</string>
-    <string name="dialog_edit_station_name">Nombre de estación</string>
+    <string name="dialog_edit_station_name">Nombre de emisora</string>
     <string name="dialog_edit_stream_uri">Dirección de retransmisión</string>
     <string name="pref_advanced_title">Avanzado</string>
     <string name="pref_edit_station_summary_disabled">Edición de la información de la estación deshabilitada.</string>
@@ -104,4 +104,5 @@
     <string name="descr_expanded_player_metadata_previous_button">Entrada anterior de metadatos de reproducción</string>
     <string name="dialog_add_station_title">Añadir una estación</string>
     <string name="dialog_restore_collection_replace_existing">¿Reemplazar la colección actual de estaciones de radio con la estación de radio de la copia de seguridad?</string>
+    <string name="toast_message_error_station_not_found">Emisora no encontrada.</string>
 </resources>
