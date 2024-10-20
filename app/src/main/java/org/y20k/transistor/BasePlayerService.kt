@@ -485,9 +485,9 @@ abstract class BasePlayerService: MediaLibraryService() {
         // manually add seek to next and seek to previous since headphones issue them and they are translated to next and previous station
         val player = object : ForwardingPlayer(exoPlayer) {
             override fun getAvailableCommands(): Player.Commands {
-                return super.getAvailableCommands().buildUpon().add(COMMAND_SEEK_TO_NEXT).add(
-                    COMMAND_SEEK_TO_PREVIOUS
-                ).build()
+                return super.getAvailableCommands().buildUpon()
+                    .add(COMMAND_SEEK_TO_NEXT)
+                    .add(COMMAND_SEEK_TO_PREVIOUS).build()
             }
             override fun isCommandAvailable(command: Int): Boolean {
                 return availableCommands.contains(command)

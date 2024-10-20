@@ -145,11 +145,7 @@ abstract class BasePlayerFragment: Fragment(),
 
 
     /* Overrides onCreate from Fragment*/
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // find views and set them up
         val rootView: View = inflater.inflate(R.layout.fragment_player, container, false);
         layout = LayoutHolder(rootView)
@@ -253,8 +249,7 @@ abstract class BasePlayerFragment: Fragment(),
     }
 
     /* Register permission launcher */
-    private val requestPermissionLauncher =
-        registerForActivityResult(RequestPermission()) { isGranted: Boolean ->
+    private val requestPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {
                 // permission granted
                 pickImage()
@@ -498,7 +493,7 @@ abstract class BasePlayerFragment: Fragment(),
     private fun updatePlayerViews() {
         // get station
         var station: Station = Station()
-        if (playerState.stationPosition > -1 && playerState.stationPosition < collection.stations.size - 1) {
+        if (playerState.stationPosition > -1 && playerState.stationPosition <= collection.stations.size -1) {
             // get station from player state
             station = collection.stations[playerState.stationPosition]
         } else if (collection.stations.isNotEmpty()) {
