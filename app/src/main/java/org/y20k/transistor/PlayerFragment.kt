@@ -22,7 +22,7 @@ import androidx.core.view.isVisible
 import androidx.mediarouter.app.MediaRouteButton
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.CastState.NO_DEVICES_AVAILABLE
+import com.google.android.gms.cast.framework.CastState
 import com.google.android.gms.cast.framework.CastStateListener
 
 
@@ -84,7 +84,7 @@ class PlayerFragment: BasePlayerFragment() {
      */
     private val customCastStateListener = object : CastStateListener {
         override fun onCastStateChanged(state: Int) {
-            castEnabled = state != NO_DEVICES_AVAILABLE
+            castEnabled = state != CastState.NO_DEVICES_AVAILABLE
             changeCastButtonVisibility(castEnabled)
         }
     }
