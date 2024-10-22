@@ -105,4 +105,5 @@
     <string name="dialog_add_station_title">Añadir una estación</string>
     <string name="dialog_restore_collection_replace_existing">¿Reemplazar la colección actual de estaciones de radio con la estación de radio de la copia de seguridad?</string>
     <string name="toast_message_error_station_not_found">Emisora no encontrada.</string>
+    <string name="cast_context_error">No se pudo obtener el contexto de Cast. Intenta actualizar los servicios de Google Play y reinicia la aplicación.</string>
 </resources>
