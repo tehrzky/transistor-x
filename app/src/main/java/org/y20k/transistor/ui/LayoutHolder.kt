@@ -17,10 +17,9 @@ package org.y20k.transistor.ui
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Build
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -305,22 +304,21 @@ data class LayoutHolder(var rootView: View) {
     }
 
 
-
     /* Initiates the rotation animation of the play button  */
     fun animatePlaybackButtonStateTransition(context: Context, isPlaying: Boolean) {
         when (isPlaying) {
             true -> {
-                val rotateClockwise = AnimationUtils.loadAnimation(context, R.anim.rotate_clockwise_slow)
-                rotateClockwise.setAnimationListener(createAnimationListener(isPlaying))
-                playButtonView.startAnimation(rotateClockwise)
+                // rotate and morph to stop icon
+                playButtonView.setImageResource(R.drawable.avd_play_to_stop)
+                val morphDrawable: AnimatedVectorDrawable = playButtonView.drawable as AnimatedVectorDrawable
+                morphDrawable.start()
             }
-
             false -> {
-                val rotateCounterClockwise = AnimationUtils.loadAnimation(context, R.anim.rotate_counterclockwise_fast)
-                rotateCounterClockwise.setAnimationListener(createAnimationListener(isPlaying))
-                playButtonView.startAnimation(rotateCounterClockwise)
+                // rotate and morph to play icon
+                playButtonView.setImageResource(R.drawable.avd_stop_to_play)
+                val morphDrawable: AnimatedVectorDrawable = playButtonView.drawable as AnimatedVectorDrawable
+                morphDrawable.start()
             }
-
         }
     }
 
@@ -350,19 +348,6 @@ data class LayoutHolder(var rootView: View) {
             true
         } else {
             false
-        }
-    }
-
-
-    /* Creates AnimationListener for play button */
-    private fun createAnimationListener(isPlaying: Boolean): Animation.AnimationListener {
-        return object : Animation.AnimationListener {
-            override fun onAnimationStart(animation: Animation) {}
-            override fun onAnimationEnd(animation: Animation) {
-                // set up button symbol and playback indicator afterwards
-                togglePlayButton(isPlaying)
-            }
-            override fun onAnimationRepeat(animation: Animation) {}
         }
     }
 

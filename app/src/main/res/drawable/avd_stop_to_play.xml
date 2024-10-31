@@ -1,0 +1,45 @@
+<animated-vector
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:name="vector"
+            android:width="48dp"
+            android:height="48dp"
+            android:viewportWidth="960"
+            android:viewportHeight="960">
+            <group
+                android:name="group"
+                android:pivotX="480"
+                android:pivotY="480">
+                <path
+                    android:name="path"
+                    android:pathData="M 280 280 L 680 280 L 680 680 L 280 680 L 280 280 M 320 320 L 320 640 L 640 640 L 640 320 L 320 320"
+                    android:fillColor="@color/player_play_pause_icon" />
+            </group>
+        </vector>
+    </aapt:attr>
+    <target android:name="group">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="rotation"
+                android:duration="400"
+                android:valueFrom="0"
+                android:valueTo="-180"
+                android:valueType="floatType"
+                android:interpolator="@android:anim/accelerate_decelerate_interpolator"/>
+        </aapt:attr>
+    </target>
+    <target android:name="path">
+        <aapt:attr name="android:animation">
+            <objectAnimator
+                android:propertyName="pathData"
+                android:startOffset="50"
+                android:duration="350"
+                android:valueFrom="M 680 680 L 680 280 L 280 280 L 280 680 L 680 680 M 640 640 L 320 640 L 320 320 L 640 320 L 640 640"
+                android:valueTo="M 600 480.577 L 600 272.31 L 273.84 480 L 600 687.69 L 600 480.577 M 560 480.577 L 560 614 L 348.46 480 L 560 346 L 560 480.577"
+                android:valueType="pathType"
+                android:interpolator="@android:interpolator/fast_out_slow_in"/>
+        </aapt:attr>
+    </target>
+</animated-vector>
