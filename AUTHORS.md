@@ -29,6 +29,8 @@ Dutch version: [mm4c](https://hosted.weblate.org/user/mm4c/) | [weblate version 
 
 Esperanto version: [Jakub Fabijan](https://hosted.weblate.org/user/JakubFabijan/) | [weblate version history](https://hosted.weblate.org/changes/?lang=eo&project=transistor)
 
+Estonian version: [Priit Jõerüüt](https://hosted.weblate.org/user/jrthwlate/) | [weblate version history](https://hosted.weblate.org/changes/?lang=est&project=transistor)
+
 French version: [Nathan](https://hosted.weblate.org/user/NathanBnm/) | [weblate version history](https://hosted.weblate.org/changes/?lang=fr&project=transistor)
 
 Finnish version: [tomechio](https://hosted.weblate.org/user/tomechio/) | [weblate version history](https://hosted.weblate.org/changes/?lang=fi&project=transistor)
@@ -36,6 +38,8 @@ Finnish version: [tomechio](https://hosted.weblate.org/user/tomechio/) | [weblat
 German version: [nautilusx](https://hosted.weblate.org/user/nautilusx/), [y20k](https://codeberg.org/y20k) | [weblate version history](https://hosted.weblate.org/changes/?lang=de&project=transistor)
 
 Greek version: [nikos](https://hosted.weblate.org/user/nikoss/) | [weblate version history](https://hosted.weblate.org/changes/?lang=el&project=transistor)
+
+Hindi [Scrambled777](https://hosted.weblate.org/user/Scrambled777/) | [weblate version history](https://hosted.weblate.org/changes/?lang=hi&project=transistor)
 
 Indonesian version: [zmni](https://hosted.weblate.org/user/zmni/) | [weblate version history](https://hosted.weblate.org/changes/?lang=id&project=transistor)
 
@@ -48,6 +52,8 @@ Italian version: [pjammo](https://hosted.weblate.org/user/pjammo/) | [weblate ve
 Japanese version: [naofum](https://hosted.weblate.org/user/naofum/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ja&project=transistor)
 
 Korean version: [tomechio](https://hosted.weblate.org/user/sarami/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ko&project=transistor)
+
+Kurdish [Halbast Abdullah](https://hosted.weblate.org/user/halbast/) | [weblate version history](https://hosted.weblate.org/changes/browse/transistor/-/ckb/)
 
 Norwegian version: [Allan Nordhøy](https://hosted.weblate.org/user/kingu/) | [weblate version history](https://hosted.weblate.org/changes/?lang=nb_NO&project=transistor)
 
