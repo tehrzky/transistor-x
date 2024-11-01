@@ -32,7 +32,7 @@
     <string name="dialog_yes_no_positive_button_default">Jah</string>
     <string name="dialog_yes_no_positive_button_remove_station">Eemalda</string>
     <string name="dialog_yes_no_positive_button_update_covers">Uuenda</string>
-    <string name="toast_message_error_missing_storage_permission">Selle faili avaliseks anna rakendusele õigused lugeda andmeruumist faile.</string>
+    <string name="toast_message_error_missing_storage_permission">Selle faili avamiseks anna rakendusele õigused lugeda andmeruumist faile.</string>
     <string name="toast_message_install_file_helper">Palun paigalda failihaldur.</string>
     <string name="toast_message_error_station_not_found">Veebiraadiojaama ei leidu.</string>
     <string name="toast_message_station_duplicate">Korduv veebiraadiojaam.</string>
