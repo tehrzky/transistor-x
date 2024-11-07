@@ -39,7 +39,7 @@ German version: [nautilusx](https://hosted.weblate.org/user/nautilusx/), [y20k](
 
 Greek version: [nikos](https://hosted.weblate.org/user/nikoss/) | [weblate version history](https://hosted.weblate.org/changes/?lang=el&project=transistor)
 
-Hindi [Scrambled777](https://hosted.weblate.org/user/Scrambled777/) | [weblate version history](https://hosted.weblate.org/changes/?lang=hi&project=transistor)
+Hindi version: [Scrambled777](https://hosted.weblate.org/user/Scrambled777/) | [weblate version history](https://hosted.weblate.org/changes/?lang=hi&project=transistor)
 
 Indonesian version: [zmni](https://hosted.weblate.org/user/zmni/) | [weblate version history](https://hosted.weblate.org/changes/?lang=id&project=transistor)
 
@@ -53,7 +53,7 @@ Japanese version: [naofum](https://hosted.weblate.org/user/naofum/) | [weblate v
 
 Korean version: [tomechio](https://hosted.weblate.org/user/sarami/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ko&project=transistor)
 
-Kurdish [Halbast Abdullah](https://hosted.weblate.org/user/halbast/) | [weblate version history](https://hosted.weblate.org/changes/browse/transistor/-/ckb/)
+Kurdish version: [Halbast Abdullah](https://hosted.weblate.org/user/halbast/) | [weblate version history](https://hosted.weblate.org/changes/browse/transistor/-/ckb/)
 
 Norwegian version: [Allan Nordhøy](https://hosted.weblate.org/user/kingu/) | [weblate version history](https://hosted.weblate.org/changes/?lang=nb_NO&project=transistor)
 

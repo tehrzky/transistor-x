@@ -104,4 +104,6 @@
     <string name="descr_expanded_player_metadata_copy_button">Copier les informations sur la lecture en cours</string>
     <string name="dialog_add_station_title">Ajouter une station</string>
     <string name="dialog_restore_collection_replace_existing">Remplacer les stations actuelles par les stations de la sauvegarde \?</string>
+    <string name="toast_message_error_station_not_found">Station introuvable.</string>
+    <string name="cast_context_error">Impossible d’obtenir le contexte Cast. Essayez de mettre à jour Google Play Services et redémarrer l’application.</string>
 </resources>
