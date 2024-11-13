@@ -309,13 +309,13 @@ data class LayoutHolder(var rootView: View) {
         when (isPlaying) {
             true -> {
                 // rotate and morph to stop icon
-                playButtonView.setImageResource(R.drawable.anim_play_to_stop)
+                playButtonView.setImageResource(R.drawable.anim_play_to_stop_48dp)
                 val morphDrawable: AnimatedVectorDrawable = playButtonView.drawable as AnimatedVectorDrawable
                 morphDrawable.start()
             }
             false -> {
                 // rotate and morph to play icon
-                playButtonView.setImageResource(R.drawable.anim_stop_to_play)
+                playButtonView.setImageResource(R.drawable.anim_stop_to_play_48dp)
                 val morphDrawable: AnimatedVectorDrawable = playButtonView.drawable as AnimatedVectorDrawable
                 morphDrawable.start()
             }
