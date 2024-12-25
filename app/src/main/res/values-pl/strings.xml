@@ -104,4 +104,6 @@
     <string name="descr_expanded_player_metadata_previous_button">Poprzednio odtwarzane</string>
     <string name="descr_expanded_player_metadata_next_button">Następnie odtwarzane</string>
     <string name="dialog_restore_collection_replace_existing">Zastąpić obecne stacje radiowe zawartością kopii zapasowej?</string>
+    <string name="cast_context_error">Nie udało się uzyskać kontekstu Cast. Spróbuj zaktualizować Usługi Google Play i ponownie uruchomić aplikację.</string>
+    <string name="toast_message_error_station_not_found">Stacja nie została znaleziona.</string>
 </resources>
