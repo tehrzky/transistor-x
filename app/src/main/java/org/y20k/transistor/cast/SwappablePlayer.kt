@@ -6,7 +6,7 @@
  * This file is part of
  * TRANSISTOR - Radio App for Android
  *
- * Copyright (c) 2015-24 - Y20K.org
+ * Copyright (c) 2015-25 - Y20K.org
  * Licensed under the MIT-License
  * http://opensource.org/licenses/MIT
  */
@@ -308,27 +308,27 @@ class SwappablePlayer(private var player: Player) : Player {
         player.seekForward()
     }
 
-    @Deprecated("Deprecated in Java")
-    @OptIn(UnstableApi::class)
-    override fun hasPrevious(): Boolean {
-        return player.hasPrevious()
-    }
+//    @Deprecated("Deprecated in Java")
+//    @OptIn(UnstableApi::class)
+//    override fun hasPrevious(): Boolean {
+//        return player.hasPrevious()
+//    }
 
-    @Deprecated("Deprecated in Java")
-    @OptIn(UnstableApi::class)
-    override fun hasPreviousWindow(): Boolean {
-        return player.hasPreviousWindow()
-    }
+//    @Deprecated("Deprecated in Java")
+//    @OptIn(UnstableApi::class)
+//    override fun hasPreviousWindow(): Boolean {
+//        return player.hasPreviousWindow()
+//    }
 
     override fun hasPreviousMediaItem(): Boolean {
         return player.hasPreviousMediaItem()
     }
 
-    @Deprecated("Deprecated in Java")
-    @OptIn(UnstableApi::class)
-    override fun previous() {
-        player.previous()
-    }
+//    @Deprecated("Deprecated in Java")
+//    @OptIn(UnstableApi::class)
+//    override fun previous() {
+//        player.previous()
+//    }
 
     @Deprecated("Deprecated in Java")
     @OptIn(UnstableApi::class)

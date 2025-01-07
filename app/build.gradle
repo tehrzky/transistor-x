@@ -92,12 +92,12 @@ dependencies {
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation "androidx.media:media:1.7.0"
 
-    def mediaVersion = "1.4.1"
+    def mediaVersion = "1.5.1"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
     implementation "androidx.media3:media3-exoplayer-hls:$mediaVersion"
     implementation "androidx.media3:media3-session:$mediaVersion"
 
-    def navigationVersion = "2.8.3"
+    def navigationVersion = "2.8.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
@@ -107,7 +107,7 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
 
     // Google Cast
-    implementation 'androidx.media3:media3-cast:1.4.1'
+    implementation 'androidx.media3:media3-cast:1.5.1'
     implementation 'androidx.mediarouter:mediarouter:1.7.0'
     implementation 'com.google.android.gms:play-services-cast-framework:22.0.0'
 
