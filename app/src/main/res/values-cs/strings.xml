@@ -102,4 +102,6 @@
     <string name="toast_message_collection_restore">Obnova stanic ze zálohy.</string>
     <string name="toast_message_collection_backup">Záloha stanic na:</string>
     <string name="dialog_add_station_title">Přidat stanici</string>
+    <string name="dialog_restore_collection_replace_existing">Nahradit stávající kolekci stanic kolekcí ze zálohy?</string>
+    <string name="toast_message_error_station_not_found">Stanice nenalezena.</string>
 </resources>
