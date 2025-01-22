@@ -36,7 +36,8 @@
 
         <!-- PLAYER SHEET -->
         <include
-            layout="@layout/bottom_sheet_playback_controls" />
+            layout="@layout/bottom_sheet_playback_controls"
+            tools:visibility="visible" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

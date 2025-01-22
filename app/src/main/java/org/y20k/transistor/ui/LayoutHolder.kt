@@ -22,13 +22,20 @@ import android.os.Build
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -39,7 +46,6 @@ import org.y20k.transistor.core.Station
 import org.y20k.transistor.helpers.DateTimeHelper
 import org.y20k.transistor.helpers.ImageHelper
 import org.y20k.transistor.helpers.PreferencesHelper
-import org.y20k.transistor.helpers.UiHelper
 
 
 /*
@@ -52,6 +58,8 @@ data class LayoutHolder(var rootView: View) {
 
 
     /* Main class variables */
+    private lateinit var systemBars: Insets
+    private var playerFragment: LinearLayout
     var recyclerView: RecyclerView
     val layoutManager: LinearLayoutManager
     var bottomSheet: ConstraintLayout
@@ -85,6 +93,7 @@ data class LayoutHolder(var rootView: View) {
     /* Init block */
     init {
         // find views
+        playerFragment = rootView.findViewById(R.id.player_fragment)
         recyclerView = rootView.findViewById(R.id.station_list)
         bottomSheet = rootView.findViewById(R.id.bottom_sheet)
         //sheetMetadataViews = rootView.findViewById(R.id.sheet_metadata_views)
@@ -149,6 +158,9 @@ data class LayoutHolder(var rootView: View) {
             copyMetadataHistoryToClipboard()
             return@setOnLongClickListener true
         }
+
+        // set up edge to edge display
+        setupEdgeToEdge()
 
         // set layout for player
         setupBottomSheet()
@@ -325,9 +337,10 @@ data class LayoutHolder(var rootView: View) {
 
     /* Shows player */
     fun showPlayer(context: Context): Boolean {
-        UiHelper.setViewMargins(context, recyclerView, 0,0,0, Keys.BOTTOM_SHEET_PEEK_HEIGHT)
-        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN && onboardingLayout.visibility == View.GONE) {
+        toggleListPadding(false)
+        if (bottomSheetBehavior.state == BottomSheetBehavior.STATE_HIDDEN || bottomSheetBehavior.state == BottomSheetBehavior.STATE_SETTLING) {
             bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            bottomSheet.postDelayed({bottomSheetBehavior.isHideable = false}, 50) // disable hiding again - give the bottom sheet time to settle
         }
         return true
     }
@@ -335,7 +348,8 @@ data class LayoutHolder(var rootView: View) {
 
     /* Hides player */
     fun hidePlayer(context: Context): Boolean {
-        UiHelper.setViewMargins(context, recyclerView, 0,0,0, 0)
+        toggleListPadding(true)
+        bottomSheetBehavior.isHideable = true // temporarily allow hiding
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_HIDDEN
         return true
     }
@@ -374,7 +388,7 @@ data class LayoutHolder(var rootView: View) {
                     BottomSheetBehavior.STATE_EXPANDED -> Unit // do nothing
                     BottomSheetBehavior.STATE_HALF_EXPANDED ->  Unit // do nothing
                     BottomSheetBehavior.STATE_SETTLING -> Unit // do nothing
-                    BottomSheetBehavior.STATE_HIDDEN -> showPlayer(rootView.context)
+                    BottomSheetBehavior.STATE_HIDDEN -> Unit // do nothing
                 }
             }
         })
@@ -393,6 +407,48 @@ data class LayoutHolder(var rootView: View) {
             else -> bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         }
     }
+
+
+    /* Sets up margins/paddings for edge to edge view - for API 35 and above */
+    private fun setupEdgeToEdge() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+                // get measurements for status and navigation bar
+                systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+                // apply measurements to the bottom sheet
+                bottomSheetBehavior.peekHeight = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt()
+                downloadProgressIndicator.updateLayoutParams<LinearLayout.LayoutParams> {
+                    topMargin = systemBars.top
+                }
+                bottomSheet.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                    bottomMargin = systemBars.top // bottomMargin is actually the top margin of the bottom sheet ¯\_(ツ)_/¯
+                }
+                bottomSheet.updatePadding(bottom =  systemBars.bottom)
+                recyclerView.updatePadding(bottom = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
+                // return the insets
+                insets
+            }
+        }
+    }
+
+
+    /* Toggles the bottom padding for the fragment container containing the podcast list */
+    private fun toggleListPadding(playerHidden: Boolean) {
+        if (this::systemBars.isInitialized) {
+            if (playerHidden) {
+                recyclerView.updatePadding(bottom = systemBars.bottom) // todo bottom should be 0
+            } else {
+                recyclerView.updatePadding(bottom = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
+            }
+        } else {
+            if (playerHidden) {
+                recyclerView.updatePadding(bottom = 0)
+            } else {
+                recyclerView.updatePadding(bottom = (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
+            }
+        }
+    }
+
 
 
     /*

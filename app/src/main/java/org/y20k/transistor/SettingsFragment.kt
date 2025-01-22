@@ -21,15 +21,18 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -37,6 +40,7 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.contains
+import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -61,12 +65,18 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     /* Overrides onViewCreated from PreferenceFragmentCompat */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        // set up top bar button
+        val topbarBackButton: ImageButton = view.findViewById(R.id.arrow_back)
+        topbarBackButton.setOnClickListener {
+            view.findNavController().navigateUp()
+        }
+        // set up top bar text
+        val topbarTitleView: MaterialTextView = view.findViewById(R.id.topbar_title)
+        topbarTitleView.text = getText(R.string.fragment_settings_title)
         // set the background color
         view.setBackgroundColor(resources.getColor(R.color.app_window_background, null))
-        // show action bar
-        (activity as AppCompatActivity).supportActionBar?.show()
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.fragment_settings_title)
+        // set up edge to edge display
+        setupEdgeToEdge(view)
     }
 
 
@@ -421,8 +431,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     }
 
 
-
-
     /* Opens up a file picker to select the file containing the collection to be restored */
     private fun openRestoreCollectionDialog() {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
@@ -439,5 +447,20 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         }
     }
 
+
+    /* Sets up margins/paddings for edge to edge view - for API 35 and above */
+    private fun setupEdgeToEdge(view: View) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
+                // get measurements for status and navigation bar
+                val systemBars =
+                    insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+                // apply measurements to the main view
+                view.updatePadding(bottom = systemBars.bottom)
+                // return the insets
+                insets
+            }
+        }
+    }
 
 }

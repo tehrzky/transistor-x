@@ -97,6 +97,7 @@
     <string name="pref_update_station_images_title">Update Station Images</string>
     <!-- Accessibility Descriptions -->
     <string name="descr_app_icon">App icon depicting an old radio</string>
+    <string name="descr_back_icon">Navigate back</string>
     <string name="descr_card_small_play_button">Play/stop</string>
     <string name="descr_card_starred_station">Starred station</string>
     <string name="descr_card_station_image">Station image</string>
