@@ -15,9 +15,16 @@
 package org.y20k.transistor
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
+import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
@@ -38,6 +45,7 @@ class MainActivity: AppCompatActivity() {
 
 
     /* Main class variables */
+    private lateinit var systemBars: Insets
     private lateinit var appBarConfiguration: AppBarConfiguration
 
 
@@ -72,8 +80,35 @@ class MainActivity: AppCompatActivity() {
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
         supportActionBar?.hide()
 
+        // set up edge to edge display
+        setupEdgeToEdge()
+
         // register listener for changes in shared preferences
         PreferencesHelper.registerPreferenceChangeListener(sharedPreferenceChangeListener)
+    }
+
+
+    /* Sets up margins/paddings for edge to edge view - for API 35 and above */
+    private fun setupEdgeToEdge() {
+        val rootView: ConstraintLayout = findViewById(R.id.root_view)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
+                // get measurements for status and navigation bar
+                systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+                // apply measurements to the fragment container containing the station list
+                val mainHostContainer: FragmentContainerView = rootView.findViewById(R.id.main_host_container)
+                mainHostContainer.updatePadding(
+                    left = systemBars.left,
+                    top = systemBars.top,
+                    right = systemBars.right,
+                )
+                // return the insets
+                insets
+            }
+        } else {
+            // deactivate edge to edge
+            rootView.fitsSystemWindows = true
+        }
     }
 
 

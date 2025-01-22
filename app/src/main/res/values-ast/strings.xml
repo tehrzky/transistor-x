@@ -103,4 +103,6 @@
     <string name="descr_player_station_image">Imaxe de la emisora</string>
     <string name="descr_player_playback_button">Reproducir/posar</string>
     <string name="onboarding_app_description">Una aplicación de radio</string>
+    <string name="cast_context_error">Hebo un fallu al consiguir el contestu de Cast. Prueba a anovar los servicios de Google Play y reanicia l\'aplicación.</string>
+    <string name="toast_message_error_station_not_found">Nun s\'atopó la emisora.</string>
 </resources>

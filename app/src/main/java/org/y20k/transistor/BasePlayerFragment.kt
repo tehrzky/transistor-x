@@ -18,7 +18,6 @@ import android.Manifest
 import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
@@ -138,7 +137,7 @@ abstract class BasePlayerFragment: Fragment(),
 
         // create collection adapter
         collectionAdapter = CollectionAdapter(
-            activity as Context,
+            requireContext(),
             this as CollectionAdapter.CollectionAdapterListener
         )
     }
@@ -193,6 +192,7 @@ abstract class BasePlayerFragment: Fragment(),
         // load player state
         playerState = PreferencesHelper.loadPlayerState()
         // recreate player ui
+        updatePlayerViews()
         updateStationListState()
         togglePeriodicSleepTimerUpdateRequest()
         // begin looking for changes in collection
@@ -233,7 +233,7 @@ abstract class BasePlayerFragment: Fragment(),
         if (result.resultCode == RESULT_OK && result.data != null) {
             val imageUri: Uri? = result.data?.data
             if (imageUri != null) {
-                collection = CollectionHelper.setStationImageWithStationUuid(activity as Context, collection, imageUri.toString(), tempStationUuid, imageManuallySet = true)
+                collection = CollectionHelper.setStationImageWithStationUuid(requireContext(), collection, imageUri.toString(), tempStationUuid, imageManuallySet = true)
                 tempStationUuid = String()
             }
         }
@@ -246,7 +246,7 @@ abstract class BasePlayerFragment: Fragment(),
                 pickImage()
             } else {
                 // permission denied
-                Toast.makeText(activity as Context, R.string.toast_message_error_missing_storage_permission, Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(), R.string.toast_message_error_missing_storage_permission, Toast.LENGTH_LONG).show()
             }
         }
 
@@ -266,7 +266,7 @@ abstract class BasePlayerFragment: Fragment(),
     override fun onFindStationDialog(station: Station) {
         if (station.streamContent.isNotEmpty() && station.streamContent != Keys.MIME_TYPE_UNSUPPORTED) {
             // add station and save collection
-            collection = CollectionHelper.addStation(activity as Context, collection, station)
+            collection = CollectionHelper.addStation(requireContext(), collection, station)
         } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
@@ -275,7 +275,7 @@ abstract class BasePlayerFragment: Fragment(),
                 station.streamContent = contentType.type
                 // add station and save collection
                 withContext(Main) {
-                    CollectionHelper.addStation(activity as Context, collection, station) // todo check if should be moved to adapter (like removeStation)
+                    CollectionHelper.addStation(requireContext(), collection, station) // todo check if should be moved to adapter (like removeStation)
                 }
             }
         }
@@ -286,7 +286,7 @@ abstract class BasePlayerFragment: Fragment(),
     override fun onAddStationDialog(station: Station) {
         if (station.streamContent.isNotEmpty() && station.streamContent != Keys.MIME_TYPE_UNSUPPORTED) {
             // add station and save collection
-            CollectionHelper.addStation(activity as Context, collection, station) // todo check if should be moved to adapter (like removeStation)
+            CollectionHelper.addStation(requireContext(), collection, station) // todo check if should be moved to adapter (like removeStation)
         }
     }
 
@@ -302,7 +302,7 @@ abstract class BasePlayerFragment: Fragment(),
         else {
             playerState.stationPosition = stationPosition
             // start playback
-            controller?.play(activity as Context, stationPosition)
+            controller?.play(requireContext(), stationPosition)
         }
         updatePlayerViews()
     }
@@ -330,7 +330,7 @@ abstract class BasePlayerFragment: Fragment(),
                 when (dialogResult) {
                     // user tapped remove station
                     true -> {
-                        collectionAdapter.removeStation(activity as Context, payload)
+                        collectionAdapter.removeStation(requireContext(), payload)
                         if (controller?.isPlaying == true && playerState.stationPosition == payload) {
                             // delete the currently playing station
                             playerState.isPlaying = false
@@ -346,7 +346,7 @@ abstract class BasePlayerFragment: Fragment(),
             Keys.DIALOG_RESTORE_COLLECTION -> {
                 when (dialogResult) {
                     // user tapped restore
-                    true -> BackupHelper.restore(activity as Context, payloadString.toUri())
+                    true -> BackupHelper.restore(requireContext(), payloadString.toUri())
                     // user tapped cancel
                     false -> { /* do nothing */
                     }
@@ -358,7 +358,7 @@ abstract class BasePlayerFragment: Fragment(),
 
     /* Initializes the MediaController - handles connection to PlayerService under the hood */
     private fun initializeController() {
-        controllerFuture = MediaController.Builder(activity as Context, SessionToken(activity as Context, ComponentName(activity as Context, PlayerService::class.java))).buildAsync()
+        controllerFuture = MediaController.Builder(requireContext(), SessionToken(requireContext(), ComponentName(requireContext(), PlayerService::class.java))).buildAsync()
         controllerFuture.addListener({ setupController() }, MoreExecutors.directExecutor())
     }
 
@@ -389,12 +389,12 @@ abstract class BasePlayerFragment: Fragment(),
         layout.recyclerView.adapter = collectionAdapter
 
         // enable swipe to delete
-        val swipeToDeleteHandler = object : UiHelper.SwipeToDeleteCallback(activity as Context) {
+        val swipeToDeleteHandler = object : UiHelper.SwipeToDeleteCallback(requireContext()) {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // ask user
                 val adapterPosition: Int = viewHolder.adapterPosition
                 val dialogMessage: String = "${getString(R.string.dialog_yes_no_message_remove_station)}\n\n- ${collection.stations[adapterPosition].name}"
-                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(context = activity as Context, type = Keys.DIALOG_REMOVE_STATION, messageString = dialogMessage, yesButton = R.string.dialog_yes_no_positive_button_remove_station, payload = adapterPosition)
+                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_REMOVE_STATION, messageString = dialogMessage, yesButton = R.string.dialog_yes_no_positive_button_remove_station, payload = adapterPosition)
             }
         }
         val swipeToDeleteItemTouchHelper = ItemTouchHelper(swipeToDeleteHandler)
@@ -402,11 +402,11 @@ abstract class BasePlayerFragment: Fragment(),
 
         // enable swipe to mark starred
         val swipeToMarkStarredHandler =
-            object : UiHelper.SwipeToMarkStarredCallback(activity as Context) {
+            object : UiHelper.SwipeToMarkStarredCallback(requireContext()) {
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     // mark card starred
                     val adapterPosition: Int = viewHolder.adapterPosition
-                    collectionAdapter.toggleStarredStation(activity as Context, adapterPosition)
+                    collectionAdapter.toggleStarredStation(requireContext(), adapterPosition)
                 }
             }
         val swipeToMarkStarredItemTouchHelper = ItemTouchHelper(swipeToMarkStarredHandler)
@@ -422,7 +422,7 @@ abstract class BasePlayerFragment: Fragment(),
                 }
 
                 else -> Toast.makeText(
-                    activity as Context,
+                    requireContext(),
                     R.string.toast_message_sleep_timer_unable_to_start,
                     Toast.LENGTH_LONG
                 ).show()
@@ -455,13 +455,17 @@ abstract class BasePlayerFragment: Fragment(),
         if (playerState.stationPosition > -1 && playerState.stationPosition <= collection.stations.size -1) {
             // get station from player state
             station = collection.stations[playerState.stationPosition]
+            layout.showPlayer(requireContext())
         } else if (collection.stations.isNotEmpty()) {
             // fallback: get first station
             station = collection.stations[0]
             playerState.stationPosition = 0
+            layout.showPlayer(requireContext())
+        } else {
+            layout.hidePlayer(requireContext())
         }
         // update views
-        layout.updatePlayerViews(activity as Context, station, playerState.isPlaying)
+        layout.updatePlayerViews(requireContext(), station, playerState.isPlaying)
     }
 
 
@@ -479,7 +483,7 @@ abstract class BasePlayerFragment: Fragment(),
             controller?.requestSleepTimerRemaining()
         resultFuture?.addListener(kotlinx.coroutines.Runnable {
             val timeRemaining: Long = resultFuture.get().extras.getLong(Keys.EXTRA_SLEEP_TIMER_REMAINING)
-            layout.updateSleepTimer(activity as Context, timeRemaining)
+            layout.updateSleepTimer(requireContext(), timeRemaining)
         }, MoreExecutors.directExecutor())
     }
 
@@ -496,7 +500,7 @@ abstract class BasePlayerFragment: Fragment(),
 
     /* Check permissions and start image picker */
     private fun pickImage() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(activity as Context, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q && ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             // permission READ_EXTERNAL_STORAGE not granted - request permission
             requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         } else {
@@ -549,7 +553,7 @@ abstract class BasePlayerFragment: Fragment(),
                 // CASE: intent is a local file
                 else if (scheme.startsWith("content")) {
                     Log.i(TAG, "Transistor was started to handle a local audio playlist.")
-                    stationList.addAll(CollectionHelper.createStationListFromContentUri(activity as Context, intentUri))
+                    stationList.addAll(CollectionHelper.createStationListFromContentUri(requireContext(), intentUri))
                 }
                 withContext(Main) {
                     if (stationList.isNotEmpty()) {
@@ -568,10 +572,10 @@ abstract class BasePlayerFragment: Fragment(),
     private fun handleStartPlayer() {
         val intent: Intent = (activity as Activity).intent
         if (intent.hasExtra(Keys.EXTRA_START_LAST_PLAYED_STATION)) {
-            controller?.play(activity as Context, playerState.stationPosition)
+            controller?.play(requireContext(), playerState.stationPosition)
         } else if (intent.hasExtra(Keys.EXTRA_STATION_UUID)) {
             val uuid: String = intent.getStringExtra(Keys.EXTRA_STATION_UUID) ?: String()
-            controller?.play(activity as Context, CollectionHelper.getStationPosition(collection, uuid))
+            controller?.play(requireContext(), CollectionHelper.getStationPosition(collection, uuid))
         } else if (intent.hasExtra(Keys.EXTRA_STREAM_URI)) {
             val streamUri: String = intent.getStringExtra(Keys.EXTRA_STREAM_URI) ?: String()
             controller?.playStreamDirectly(streamUri)
@@ -604,10 +608,10 @@ abstract class BasePlayerFragment: Fragment(),
                 updatePlayerViews()
                 // todo only execute the below lines if the collection size has changed (note: the above sizeChanged check does not work)
                 // toggle the onboarding view if necessary and export the collection
-                layout.toggleOnboarding(activity as Context, collection.stations.size)
+                layout.toggleOnboarding(requireContext(), collection.stations.size)
                 if (collection.stations.size > 0) {
                     CoroutineScope(IO).launch {
-                        FileHelper.backupCollectionAsM3u(activity as Context, collection)
+                        FileHelper.backupCollectionAsM3u(requireContext(), collection)
                     }
                 }
             })
@@ -623,22 +627,22 @@ abstract class BasePlayerFragment: Fragment(),
 
         if (updateCollection) {
             arguments?.putBoolean(Keys.ARG_UPDATE_COLLECTION, false)
-            val updateHelper: UpdateHelper = UpdateHelper(activity as Context, collectionAdapter, collection)
+            val updateHelper: UpdateHelper = UpdateHelper(requireContext(), collectionAdapter, collection)
             updateHelper.updateCollection()
         }
         if (updateStationImages) {
             arguments?.putBoolean(Keys.ARG_UPDATE_IMAGES, false)
-            DownloadHelper.updateStationImages(activity as Context)
+            DownloadHelper.updateStationImages(requireContext())
         }
         if (!restoreCollectionFileString.isNullOrEmpty()) {
             arguments?.putString(Keys.ARG_RESTORE_COLLECTION, null)
             when (collection.stations.isNotEmpty()) {
                 true -> {
-                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(context = activity as Context, type = Keys.DIALOG_RESTORE_COLLECTION, messageString = getString(R.string.dialog_restore_collection_replace_existing), payloadString = restoreCollectionFileString)
+                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_RESTORE_COLLECTION, messageString = getString(R.string.dialog_restore_collection_replace_existing), payloadString = restoreCollectionFileString)
                 }
 
                 false -> {
-                    BackupHelper.restore(activity as Context, restoreCollectionFileString.toUri())
+                    BackupHelper.restore(requireContext(), restoreCollectionFileString.toUri())
                 }
             }
         }
@@ -687,17 +691,17 @@ abstract class BasePlayerFragment: Fragment(),
             // store state of playback
             playerState.isPlaying = isPlaying
             // animate state transition of play button(s)
-            layout.animatePlaybackButtonStateTransition(activity as Context, isPlaying)
+            layout.animatePlaybackButtonStateTransition(requireContext(), isPlaying)
             // toggle the sleep timer update subscription
             togglePeriodicSleepTimerUpdateRequest()
 
             if (isPlaying) {
                 // playback is active
-                layout.showPlayer(activity as Context)
+                layout.showPlayer(requireContext())
                 layout.showBufferingIndicator(buffering = false)
             } else {
                 // playback is not active
-                layout.updateSleepTimer(activity as Context)
+                layout.updateSleepTimer(requireContext())
             }
 
             // update the sleep timer running state

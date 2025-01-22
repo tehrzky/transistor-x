@@ -33,7 +33,7 @@
     <string name="pref_app_version_summary">Издание</string>
     <string name="pref_app_version_title">Издание на приложението</string>
     <string name="pref_backup_title">Резервно копие на станциите</string>
-    <string name="pref_backup_summary">Запазва избраните радиостанции и изображения им в хранилището на устройството.</string>
+    <string name="pref_backup_summary">Запазва списъка с радиостанциите и изображенията им в хранилището на устройството.</string>
     <string name="pref_buffer_size_summary_disabled">Използва се стандартното количество междинна памет за възпроизвеждане на потоци.</string>
     <string name="pref_buffer_size_summary_enabled">Използва се голямо количество междинна памет за възпроизвеждане на потоци. Възпроизвеждането може да започне с голямо забавяне.</string>
     <string name="toast_message_install_file_helper">Инсталирайте приложение за управление на файлове.</string>
@@ -66,7 +66,7 @@
     <string name="descr_dialog_edit_place_on_home_screen_icon">Добавяне към началния екран</string>
     <string name="toast_message_shortcut_not_created">Прекият път не е създаден. Устройството не позволява създаването на преки пътища.</string>
     <string name="toast_message_copied_to_clipboard">Копирано в междинната памет.</string>
-    <string name="toast_message_no_image_picker">Няма приложение за избор на изображениея. Инсталирайте приложение за галерия.</string>
+    <string name="toast_message_no_image_picker">Няма приложение за избор на изображения. Инсталирайте приложение за галерия.</string>
     <string name="toast_message_error_missing_storage_permission">За да достъпите този файл е необходим достъп до хранилището.</string>
     <string name="toast_message_updating_station_images">Изображенията на станциите са обновени.</string>
     <string name="toast_message_error_restart_playback_failed">Грешка при възпроизвеждане.</string>

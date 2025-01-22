@@ -103,4 +103,6 @@
     <string name="descr_expanded_player_metadata_previous_button">Entri metadata pemutaran saat ini sebelumnya</string>
     <string name="dialog_add_station_title">Tambah Stasiun</string>
     <string name="dialog_restore_collection_replace_existing">Ganti koleksi stasiun radio saat ini dengan stasiun radio dari cadangan?</string>
+    <string name="toast_message_error_station_not_found">Stasiun tidak ditemukan.</string>
+    <string name="cast_context_error">Gagal mendapatkan konteks Cast. Coba perbarui Layanan Google Play dan mulai ulang aplikasi.</string>
 </resources>
