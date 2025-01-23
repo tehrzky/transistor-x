@@ -116,11 +116,7 @@ class SwappablePlayer(private var player: Player) : Player {
         playlist.addAll(mediaItems)
     }
 
-    override fun setMediaItems(
-        mediaItems: MutableList<MediaItem>,
-        startWindowIndex: Int,
-        startPositionMs: Long
-    ) {
+    override fun setMediaItems(mediaItems: MutableList<MediaItem>, startWindowIndex: Int, startPositionMs: Long) {
         player.setMediaItems(mediaItems, startWindowIndex, startPositionMs)
         playlist.clear()
         playlist.addAll(mediaItems)

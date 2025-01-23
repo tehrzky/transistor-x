@@ -22,8 +22,6 @@ import androidx.core.view.isVisible
 import androidx.mediarouter.app.MediaRouteButton
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.gms.cast.framework.CastContext
-import com.google.android.gms.cast.framework.CastState
-import com.google.android.gms.cast.framework.CastStateListener
 
 
 /*
@@ -33,7 +31,7 @@ class PlayerFragment: BasePlayerFragment() {
 
     /* Main class variables */
     private lateinit var castContext: CastContext
-    private var castEnabled: Boolean = false
+//    private var castEnabled: Boolean = false
     lateinit var castButton: MediaRouteButton
 
 
@@ -52,44 +50,33 @@ class PlayerFragment: BasePlayerFragment() {
         castButton = layout.rootView.findViewById(R.id.cast_button)
         castButton.setRemoteIndicatorDrawable(AppCompatResources.getDrawable(activity as Context, R.drawable.selector_cast_button))
         CastButtonFactory.setUpMediaRouteButton(activity as Context, castButton)
-    }
-
-
-    /* Overrides onResume from BasePlayerFragment */
-    override fun onResume() {
-        super.onResume()
-        // toggle Cast button
-        changeCastButtonVisibility(castEnabled)
-        // start listening for Cast state changes
-        castContext.addCastStateListener(customCastStateListener)
-    }
-
-
-    /* Overrides onPause from BasePlayerFragment */
-    override fun onPause() {
-        super.onPause()
-        // stop listening for Cast state changes
-        castContext.removeCastStateListener(customCastStateListener)
+        // show button if Cast is supported
+        try {
+            CastContext.getSharedInstance(activity as Context)
+            changeCastButtonVisibility(true)
+        } catch (e: Exception) {
+            changeCastButtonVisibility(false)
+        }
     }
 
 
     /* Toggles visibility of the cast button */
-    fun changeCastButtonVisibility(visible: Boolean) {
+    private fun changeCastButtonVisibility(visible: Boolean) {
         castButton.isVisible = visible
     }
 
 
-    /*
-     * Inner class: listener that is called when the Cast state changes
-     */
-    private val customCastStateListener = object : CastStateListener {
-        override fun onCastStateChanged(state: Int) {
-            castEnabled = state != CastState.NO_DEVICES_AVAILABLE
-            changeCastButtonVisibility(castEnabled)
-        }
-    }
-    /*
-     * End of inner class
-     */
+//    /*
+//     * Inner class: listener that is called when the Cast state changes
+//     */
+//    private val customCastStateListener = object : CastStateListener {
+//        override fun onCastStateChanged(state: Int) {
+//            castEnabled = state != CastState.NO_DEVICES_AVAILABLE
+//            changeCastButtonVisibility(castEnabled)
+//        }
+//    }
+//    /*
+//     * End of inner class
+//     */
 
 }
