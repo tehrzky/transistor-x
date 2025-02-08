@@ -104,6 +104,6 @@
     <string name="descr_expanded_player_metadata_previous_button">Vorheriger Metadateneintrag zur aktuellen Wiedergabe</string>
     <string name="dialog_add_station_title">Sender hinzufügen</string>
     <string name="dialog_restore_collection_replace_existing">Aktuelle Sammlung von Radiosendern mit dem Radiosender aus der Sicherung ersetzen\?</string>
-    <string name="cast_context_error">Cast-Kontext konnte nicht bekommen werden. Versuchen Sie, Google Play Services zu aktualisieren und die Anwendung neu zu starten.</string>
+    <string name="cast_context_error">Cast-Kontext konnte nicht abgerufen werden. Versuche, Google Play Services zu aktualisieren und starte die App neu.</string>
     <string name="toast_message_error_station_not_found">Sender nicht gefunden.</string>
 </resources>
