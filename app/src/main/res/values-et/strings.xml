@@ -105,4 +105,5 @@
     <string name="descr_expanded_player_metadata_previous_button">Hetkel kuulatava veebiraadiojaama eelmine metateave</string>
     <string name="onboarding_app_description">Rakendus veebiraadiojaamade kuulamiseks</string>
     <string name="cast_context_error">Google Casti konteksti tuvastamine ei õnnestunud. Proovi uuendada Google Play teenused ja käivita rakendus uuesti.</string>
+    <string name="descr_back_icon">Liigu tagasi</string>
 </resources>
