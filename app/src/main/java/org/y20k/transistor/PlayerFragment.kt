@@ -16,6 +16,7 @@ package org.y20k.transistor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
@@ -29,9 +30,12 @@ import com.google.android.gms.cast.framework.CastContext
  */
 class PlayerFragment: BasePlayerFragment() {
 
+    /* Define log tag */
+    private val TAG: String = PlayerFragment::class.java.simpleName
+
+
     /* Main class variables */
-    private lateinit var castContext: CastContext
-//    private var castEnabled: Boolean = false
+    private var castContext: CastContext? = null
     lateinit var castButton: MediaRouteButton
 
 
@@ -39,7 +43,11 @@ class PlayerFragment: BasePlayerFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // initialize Cast context
-        castContext = CastContext.getSharedInstance(activity as Context)
+        try {
+            castContext = CastContext.getSharedInstance(activity as Context)
+        } catch (e: Exception) {
+            Log.e(TAG, "Cast framework unavailable", e)
+        }
     }
 
 
@@ -48,21 +56,18 @@ class PlayerFragment: BasePlayerFragment() {
         super.onViewCreated(view, savedInstanceState)
         // initialize cast button
         castButton = layout.rootView.findViewById(R.id.cast_button)
-        castButton.setRemoteIndicatorDrawable(AppCompatResources.getDrawable(activity as Context, R.drawable.selector_cast_button))
-        CastButtonFactory.setUpMediaRouteButton(activity as Context, castButton)
-        // show button if Cast is supported
-        try {
-            CastContext.getSharedInstance(activity as Context)
-            changeCastButtonVisibility(true)
-        } catch (e: Exception) {
-            changeCastButtonVisibility(false)
+        if (castContext != null) {
+            try {
+                castButton.setRemoteIndicatorDrawable(AppCompatResources.getDrawable(activity as Context, R.drawable.selector_cast_button))
+                CastButtonFactory.setUpMediaRouteButton(requireContext(), castButton)
+                castButton.isVisible = true
+            } catch (e: Exception) {
+                Log.e(TAG, "Cast button setup failed.", e)
+                castButton.isVisible = false
+            }
+        } else {
+            castButton.isVisible = false
         }
-    }
-
-
-    /* Toggles visibility of the cast button */
-    private fun changeCastButtonVisibility(visible: Boolean) {
-        castButton.isVisible = visible
     }
 
 

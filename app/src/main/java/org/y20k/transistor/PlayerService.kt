@@ -30,7 +30,6 @@ import org.y20k.transistor.cast.SwappablePlayer
 @UnstableApi
 class PlayerService: BasePlayerService() {
 
-
     /* Define log tag */
     private val TAG: String = PlayerService::class.java.simpleName
 
