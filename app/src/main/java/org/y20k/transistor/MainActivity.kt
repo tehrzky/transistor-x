@@ -121,24 +121,6 @@ class MainActivity: AppCompatActivity() {
     }
 
 
-//    /* Overrides onResume from AppCompatActivity */
-//    override fun onResume() {
-//        super.onResume()
-//        if (!this@MainActivity::castContext.isInitialized) {
-//            return
-//        }
-//    }
-//
-//
-//    /* Overrides onPause from AppCompatActivity */
-//    override fun onPause() {
-//        super.onPause()
-//        if (!this@MainActivity::castContext.isInitialized) {
-//            return
-//        }
-//    }
-
-
     /* Overrides onDestroy from AppCompatActivity */
     override fun onDestroy() {
         super.onDestroy()
