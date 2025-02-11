@@ -105,4 +105,5 @@
     <string name="dialog_restore_collection_replace_existing">Queres substituír a colección actual de radios coas incluídas na copia de apoio\?</string>
     <string name="toast_message_error_station_not_found">Non se atopa a emisora.</string>
     <string name="cast_context_error">Non se obtivo o contexto Cast. Intenta actualizar Google Play Services e reiniciar a app.</string>
+    <string name="descr_back_icon">Volver atrás</string>
 </resources>
