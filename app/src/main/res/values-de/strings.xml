@@ -91,7 +91,7 @@
     <string name="pref_backup_summary">Speichere die Sammlung von Radiosendern einschließlich der Bilder im Gerätespeicher.</string>
     <string name="toast_message_collection_restore">Wiederherstellen der Radiosender aus einem Backup.</string>
     <string name="pref_restore_title">Sender wiederherstellen</string>
-    <string name="pref_restore_summary">Wiederherstellen der Sammlung von Radiosendern aus dem Backup. Vorhandene Sender werden ersetzt.</string>
+    <string name="pref_restore_summary">Wiederherstellen der Sammlung von Radiosendern aus einer Sicherung. Vorhandene Sender werden ersetzt.</string>
     <string name="toast_message_collection_backup">Radiosender sichern auf:</string>
     <string name="pref_buffer_size_title">Größeren Puffer verwenden</string>
     <string name="pref_tap_anywhere_playback_summary_disabled">Tippe auf die Wiedergabetaste, um einen Radiosender zu hören.</string>
@@ -106,4 +106,5 @@
     <string name="dialog_restore_collection_replace_existing">Aktuelle Sammlung von Radiosendern mit dem Radiosender aus der Sicherung ersetzen\?</string>
     <string name="cast_context_error">Cast-Kontext konnte nicht abgerufen werden. Versuche, Google Play Services zu aktualisieren und starte die App neu.</string>
     <string name="toast_message_error_station_not_found">Sender nicht gefunden.</string>
+    <string name="descr_back_icon">Zurück gehen</string>
 </resources>
