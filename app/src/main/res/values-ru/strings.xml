@@ -100,5 +100,11 @@
     <string name="dialog_restore_collection_replace_existing">Заменить текущую коллекцию радиостанций на радиостанции из резервной копии?</string>
     <string name="pref_tap_anywhere_playback_title">Нажмите на радиостанцию</string>
     <string name="descr_expanded_player_metadata_copy_button">Скопировать информацию о текущем воспроизведении</string>
-    <string name="pref_buffer_size_summary_disabled">Использовать буфер размер по умолчанию при воспроизведении радиопотока.</string>
+    <string name="pref_buffer_size_summary_disabled">Используется размер буфера по умолчанию при воспроизведении радиопотока.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Нажмите в любом месте на карточке радиостанции, чтобы начать ее прослушивание.</string>
+    <string name="pref_buffer_size_summary_enabled">Включен увеличенный размер буфера для воспроизведения радиопотока. Для начала воспроизведения может потребоваться больше времени.</string>
+    <string name="descr_expanded_player_metadata_previous_button">Метаданные о предыдущем треке</string>
+    <string name="descr_expanded_player_metadata_next_button">Метаданные о следующем треке</string>
+    <string name="descr_back_icon">Вернуться</string>
+    <string name="cast_context_error">Не удалось получить контекст Cast. Попробуйте обновить Службы Google Play и перезапустить приложение.</string>
 </resources>
