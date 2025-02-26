@@ -29,6 +29,7 @@ import android.os.Looper
 import android.text.Html
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.NotificationCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
@@ -50,9 +51,9 @@ import androidx.media3.session.CommandButton
 import androidx.media3.session.DefaultMediaNotificationProvider
 import androidx.media3.session.LibraryResult
 import androidx.media3.session.MediaLibraryService
+import androidx.media3.session.MediaNotification
 import androidx.media3.session.MediaSession
 import androidx.media3.session.SessionCommand
-import androidx.media3.session.SessionCommands
 import androidx.media3.session.SessionResult
 import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
@@ -103,9 +104,7 @@ abstract class BasePlayerService: MediaLibraryService() {
         // load collection
         collection = FileHelper.readCollection(this)
         // create and register collection changed receiver
-        LocalBroadcastManager.getInstance(application).registerReceiver(collectionChangedReceiver, IntentFilter(
-            Keys.ACTION_COLLECTION_CHANGED)
-        )
+        LocalBroadcastManager.getInstance(application).registerReceiver(collectionChangedReceiver, IntentFilter(Keys.ACTION_COLLECTION_CHANGED))
         // initialize player
         initializePlayer()
         // initialize media session
@@ -126,11 +125,11 @@ abstract class BasePlayerService: MediaLibraryService() {
     }
 
 
-    /* Overrides onTaskRemoved from Service */
-    override fun onTaskRemoved(rootIntent: Intent?) {
-        releaseSession()
-        stopSelf() // todo check if that makes sense
-    }
+//    /* Overrides onTaskRemoved from Service */
+//    override fun onTaskRemoved(rootIntent: Intent?) {
+//        releaseSession()
+//        pauseAllPlayersAndStopSelf()
+//    }
 
 
     /* Overrides onGetSession from MediaSessionService */
@@ -151,7 +150,6 @@ abstract class BasePlayerService: MediaLibraryService() {
             addNextIntent(intent)
             getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         }
-
         mediaLibrarySession = MediaLibrarySession.Builder(this, player, librarySessionCallback).apply {
             setSessionActivity(pendingIntent)
         }.build()
@@ -309,7 +307,7 @@ abstract class BasePlayerService: MediaLibraryService() {
 //            }
         }
     }
- 
+
 
     /*
      * Custom MediaLibrarySession Callback that handles player commands
@@ -339,14 +337,25 @@ abstract class BasePlayerService: MediaLibraryService() {
 
         override fun onConnect(session: MediaSession, controller: MediaSession.ControllerInfo): MediaSession.ConnectionResult {
             // add custom commands
-            val connectionResult: MediaSession.ConnectionResult  = super.onConnect(session, controller)
-            val builder: SessionCommands.Builder = connectionResult.availableSessionCommands.buildUpon()
-            builder.add(SessionCommand(Keys.CMD_START_SLEEP_TIMER, Bundle.EMPTY))
-            builder.add(SessionCommand(Keys.CMD_CANCEL_SLEEP_TIMER, Bundle.EMPTY))
-            builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING, Bundle.EMPTY))
-            builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
-            builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
-            return MediaSession.ConnectionResult.accept(builder.build(), connectionResult.availablePlayerCommands);
+            val mediaNotificationSessionCommands = MediaSession.ConnectionResult.DEFAULT_SESSION_AND_LIBRARY_COMMANDS.buildUpon().also { builder ->
+                builder.add(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
+                builder.add(SessionCommand(Keys.CMD_START_SLEEP_TIMER, Bundle.EMPTY))
+                builder.add(SessionCommand(Keys.CMD_CANCEL_SLEEP_TIMER, Bundle.EMPTY))
+                builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING, Bundle.EMPTY))
+                builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
+                builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
+            }.build()
+            // create cancel button
+            val customLayoutCancelButton: CommandButton = CommandButton.Builder().apply {
+                setIconResId(R.drawable.ic_clear_24dp)
+                setDisplayName(getString(R.string.notification_cancel))
+                setSessionCommand(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
+            }.build()
+            // add commands and cancel button to notification
+            return MediaSession.ConnectionResult.AcceptedResultBuilder(session).apply {
+                setAvailableSessionCommands(mediaNotificationSessionCommands)
+                setCustomLayout(ImmutableList.of(customLayoutCancelButton))
+            }.build()
         }
 
         override fun onSubscribe(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String, params: LibraryParams?): ListenableFuture<LibraryResult<Void>> {
@@ -391,6 +400,10 @@ abstract class BasePlayerService: MediaLibraryService() {
                     val resultBundle = Bundle()
                     resultBundle.putStringArrayList(Keys.EXTRA_METADATA_HISTORY, ArrayList(metadataHistory))
                     return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS, resultBundle))
+                }
+                Keys.CMD_CANCEL_NOTIFICATION -> {
+                    player.stop()
+                    return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
                 }
             }
             return super.onCustomCommand(session, controller, customCommand, args)
@@ -439,6 +452,15 @@ abstract class BasePlayerService: MediaLibraryService() {
      * NotificationProvider to customize Notification actions
      */
     private inner class CustomNotificationProvider: DefaultMediaNotificationProvider(this@BasePlayerService) {
+        override fun addNotificationActions(
+            mediaSession: MediaSession,
+            mediaButtons: ImmutableList<CommandButton>,
+            builder: NotificationCompat.Builder,
+            actionFactory: MediaNotification.ActionFactory
+        ): IntArray {
+            return super.addNotificationActions(mediaSession, mediaButtons, builder, actionFactory)
+        }
+
         override fun getMediaButtons(session: MediaSession, playerCommands: Player.Commands, customLayout: ImmutableList<CommandButton>, showPauseButton: Boolean): ImmutableList<CommandButton> {
             val seekToPreviousCommandButton = CommandButton.Builder().apply {
                 setPlayerCommand(Player.COMMAND_SEEK_TO_PREVIOUS)
