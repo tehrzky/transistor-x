@@ -106,4 +106,5 @@
     <string name="toast_message_error_station_not_found">Stáisiún gan aimsiú.</string>
     <string name="cast_context_error">Theip ar an gcomhthéacs Cast a fháil. Bain triail as Google Play Services a nuashonrú agus atosaigh an aip.</string>
     <string name="descr_back_icon">Téigh siar</string>
+    <string name="notification_cancel">Cealaigh</string>
 </resources>
