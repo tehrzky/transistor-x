@@ -107,4 +107,5 @@
     <string name="toast_message_error_station_not_found">Станцію не знайдено.</string>
     <string name="cast_context_error">Не вдалося отримати контекст Cast. Спробуйте оновити Служби Google Play і перезапустіть застосунок.</string>
     <string name="descr_back_icon">Назад</string>
+    <string name="notification_cancel">Скасувати</string>
 </resources>
