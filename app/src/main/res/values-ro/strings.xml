@@ -106,4 +106,5 @@
     <string name="onboarding_app_import_running">Se importă posturile…</string>
     <string name="pref_tap_anywhere_playback_summary_enabled">Atinge oriunde pe cardul unui post de radio pentru a începe să îl asculți.</string>
     <string name="descr_back_icon">Navighează înapoi</string>
+    <string name="notification_cancel">Anulează</string>
 </resources>
