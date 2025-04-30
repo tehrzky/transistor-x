@@ -107,4 +107,5 @@
     <string name="descr_expanded_player_metadata_next_button">Метаданные о следующем треке</string>
     <string name="descr_back_icon">Вернуться</string>
     <string name="cast_context_error">Не удалось получить контекст Cast. Попробуйте обновить Службы Google Play и перезапустить приложение.</string>
+    <string name="notification_cancel">Отменить</string>
 </resources>
