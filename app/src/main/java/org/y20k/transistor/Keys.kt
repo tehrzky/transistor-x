@@ -71,6 +71,7 @@ object Keys {
     // custom MediaController commands
     const val CMD_RELOAD_PLAYER_STATE: String = "RELOAD_PLAYER_STATE"
     const val CMD_REQUEST_PROGRESS_UPDATE: String = "REQUEST_PROGRESS_UPDATE"
+    const val CMD_CANCEL_NOTIFICATION = "CANCEL_NOTIFICATION"
     const val CMD_START_SLEEP_TIMER: String = "START_SLEEP_TIMER"
     const val CMD_CANCEL_SLEEP_TIMER: String = "CANCEL_SLEEP_TIMER"
     const val CMD_REQUEST_SLEEP_TIMER_REMAINING: String = "REQUEST_SLEEP_TIMER_REMAINING"
@@ -194,6 +195,9 @@ object Keys {
     // server addresses
     const val RADIO_BROWSER_API_BASE: String = "all.api.radio-browser.info"
     const val RADIO_BROWSER_API_DEFAULT: String = "de1.api.radio-browser.info"
+
+    // user agent // todo: keep user agent up to date
+    const val DEFAULT_USER_AGENT: String = "Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
 
     // locations
     const val LOCATION_DEFAULT_STATION_IMAGE: String = "android.resource://org.y20k.transistor/drawable/ic_default_station_image_24dp"

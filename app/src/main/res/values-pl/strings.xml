@@ -106,4 +106,6 @@
     <string name="dialog_restore_collection_replace_existing">Zastąpić obecne stacje radiowe zawartością kopii zapasowej?</string>
     <string name="cast_context_error">Nie udało się uzyskać kontekstu Cast. Spróbuj zaktualizować Usługi Google Play i ponownie uruchomić aplikację.</string>
     <string name="toast_message_error_station_not_found">Stacja nie została znaleziona.</string>
+    <string name="descr_back_icon">Nawiguj wstecz</string>
+    <string name="notification_cancel">Anuluj</string>
 </resources>
