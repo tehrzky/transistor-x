@@ -183,8 +183,9 @@ object NetworkHelper {
             // try to open connection and get status
             Log.i(TAG, "Opening http connection.")
             connection = URL(urlString).openConnection() as HttpURLConnection
+            connection.setRequestProperty("User-Agent", Keys.DEFAULT_USER_AGENT)
             val status = connection.responseCode
-
+            Log.i(TAG, "http status: $status")
             // CHECK for non-HTTP_OK status
             if (status != HttpURLConnection.HTTP_OK) {
                 // CHECK for redirect status

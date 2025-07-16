@@ -39,6 +39,8 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
+import androidx.media3.datasource.DefaultDataSource
+import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
@@ -494,12 +496,15 @@ abstract class BasePlayerService: MediaLibraryService() {
      * Custom Player for local playback
      */
     val localPlayer: Player by lazy {
-        // step 1: create the local player
+        // create data source factory with User-Agent
+        val httpDataSourceFactory: DefaultHttpDataSource.Factory = DefaultHttpDataSource.Factory().setUserAgent(Keys.DEFAULT_USER_AGENT)
+        val dataSourceFactory: DefaultDataSource.Factory = DefaultDataSource.Factory(this, httpDataSourceFactory)
+        // create the local player
         val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
             setAudioAttributes(AudioAttributes.DEFAULT, true)
             setHandleAudioBecomingNoisy(true)
             setLoadControl(loadControl)
-            setMediaSourceFactory(DefaultMediaSourceFactory(this@BasePlayerService).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
+            setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
         }.build()
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
