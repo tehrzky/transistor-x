@@ -104,4 +104,6 @@
     <string name="dialog_add_station_title">Přidat stanici</string>
     <string name="dialog_restore_collection_replace_existing">Nahradit stávající kolekci stanic kolekcí ze zálohy?</string>
     <string name="toast_message_error_station_not_found">Stanice nenalezena.</string>
+    <string name="cast_context_error">Nepodařilo se získat vysílaný obsah. Zkuste aktualizovat služby Google Play a restartujte aplikaci.</string>
+    <string name="descr_back_icon">Přejít zpět</string>
 </resources>
