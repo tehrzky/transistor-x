@@ -105,4 +105,6 @@
     <string name="descr_expanded_player_metadata_previous_button">רשומת נתוני־על של מה שמתנגן הקודם</string>
     <string name="toast_message_error_station_not_found">התחנה לא נמצאה.</string>
     <string name="cast_context_error">שידור התוכן נכשל. כדאי לנסות לעדכן את שירותי Play של Google ולהפעיל את היישומון מחדש.</string>
+    <string name="notification_cancel">ביטול</string>
+    <string name="descr_back_icon">ניווט חזרה</string>
 </resources>

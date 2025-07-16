@@ -107,4 +107,5 @@
     <string name="cast_context_error">Cast-Kontext konnte nicht abgerufen werden. Versuche, Google Play Services zu aktualisieren und starte die App neu.</string>
     <string name="toast_message_error_station_not_found">Sender nicht gefunden.</string>
     <string name="descr_back_icon">Zurück gehen</string>
+    <string name="notification_cancel">Abbrechen</string>
 </resources>

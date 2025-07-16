@@ -107,4 +107,5 @@
     <string name="pref_update_station_images_title">Ажурирање слика станица</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Постави на почетни екран</string>
     <string name="descr_back_icon">Иди назад</string>
+    <string name="notification_cancel">Откажи</string>
 </resources>

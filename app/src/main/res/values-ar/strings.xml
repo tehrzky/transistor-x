@@ -37,4 +37,9 @@
     <string name="dialog_error_title_no_network">غير متصل</string>
     <string name="dialog_error_message_no_network">اتصل بالإنترنت.</string>
     <string name="fragment_settings_title">إעعدادات</string>
+    <string name="notification_skip_to_previous">سابق</string>
+    <string name="pref_general_title">عام</string>
+    <string name="dialog_edit_save_changes">https://hosted.weblate.org/translate/transistor/strings/ar/?checksum=9bd7c9409a29a130</string>
+    <string name="notification_stop">قف</string>
+    <string name="notification_skip_to_next">التالي</string>
 </resources>

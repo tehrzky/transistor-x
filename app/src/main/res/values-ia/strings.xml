@@ -103,4 +103,7 @@
     <string name="toast_message_collection_restore">In restauration del stationes de radio ab le copia de securitate.</string>
     <string name="descr_expanded_player_metadata_next_button">Entrata de metadatos de reproduction in curso sequente</string>
     <string name="descr_expanded_player_metadata_previous_button">Entrata de metadatos de reproduction in curso previe</string>
+    <string name="toast_message_error_station_not_found">Station non trovate.</string>
+    <string name="notification_cancel">Cancellar</string>
+    <string name="descr_back_icon">Navigar retro</string>
 </resources>
