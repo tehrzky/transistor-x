@@ -8,12 +8,12 @@ android {
     namespace 'org.y20k.transistor'
 
     defaultConfig {
-        compileSdk 35
+        compileSdk 36
         applicationId "org.y20k.transistor"
         minSdkVersion 25
-        targetSdkVersion 35
-        versionCode 103
-        versionName "4.2.3"
+        targetSdkVersion 36
+        versionCode 104
+        versionName "4.2.4"
         resConfigs "en", "ar", "ast", "bg", "ca", "ckb", "cy", "cs", "de", "el", "eo", "es", "eu", "et", "fi", "fr", "fy", "ga", "gl", "hi", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"
     }
 
@@ -77,33 +77,33 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlinVersion"
 
-    def coroutinesVersion = "1.8.1"
+    def coroutinesVersion = "1.10.2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
 
     implementation 'com.google.android.material:material:1.12.0'
 
     implementation "androidx.activity:activity-ktx:1.10.1"
-    implementation "androidx.appcompat:appcompat:1.7.0"
+    implementation "androidx.appcompat:appcompat:1.7.1"
     implementation "androidx.constraintlayout:constraintlayout:2.2.1"
-    implementation "androidx.core:core-ktx:1.15.0"
+    implementation "androidx.core:core-ktx:1.16.0"
     implementation "androidx.palette:palette-ktx:1.0.0"
     implementation "androidx.preference:preference-ktx:1.2.1"
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
     implementation "androidx.media:media:1.7.0"
 
-    def mediaVersion = "1.5.1"
+    def mediaVersion = "1.7.1"
     implementation "androidx.media3:media3-exoplayer:$mediaVersion"
     implementation "androidx.media3:media3-exoplayer-hls:$mediaVersion"
     implementation "androidx.media3:media3-session:$mediaVersion"
 
-    def navigationVersion = "2.8.8"
+    def navigationVersion = "2.9.2"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
 
-    implementation 'androidx.work:work-runtime-ktx:2.10.0'
+    implementation 'androidx.work:work-runtime-ktx:2.10.2'
 
-    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "com.google.code.gson:gson:2.13.1"
     implementation 'com.android.volley:volley:1.2.1'
 
 }
