@@ -14,7 +14,7 @@ android {
         targetSdkVersion 36
         versionCode 104
         versionName "4.2.4"
-        resConfigs "en", "ar", "ast", "bg", "ca", "ckb", "cy", "cs", "de", "el", "eo", "es", "eu", "et", "fi", "fr", "fy", "ga", "gl", "hi", "hr", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ru", "sk", "sl", "tr", "uk", "zh-rCN"
+        resConfigs "en", "ar", "ast", "bg", "ca", "ckb", "cs", "cy", "de", "el", "eo", "es", "et", "eu", "fi", "fr", "fy", "ga", "gl", "hi", "hr", "hu", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ro", "ru", "sk", "sl", "sr", "ta", "tr", "uk", "zh-rCN"
     }
 
     kotlinOptions {
