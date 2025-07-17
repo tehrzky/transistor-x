@@ -41,6 +41,8 @@ Greek version: [nikos](https://hosted.weblate.org/user/nikoss/) | [weblate versi
 
 Hindi version: [Scrambled777](https://hosted.weblate.org/user/Scrambled777/) | [weblate version history](https://hosted.weblate.org/changes/?lang=hi&project=transistor)
 
+Hungarian version [Gócza Dávid](https://hosted.weblate.org/user/gczdvd/) | [weblate version history](https://hosted.weblate.org/changes/?lang=hu&project=transistor)
+
 Indonesian version: [zmni](https://hosted.weblate.org/user/zmni/) | [weblate version history](https://hosted.weblate.org/changes/?lang=id&project=transistor)
 
 Interlingua version: [softinterlingua](https://codeberg.org/softinterlingua) |  [weblate version history](https://hosted.weblate.org/changes/?lang=ia&project=transistor)
@@ -63,15 +65,19 @@ Portuguese version: [Rui Mendes](https://hosted.weblate.org/user/tonela/) |  [we
 
 Portuguese (Brazil) version: [Pablo Wildson](https://hosted.weblate.org/user/Karioca/) |  [weblate version history](https://hosted.weblate.org/changes/?lang=pt_BR&project=transistor)
 
+Romanian version: [Igor Sorocean](https://hosted.weblate.org/user/ygorigor/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ro&project=transistor)
+
 Russian version: [Nikita Epifanov](https://hosted.weblate.org/user/Nikets/), [Andrei Stepanov](https://hosted.weblate.org/user/adem/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ru&project=transistor)
 
-Serbian version: [Mladen Pejaković](https://hosted.weblate.org/user/pejakm/) | [weblate version history](https://hosted.weblate.org/changes/?lang=sr&project=transistor)
+Serbian version: [Mladen Pejaković](https://hosted.weblate.org/user/pejakm/), [NEXI](https://hosted.weblate.org/user/nexi/) | [weblate version history](https://hosted.weblate.org/changes/?lang=sr&project=transistor)
 
 Slovak version: [Martin M](https://hosted.weblate.org/user/McLenin666/), [Peter Vágner](https://hosted.weblate.org/user/pvagner/) | [weblate version history](https://hosted.weblate.org/changes/?lang=sk&project=transistor)
 
 Slovenian version: [Marjan Macek](https://hosted.weblate.org/user/macek/), [b. bunga](https://hosted.weblate.org/user/bungabunga/) | [weblate version history](https://hosted.weblate.org/changes/?lang=sl&project=transistor)
 
 Spanish version: [gallegonovato](https://hosted.weblate.org/user/gallegonovato/), [Francisco T.](https://hosted.weblate.org/user/franciscot/) | [weblate version history](https://hosted.weblate.org/changes/?lang=es&project=transistor)
+
+Tamil version: [தமிழ்நேரம்](https://hosted.weblate.org/user/TamilNeram/) | [weblate version history](https://hosted.weblate.org/changes/?lang=ta&project=transistor)
 
 Thai version [Athicom](https://hosted.weblate.org/user/ViTy/) | [weblate version history](https://hosted.weblate.org/changes/?lang=th&project=transistor)
 
