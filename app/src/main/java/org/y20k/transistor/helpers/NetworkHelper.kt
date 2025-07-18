@@ -183,7 +183,12 @@ object NetworkHelper {
             // try to open connection and get status
             Log.i(TAG, "Opening http connection.")
             connection = URL(urlString).openConnection() as HttpURLConnection
-            connection.setRequestProperty("User-Agent", Keys.DEFAULT_USER_AGENT)
+            // add user agent if required
+            for (hostname in Keys.WEB_BROWSER_USER_AGENT_REQUIRED) {
+                if (urlString.contains(hostname, ignoreCase = true)) {
+                    connection.setRequestProperty("User-Agent", Keys.WEB_BROWSER_USER_AGENT)
+                }
+            }
             val status = connection.responseCode
             Log.i(TAG, "http status: $status")
             // CHECK for non-HTTP_OK status
