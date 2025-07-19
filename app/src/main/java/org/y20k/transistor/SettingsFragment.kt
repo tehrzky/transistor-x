@@ -74,7 +74,9 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         val topbarTitleView: MaterialTextView = view.findViewById(R.id.topbar_title)
         topbarTitleView.text = getText(R.string.fragment_settings_title)
         // set the background color
-        view.setBackgroundColor(resources.getColor(R.color.app_window_background, null))
+//        val colorSurfaceVariant: Int = MaterialColors.getColor(view, com.google.android.material.R.attr.colorSurfaceVariant) // Provide a default color as a fallback
+//        vtopbarTitleViewiew.setBackgroundColor(colorSurfaceVariant)
+        // view.setBackgroundColor(resources.getColor(R.color.app_window_background, null)) // todo remove
         // set up edge to edge display
         setupEdgeToEdge(view)
     }
