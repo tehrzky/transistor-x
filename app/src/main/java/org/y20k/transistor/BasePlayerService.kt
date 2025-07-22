@@ -45,7 +45,9 @@ import androidx.media3.datasource.HttpDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.analytics.AnalyticsListener
+import androidx.media3.exoplayer.drm.DrmSessionManagerProvider
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
+import androidx.media3.exoplayer.source.MediaSource
 import androidx.media3.exoplayer.upstream.DefaultAllocator
 import androidx.media3.exoplayer.upstream.DefaultLoadErrorHandlingPolicy
 import androidx.media3.exoplayer.upstream.LoadErrorHandlingPolicy
@@ -369,7 +371,7 @@ abstract class BasePlayerService: MediaLibraryService() {
         override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
             val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
             CoroutineScope(Main).launch {
-                val recentMediaItem = CollectionHelper.getRecent(this@BasePlayerService, collection)
+                val recentMediaItem: MediaItem? = CollectionHelper.getRecent(this@BasePlayerService, collection)
                 val result: MediaSession.MediaItemsWithStartPosition = if (recentMediaItem != null) {
                     MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), 0, C.TIME_UNSET)
                 } else {
@@ -419,9 +421,11 @@ abstract class BasePlayerService: MediaLibraryService() {
             // prev: adb shell input keyevent 88
             when (playerCommand) {
                 Player.COMMAND_PREPARE -> {
-                    if (playLastStation) {
+                    // todo check: playLastStation is never "true" ... Player.COMMAND_PREPARE -> can be probably deleted
+                    val recent: MediaItem? = CollectionHelper.getRecent(this@BasePlayerService, collection)
+                    if (playLastStation && recent != null) {
                         // special case: system requested media resumption (see also onGetLibraryRoot)
-                        player.addMediaItem(CollectionHelper.getRecent(this@BasePlayerService, collection))
+                        player.addMediaItem(recent)
                         player.prepare()
                         playLastStation = false
                         return SessionResult.RESULT_SUCCESS
@@ -493,18 +497,92 @@ abstract class BasePlayerService: MediaLibraryService() {
 
 
     /*
+     * Custom LoadErrorHandlingPolicy that handles network drop outs
+     */
+    private val loadErrorHandlingPolicy: DefaultLoadErrorHandlingPolicy = object: DefaultLoadErrorHandlingPolicy()  {
+        override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
+            // try to reconnect every 5 seconds - up to 20 times
+            if (loadErrorInfo.errorCount <= Keys.DEFAULT_MAX_RECONNECTION_COUNT && loadErrorInfo.exception is HttpDataSource.HttpDataSourceException) {
+                return Keys.RECONNECTION_WAIT_INTERVAL
+//            } else {
+//                CoroutineScope(Main).launch {
+//                    player.stop()
+//                }
+            }
+            //    if (loadErrorInfo.errorCount > 3) {
+            //        return C.TIME_UNSET // Don't retry after 3 attempts
+            //    }
+            //    return super.getRetryDelayMsFor(loadErrorInfo)
+            return C.TIME_UNSET
+        }
+
+        override fun getMinimumLoadableRetryCount(dataType: Int): Int {
+            //    return 5 // Allow more retries for manifest loads, for example
+            return Int.MAX_VALUE
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
+    /*
+     * Custom MediaSourceFactory that inserts a web browser user agent for domains in Keys.WEB_BROWSER_USER_AGENT
+     */
+    private val customMediaSourceFactory by lazy {
+        object : MediaSource.Factory {
+            val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory() // use the default user agent
+            val defaultDataSourceFactory = DefaultDataSource.Factory(this@BasePlayerService, defaultHttpDataSourceFactory)
+            val defaultMediaSourceFactory = DefaultMediaSourceFactory(defaultDataSourceFactory).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy)
+
+            val webBrowserHttpDataSourceFactory = DefaultHttpDataSource.Factory().setUserAgent(Keys.WEB_BROWSER_USER_AGENT)
+            val webBrowserCaseDataSourceFactory = DefaultDataSource.Factory(this@BasePlayerService, webBrowserHttpDataSourceFactory)
+            val webBrowserMediaSourceFactory = DefaultMediaSourceFactory(webBrowserCaseDataSourceFactory).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy)
+
+            override fun setDrmSessionManagerProvider(drmSessionManagerProvider: DrmSessionManagerProvider): MediaSource.Factory {
+                defaultMediaSourceFactory.setDrmSessionManagerProvider(drmSessionManagerProvider)
+                webBrowserMediaSourceFactory.setDrmSessionManagerProvider(drmSessionManagerProvider)
+                return this
+            }
+            override fun setLoadErrorHandlingPolicy(loadErrorHandlingPolicy: LoadErrorHandlingPolicy): MediaSource.Factory {
+                defaultMediaSourceFactory.setLoadErrorHandlingPolicy(DefaultLoadErrorHandlingPolicy())
+                webBrowserMediaSourceFactory.setLoadErrorHandlingPolicy(loadErrorHandlingPolicy)
+                return this
+            }
+            override fun getSupportedTypes(): IntArray {
+                return defaultMediaSourceFactory.supportedTypes // both should support the same types
+            }
+            override fun createMediaSource(mediaItem: MediaItem): MediaSource {
+                // return a media source that inserts a web browser user agent if necessary
+                val urlString = mediaItem.requestMetadata.mediaUri?.toString() ?: mediaItem.localConfiguration?.uri.toString()
+                val requiresWebBrowserUserAgent = Keys.WEB_BROWSER_USER_AGENT_REQUIRED.any { hostname ->
+                    urlString.contains(hostname, ignoreCase = true)
+                }
+                return if (requiresWebBrowserUserAgent) {
+                    Log.d(TAG, "Using web browser user agent for: $urlString")
+                    webBrowserMediaSourceFactory.createMediaSource(mediaItem)
+                } else {
+                    Log.d(TAG, "Using default user agent for: $urlString")
+                    defaultMediaSourceFactory.createMediaSource(mediaItem)
+                }
+            }
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
+    /*
      * Custom Player for local playback
      */
     val localPlayer: Player by lazy {
-        // create data source factory with User-Agent
-        val httpDataSourceFactory: DefaultHttpDataSource.Factory = DefaultHttpDataSource.Factory().setUserAgent(Keys.DEFAULT_USER_AGENT)
-        val dataSourceFactory: DefaultDataSource.Factory = DefaultDataSource.Factory(this, httpDataSourceFactory)
         // create the local player
         val exoPlayer: ExoPlayer = ExoPlayer.Builder(this).apply {
             setAudioAttributes(AudioAttributes.DEFAULT, true)
             setHandleAudioBecomingNoisy(true)
             setLoadControl(loadControl)
-            setMediaSourceFactory(DefaultMediaSourceFactory(dataSourceFactory).setLoadErrorHandlingPolicy(loadErrorHandlingPolicy))
+            setMediaSourceFactory(customMediaSourceFactory)
         }.build()
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
@@ -635,31 +713,6 @@ abstract class BasePlayerService: MediaLibraryService() {
             DefaultLoadControl.DEFAULT_BUFFER_FOR_PLAYBACK_AFTER_REBUFFER_MS * bufferSizeMultiplier
         )
         .build()
-    /*
-     * End of declaration
-     */
-
-
-    /*
-     * Custom LoadErrorHandlingPolicy that network drop outs
-     */
-    val loadErrorHandlingPolicy: DefaultLoadErrorHandlingPolicy = object: DefaultLoadErrorHandlingPolicy()  {
-        override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
-            // try to reconnect every 5 seconds - up to 20 times
-            if (loadErrorInfo.errorCount <= Keys.DEFAULT_MAX_RECONNECTION_COUNT && loadErrorInfo.exception is HttpDataSource.HttpDataSourceException) {
-                return Keys.RECONNECTION_WAIT_INTERVAL
-//            } else {
-//                CoroutineScope(Main).launch {
-//                    player.stop()
-//                }
-            }
-            return C.TIME_UNSET
-        }
-
-        override fun getMinimumLoadableRetryCount(dataType: Int): Int {
-            return Int.MAX_VALUE
-        }
-    }
     /*
      * End of declaration
      */
