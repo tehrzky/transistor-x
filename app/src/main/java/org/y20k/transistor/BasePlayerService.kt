@@ -371,7 +371,7 @@ abstract class BasePlayerService: MediaLibraryService() {
         override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
             val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
             CoroutineScope(Main).launch {
-                val recentMediaItem = CollectionHelper.getRecent(this@BasePlayerService, collection)
+                val recentMediaItem: MediaItem? = CollectionHelper.getRecent(this@BasePlayerService, collection)
                 val result: MediaSession.MediaItemsWithStartPosition = if (recentMediaItem != null) {
                     MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), 0, C.TIME_UNSET)
                 } else {
@@ -421,9 +421,11 @@ abstract class BasePlayerService: MediaLibraryService() {
             // prev: adb shell input keyevent 88
             when (playerCommand) {
                 Player.COMMAND_PREPARE -> {
-                    if (playLastStation) {
+                    // todo check: playLastStation is never "true" ... Player.COMMAND_PREPARE -> can be probably deleted
+                    val recent: MediaItem? = CollectionHelper.getRecent(this@BasePlayerService, collection)
+                    if (playLastStation && recent != null) {
                         // special case: system requested media resumption (see also onGetLibraryRoot)
-                        player.addMediaItem(CollectionHelper.getRecent(this@BasePlayerService, collection))
+                        player.addMediaItem(recent)
                         player.prepare()
                         playLastStation = false
                         return SessionResult.RESULT_SUCCESS

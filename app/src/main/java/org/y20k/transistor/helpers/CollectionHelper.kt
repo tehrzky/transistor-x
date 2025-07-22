@@ -396,8 +396,15 @@ object CollectionHelper {
 
 
     /* Returns media item for last played station */
-    fun getRecent(context: Context, collection: Collection): MediaItem {
-        return buildMediaItem(context, collection.stations[PreferencesHelper.loadLastPlayedStationPosition()])
+    fun getRecent(context: Context, collection: Collection): MediaItem? {
+        val lastPlayedPosition: Int = PreferencesHelper.loadLastPlayedStationPosition()
+        val station: Station? = collection.stations.getOrNull(lastPlayedPosition)
+        if (station == null) {
+            Log.w(TAG, "Last played station not found.")
+            return null
+        } else {
+            return buildMediaItem(context, station)
+        }
     }
 
 
