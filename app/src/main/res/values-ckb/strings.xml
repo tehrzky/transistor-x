@@ -77,4 +77,14 @@
     <string name="descr_card_station_image">وێنەی وێستگە</string>
     <string name="descr_card_station_image_change">وێنەی وێستگە بگۆڕە</string>
     <string name="descr_expanded_player_metadata_copy_button">زانیاریی ئەوەی لێدەدرێت کۆپی بکە</string>
+    <string name="dialog_add_station_title">وێستگەیەک زیاد بکە</string>
+    <string name="dialog_rename_station_input_hint">ناوێکی نوێ بنووسە</string>
+    <string name="dialog_restore_collection_replace_existing">کۆکراوەی وێستگە ڕادیۆیییەکان جێدەگریتەوە بە وێستگە ڕادیۆیییەکەی پاڵپشت؟</string>
+    <string name="toast_message_error_station_not_found">وێستگەکە نەدۆزرایەوە.</string>
+    <string name="toast_message_collection_restore">وێستگە ڕادیۆیییەکان لە پاڵپشتەوە دەھێندرێنەوە.</string>
+    <string name="toast_message_collection_backup">پاڵپشتکردنی وێستگە ڕادیۆیییەکان بۆ:</string>
+    <string name="toast_message_shortcut_created">قەدبڕ دروستکرا.</string>
+    <string name="toast_message_shortcut_not_created">قەدبڕ دروست نەکرا. ئەم ئامێرە ڕێ بە دروستکردنی قەدبڕەکان نادات.</string>
+    <string name="toast_message_copied_to_clipboard">کۆپی کرا بۆ کلیپبۆرد.</string>
+    <string name="toast_message_no_image_picker">ھیچ وێنەھەڵگرێک بەردەست نییە. تکایە دانەیەک داببەزێنە.</string>
 </resources>
