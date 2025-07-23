@@ -105,4 +105,6 @@
     <string name="dialog_restore_collection_replace_existing">Ganti koleksi stasiun radio saat ini dengan stasiun radio dari cadangan?</string>
     <string name="toast_message_error_station_not_found">Stasiun tidak ditemukan.</string>
     <string name="cast_context_error">Gagal mendapatkan konteks Cast. Coba perbarui Layanan Google Play dan mulai ulang aplikasi.</string>
+    <string name="notification_cancel">Batal</string>
+    <string name="descr_back_icon">Kembali</string>
 </resources>
