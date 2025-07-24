@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/station_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingStart="8dp"
+    android:background="?attr/colorSurface"
+    android:paddingStart="0dp"
     android:paddingTop="8dp"
-    android:paddingEnd="8dp"
-    android:paddingBottom="0dp"
-    android:background="?attr/colorSurface">
+    android:paddingEnd="0dp"
+    android:paddingBottom="0dp">
 
     <View
         android:id="@+id/divider"
@@ -18,23 +17,25 @@
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
         android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/station_icon"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/station_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="16dp"
         android:layout_marginBottom="8dp"
-        android:background="@null"
+        android:background="?attr/colorSecondary"
         android:contentDescription="@string/descr_card_station_image"
+        android:scaleType="centerInside"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:shapeAppearanceOverlay="@style/RoundedCorners"
-        app:srcCompat="@drawable/ic_default_station_image_72dp" />
+        app:shapeAppearanceOverlay="@style/Circle"
+        app:srcCompat="@drawable/ic_default_station_image_48dp" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/change_image_view"
@@ -48,23 +49,23 @@
         app:layout_constraintEnd_toEndOf="@+id/station_icon"
         app:layout_constraintStart_toStartOf="@+id/station_icon"
         app:layout_constraintTop_toTopOf="@+id/station_icon"
-        app:shapeAppearanceOverlay="@style/RoundedCorners"
+        app:shapeAppearanceOverlay="@style/Circle"
         app:srcCompat="@drawable/ic_image_inverse_36dp" />
 
-<!--    <com.google.android.material.imageview.ShapeableImageView-->
-<!--        android:id="@+id/imageView"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:cropToPadding="false"-->
-<!--        app:contentPadding="8dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/cancel_button"-->
-<!--        app:layout_constraintEnd_toEndOf="@+id/station_icon"-->
-<!--        app:layout_constraintStart_toStartOf="@+id/station_icon"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/station_icon"-->
-<!--        app:shapeAppearanceOverlay="@style/RoundedCorners"-->
-<!--        app:srcCompat="@drawable/ic_add_to_home_screen_24dp"-->
-<!--        app:strokeColor="@color/text_default"-->
-<!--        app:strokeWidth="1dp" />-->
+    <!--    <com.google.android.material.imageview.ShapeableImageView-->
+    <!--        android:id="@+id/imageView"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:cropToPadding="false"-->
+    <!--        app:contentPadding="8dp"-->
+    <!--        app:layout_constraintBottom_toTopOf="@+id/cancel_button"-->
+    <!--        app:layout_constraintEnd_toEndOf="@+id/station_icon"-->
+    <!--        app:layout_constraintStart_toStartOf="@+id/station_icon"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/station_icon"-->
+    <!--        app:shapeAppearanceOverlay="@style/RoundedCorners"-->
+    <!--        app:srcCompat="@drawable/ic_add_to_home_screen_24dp"-->
+    <!--        app:strokeColor="@color/text_default"-->
+    <!--        app:strokeWidth="1dp" />-->
 
     <ImageView
         android:id="@+id/starred_icon"
@@ -97,7 +98,6 @@
         app:layout_constraintTop_toTopOf="@+id/station_icon"
         tools:text="@string/sample_text_station_name" />
 
-<!--    android:backgroundTint="@color/default_transparent"-->
     <ImageButton
         android:id="@+id/playback_button"
         android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
         android:contentDescription="@string/descr_card_small_play_button"
         android:paddingStart="8dp"
         android:paddingTop="8dp"
-        android:paddingEnd="12dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toBottomOf="@+id/station_name"
         app:layout_constraintEnd_toEndOf="parent"
