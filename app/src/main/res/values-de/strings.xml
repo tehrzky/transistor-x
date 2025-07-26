@@ -62,7 +62,7 @@
     <string name="dialog_find_station_title">Sender finden</string>
     <string name="dialog_find_station_hint">Name oder Stream-Adresse</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Auf dem Startbildschirm platzieren</string>
-    <string name="onboarding_app_import_running">Importiere deine Sender…</string>
+    <string name="onboarding_app_import_running">Deine Sender werden importiert …</string>
     <string name="toast_message_updating_station_images">Aktualisierung der Senderbilder.</string>
     <string name="toast_message_error_restart_playback_failed">Die Wiedergabe konnte nicht neu gestartet werden.</string>
     <string name="toast_message_error_download_error">Fehler beim Herunterladen</string>
