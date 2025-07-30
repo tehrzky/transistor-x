@@ -18,7 +18,10 @@
             android:id="@+id/station_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingBottom="96dp"
+            android:clipToPadding="false"
             android:visibility="visible" />
+        <!-- make room for the player => paddingBottom = Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) -->
 
         <!-- ONBOARDING -->
         <include

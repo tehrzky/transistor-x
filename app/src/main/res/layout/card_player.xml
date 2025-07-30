@@ -5,7 +5,6 @@
     android:id="@+id/player_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
     android:alpha="1"
     android:layout_gravity="center"
     app:cardElevation="1dp"
@@ -31,6 +30,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
             app:shapeAppearanceOverlay="@style/Circle"
             app:srcCompat="@drawable/ic_default_station_image_48dp" />
 
@@ -60,8 +60,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:letterSpacing="0"
             android:singleLine="true"
@@ -94,11 +94,12 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="72dp"
             android:layout_height="72dp"
-            android:layout_marginEnd="3dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="2dp"
             android:indeterminateTint="?attr/colorOnPrimary"
             android:indeterminateTintMode="src_in"
             android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/station_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:visibility="visible" />
@@ -108,13 +109,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            android:contentDescription="@string/descr_expanded_player_streaming_link_icon"
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/station_icon"
             app:srcCompat="@drawable/ic_player_sheet_music_note_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/sheet_streaming_link_headline"
+            android:id="@+id/sheet_streaming_link_headline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/player_sheet_h2_stream_url"

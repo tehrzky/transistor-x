@@ -174,6 +174,7 @@ class PlayerFragment: Fragment(),
         }
     }
 
+
     /* Register permission launcher */
     private val requestPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted: Boolean ->
             if (isGranted) {

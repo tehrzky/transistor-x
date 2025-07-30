@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,9 +47,8 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <!-- DOWNLOAD INDICATOR -->
-    <android.widget.ProgressBar
+    <com.google.android.material.progressindicator.LinearProgressIndicator
         android:id="@+id/download_progress_indicator"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorSurface"

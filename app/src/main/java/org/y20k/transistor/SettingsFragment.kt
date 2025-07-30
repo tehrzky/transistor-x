@@ -24,7 +24,6 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
@@ -40,6 +39,8 @@ import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.contains
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -51,6 +52,7 @@ import org.y20k.transistor.helpers.BackupHelper
 import org.y20k.transistor.helpers.FileHelper
 import org.y20k.transistor.helpers.NetworkHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.UiHelper
 
 
 /*
@@ -66,17 +68,13 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // set up top bar button
-        val topbarBackButton: ImageButton = view.findViewById(R.id.arrow_back)
+        val topbarBackButton: MaterialButton = view.findViewById(R.id.arrow_back)
         topbarBackButton.setOnClickListener {
             view.findNavController().navigateUp()
         }
         // set up top bar text
         val topbarTitleView: MaterialTextView = view.findViewById(R.id.topbar_title)
         topbarTitleView.text = getText(R.string.fragment_settings_title)
-        // set the background color
-//        val colorSurfaceVariant: Int = MaterialColors.getColor(view, com.google.android.material.R.attr.colorSurfaceVariant) // Provide a default color as a fallback
-//        vtopbarTitleViewiew.setBackgroundColor(colorSurfaceVariant)
-        // view.setBackgroundColor(resources.getColor(R.color.app_window_background, null)) // todo remove
         // set up edge to edge display
         setupEdgeToEdge(view)
     }
@@ -452,16 +450,26 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
     /* Sets up margins/paddings for edge to edge view - for API 35 and above */
     private fun setupEdgeToEdge(view: View) {
+        val preferencesList: RecyclerView = listView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
                 // get measurements for status and navigation bar
-                val systemBars =
-                    insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                // apply measurements to the main view
-                view.updatePadding(bottom = systemBars.bottom)
+                val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+                // apply measurements to the main view to make room for the status bar
+                view.updatePadding(top = systemBars.top)
+                // apply measurements to the list to make room for the player
+                preferencesList.updatePadding(
+                    bottom = systemBars.bottom + ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(requireContext())).toInt()
+                )
+
                 // return the insets
                 insets
             }
+        } else {
+            // make room for the player
+            preferencesList.updatePadding(
+                bottom = ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(requireContext())).toInt()
+            )
         }
     }
 

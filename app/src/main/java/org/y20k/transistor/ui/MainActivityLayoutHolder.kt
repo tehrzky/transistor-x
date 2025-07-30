@@ -22,10 +22,10 @@ import android.support.v4.media.session.PlaybackStateCompat
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -33,7 +33,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.card.MaterialCardView
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
@@ -41,6 +40,7 @@ import org.y20k.transistor.core.Station
 import org.y20k.transistor.helpers.DateTimeHelper
 import org.y20k.transistor.helpers.ImageHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.UiHelper
 
 
 /*
@@ -308,7 +308,7 @@ data class MainActivityLayoutHolder (var rootView: View) {
     /* Minimizes player sheet if expanded */
     fun navigateBackTogglesPlaybackViewsIfNecessary(): Boolean {
         return if (playerStationInfoViews.isVisible && playerPlaybackViews.isGone) {
-            showPlayerPlaybackViews()
+            hidePlayerInfoViews()
             true
         } else {
             false
@@ -328,18 +328,22 @@ data class MainActivityLayoutHolder (var rootView: View) {
     /* Shows the info views and hides the playback views */
     private fun showPlayerInfoViews() {
         playerStationInfoViews.isVisible = true
-        playerPlaybackViews.isGone = true
-        bufferingIndicator.isVisible = false
+        sleepTimerRunningViews.isGone = sheetSleepTimerRemainingTimeView.text.isEmpty()
+    }
+
+    /* Shows the info views and hides the playback views */
+    private fun hidePlayerInfoViews() {
+        playerStationInfoViews.isGone = true
         sleepTimerRunningViews.isGone = sheetSleepTimerRemainingTimeView.text.isEmpty()
     }
 
 
     /* Toggles between showing the playback views (default) and the station info views */
     private fun togglePlayerInfoViews() {
-        if (playerStationInfoViews.isGone && playerPlaybackViews.isVisible) {
+        if (playerStationInfoViews.isGone) {
             showPlayerInfoViews()
-        } else if (playerStationInfoViews.isVisible && playerPlaybackViews.isGone) {
-            showPlayerPlaybackViews()
+        } else if (playerStationInfoViews.isVisible) {
+            hidePlayerInfoViews()
         }
     }
 
@@ -359,26 +363,23 @@ data class MainActivityLayoutHolder (var rootView: View) {
             ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
                 // get measurements for status and navigation bar
                 systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                // apply measurements
-                // todo add to player card
-//                bottomSheetBehavior.peekHeight = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt()
-                downloadProgressIndicator.updateLayoutParams<LinearLayout.LayoutParams> {
+
+                // apply measurements to the download progress indicator
+                downloadProgressIndicator.updateLayoutParams<ConstraintLayout.LayoutParams> {
                     topMargin = systemBars.top
                 }
 
-                // todo
-                // apply measurements to the fragment container containing the podcast list
+                // apply measurements to the player card
+                playerCardView.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    bottomMargin = (Keys.PLAYER_BOTTOM_MARGIN * UiHelper.getDensityScalingFactor(rootView.context)).toInt() + systemBars.bottom
+                }
 
-
-//                bottomSheet.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-//                    bottomMargin = systemBars.top // bottomMargin is actually the top margin of the bottom sheet ¯\_(ツ)_/¯
-//                }
-                // todo check the updatePadding calls
-                // bottomSheet.updatePadding(bottom =  systemBars.bottom)
-                // recyclerView.updatePadding(bottom = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
                 // return the insets
                 insets
             }
+        } else {
+            // deactivate edge to edge for main activity
+            rootView.fitsSystemWindows = true
         }
     }
 
@@ -399,20 +400,6 @@ data class MainActivityLayoutHolder (var rootView: View) {
 //            }
 //        }
 //    }
-
-
-
-    /*
-     * Inner class: Custom LinearLayoutManager
-     */
-    private inner class CustomLayoutManager(context: Context): LinearLayoutManager(context, VERTICAL, false) {
-        override fun supportsPredictiveItemAnimations(): Boolean {
-            return true
-        }
-    }
-    /*
-     * End of inner class
-     */
 
 
 }

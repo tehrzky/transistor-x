@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!-- show light status bar -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- inject custom layout for preferences -->
+        <!-- credit: https://medium.com/@JakobUlbrich/sure-you-can-use-a-custom-layout-for-your-preferencefragmentcompat-318b7fa06e29 -->
+        <item name="preferenceFragmentCompatStyle">
+            @style/AppPreferenceFragmentCompatStyle
+        </item>
+
+        <!--        <item name="mediaRouteTheme">@style/CustomMediaRouterTheme</item>-->
+
+    </style>
+
+</resources>

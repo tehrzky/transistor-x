@@ -8,8 +8,7 @@
     android:background="?attr/colorSurfaceVariant"
     android:minHeight="?attr/actionBarSize">
 
-<!--    android:background="@color/default_transparent"-->
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/arrow_back"
         style="?attr/materialIconButtonStyle"
         android:layout_width="wrap_content"
@@ -18,7 +17,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_arrow_back_24dp" />
+        app:icon="@drawable/ic_arrow_back_24dp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/topbar_title"

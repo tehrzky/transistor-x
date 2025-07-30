@@ -18,7 +18,6 @@ package org.y20k.transistor
 import android.content.ComponentName
 import android.content.SharedPreferences
 import android.media.AudioManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -26,12 +25,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.Insets
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
-import androidx.fragment.app.FragmentContainerView
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
@@ -112,9 +106,6 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
         supportActionBar?.hide()
 
-        // set up edge to edge display
-        setupEdgeToEdge()
-
         // set up playback controls
         setupPlaybackControls()
 
@@ -180,38 +171,12 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
                 requestMetadataUpdate()
             }
         }
-
-    }
-
-
-
-    /* Sets up margins/paddings for edge to edge view - for API 35 and above */
-    private fun setupEdgeToEdge() {
-        val rootView: ConstraintLayout = findViewById(R.id.root_view)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
-            ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
-                // get measurements for status and navigation bar
-                systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                // apply measurements to the fragment container containing the station list
-                val mainHostContainer: FragmentContainerView = rootView.findViewById(R.id.main_host_container)
-                mainHostContainer.updatePadding(
-                    left = systemBars.left,
-                    top = systemBars.top,
-                    right = systemBars.right,
-                )
-                // return the insets
-                insets
-            }
-        } else {
-            // deactivate edge to edge
-            rootView.fitsSystemWindows = true
-        }
     }
 
 
     /* Overrides onSupportNavigateUp from AppCompatActivity */
     override fun onSupportNavigateUp(): Boolean {
-        // Taken from: https://developer.android.com/guide/navigation/navigation-ui#action_bar
+        // taken from: https://developer.android.com/guide/navigation/navigation-ui#action_bar
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.main_host_container) as NavHostFragment
         val navController = navHostFragment.navController
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
@@ -301,8 +266,7 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
 
     /* Requests an update of the sleep timer from the player service */
     private fun requestSleepTimerUpdate() {
-        val resultFuture: ListenableFuture<SessionResult>? =
-            controller?.requestSleepTimerRemaining()
+        val resultFuture: ListenableFuture<SessionResult>? = controller?.requestSleepTimerRemaining()
         resultFuture?.addListener(kotlinx.coroutines.Runnable {
             val timeRemaining: Long = resultFuture.get().extras.getLong(Keys.EXTRA_SLEEP_TIMER_REMAINING)
             layout.updateSleepTimer(this, timeRemaining)
