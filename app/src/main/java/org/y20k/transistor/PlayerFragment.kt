@@ -155,6 +155,12 @@ class PlayerFragment: Fragment(),
         observeCollectionViewModel()
         // handle navigation arguments
         handleNavigationArguments()
+        // set up list drag listener
+        val mainActivity = activity as? BaseMainActivity
+        if (mainActivity != null) {
+            layout.setListDragListener(mainActivity.layout as PlayerFragmentLayoutHolder.StationListDragListener)
+            // layout.setListDragListener(mainActivity as SettingsFragment.SettingsListDragListener)
+        }
     }
 
 
@@ -415,22 +421,26 @@ class PlayerFragment: Fragment(),
         collectionViewModel.collectionLiveData.observe(
             this,
             Observer<Collection> { updatedCollection ->
+                // get BaseMainActivity instance
+                val mainActivity = activity as? BaseMainActivity
+
                 // update collection
                 collection = updatedCollection
                 
                 // toggle the onboarding view if necessary and export the collection
-                layout.toggleOnboarding(requireContext(), collection.stations.size)
+                layout.toggleOnboarding(collection.stations.size)
                 if (collection.stations.size > 0) {
                     CoroutineScope(IO).launch {
                         FileHelper.backupCollectionAsM3u(requireContext(), collection)
                     }
                 }
                 
-                // Notify the activity about the updated collection
-                val mainActivity = activity as? BaseMainActivity
+                // notify the activity about the updated collection
                 if (mainActivity != null && collection.stations.isNotEmpty()) {
-                    val currentStation = collection.stations[PreferencesHelper.loadLastPlayedStationPosition().coerceIn(0, collection.stations.size - 1)]
+                    val currentStation: Station = collection.stations[PreferencesHelper.loadLastPlayedStationPosition().coerceIn(0, collection.stations.size - 1)]
                     mainActivity.updatePlayerViews(currentStation)
+                } else if (mainActivity != null && collection.stations.isEmpty()) {
+                    // todo hide the player
                 }
             })
     }

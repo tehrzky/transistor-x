@@ -31,7 +31,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -40,8 +39,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.contains
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.button.MaterialButton
-import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -64,17 +61,23 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     private val TAG: String = SettingsFragment::class.java.simpleName
 
 
+    /* Interfaces for list events */
+    interface SettingsListDragListener {
+        fun onSettingsListDragStateChanged(newState: Int)
+    }
+
+
+    /* Main class variables */
+    private var settingsListDragListener: SettingsListDragListener? = null
+
+
     /* Overrides onViewCreated from PreferenceFragmentCompat */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // set up top bar button
-        val topbarBackButton: MaterialButton = view.findViewById(R.id.arrow_back)
-        topbarBackButton.setOnClickListener {
-            view.findNavController().navigateUp()
-        }
-        // set up top bar text
-        val topbarTitleView: MaterialTextView = view.findViewById(R.id.topbar_title)
-        topbarTitleView.text = getText(R.string.fragment_settings_title)
+
+        // set up list drag listener
+        setUpDragListener()
+
         // set up edge to edge display
         setupEdgeToEdge(view)
     }
@@ -106,6 +109,33 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             }
         }
 
+        // set up "Dynamic Colors" preference (Android 12+ only)
+        val preferenceEnableDynamicColors: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
+        preferenceEnableDynamicColors.title = getString(R.string.pref_dynamic_colors_title)
+        preferenceEnableDynamicColors.setIcon(R.drawable.ic_color_palette_24dp)
+        preferenceEnableDynamicColors.key = Keys.PREF_DYNAMIC_COLORS
+        preferenceEnableDynamicColors.summaryOn = getString(R.string.pref_dynamic_colors_summary_enabled)
+        preferenceEnableDynamicColors.summaryOff = getString(R.string.pref_dynamic_colors_summary_disabled)
+        preferenceEnableDynamicColors.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        preferenceEnableDynamicColors.setDefaultValue(PreferencesHelper.loadDynamicColorsEnabled())
+        preferenceEnableDynamicColors.setOnPreferenceChangeListener { _, newValue ->
+            val enabled = newValue as Boolean
+            PreferencesHelper.saveDynamicColorsEnabled(enabled) // Save the new setting
+
+            // Important: For dynamic colors to apply/unapply reliably,
+            // the Activity needs to be recreated.
+            // DynamicColors.applyToActivitiesIfAvailable() is usually called in Application.onCreate()
+            // to set it up for the app's lifetime. Toggling it mid-flight requires a recreate.
+
+            // Recreate the current activity to apply the theme change.
+            // This will ensure that the Activity restarts and applies the correct
+            // theme (either with or without dynamic colors from the start).
+            activity?.recreate()
+
+            Log.v(TAG, "Dynamic Colors Toggled. Enabled: $enabled. Activity will be recreated.")
+
+            true // Return true to update the state of the Preference.
+        }
 
         // set up "Tap Anywhere" preference
         val preferenceEnableTapAnywherePlayback: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
@@ -115,7 +145,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceEnableTapAnywherePlayback.summaryOn = getString(R.string.pref_tap_anywhere_playback_summary_enabled)
         preferenceEnableTapAnywherePlayback.summaryOff = getString(R.string.pref_tap_anywhere_playback_summary_disabled)
         preferenceEnableTapAnywherePlayback.setDefaultValue(PreferencesHelper.loadTapAnyWherePlayback())
-
 
         // set up "Update Station Images" preference
         val preferenceUpdateStationImages: Preference = Preference(activity as Context)
@@ -128,7 +157,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             return@setOnPreferenceClickListener true
         }
 
-
 //        // set up "Update Stations" preference
 //        val preferenceUpdateCollection: Preference = Preference(activity as Context)
 //        preferenceUpdateCollection.title = getString(R.string.pref_update_collection_title)
@@ -140,7 +168,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 //            return@setOnPreferenceClickListener true
 //        }
 
-
         // set up "M3U Export" preference
         val preferenceM3uExport: Preference = Preference(activity as Context)
         preferenceM3uExport.title = getString(R.string.pref_m3u_export_title)
@@ -150,7 +177,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             openSaveM3uDialog()
             return@setOnPreferenceClickListener true
         }
-
 
         // set up "Backup Stations" preference
         val preferenceBackupCollection: Preference = Preference(activity as Context)
@@ -162,7 +188,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             return@setOnPreferenceClickListener true
         }
 
-
         // set up "Restore Stations" preference
         val preferenceRestoreCollection: Preference = Preference(activity as Context)
         preferenceRestoreCollection.title = getString(R.string.pref_restore_title)
@@ -173,7 +198,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             return@setOnPreferenceClickListener true
         }
 
-
         // set up "Buffer Size" preference
         val preferenceBufferSize: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
         preferenceBufferSize.title = getString(R.string.pref_buffer_size_title)
@@ -183,7 +207,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceBufferSize.summaryOff = getString(R.string.pref_buffer_size_summary_disabled)
         preferenceBufferSize.setDefaultValue(PreferencesHelper.loadLargeBufferSize())
 
-
         // set up "Edit Stream Address" preference
         val preferenceEnableEditingStreamUri: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
         preferenceEnableEditingStreamUri.title = getString(R.string.pref_edit_station_stream_title)
@@ -192,7 +215,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceEnableEditingStreamUri.summaryOn = getString(R.string.pref_edit_station_stream_summary_enabled)
         preferenceEnableEditingStreamUri.summaryOff = getString(R.string.pref_edit_station_stream_summary_disabled)
         preferenceEnableEditingStreamUri.setDefaultValue(PreferencesHelper.loadEditStreamUrisEnabled())
-
 
         // set up "Edit Stations" preference
         val preferenceEnableEditingGeneral: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
@@ -214,7 +236,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             }
             return@setOnPreferenceChangeListener true
         }
-
 
         // set up "App Version" preference
         val preferenceAppVersion: Preference = Preference(context)
@@ -238,6 +259,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         val preferenceCategoryGeneral: PreferenceCategory = PreferenceCategory(activity as Context)
         preferenceCategoryGeneral.title = getString(R.string.pref_general_title)
         preferenceCategoryGeneral.contains(preferenceThemeSelection)
+        preferenceCategoryGeneral.contains(preferenceEnableDynamicColors)
         preferenceCategoryGeneral.contains(preferenceEnableTapAnywherePlayback)
 
         val preferenceCategoryMaintenance: PreferenceCategory = PreferenceCategory(activity as Context)
@@ -262,6 +284,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         // setup preference screen
         screen.addPreference(preferenceCategoryGeneral)
         screen.addPreference(preferenceThemeSelection)
+        screen.addPreference(preferenceEnableDynamicColors)
         screen.addPreference(preferenceEnableTapAnywherePlayback)
         screen.addPreference(preferenceCategoryMaintenance)
         screen.addPreference(preferenceUpdateStationImages)
@@ -303,6 +326,11 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
         }
 
+    }
+
+    /* Sets the list drag listener */
+    fun setListDragListener(listener: SettingsListDragListener) {
+        settingsListDragListener = listener
     }
 
 
@@ -412,8 +440,6 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     }
 
 
-
-
     /* Opens up a file picker to select the backup location */
     private fun openBackupCollectionDialog() {
         val intent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
@@ -448,6 +474,24 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     }
 
 
+    /* Creates a listener that detects when the list of preferences is being dragged */
+    private fun setUpDragListener() {
+        // add scroll listener to detect when list is being dragged
+        val preferencesList: RecyclerView = listView
+        preferencesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                settingsListDragListener?.onSettingsListDragStateChanged(newState)
+            }
+        })
+        // set up list drag listener
+        val mainActivity = activity as? BaseMainActivity
+        if (mainActivity != null) {
+            setListDragListener(mainActivity.layout as SettingsListDragListener)
+        }
+    }
+
+
     /* Sets up margins/paddings for edge to edge view - for API 35 and above */
     private fun setupEdgeToEdge(view: View) {
         val preferencesList: RecyclerView = listView
@@ -455,8 +499,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             ViewCompat.setOnApplyWindowInsetsListener(view) { v, insets ->
                 // get measurements for status and navigation bar
                 val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                // apply measurements to the main view to make room for the status bar
-                view.updatePadding(top = systemBars.top)
+
                 // apply measurements to the list to make room for the player
                 preferencesList.updatePadding(
                     bottom = systemBars.bottom + ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(requireContext())).toInt()

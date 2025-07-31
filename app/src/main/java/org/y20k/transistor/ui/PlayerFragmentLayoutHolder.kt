@@ -19,11 +19,13 @@ import android.os.Build
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
+import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,6 +45,12 @@ data class PlayerFragmentLayoutHolder(var rootView: View) {
     private val TAG: String = PlayerFragmentLayoutHolder::class.java.simpleName
 
 
+    /* Interfaces for list events */
+    interface StationListDragListener {
+        fun onStationListDragStateChanged(newState: Int)
+    }
+
+
     /* Main class variables */
     private lateinit var systemBars: Insets
     var recyclerView: RecyclerView
@@ -50,6 +58,7 @@ data class PlayerFragmentLayoutHolder(var rootView: View) {
     private var onboardingLayout: ConstraintLayout
     private var onboardingQuoteViews: Group
     private var onboardingImportViews: Group
+    private var stationListDragListener: StationListDragListener? = null
 
 
     /* Init block */
@@ -65,8 +74,21 @@ data class PlayerFragmentLayoutHolder(var rootView: View) {
         recyclerView.layoutManager = layoutManager
         recyclerView.itemAnimator = DefaultItemAnimator()
 
+        // add scroll listener to detect when list is being dragged
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                stationListDragListener?.onStationListDragStateChanged(newState)
+            }
+        })
+
         // set up edge to edge display
         setupEdgeToEdge()
+    }
+    
+    /* Sets the list drag listener */
+    fun setListDragListener(listener: StationListDragListener) {
+        stationListDragListener = listener
     }
 
 
@@ -83,7 +105,7 @@ data class PlayerFragmentLayoutHolder(var rootView: View) {
 
 
     /* Toggles visibility of the onboarding screen */
-    fun toggleOnboarding(context: Context, collectionSize: Int): Boolean {
+    fun toggleOnboarding(collectionSize: Int): Boolean {
         if (collectionSize == 0 && PreferencesHelper.loadCollectionSize() <= 0) {
             onboardingLayout.isVisible = true
             return true
@@ -107,6 +129,11 @@ data class PlayerFragmentLayoutHolder(var rootView: View) {
                     top = systemBars.top,
                     bottom = systemBars.bottom + ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(rootView.context)).toInt()
                 )
+
+                // update the onboarding layout margin to position it below the status bar
+                onboardingLayout.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                    topMargin = systemBars.top
+                }
 
                 // return the insets
                 insets

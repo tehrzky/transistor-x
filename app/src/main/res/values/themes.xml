@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme -->
+    <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+
+        <!--        <item name="mediaRouteTheme">@style/CustomMediaRouterTheme</item>-->
+
+    </style>
+
+    <style name="AppTheme" parent="Base.AppTheme" />
+
+    <style name="Circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <!-- custom style for the Cast button -->
+    <!--    <style name="CustomMediaRouteButtonStyle" parent="Widget.MediaRouter.MediaRouteButton">-->
+    <!--        <item name="android:tint">@color/player_sheet_icon</item>-->
+    <!--    </style>-->
+
+</resources>

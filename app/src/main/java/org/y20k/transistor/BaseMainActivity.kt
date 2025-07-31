@@ -23,6 +23,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.graphics.Insets
@@ -54,7 +55,8 @@ import org.y20k.transistor.ui.PlayerState
 /*
  * BaseMainActivity class
  */
-abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnSharedPreferenceChangeListener {
+abstract class BaseMainActivity : AppCompatActivity(),
+    SharedPreferences.OnSharedPreferenceChangeListener {
 
 
     /* Define log tag */
@@ -62,9 +64,9 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
 
 
     /* Main class variables */
+    lateinit var layout: MainActivityLayoutHolder
     private lateinit var systemBars: Insets
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private lateinit var layout: MainActivityLayoutHolder
     private lateinit var controllerFuture: ListenableFuture<MediaController>
     private val controller: MediaController? get() = if (controllerFuture.isDone) controllerFuture.get() else null
     private var playerState: PlayerState = PlayerState()
@@ -105,6 +107,29 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
         appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupWithNavController(toolbar, navController, appBarConfiguration)
         supportActionBar?.hide()
+
+        // show/hide toolbar based on current fragment
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            if (destination.id == R.id.settings_destination) {
+                supportActionBar?.show()
+                // find the SettingsFragment and set the layout as its list drag listener
+                val settingsFragment = supportFragmentManager.primaryNavigationFragment?.childFragmentManager?.fragments?.firstOrNull() as? SettingsFragment
+                settingsFragment?.setListDragListener(layout as SettingsFragment.SettingsListDragListener)
+            }
+            else supportActionBar?.hide()
+        }
+
+        // custom back press handling
+        val onBackPressedCallback = object : OnBackPressedCallback(true /* enabled by default */) {
+            override fun handleOnBackPressed() {
+                if (!layout.navigateBackHidesPlayerInfoView()) {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
+            }
+        }
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
+
 
         // set up playback controls
         setupPlaybackControls()
@@ -266,7 +291,8 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
 
     /* Requests an update of the sleep timer from the player service */
     private fun requestSleepTimerUpdate() {
-        val resultFuture: ListenableFuture<SessionResult>? = controller?.requestSleepTimerRemaining()
+        val resultFuture: ListenableFuture<SessionResult>? =
+            controller?.requestSleepTimerRemaining()
         resultFuture?.addListener(kotlinx.coroutines.Runnable {
             val timeRemaining: Long = resultFuture.get().extras.getLong(Keys.EXTRA_SLEEP_TIMER_REMAINING)
             layout.updateSleepTimer(this, timeRemaining)
@@ -336,7 +362,8 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
             }
 
             // update the sleep timer running state
-            val resultFuture: ListenableFuture<SessionResult>? = controller?.requestSleepTimerRunning()
+            val resultFuture: ListenableFuture<SessionResult>? =
+                controller?.requestSleepTimerRunning()
             resultFuture?.addListener(kotlinx.coroutines.Runnable {
                 playerState.sleepTimerRunning = resultFuture.get().extras.getBoolean(Keys.EXTRA_SLEEP_TIMER_RUNNING, false)
             }, MoreExecutors.directExecutor())
@@ -360,4 +387,5 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
     /*
      * End of declaration
      */
+
 }
