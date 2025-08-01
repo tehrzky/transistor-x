@@ -105,4 +105,6 @@
     <string name="descr_expanded_player_metadata_previous_button">Gioco di metadati della riproduzione precedente</string>
     <string name="toast_message_error_station_not_found">Stazione non trovata.</string>
     <string name="cast_context_error">Non è riuscito a ottenere contesto Cast. Cerca di aggiornare Google Play Services e riavviare l\'app.</string>
+    <string name="notification_cancel">Annulla</string>
+    <string name="descr_back_icon">Torna indietro</string>
 </resources>

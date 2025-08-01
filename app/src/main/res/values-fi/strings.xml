@@ -103,4 +103,7 @@
     <string name="toast_message_collection_backup">Radiokanavat varmuuskopioidaan:</string>
     <string name="dialog_add_station_title">Lisää kanava</string>
     <string name="dialog_restore_collection_replace_existing">Korvaa nykyiset radiokanavat varmuuskopion radiokanavilla?</string>
+    <string name="notification_cancel">Peruuta</string>
+    <string name="descr_back_icon">Navigoi takaisin</string>
+    <string name="cast_context_error">Epäonnistunut konteksti. Yritä päivittää Google Play -palveluita ja käynnistää sovellus uudelleen.</string>
 </resources>
