@@ -19,13 +19,15 @@ import android.content.Context
 import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Build
 import android.support.v4.media.session.PlaybackStateCompat
+import android.transition.AutoTransition
+import android.transition.TransitionManager
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.Group
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -33,27 +35,31 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
+import org.y20k.transistor.SettingsFragment
 import org.y20k.transistor.core.Station
 import org.y20k.transistor.helpers.DateTimeHelper
 import org.y20k.transistor.helpers.ImageHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.UiHelper
 
 
 /*
- * PlayerFragmentLayoutHolder class
+ * MainActivityLayoutHolder class
  */
-data class MainActivityLayoutHolder (var rootView: View) {
+data class MainActivityLayoutHolder (var rootView: View) : PlayerFragmentLayoutHolder.StationListDragListener, SettingsFragment.SettingsListDragListener {
 
     /* Define log tag */
     private val TAG: String = MainActivityLayoutHolder::class.java.simpleName
 
     /* Main class variables */
     private lateinit var systemBars: Insets
-    val playerCardView: MaterialCardView
+    private val mainToolBar: MaterialToolbar
+    private val playerCardView: MaterialCardView
     private var playerPlaybackViews: Group
     private var playerStationInfoViews: Group
     var sleepTimerRunningViews: Group
@@ -81,6 +87,7 @@ data class MainActivityLayoutHolder (var rootView: View) {
     /* Init block */
     init {
         // find views
+        mainToolBar = rootView.findViewById(R.id.main_toolbar)
         playerCardView = rootView.findViewById(R.id.player_card)
         playerPlaybackViews = rootView.findViewById(R.id.playback_views)
         playerStationInfoViews = rootView.findViewById(R.id.station_info_views)
@@ -142,6 +149,18 @@ data class MainActivityLayoutHolder (var rootView: View) {
 
         // set layout for player
         setupPlayer()
+    }
+
+
+    /* Overrides onStationListDragStateChanged from StationListDragListener */
+    override fun onStationListDragStateChanged(newState: Int) {
+        setPlayerTransparencyDuringDrag(newState)
+    }
+
+
+    /* Overrides onSettingsListDragStateChanged from SettingsListDragListener */
+    override fun onSettingsListDragStateChanged(newState: Int) {
+        setPlayerTransparencyDuringDrag(newState)
     }
 
 
@@ -289,7 +308,6 @@ data class MainActivityLayoutHolder (var rootView: View) {
 
     /* Shows player */
     fun showPlayer(): Boolean {
-//        toggleListPadding(false)
         playerPlaybackViews.visibility = View.VISIBLE
         playerStationInfoViews.visibility = View.GONE
         return true
@@ -297,19 +315,18 @@ data class MainActivityLayoutHolder (var rootView: View) {
 
 
     /* Hides player */
-    fun hidePlayer(): Boolean {
-//        toggleListPadding(true)
+    private fun hidePlayer(): Boolean {
         playerPlaybackViews.visibility = View.GONE
         playerStationInfoViews.visibility = View.GONE
         return true
     }
 
 
-    /* Minimizes player sheet if expanded */
-    fun navigateBackTogglesPlaybackViewsIfNecessary(): Boolean {
-        return if (playerStationInfoViews.isVisible && playerPlaybackViews.isGone) {
-            showPlayerPlaybackViews()
-            true
+    /* Hides the info views if they are visible */
+    fun navigateBackHidesPlayerInfoView(): Boolean {
+        return if (playerStationInfoViews.isVisible) {
+            hidePlayerInfoViews()
+            true // = info view was visible had to be hidden (= no need to interpret back press as a navigation)
         } else {
             false
         }
@@ -327,19 +344,32 @@ data class MainActivityLayoutHolder (var rootView: View) {
 
     /* Shows the info views and hides the playback views */
     private fun showPlayerInfoViews() {
+        val transition = AutoTransition().apply {
+            duration = Keys.DEFAULT_TRANSITION_ANIMATION_DURATION
+        }
+        TransitionManager.beginDelayedTransition(playerCardView, transition)
         playerStationInfoViews.isVisible = true
-        playerPlaybackViews.isGone = true
-        bufferingIndicator.isVisible = false
+        sleepTimerRunningViews.isGone = sheetSleepTimerRemainingTimeView.text.isEmpty()
+    }
+
+
+    /* Shows the info views and hides the playback views */
+    private fun hidePlayerInfoViews() {
+        val transition = AutoTransition().apply {
+            duration = Keys.DEFAULT_TRANSITION_ANIMATION_DURATION
+        }
+        TransitionManager.beginDelayedTransition(playerCardView, transition)
+        playerStationInfoViews.isGone = true
         sleepTimerRunningViews.isGone = sheetSleepTimerRemainingTimeView.text.isEmpty()
     }
 
 
     /* Toggles between showing the playback views (default) and the station info views */
     private fun togglePlayerInfoViews() {
-        if (playerStationInfoViews.isGone && playerPlaybackViews.isVisible) {
+        if (playerStationInfoViews.isGone) {
             showPlayerInfoViews()
-        } else if (playerStationInfoViews.isVisible && playerPlaybackViews.isGone) {
-            showPlayerPlaybackViews()
+        } else if (playerStationInfoViews.isVisible) {
+            hidePlayerInfoViews()
         }
     }
 
@@ -353,66 +383,54 @@ data class MainActivityLayoutHolder (var rootView: View) {
     }
 
 
+    /* Make player semi-transparent during list drag */
+    private fun setPlayerTransparencyDuringDrag(newState: Int) {
+        when (newState) {
+            RecyclerView.SCROLL_STATE_DRAGGING -> {
+                playerCardView.alpha = 0.5f
+                hidePlayerInfoViews()
+            }
+            RecyclerView.SCROLL_STATE_IDLE -> {
+                // animate the alpha transition from 0.5f to 1.0f
+                playerCardView.animate()
+                    .alpha(1.0f)
+                    .setDuration(Keys.DEFAULT_TRANSITION_ANIMATION_DURATION)
+                    .start()
+            }
+            RecyclerView.SCROLL_STATE_SETTLING -> {
+                // animation handled in IDLE state
+            }
+        }
+    }
+
+
     /* Sets up margins/paddings for edge to edge view - for API 35 and above */
     private fun setupEdgeToEdge() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.VANILLA_ICE_CREAM) {
             ViewCompat.setOnApplyWindowInsetsListener(rootView) { v, insets ->
                 // get measurements for status and navigation bar
                 systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-                // apply measurements
-                // todo add to player card
-//                bottomSheetBehavior.peekHeight = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt()
-                downloadProgressIndicator.updateLayoutParams<LinearLayout.LayoutParams> {
+
+                // apply measurements to main toolbar and download progress indicator
+                mainToolBar.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    topMargin = systemBars.top
+                }
+                downloadProgressIndicator.updateLayoutParams<ConstraintLayout.LayoutParams> {
                     topMargin = systemBars.top
                 }
 
-                // todo
-                // apply measurements to the fragment container containing the podcast list
+                // apply measurements to the player card
+                playerCardView.updateLayoutParams<ConstraintLayout.LayoutParams> {
+                    bottomMargin = (Keys.PLAYER_BOTTOM_MARGIN * UiHelper.getDensityScalingFactor(rootView.context)).toInt() + systemBars.bottom
+                }
 
-
-//                bottomSheet.updateLayoutParams<CoordinatorLayout.LayoutParams> {
-//                    bottomMargin = systemBars.top // bottomMargin is actually the top margin of the bottom sheet ¯\_(ツ)_/¯
-//                }
-                // todo check the updatePadding calls
-                // bottomSheet.updatePadding(bottom =  systemBars.bottom)
-                // recyclerView.updatePadding(bottom = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
                 // return the insets
                 insets
             }
+        } else {
+            // deactivate edge to edge for main activity
+            rootView.fitsSystemWindows = true
         }
     }
-
-
-//    /* Toggles the bottom padding for the fragment container containing the podcast list */
-//    private fun toggleListPadding(playerHidden: Boolean) {
-//        if (this::systemBars.isInitialized) {
-//            if (playerHidden) {
-//                recyclerView.updatePadding(bottom = systemBars.bottom) // todo bottom should be 0
-//            } else {
-//                recyclerView.updatePadding(bottom = systemBars.bottom + (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
-//            }
-//        } else {
-//            if (playerHidden) {
-//                recyclerView.updatePadding(bottom = 0)
-//            } else {
-//                recyclerView.updatePadding(bottom = (Keys.BOTTOM_SHEET_PEEK_HEIGHT * ImageHelper.getDensityScalingFactor(rootView.context)).toInt())
-//            }
-//        }
-//    }
-
-
-
-    /*
-     * Inner class: Custom LinearLayoutManager
-     */
-    private inner class CustomLayoutManager(context: Context): LinearLayoutManager(context, VERTICAL, false) {
-        override fun supportsPredictiveItemAnimations(): Boolean {
-            return true
-        }
-    }
-    /*
-     * End of inner class
-     */
-
 
 }
