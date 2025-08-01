@@ -2,13 +2,11 @@
 <resources>
 
     <!-- Base application theme -->
-    <style name="Base.AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
 
         <!--        <item name="mediaRouteTheme">@style/CustomMediaRouterTheme</item>-->
 
     </style>
-
-    <style name="AppTheme" parent="Base.AppTheme" />
 
     <style name="Circle" parent="">
         <item name="cornerFamily">rounded</item>

@@ -1,53 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-<!--    &lt;!&ndash; DAY THEME COLORS &ndash;&gt;-->
 
-<!--    &lt;!&ndash; app colors &ndash;&gt;-->
-<!--    <color name="app_window_background">#fffffbfe</color> &lt;!&ndash; android:colorBackground / colorSurface &ndash;&gt;-->
-<!--    <color name="status_bar_background">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;-->
-<!--    <color name="dialog_background">#fffffbfe</color> &lt;!&ndash; android:colorBackground / colorSurface &ndash;&gt;-->
-<!--&lt;!&ndash;    <color name="dialog_background">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;&ndash;&gt;-->
-<!--    <color name="app_onboarding_icons">#ff1c1b1f</color> &lt;!&ndash; colorOnBackground / colorOnSurface&ndash;&gt;-->
-<!--    <color name="toolbar_background">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;-->
-
-<!--    &lt;!&ndash; text & icons &ndash;&gt;-->
-<!--    <color name="text_default">#ff1c1b1f</color> &lt;!&ndash; colorOnBackground / colorOnSurface&ndash;&gt;-->
-<!--    <color name="text_lightweight">#ff49454f</color> &lt;!&ndash; colorOnSurfaceVariant &ndash;&gt;-->
-<!--    <color name="text_link">#ffd0bcff</color> &lt;!&ndash; colorPrimaryInverse &ndash;&gt;-->
-<!--    <color name="text_link_separator">#ffd0bcff</color> &lt;!&ndash; colorPrimaryInverse &ndash;&gt;-->
-<!--    <color name="icon_default">#ff1c1b1f</color> &lt;!&ndash; colorOnBackground / colorOnSurface&ndash;&gt;-->
-<!--    <color name="icon_lightweight">#ff49454f</color> &lt;!&ndash; colorOnSurfaceVariant &ndash;&gt;-->
-<!--    <color name="icon_lightweight_background">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;-->
-
-<!--    &lt;!&ndash; list &ndash;&gt;-->
-<!--    <color name="list_card_background">#fffffbfe</color> &lt;!&ndash; android:colorBackground / colorSurface &ndash;&gt;-->
-<!--    <color name="list_card_cover_background">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;-->
-<!--    <color name="list_card_delete_background">#ffb3261e</color> &lt;!&ndash; colorError &ndash;&gt;-->
-<!--    <color name="list_card_delete_icon">#ffffffff</color> &lt;!&ndash; colorOnError (white) &ndash;&gt;-->
-<!--    <color name="list_card_mark_starred_background">#ff6750a4</color> &lt;!&ndash; colorPrimary &ndash;&gt;-->
-<!--    <color name="list_card_mark_starred_star">#ffffffff</color> &lt;!&ndash; colorOnPrimary &ndash;&gt;-->
-<!--    <color name="search_result_background">#fffffbfe</color> &lt;!&ndash; android:colorBackground / colorSurface &ndash;&gt;-->
-<!--    <color name="search_result_background_selected">#ffe7e0ec</color> &lt;!&ndash; colorSurfaceVariant &ndash;&gt;-->
-
-<!--    &lt;!&ndash; player sheet &ndash;&gt;-->
-<!--    <color name="player_play_pause_icon">#ffffffff</color> &lt;!&ndash; colorOnPrimary&ndash;&gt;-->
-<!--    <color name="player_button_background">#ff6750a4</color> &lt;!&ndash; colorPrimary &ndash;&gt;-->
-<!--    <color name="player_button_buffering">#ffd0bcff</color> &lt;!&ndash; colorPrimaryInverse &ndash;&gt;-->
-<!--    <color name="player_sheet_background">#ff313033</color> &lt;!&ndash; colorSurfaceInverse &ndash;&gt;-->
-<!--    <color name="player_sheet_text_main">#fff4eff4</color> &lt;!&ndash; colorOnSurfaceInverse &ndash;&gt;-->
-<!--    <color name="player_sheet_text_details">#fff4eff4</color> &lt;!&ndash; colorOnSurfaceInverse &ndash;&gt;-->
-<!--    <color name="player_sheet_icon">#fff4eff4</color> &lt;!&ndash; colorOnSurfaceInverse &ndash;&gt;-->
-
-
-<!--    &lt;!&ndash; default colors &ndash;&gt;-->
-<!--    <color name="default_neutral_white">#ffffffff</color> &lt;!&ndash; system_accent1_0 &ndash;&gt;-->
-<!--    <color name="default_neutral_lighter">#ffe6e1e5</color> &lt;!&ndash; system_neutral1_100 &ndash;&gt;-->
-<!--    <color name="default_neutral_medium_light">#ff7d7d7d</color> &lt;!&ndash; system_neutral1_300  todo check &ndash;&gt;-->
-<!--    <color name="default_neutral_dark">#ff595959</color> &lt;!&ndash; system_neutral1_600 todo check&ndash;&gt;-->
-<!--    <color name="default_neutral_darker">#ff1c1b1f</color> &lt;!&ndash; system_neutral1_900&ndash;&gt;-->
-
-<!--    <color name="default_neutral_85percent">#d9313033</color> &lt;!&ndash; 85% system_neutral1_800 &ndash;&gt;-->
-<!--    <color name="default_transparent">#00ffffff</color>-->
+    <!-- color palette created via https://material-foundation.github.io/material-theme-builder/-->
 
 </resources>

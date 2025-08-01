@@ -38,6 +38,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.navigateUp
 import com.google.common.util.concurrent.ListenableFuture
 import com.google.common.util.concurrent.MoreExecutors
+import org.y20k.transistor.core.Station
 import org.y20k.transistor.extensions.cancelSleepTimer
 import org.y20k.transistor.extensions.play
 import org.y20k.transistor.extensions.requestMetadataHistory
@@ -156,6 +157,15 @@ abstract class BaseMainActivity : AppCompatActivity(),
         playerState = PreferencesHelper.loadPlayerState()
         // toggle periodic sleep timer update request
         togglePeriodicSleepTimerUpdateRequest()
+//
+//        // Update player views with current station data after activity recreation
+//        if (playerState.stationPosition >= 0) {
+//            val collection = FileHelper.readCollection(this)
+//            if (collection.stations.isNotEmpty() && playerState.stationPosition < collection.stations.size) {
+//                val currentStation = collection.stations[playerState.stationPosition]
+//                updatePlayerViews(currentStation)
+//            }
+//        }
     }
 
 
@@ -284,7 +294,7 @@ abstract class BaseMainActivity : AppCompatActivity(),
 
 
     /* Updates the player views */
-    fun updatePlayerViews(station: org.y20k.transistor.core.Station) {
+    fun updatePlayerViews(station: Station) {
         layout.updatePlayerViews(this, station, playerState.isPlaying)
     }
 

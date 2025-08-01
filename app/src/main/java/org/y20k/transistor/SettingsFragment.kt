@@ -31,6 +31,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -39,6 +40,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import androidx.preference.contains
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.color.DynamicColors
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -103,9 +105,10 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             if (preference is ListPreference) {
                 val index: Int = preference.entryValues.indexOf(newValue)
                 preferenceThemeSelection.summary = "${getString(R.string.pref_theme_selection_summary)} ${preference.entries[index]}"
-                return@setOnPreferenceChangeListener true
+                listView.findNavController().navigate(R.id.player_destination)
+                true
             } else {
-                return@setOnPreferenceChangeListener false
+                false
             }
         }
 
@@ -116,25 +119,15 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceEnableDynamicColors.key = Keys.PREF_DYNAMIC_COLORS
         preferenceEnableDynamicColors.summaryOn = getString(R.string.pref_dynamic_colors_summary_enabled)
         preferenceEnableDynamicColors.summaryOff = getString(R.string.pref_dynamic_colors_summary_disabled)
-        preferenceEnableDynamicColors.isVisible = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+        preferenceEnableDynamicColors.isVisible = DynamicColors.isDynamicColorAvailable()
         preferenceEnableDynamicColors.setDefaultValue(PreferencesHelper.loadDynamicColorsEnabled())
-        preferenceEnableDynamicColors.setOnPreferenceChangeListener { _, newValue ->
-            val enabled = newValue as Boolean
-            PreferencesHelper.saveDynamicColorsEnabled(enabled) // Save the new setting
-
-            // Important: For dynamic colors to apply/unapply reliably,
-            // the Activity needs to be recreated.
-            // DynamicColors.applyToActivitiesIfAvailable() is usually called in Application.onCreate()
-            // to set it up for the app's lifetime. Toggling it mid-flight requires a recreate.
-
-            // Recreate the current activity to apply the theme change.
-            // This will ensure that the Activity restarts and applies the correct
-            // theme (either with or without dynamic colors from the start).
-            activity?.recreate()
-
-            Log.v(TAG, "Dynamic Colors Toggled. Enabled: $enabled. Activity will be recreated.")
-
-            true // Return true to update the state of the Preference.
+        preferenceEnableDynamicColors.setOnPreferenceChangeListener { preference, newValue ->
+            val dynamicColorsEnabled = newValue as Boolean
+            PreferencesHelper.saveDynamicColorsEnabled(dynamicColorsEnabled) // todo check if necessary
+            AppThemeHelper.setupDynamicColors(requireActivity().application)
+            requireActivity().recreate()
+            listView.findNavController().navigate(R.id.player_destination)
+            true
         }
 
         // set up "Tap Anywhere" preference
@@ -154,7 +147,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceUpdateStationImages.setOnPreferenceClickListener {
             // show dialog
             YesNoDialog(this).show(context = activity as Context, type = Keys.DIALOG_UPDATE_STATION_IMAGES, message = R.string.dialog_yes_no_message_update_station_images, yesButton = R.string.dialog_yes_no_positive_button_update_covers)
-            return@setOnPreferenceClickListener true
+            true
         }
 
 //        // set up "Update Stations" preference
@@ -165,7 +158,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 //        preferenceUpdateCollection.setOnPreferenceClickListener {
 //            // show dialog
 //            YesNoDialog(this).show(context = activity as Context, type = Keys.DIALOG_UPDATE_COLLECTION, message = R.string.dialog_yes_no_message_update_collection, yesButton = R.string.dialog_yes_no_positive_button_update_collection)
-//            return@setOnPreferenceClickListener true
+//            true
 //        }
 
         // set up "M3U Export" preference
@@ -175,7 +168,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceM3uExport.summary = getString(R.string.pref_m3u_export_summary)
         preferenceM3uExport.setOnPreferenceClickListener {
             openSaveM3uDialog()
-            return@setOnPreferenceClickListener true
+            true
         }
 
         // set up "Backup Stations" preference
@@ -185,7 +178,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceBackupCollection.summary = getString(R.string.pref_backup_summary)
         preferenceBackupCollection.setOnPreferenceClickListener {
             openBackupCollectionDialog()
-            return@setOnPreferenceClickListener true
+            true
         }
 
         // set up "Restore Stations" preference
@@ -195,7 +188,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceRestoreCollection.summary = getString(R.string.pref_restore_summary)
         preferenceRestoreCollection.setOnPreferenceClickListener {
             openRestoreCollectionDialog()
-            return@setOnPreferenceClickListener true
+            true
         }
 
         // set up "Buffer Size" preference
@@ -234,7 +227,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
                     preferenceEnableEditingStreamUri.isChecked = false
                 }
             }
-            return@setOnPreferenceChangeListener true
+            true
         }
 
         // set up "App Version" preference
@@ -251,7 +244,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
                 // since API 33 (TIRAMISU) the OS displays its own notification when content is copied to the clipboard
                 Toast.makeText(activity as Context, R.string.toast_message_copied_to_clipboard, Toast.LENGTH_LONG).show()
             }
-            return@setOnPreferenceClickListener true
+            true
         }
 
 
@@ -413,9 +406,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         if (NetworkHelper.isConnectedToNetwork(activity as Context)) {
             Toast.makeText(activity as Context, R.string.toast_message_updating_station_images, Toast.LENGTH_LONG).show()
             // update collection in player screen
-            val bundle: Bundle = bundleOf(
-                Keys.ARG_UPDATE_IMAGES to true
-            )
+            val bundle: Bundle = bundleOf(Keys.ARG_UPDATE_IMAGES to true)
             this.findNavController().navigate(R.id.player_destination, bundle)
         } else {
             ErrorDialog().show(activity as Context, R.string.dialog_error_title_no_network, R.string.dialog_error_message_no_network)

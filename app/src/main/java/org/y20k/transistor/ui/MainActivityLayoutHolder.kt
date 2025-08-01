@@ -315,7 +315,7 @@ data class MainActivityLayoutHolder (var rootView: View) : PlayerFragmentLayoutH
 
 
     /* Hides player */
-    private fun hidePlayer(): Boolean {
+    fun hidePlayer(): Boolean {
         playerPlaybackViews.visibility = View.GONE
         playerStationInfoViews.visibility = View.GONE
         return true
