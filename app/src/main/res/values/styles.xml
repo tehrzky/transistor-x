@@ -17,7 +17,7 @@
         </item>
     </style>
     <!-- FIXED: Override the default layout for PreferenceFragmentCompat -->
-    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat">
+    <style name="AppPreferenceFragmentCompatStyle" parent="PreferenceThemeOverlay.v14.Material">
         <item name="android:layout">@layout/fragment_settings</item>
     </style>
     <!-- Override background color and button color in AlertDialog -->
