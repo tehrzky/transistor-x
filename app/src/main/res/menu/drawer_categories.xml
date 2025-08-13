@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/categories_group">
+        <item android:id="@+id/all_stations" android:title="All Stations"/>
+        <item android:id="@+id/music" android:title="Music"/>
+        <item android:id="@+id/news" android:title="News"/>
+        <item android:id="@+id/talk" android:title="Talk"/>
+        <item android:id="@+id/international" android:title="International"/>
+    </group>
+    <item android:id="@+id/add_category" android:title="Add Category"/>
+    <item android:id="@+id/manage" android:title="Manage"/>
+</menu>
