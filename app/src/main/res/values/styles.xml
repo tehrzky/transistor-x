@@ -1,8 +1,7 @@
 <resources>
 
-    <!-- Base App Theme -->
+    <!-- Main App Theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Core Material3 color mappings -->
         <item name="colorPrimary">@color/md_theme_primary</item>
         <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
         <item name="colorSecondary">@color/md_theme_secondary</item>
@@ -10,21 +9,18 @@
         <item name="colorSurface">@color/md_theme_surface</item>
         <item name="colorOnSurface">@color/md_theme_onSurface</item>
 
-        <!-- Apply custom preference theme -->
+        <!-- Apply custom Material3 preference theme -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material3</item>
     </style>
 
-    <!-- Preference Theme Overlay for Material3 -->
+    <!-- Preference Theme Overlay (Material3 style) -->
     <style name="PreferenceThemeOverlay.Material3" parent="PreferenceThemeOverlay.v14.Material">
-        <!-- Match preferences to Material3 colors -->
         <item name="colorAccent">@color/md_theme_primary</item>
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="android:background">@color/md_theme_surface</item>
     </style>
 
-    <!-- Optional: Dedicated Settings Screen Theme -->
-    <style name="SettingsTheme" parent="AppTheme">
-        <!-- Override AppTheme attributes specifically for settings if needed -->
-    </style>
-
+    <!-- Optional: Theme variant for settings screens -->
+    <style name="SettingsTheme" parent="AppTheme" />
+    
 </resources>
