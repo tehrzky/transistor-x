@@ -37,5 +37,5 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'androidx.recyclerview:recyclerview:1.3.1'
     implementation 'androidx.preference:preference-ktx:1.2.1'   // For Material 3 preferences
-    implementation 'androidx.compose.material3:material3:1.2.0'  // or latest version
+    implementation 'androidx.compose.material3:material3:1.1.2'  // or latest version
 }
