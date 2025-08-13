@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
     
     - name: Cache Gradle
-      uses: actions/cache@v4  # Updated from v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -28,12 +28,6 @@ jobs:
         key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
         restore-keys: |
           ${{ runner.os }}-gradle-
-
-    - name: Fix resource filenames
-      run: |
-        find app/src/main/res/raw -name "*[A-Z]*" | while read file; do
-          mv "$file" "$(echo $file | tr 'A-Z' 'a-z')"
-        done
 
     - name: Build APK
       run: |
