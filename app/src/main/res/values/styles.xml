@@ -1,53 +1,32 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme -->
+
+    <!-- Base app theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- colorPrimary is used in dialog buttons for example -->
-        <item name="colorPrimary">@color/default_neutral_darker</item>
-        <!-- Do not use primary colored elevation overlays to present a visual hierarchy - TOO COLORFUL  -->
-        <item name="elevationOverlayEnabled">false</item>
-        <!-- Use "light" Status Bar -->
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:statusBarColor">@color/status_bar_background</item>
-        <!-- FIXED: Use correct preference theme -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <!-- FIXED: Use correct parent style -->
-        <item name="preferenceFragmentCompatStyle">
-            @style/AppPreferenceFragmentCompatStyle
-        </item>
+        <!-- Customize global colors -->
+        <item name="colorPrimary">@color/md_theme_primary</item>
+        <item name="colorOnPrimary">@color/md_theme_onPrimary</item>
+        <item name="colorSecondary">@color/md_theme_secondary</item>
+        <item name="colorOnSecondary">@color/md_theme_onSecondary</item>
+        <item name="colorSurface">@color/md_theme_surface</item>
+        <item name="colorOnSurface">@color/md_theme_onSurface</item>
+
+        <!-- Use our custom preference overlay -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material3</item>
     </style>
-    <!-- FIXED: Override the default layout for PreferenceFragmentCompat -->
-    <style name="AppPreferenceFragmentCompatStyle" parent="PreferenceThemeOverlay.v14.Material">
-        <item name="android:layout">@layout/fragment_settings</item>
+
+
+    <!-- Preference Theme Overlay for Material3 -->
+    <style name="PreferenceThemeOverlay.Material3" parent="PreferenceThemeOverlay.v14.Material">
+        <!-- Optional: tweak preference colors to match Material3 -->
+        <item name="colorAccent">@color/md_theme_primary</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+        <item name="android:background">@color/md_theme_surface</item>
     </style>
-    <!-- Override background color and button color in AlertDialog -->
-    <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.Dialog.Alert">
-        <item name="colorSurface">@color/dialog_background</item>
+
+
+    <!-- Optional: Special style if you want a dedicated theme for settings screens -->
+    <style name="SettingsTheme" parent="AppTheme">
+        <!-- You can override AppTheme colors or typography here just for settings -->
     </style>
-    <!-- Shape styles -->
-    <style name="RoundedCorners" parent="">
-        <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerFamilyTopLeft">rounded</item>
-        <item name="cornerSizeTopRight">16dp</item>
-        <item name="cornerFamilyTopRight">rounded</item>
-        <item name="cornerSizeBottomLeft">16dp</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
-        <item name="cornerSizeBottomRight">16dp</item>
-        <item name="cornerFamilyBottomRight">rounded</item>
-    </style>
-    <style name="RoundedCornerLeft" parent="">
-        <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerFamilyTopLeft">rounded</item>
-        <item name="cornerSizeBottomLeft">16dp</item>
-        <item name="cornerFamilyBottomLeft">rounded</item>
-    </style>
-    <style name="RoundedCornerLeftTop" parent="">
-        <item name="cornerSizeTopLeft">16dp</item>
-        <item name="cornerFamilyTopRight">rounded</item>
-    </style>
-    <style name="CutCornerLeftTop" parent="">
-        <item name="cornerSize">0dp</item>
-        <item name="cornerFamilyTopLeft">cut</item>
-        <item name="cornerSizeTopLeft">16dp</item>
-    </style>
+
 </resources>
