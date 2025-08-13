@@ -33,7 +33,7 @@ jobs:
       run: |
         chmod +x gradlew
         ./gradlew clean
-        ./gradlew assembleDebug --stacktrace --refresh-dependencies
+        ./gradlew assembleDebug --stacktrace
         
     - name: Upload APK
       uses: actions/upload-artifact@v4
