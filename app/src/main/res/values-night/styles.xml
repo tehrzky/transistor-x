@@ -18,4 +18,7 @@
 
     <!-- Style override for PreferenceFragmentCompat (Night) -->
     <style name="AppPreferenceFragmentCompatStyle" parent="PreferenceThemeOverlay.Material3" />
+
+    <!-- Add Theme.TransistorX for Manifest reference (Night) -->
+    <style name="Theme.TransistorX" parent="AppTheme"/>
 </resources>
