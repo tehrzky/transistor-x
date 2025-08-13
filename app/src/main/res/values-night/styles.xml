@@ -1,30 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- colorPrimary is used in dialog buttons for example -->
         <item name="colorPrimary">@color/default_neutral_lighter</item>
-
         <!-- Do not use primary colored elevation overlays to present a visual hierarchy - TOO COLORFUL  -->
         <item name="elevationOverlayEnabled">false</item>
-
         <!-- Don't show light status bar -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/status_bar_background</item>
-
-        <!-- Explicitly set the preference theme to Material3 -->
-        <item name="preferenceTheme">@style/PreferenceFragmentCompat.Material3</item>
-
-        <!-- inject custom layout for preferences -->
+        <!-- FIXED: Use correct preference theme -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <!-- FIXED: Use correct parent style -->
         <item name="preferenceFragmentCompatStyle">
             @style/AppPreferenceFragmentCompatStyle
         </item>
     </style>
-
-    <!-- Override the default layout for PreferenceFragmentCompat -->
-    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat.Material3">
+    <!-- FIXED: Override the default layout for PreferenceFragmentCompat -->
+    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat">
         <item name="android:layout">@layout/fragment_settings</item>
     </style>
-
 </resources>
