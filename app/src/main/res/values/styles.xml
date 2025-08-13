@@ -11,6 +11,8 @@
 
         <!-- Apply a proper Material3 preference overlay -->
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material3</item>
+        <!-- Apply a consistent PreferenceFragmentCompat style if needed -->
+        <item name="preferenceFragmentCompatStyle">@style/AppPreferenceFragmentCompatStyle</item>
     </style>
 
     <!-- Preference Theme Overlay for Material3 -->
@@ -19,7 +21,10 @@
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="android:background">@color/md_theme_surface</item>
     </style>
-<!-- Add this style to fix the build error -->
-    <style name="PreferenceFragmentCompat" parent="Theme.Material3.DayNight.Dialog"/>
-</resources>
 
+    <!-- Style override for PreferenceFragmentCompat -->
+    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat">
+        <!-- If you have a custom settings fragment layout, reference it here -->
+        <item name="android:layout">@layout/fragment_settings</item>
+    </style>
+</resources>
