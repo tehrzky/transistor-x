@@ -1,22 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme -->
+    <!-- Main App Theme (Material3, Night) -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- colorPrimary is used in dialog buttons for example -->
         <item name="colorPrimary">@color/default_neutral_lighter</item>
-        <!-- Do not use primary colored elevation overlays to present a visual hierarchy - TOO COLORFUL  -->
         <item name="elevationOverlayEnabled">false</item>
-        <!-- Don't show light status bar -->
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/status_bar_background</item>
-        <!-- FIXED: Use correct preference theme -->
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <!-- FIXED: Use correct parent style -->
-        <item name="preferenceFragmentCompatStyle">
-            @style/AppPreferenceFragmentCompatStyle
-        </item>
+        <!-- Use the same preference theme overlay as light for consistency -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.Material3</item>
+        <!-- Consistent PreferenceFragmentCompat style override -->
+        <item name="preferenceFragmentCompatStyle">@style/AppPreferenceFragmentCompatStyle</item>
     </style>
-    <!-- FIXED: Override the default layout for PreferenceFragmentCompat -->
+
+    <!-- Preference Theme Overlay for Material3 (Night) -->
+    <style name="PreferenceThemeOverlay.Material3" parent="PreferenceThemeOverlay.v14.Material">
+        <item name="colorAccent">@color/default_neutral_lighter</item>
+        <item name="android:textColor">@color/md_theme_onSurface</item>
+        <item name="android:background">@color/md_theme_surface</item>
+    </style>
+
+    <!-- Style override for PreferenceFragmentCompat (Night) -->
     <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat">
         <item name="android:layout">@layout/fragment_settings</item>
     </style>
