@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace 'org.y20k.transistor' // Add this line
     compileSdk 33
 
     defaultConfig {
