@@ -29,6 +29,7 @@ data class Station(
                     parcel.readString() ?: "All Stations"
                 )
             }
+
             override fun newArray(size: Int): Array<Station?> = arrayOfNulls(size)
         }
     }
