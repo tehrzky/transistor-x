@@ -1,37 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- colorPrimary is used in dialog buttons for example -->
         <item name="colorPrimary">@color/default_neutral_darker</item>
-
         <!-- Do not use primary colored elevation overlays to present a visual hierarchy - TOO COLORFUL  -->
         <item name="elevationOverlayEnabled">false</item>
-
         <!-- Use "light" Status Bar -->
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor">@color/status_bar_background</item>
-
-        <!-- Explicitly set the preference theme to Material3 -->
-        <item name="preferenceTheme">@style/PreferenceFragmentCompat.Material3</item>
-
-        <!-- inject custom layout for preferences -->
+        <!-- FIXED: Use correct preference theme -->
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <!-- FIXED: Use correct parent style -->
         <item name="preferenceFragmentCompatStyle">
             @style/AppPreferenceFragmentCompatStyle
         </item>
     </style>
-
-    <!-- Override the default layout for PreferenceFragmentCompat -->
-    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat.Material3">
+    <!-- FIXED: Override the default layout for PreferenceFragmentCompat -->
+    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat">
         <item name="android:layout">@layout/fragment_settings</item>
     </style>
-
     <!-- Override background color and button color in AlertDialog -->
     <style name="AlertDialogTheme" parent="ThemeOverlay.Material3.Dialog.Alert">
         <item name="colorSurface">@color/dialog_background</item>
     </style>
-
     <!-- Shape styles -->
     <style name="RoundedCorners" parent="">
         <item name="cornerSizeTopLeft">16dp</item>
@@ -43,19 +35,16 @@
         <item name="cornerSizeBottomRight">16dp</item>
         <item name="cornerFamilyBottomRight">rounded</item>
     </style>
-
     <style name="RoundedCornerLeft" parent="">
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerFamilyTopLeft">rounded</item>
         <item name="cornerSizeBottomLeft">16dp</item>
         <item name="cornerFamilyBottomLeft">rounded</item>
     </style>
-
     <style name="RoundedCornerLeftTop" parent="">
         <item name="cornerSizeTopLeft">16dp</item>
         <item name="cornerFamilyTopRight">rounded</item>
     </style>
-
     <style name="CutCornerLeftTop" parent="">
         <item name="cornerSize">0dp</item>
         <item name="cornerFamilyTopLeft">cut</item>
