@@ -3,7 +3,6 @@
 
     <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.Material3.DayNight.NoActionBar">
-
         <!-- colorPrimary is used in dialog buttons for example -->
         <item name="colorPrimary">@color/default_neutral_lighter</item>
 
@@ -14,12 +13,18 @@
         <item name="android:windowLightStatusBar">false</item>
         <item name="android:statusBarColor">@color/status_bar_background</item>
 
+        <!-- Explicitly set the preference theme to Material3 -->
+        <item name="preferenceTheme">@style/PreferenceFragmentCompat.Material3</item>
+
         <!-- inject custom layout for preferences -->
-        <!-- credit: https://medium.com/@JakobUlbrich/sure-you-can-use-a-custom-layout-for-your-preferencefragmentcompat-318b7fa06e29 -->
         <item name="preferenceFragmentCompatStyle">
             @style/AppPreferenceFragmentCompatStyle
         </item>
+    </style>
 
+    <!-- Override the default layout for PreferenceFragmentCompat -->
+    <style name="AppPreferenceFragmentCompatStyle" parent="@style/PreferenceFragmentCompat.Material3">
+        <item name="android:layout">@layout/fragment_settings</item>
     </style>
 
 </resources>
