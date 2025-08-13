@@ -19,5 +19,7 @@
         <item name="android:textColor">@color/md_theme_onSurface</item>
         <item name="android:background">@color/md_theme_surface</item>
     </style>
-
+<!-- Add this style to fix the build error -->
+    <style name="PreferenceFragmentCompat" parent="Theme.Material3.DayNight.Dialog"/>
 </resources>
+
