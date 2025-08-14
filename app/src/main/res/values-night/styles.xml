@@ -41,4 +41,8 @@
     <style name="RoundedCorners">
         <item name="shapeAppearanceOverlay">@style/RoundedCornersShape</item>
     </style>
+
+    <style name="Theme.Transistor.AlertDialog" parent="Theme.Material3.DayNight.Dialog.Alert">
+    <item name="android:windowBackground">@android:color/transparent</item>
+</style>
 </resources>
