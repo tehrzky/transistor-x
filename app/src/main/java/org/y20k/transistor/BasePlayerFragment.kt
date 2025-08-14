@@ -270,7 +270,7 @@ abstract class BasePlayerFragment: Fragment(),
         } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
-                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.streamUri.toString()) // Fixed: convert Uri to String
+                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(Uri.parse(station.streamUri)) // Fixed: convert Uri to String
                 // set content type
                 station.streamContent = contentType.type
                 // add station and save collection
