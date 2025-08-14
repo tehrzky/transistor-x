@@ -29,6 +29,7 @@ data class Station(
     @Expose var name: String = "",
     @Expose var streamUris: MutableList<String> = mutableListOf(),
     @Expose var stream: String = "",
+    @Expose var streamContent: String = "", // ADD THIS NEW PROPERTY
     @Expose var image: String = "",
     @Expose var smallImage: String = "",
     @Expose var imageColor: Int = -1,
@@ -40,7 +41,10 @@ data class Station(
     @Expose var remoteStationLocation: String = "",
     @Expose var radioBrowserStationUuid: String = "",
     @Expose var homepage: String = "",
-    @Expose var modificationDate: Date = Date()
+    @Expose var modificationDate: Date = Date(),
+    // Add RadioBrowser specific properties
+    @Expose var codec: String = "", // ADD THIS
+    @Expose var bitrate: Int = 0 // ADD THIS
 ) : Parcelable {
 
     /* Returns the primary stream URI */
