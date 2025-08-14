@@ -270,7 +270,7 @@ abstract class BasePlayerFragment: Fragment(),
         } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
-                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.streamUri) // Fixed: use streamUri property
+                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.streamUri.toString()) // Fixed: convert Uri to String
                 // set content type
                 station.streamContent = contentType.type
                 // add station and save collection
@@ -394,7 +394,15 @@ abstract class BasePlayerFragment: Fragment(),
                 // ask user
                 val adapterPosition: Int = viewHolder.adapterPosition
                 val dialogMessage: String = "${getString(R.string.dialog_yes_no_message_remove_station)}\n\n- ${collection.stations[adapterPosition].name}"
-                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_REMOVE_STATION, messageString = dialogMessage, yesButton = R.string.dialog_yes_no_positive_button_remove_station, payload = adapterPosition)
+                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(
+                    context = requireContext(), 
+                    type = Keys.DIALOG_REMOVE_STATION, 
+                    messageString = dialogMessage, 
+                    yesButton = R.string.dialog_yes_no_positive_button_remove_station, 
+                    payload = adapterPosition,
+                    id = "remove_station_${adapterPosition}",
+                    name = collection.stations[adapterPosition].name
+                )
             }
         }
         val swipeToDeleteItemTouchHelper = ItemTouchHelper(swipeToDeleteHandler)
@@ -638,7 +646,14 @@ abstract class BasePlayerFragment: Fragment(),
             arguments?.putString(Keys.ARG_RESTORE_COLLECTION, null)
             when (collection.stations.isNotEmpty()) {
                 true -> {
-                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_RESTORE_COLLECTION, messageString = getString(R.string.dialog_restore_collection_replace_existing), payloadString = restoreCollectionFileString)
+                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(
+                        context = requireContext(), 
+                        type = Keys.DIALOG_RESTORE_COLLECTION, 
+                        messageString = getString(R.string.dialog_restore_collection_replace_existing), 
+                        payloadString = restoreCollectionFileString,
+                        id = "restore_collection",
+                        name = "Collection Restore"
+                    )
                 }
 
                 false -> {
