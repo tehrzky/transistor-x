@@ -22,12 +22,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
-    
+
     kotlinOptions {
         jvmTarget = '17'
     }
@@ -35,15 +35,12 @@ android {
 
 dependencies {
     implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    
-    // THIS IS THE CRITICAL LINE THAT FIXES THE ERROR:
     implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
     implementation "androidx.navigation:navigation-ui-ktx:2.7.7"
-    implementation 'com.google.code.gson:gson:2.11.0'
 
     // Media3 (ExoPlayer and Media Session)
     implementation "androidx.media3:media3-exoplayer:1.3.1"
@@ -57,21 +54,13 @@ dependencies {
     implementation "androidx.work:work-runtime-ktx:2.9.0"
 
     // Gson (for @Expose)
-    implementation "com.google.code.gson:gson:2.10.1"
+    implementation "com.google.code.gson:gson:2.11.0"
 
     // Volley (for RequestQueue, JsonArrayRequest, etc.)
     implementation 'com.android.volley:volley:1.2.1'
 
     // Palette (for Palette)
     implementation 'androidx.palette:palette-ktx:1.0.0'
-
-    // Core KTX and AppCompat
-    implementation 'androidx.core:core-ktx:1.12.0'
-    implementation 'androidx.appcompat:appcompat:1.7.0'
-
-    // Material Design
-    implementation 'com.google.android.material:material:1.12.0'
-
 
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
