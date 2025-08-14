@@ -40,6 +40,10 @@ dependencies {
     
     // THIS IS THE CRITICAL LINE THAT FIXES THE ERROR:
     implementation 'androidx.preference:preference-ktx:1.2.1'
+    implementation "androidx.navigation:navigation-fragment-ktx:2.7.7"
+    implementation "androidx.navigation:navigation-ui-ktx:2.7.7"
+
+
     
     // Test dependencies
     testImplementation 'junit:junit:4.13.2'
