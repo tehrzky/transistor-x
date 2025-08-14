@@ -2,61 +2,61 @@
  * RadioBrowserResult.kt
  * Implements the RadioBrowserResult class
  * A RadioBrowserResult is the search result of a request to api.radio-browser.info
- *
- * This file is part of
- * TRANSISTOR - Radio App for Android
- *
- * Copyright (c) 2015-25 - Y20K.org
- * Licensed under the MIT-License
- * http://opensource.org/licenses/MIT
  */
-
-
 package org.y20k.transistor.search
 
 import com.google.gson.annotations.Expose
 import org.y20k.transistor.Keys
 import org.y20k.transistor.core.Station
-import java.util.GregorianCalendar
-
+import java.util.*
 
 /*
  * RadioBrowserResult class
  */
-data class RadioBrowserResult (@Expose val changeuuid: String,
-                               @Expose val stationuuid: String,
-                               @Expose val name: String,
-                               @Expose val url: String,
-                               @Expose val url_resolved: String,
-                               @Expose val homepage: String,
-                               @Expose val favicon: String,
-                               @Expose val codec: String,
-                               @Expose val bitrate: Int) {
+data class RadioBrowserResult(
+    @Expose val changeuuid: String,
+    @Expose val stationuuid: String,
+    @Expose val name: String,
+    @Expose val url: String,
+    @Expose val url_resolved: String,
+    @Expose val homepage: String,
+    @Expose val favicon: String,
+    @Expose val tags: String = "",
+    @Expose val country: String = "",
+    @Expose val countrycode: String = "",
+    @Expose val state: String = "",
+    @Expose val language: String = "",
+    @Expose val votes: Int = 0,
+    @Expose val codec: String = "",
+    @Expose val bitrate: Int = 0,
+    @Expose val hls: Int = 0,
+    @Expose val lastcheckok: Int = 0,
+    @Expose val lastchangetime: String = "",
+    @Expose val lastchecktime: String = "",
+    @Expose val lastcheckoktime: String = "",
+    @Expose val lastlocalchecktime: String = "",
+    @Expose val clicktimestamp: String = "",
+    @Expose val clickcount: Int = 0,
+    @Expose val clicktrend: Int = 0
+) {
 
-    /* Converts RadioBrowserResult to Station  */
+    /* Converts RadioBrowserResult to Station */
     fun toStation(): Station = Station(
-            starred = false,
-            name = name,
-            nameManuallySet = false,
-            streamUris = mutableListOf(url_resolved),
-            stream = 0,
-            streamContent = Keys.MIME_TYPE_UNSUPPORTED,
-            homepage = homepage,
-            image = String(),
-            smallImage = String(),
-            imageColor = -1,
-            imageManuallySet = false,
-            remoteImageLocation = favicon,
-            remoteStationLocation = url,
-            modificationDate = GregorianCalendar.getInstance().time,
-            isPlaying = false,
-            radioBrowserStationUuid = stationuuid,
-            radioBrowserChangeUuid = changeuuid,
-            codec = codec,
-            bitrate = bitrate)
-
+        name = name,
+        streamUris = mutableListOf(url_resolved),
+        stream = url_resolved, // Using url_resolved as the primary stream
+        homepage = homepage,
+        image = favicon,
+        smallImage = favicon, // Using same image for both for now
+        remoteImageLocation = favicon,
+        remoteStationLocation = url,
+        radioBrowserStationUuid = stationuuid,
+        radioBrowserChangeUuid = changeuuid,
+        codec = codec,
+        bitrate = bitrate,
+        modificationDate = Date() // Current date as modification date
+    )
 }
-
 
 /*
 JSON Struct Station
