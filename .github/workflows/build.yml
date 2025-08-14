@@ -21,21 +21,18 @@ jobs:
         distribution: 'temurin'
         
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v4
+      uses: android-actions/setup-android@v2
       with:
         api-level: 34
         build-tools: 34.0.0
-        ndk-version: '25.2.9519653'
-        cmake-version: '3.22.1'
-        additional-system-images: 'system-images;android-34;google_apis;x86_64'
         
     - name: Accept Android Licenses
       run: |
-        yes | sdkmanager --licenses || true
-        echo "ANDROID_HOME=$ANDROID_SDK_ROOT" >> $GITHUB_ENV
+        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses
+        echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
         
     - name: Cache Gradle
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           ~/.gradle/caches
@@ -54,7 +51,7 @@ jobs:
         
     - name: Upload APK
       if: success()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: app-debug
         path: app/build/outputs/apk/debug/app-debug.apk
