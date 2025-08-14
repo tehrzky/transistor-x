@@ -286,7 +286,7 @@ abstract class BasePlayerFragment: Fragment(),
     override fun onAddStationDialog(station: Station) {
         if (station.streamContent.isNotEmpty() && station.streamContent != Keys.MIME_TYPE_UNSUPPORTED) {
             // add station and save collection
-            CollectionHelper.addStation(requireContext(), collection, station) // todo check if should be moved to adapter (like removeStation)
+            collection = CollectionHelper.addStation(requireContext(), collection, station) // Fixed: assign result back to collection
         }
     }
 
@@ -394,15 +394,7 @@ abstract class BasePlayerFragment: Fragment(),
                 // ask user
                 val adapterPosition: Int = viewHolder.adapterPosition
                 val dialogMessage: String = "${getString(R.string.dialog_yes_no_message_remove_station)}\n\n- ${collection.stations[adapterPosition].name}"
-                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(
-                    context = requireContext(), 
-                    type = Keys.DIALOG_REMOVE_STATION, 
-                    messageString = dialogMessage, 
-                    yesButton = R.string.dialog_yes_no_positive_button_remove_station, 
-                    payload = adapterPosition,
-                    id = "remove_station_${adapterPosition}",
-                    name = collection.stations[adapterPosition].name
-                )
+                YesNoDialog(this@BasePlayerFragment as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_REMOVE_STATION, messageString = dialogMessage, yesButton = R.string.dialog_yes_no_positive_button_remove_station, payload = adapterPosition)
             }
         }
         val swipeToDeleteItemTouchHelper = ItemTouchHelper(swipeToDeleteHandler)
@@ -459,7 +451,7 @@ abstract class BasePlayerFragment: Fragment(),
     /* Sets up the player */
     private fun updatePlayerViews() {
         // get station
-        var station: Station = Station()
+        var station: Station? = null
         if (playerState.stationPosition > -1 && playerState.stationPosition <= collection.stations.size -1) {
             // get station from player state
             station = collection.stations[playerState.stationPosition]
@@ -471,9 +463,12 @@ abstract class BasePlayerFragment: Fragment(),
             layout.showPlayer(requireContext())
         } else {
             layout.hidePlayer(requireContext())
+            return
         }
         // update views
-        layout.updatePlayerViews(requireContext(), station, playerState.isPlaying)
+        station?.let {
+            layout.updatePlayerViews(requireContext(), it, playerState.isPlaying)
+        }
     }
 
 
@@ -646,14 +641,7 @@ abstract class BasePlayerFragment: Fragment(),
             arguments?.putString(Keys.ARG_RESTORE_COLLECTION, null)
             when (collection.stations.isNotEmpty()) {
                 true -> {
-                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(
-                        context = requireContext(), 
-                        type = Keys.DIALOG_RESTORE_COLLECTION, 
-                        messageString = getString(R.string.dialog_restore_collection_replace_existing), 
-                        payloadString = restoreCollectionFileString,
-                        id = "restore_collection",
-                        name = "Collection Restore"
-                    )
+                    YesNoDialog(this as YesNoDialog.YesNoDialogListener).show(context = requireContext(), type = Keys.DIALOG_RESTORE_COLLECTION, messageString = getString(R.string.dialog_restore_collection_replace_existing), payloadString = restoreCollectionFileString)
                 }
 
                 false -> {
