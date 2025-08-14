@@ -14,6 +14,7 @@ data class Station(
     val isFavorite: Boolean,
     val isDeleted: Boolean,
     val category: String = "All Stations"
+    var streamContent: String = ""
 ) : Parcelable {
     companion object {
         @JvmField
