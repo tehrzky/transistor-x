@@ -1,68 +1,40 @@
-package org.y20k.transistor.dialogs
+// app/src/main/java/org/y20k/transistor/search/SearchResultAdapter.kt
+package org.y20k.transistor.search
 
-import android.content.Context
 import android.view.LayoutInflater
-import androidx.appcompat.app.AlertDialog
-import androidx.recyclerview.widget.DefaultItemAnimator
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import org.y20k.transistor.R
 import org.y20k.transistor.core.Station
-import org.y20k.transistor.search.SearchResultAdapter
+import org.y20k.transistor.databinding.ListitemSearchResultBinding
 
-class AddStationDialog(
-    private val context: Context, 
-    private val stationList: List<Station>, 
-    private val listener: AddStationDialogListener
-) : SearchResultAdapter.SearchResultAdapterListener {
+class SearchResultAdapter(
+    private val listener: SearchResultAdapterListener,
+    private val stations: List<Station>
+) : RecyclerView.Adapter<SearchResultAdapter.ViewHolder>() {
 
-    interface AddStationDialogListener {
-        fun onAddStationDialog(station: Station)
+    interface SearchResultAdapterListener {
+        fun onSearchResultTapped(station: Station)
     }
 
-    private val TAG = AddStationDialog::class.java.simpleName
-    private lateinit var dialog: AlertDialog
-    private lateinit var stationSearchResultList: RecyclerView
-    private lateinit var searchResultAdapter: SearchResultAdapter
-    private var station: Station = Station()
+    inner class ViewHolder(val binding: ListitemSearchResultBinding) : 
+        RecyclerView.ViewHolder(binding.root)
 
-    override fun onSearchResultTapped(result: Station) {
-        station = result
-        if (::dialog.isInitialized) {
-            activateAddButton()
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val binding = ListitemSearchResultBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return ViewHolder(binding)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val station = stations[position]
+        holder.binding.station = station
+        holder.binding.root.setOnClickListener {
+            listener.onSearchResultTapped(station)
         }
     }
 
-    fun show() {
-        val builder = MaterialAlertDialogBuilder(context, R.style.Theme_Transistor_AlertDialog)
-            .setTitle(R.string.dialog_add_station_title)
-            .setPositiveButton(R.string.dialog_find_station_button_add) { _, _ ->
-                listener.onAddStationDialog(station)
-            }
-            .setNegativeButton(R.string.dialog_generic_button_cancel, null)
-
-        val view = LayoutInflater.from(context).inflate(R.layout.dialog_add_station, null)
-        stationSearchResultList = view.findViewById(R.id.station_list)
-        setupRecyclerView(context)
-
-        dialog = builder.setView(view).create()
-        dialog.show()
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = false
-    }
-
-    private fun setupRecyclerView(context: Context) {
-        searchResultAdapter = SearchResultAdapter(this, stationList)
-        stationSearchResultList.apply {
-            adapter = searchResultAdapter
-            layoutManager = object : LinearLayoutManager(context) {
-                override fun supportsPredictiveItemAnimations() = true
-            }
-            itemAnimator = DefaultItemAnimator()
-        }
-    }
-
-    private fun activateAddButton() {
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).isEnabled = true
-    }
+    override fun getItemCount(): Int = stations.size
 }
