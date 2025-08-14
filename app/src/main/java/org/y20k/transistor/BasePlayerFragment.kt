@@ -270,7 +270,7 @@ abstract class BasePlayerFragment: Fragment(),
         } else {
             // detect content type on background thread
             CoroutineScope(IO).launch {
-                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.getStreamUri) // Fixed: removed parentheses
+                val contentType: NetworkHelper.ContentType = NetworkHelper.detectContentType(station.streamUri) // Fixed: use streamUri property
                 // set content type
                 station.streamContent = contentType.type
                 // add station and save collection
@@ -301,8 +301,8 @@ abstract class BasePlayerFragment: Fragment(),
         // CASE: the selected station is not playing (another station might be playing)
         else {
             playerState.stationPosition = stationPosition
-            // start playback
-            controller?.play(requireContext(), collection, stationPosition) // Fixed: added collection parameter
+            // start playback using extension function
+            controller?.play(requireContext(), stationPosition)
         }
         updatePlayerViews()
     }
@@ -572,10 +572,10 @@ abstract class BasePlayerFragment: Fragment(),
     private fun handleStartPlayer() {
         val intent: Intent = (activity as Activity).intent
         if (intent.hasExtra(Keys.EXTRA_START_LAST_PLAYED_STATION)) {
-            controller?.play(requireContext(), collection, playerState.stationPosition) // Fixed: added collection parameter
+            controller?.play(requireContext(), playerState.stationPosition)
         } else if (intent.hasExtra(Keys.EXTRA_STATION_UUID)) {
             val uuid: String = intent.getStringExtra(Keys.EXTRA_STATION_UUID) ?: String()
-            controller?.play(requireContext(), collection, CollectionHelper.getStationPosition(collection, uuid)) // Fixed: added collection parameter
+            controller?.play(requireContext(), CollectionHelper.getStationPosition(collection, uuid))
         } else if (intent.hasExtra(Keys.EXTRA_STREAM_URI)) {
             val streamUri: String = intent.getStringExtra(Keys.EXTRA_STREAM_URI) ?: String()
             controller?.playStreamDirectly(streamUri)
