@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.yourpackage.transistorx'
+    namespace 'org.y20k.transistor'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.yourpackage.transistorx"
+        applicationId "org.y20k.transistor"
         minSdk 21
         targetSdk 34
         versionCode 1
